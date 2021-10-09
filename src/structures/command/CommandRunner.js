@@ -60,15 +60,13 @@ module.exports = class CommandRunner {
       db: client.database.users
     }, _locale)
     const rand = Math.random() * 100;
-    const rands = Math.random() * 100;
 
-    if (message.member.permissions.has('manageGuild') && rands < 20) {
       const embed = new EmbedBuilder()
       embed.setColor('DEFAULT')
       embed.setTitle(ctx._locale('basic:migrate.migrateTitle'))
       embed.setDescription(ctx._locale('basic:migrate.migrateToSlashCommand', { 0: client.user.id, 1: message.guild.id }))
       ctx.send(embed.build())
-    }
+
     
 if (rand < 5) {
       const embed = new EmbedBuilder()
