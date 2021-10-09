@@ -38,7 +38,7 @@ module.exports = class JanKenPonCommand extends Command {
 
     const userWinOption = (clientChoiceMappings[clientChoice]).includes(clientDrawMappings[me])
     if (userWinOption) {
-      emoji = 'mitsy_upset'
+      emoji = 'mitsy_woah'
       result = ctx._locale('commands:jankenpon.youWin', { 0: ctx._locale(`commands:jankenpon.choice.${clientDrawMappings[me]}`), 1: ctx._locale(`commands:jankenpon.choice.${clientDrawMappings[clientChoice]}`), 2: Number(value).toLocaleString() })
       user.comets += Math.floor(value)
       user.save()
