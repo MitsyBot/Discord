@@ -14,7 +14,7 @@ module.exports = class JanKenPonCommand extends Command {
     const user = await ctx.db.user
     const client = await ctx.client.database.users.getOrCreate(ctx.client.user.id)
     const options = ['pedra', 'papel', 'tesoura']
-    if (!['pedra', 'papel', 'tesoura', 'rock', 'paper', 'scissors'].includes(ctx.args[0])) return ctx.replyT('error', 'commands:jankenpon.optionNotFound')
+    if (!['pedra', 'papel', 'tesoura'].includes(ctx.args[0])) return ctx.replyT('error', 'commands:jankenpon.optionNotFound')
     const clientChoice = options[Math.floor(Math.random() * options.length)]
     const me = ctx.args[0].toLowerCase()
     let result
@@ -31,12 +31,9 @@ module.exports = class JanKenPonCommand extends Command {
     }
 
     const clientDrawMappings = {
-      tesoura: 'scissors',
-      pedra: 'rock',
-      papel: 'paper',
-      scissors: 'scissors',
-      rock: 'rock',
-      paper: 'paper'
+      tesoura: 'tesoura',
+      pedra: 'pedra',
+      papel: 'papel',
     }
 
     const userWinOption = (clientChoiceMappings[clientChoice]).includes(clientDrawMappings[me])
