@@ -47,7 +47,7 @@ module.exports = class JanKenPonCommand extends Command {
         client.save()
       }
     } else if (clientDrawMappings[clientChoice] === clientDrawMappings[me]) {
-      emoji = 'mitsy_woah'
+      emoji = 'mitsy_Woah'
       result = ctx._locale('commands:jankenpon.tie')
     } else if (!userWinOption) {
       emoji = 'mitsy_wow'
