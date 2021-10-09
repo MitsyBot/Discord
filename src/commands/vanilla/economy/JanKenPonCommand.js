@@ -1,4 +1,5 @@
 const { Command } = require('../../../utils')
+const { CommandBase, CommandOptions, Choice } = require('eris')
 
 module.exports = class JanKenPonCommand extends Command {
   constructor() {
@@ -6,7 +7,33 @@ module.exports = class JanKenPonCommand extends Command {
       name: 'jankenpon',
       aliases: ['ppt', 'pedrapapeltesoura', 'rps', 'janken'],
       arguments: 1,
-      hasUsage: true
+      hasUsage: true,
+      slash: new CommandBase()
+        .setName('jankenpon')
+        .setDescription('Jogue pedra papel tesoura.')
+        .addOptions(
+          new CommandOptions()
+            .setType(3)
+            .setName('escolha')
+            .setDescription('Escolha uma das opções.')
+            .addChoices(
+              new Choice()
+                .setName('pedra')
+                .setValue('pedra'),
+              new Choice()
+                .setName('papel')
+                .setValue('papel'),
+              new Choice()
+                .setName('tesoura')
+                .setValue('tesoura'),
+            )
+            .isRequired(),
+          new CommandOptions()
+            .setType(10)
+            .setName('valor')
+            .setDescription('Valor de cometinhas para apostar.')
+            .isRequired()
+        )
     })
   }
 
@@ -14,12 +41,12 @@ module.exports = class JanKenPonCommand extends Command {
     const user = await ctx.db.user
     const client = await ctx.client.database.users.getOrCreate(ctx.client.user.id)
     const options = ['pedra', 'papel', 'tesoura']
-    if (!['pedra', 'papel', 'tesoura', 'rock', 'paper', 'scissors'].includes(ctx.args[0])) return ctx.replyT('error', 'commands:jankenpon.optionNotFound')
+    if (!['pedra', 'papel', 'tesoura'].includes(ctx.args.get('escolha').value.toLowerCase())) return ctx.replyT('error', 'commands:jankenpon.optionNotFound')
     const clientChoice = options[Math.floor(Math.random() * options.length)]
-    const me = ctx.args[0].toLowerCase()
+    const me = ctx.args.get('escolha').value.toLowerCase()
     let result
     let emoji
-    const value = ctx.args[1]
+    const value = ctx.args.get('valor').value
     if (!value) return ctx.replyT('warn', 'commands:jankenpon.valueNotInputed')
     const invalidValue = Number(value) < 0 || Number(value) === Infinity || isNaN(value)
     if (invalidValue) return ctx.replyT('error', 'commands:pay.invalidValue')
@@ -31,17 +58,14 @@ module.exports = class JanKenPonCommand extends Command {
     }
 
     const clientDrawMappings = {
-      tesoura: 'scissors',
-      pedra: 'rock',
-      papel: 'paper',
-      scissors: 'scissors',
-      rock: 'rock',
-      paper: 'paper'
+      tesoura: 'tesoura',
+      pedra: 'pedra',
+      papel: 'papel',
     }
 
     const userWinOption = (clientChoiceMappings[clientChoice]).includes(clientDrawMappings[me])
     if (userWinOption) {
-      emoji = 'mitsy_upset'
+      emoji = 'mitsy_rage'
       result = ctx._locale('commands:jankenpon.youWin', { 0: ctx._locale(`commands:jankenpon.choice.${clientDrawMappings[me]}`), 1: ctx._locale(`commands:jankenpon.choice.${clientDrawMappings[clientChoice]}`), 2: Number(value).toLocaleString() })
       user.comets += Math.floor(value)
       user.save()
@@ -50,10 +74,10 @@ module.exports = class JanKenPonCommand extends Command {
         client.save()
       }
     } else if (clientDrawMappings[clientChoice] === clientDrawMappings[me]) {
-      emoji = 'mitsy_whoa'
+      emoji = 'mitsy_what'
       result = ctx._locale('commands:jankenpon.tie')
     } else if (!userWinOption) {
-      emoji = 'mitsy_kek'
+      emoji = 'mitsy_whoa'
       result = ctx._locale('commands:jankenpon.youLose', { 0: ctx._locale(`commands:jankenpon.choice.${clientDrawMappings[me]}`), 1: ctx._locale(`commands:jankenpon.choice.${clientDrawMappings[clientChoice]}`), 2: Number(value).toLocaleString() })
       user.comets -= Math.floor(value)
       client.comets += Math.floor(value)
@@ -61,7 +85,7 @@ module.exports = class JanKenPonCommand extends Command {
       client.save()
     }
 
-    ctx.send('Jan ken pon').then(msg => {
+    ctx.send('Pedra papel tesoura...').then(msg => {
       setTimeout(() => {
         msg.delete()
         ctx.reply(emoji, result)

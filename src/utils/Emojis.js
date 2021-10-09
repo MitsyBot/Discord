@@ -15,5 +15,6 @@ module.exports = {
   broken_heart: '💔',
   tada: '🎉',
   mitsy_what: '<:mitsy_what:825404965564448789>',
-  mitsy_whoa: '<:mitsy_Woah:825404965640077312>'
+  mitsy_whoa: '<:mitsy_Woah:825404965640077312>',
+  mitsy_rage: '<:mitsy_rage:842775933285826644>'
 }

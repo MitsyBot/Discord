@@ -33,8 +33,9 @@ module.exports = class DivorceCommand extends Command {
       .then(message => {
         const ack = new ResponseAck(message)
         ack.on('collect', (data) => {
-          if ((data.d.member.user.id !== message.mentions[0].id && message.author.id === ctx.client.user.id)) return
-          switch (data.d.data.custom_id) {
+          if(data.interaction.buttonEvent.member.id !== author.id) return;
+
+          switch (data.interaction.buttonEvent.customID) {
             case 'confirm_button': {
               author.comets -= Number(300)
               author.isMarry = false

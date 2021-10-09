@@ -19,16 +19,19 @@ module.exports = class DivorceCommand extends Command {
 
   async run(ctx) {
     const author = ctx.db.user
-    if (!author.isMarry) return ctx.replyT('error', 'commands:divorce.youAreNotMarried', { 0: ctx.db.guild.prefix })
+      if (!author.isMarry) return ctx.replyT('error', 'commands:divorce.youAreNotMarried', { 0: ctx.db.guild.prefix })
+    
     const couple = await ctx.client.database.users.getOrCreate(author.marryWith)
-    if (author.comets < Number(300)) return ctx.replyT('error', 'commands:divorce.youNeedToDivorce', { 0: Number(300 - author.comets).toLocaleString() })
-    if (couple.comets < Number(300)) return ctx.replyT('error', 'commands:divorce.theyNeedToDivorce', { 0: Number(300 - couple.comets).toLocaleString() })
+        if (author.comets < Number(300)) return ctx.replyT('error', 'commands:divorce.youNeedToDivorce', { 0: Number(300 - author.comets).toLocaleString() })
+        if (couple.comets < Number(300)) return ctx.replyT('error', 'commands:divorce.theyNeedToDivorce', { 0: Number(300 - couple.comets).toLocaleString() })
+    
+    
     ctx.interaction()
       .components(new Button()
-        .setLabel(ctx._locale('basic:boolean.true'))
-        .customID('confirm_button')
-        .setStyle(3),
-        new Button()
+          .setLabel(ctx._locale('basic:boolean.true'))
+          .customID('confirm_button')
+          .setStyle(3),
+      new Button()
           .setLabel(ctx._locale('basic:boolean.false'))
           .customID('reject_button')
           .setStyle(4))
@@ -38,8 +41,9 @@ module.exports = class DivorceCommand extends Command {
         const ack = new ResponseAck(message)
         ack.on('collect', ({packet}) => {
           const data = packet
-          if ((data.d.member.user.id !== message.mentions[0].id && message.author.id === ctx.client.user.id)) return
-          switch (data.d.data.custom_id) {
+          if(data.interaction.buttonEvent.member.id !== author.id) return;
+
+          switch (data.interaction.buttonEvent.customID) {
             case 'confirm_button': {
               author.comets -= Number(300)
               author.isMarry = false
