@@ -47,7 +47,7 @@ module.exports = class MarryCommand extends Command {
       
       const ack = new ResponseAck(message)
         ack.on('collect', (data) => {
-          if(data.interaction.buttonEvent.member.id !== author.id && message.author.id === ctx.client.user.id) return;
+          if(data.interaction.buttonEvent.member.id !== couple.id) return;
 
           switch (data.interaction.buttonEvent.customID) {
               case 'confirm_button': {
