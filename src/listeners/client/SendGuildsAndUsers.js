@@ -10,7 +10,7 @@ module.exports = class SendDataListener extends Listener {
   }
 
   async on(client) {
-
+    if (process.env.PRODUCTION === false) {
     setInterval(() => {
         axios({
             url: 'http://127.0.0.1:3000/api/v2/guildsusers',
@@ -20,8 +20,8 @@ module.exports = class SendDataListener extends Listener {
               users: client.users.size,
             },
           })
-
-        Logger.info(`Servidores e usuarios enviados para o a Api`)
+        Logger.debug(`Servidores e usuarios enviados para o a Api`)
     }, 20 * 1000)
+  }
   }
 }
