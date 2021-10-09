@@ -59,8 +59,7 @@ module.exports = class PayCommand extends Command {
       .replyT('warn', 'commands:pay.confirm', { user: member.mention, comets: totalcomets, total: value })
       .then(message => {
         const ack = new ResponseAck(message)
-        ack.on('collect', ({ packet }) => {
-          const data = packet
+        ack.on('collect', (data) => {
           if(data.interaction.buttonEvent.member.id !== author.id) return;
 
           switch (data.interaction.buttonEvent.customID) {
