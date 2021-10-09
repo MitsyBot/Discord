@@ -47,10 +47,10 @@ module.exports = class JanKenPonCommand extends Command {
         client.save()
       }
     } else if (clientDrawMappings[clientChoice] === clientDrawMappings[me]) {
-      emoji = 'mitsy_Woah'
+      emoji = 'mitsy_what'
       result = ctx._locale('commands:jankenpon.tie')
     } else if (!userWinOption) {
-      emoji = 'mitsy_wow'
+      emoji = 'mitsy_whoa'
       result = ctx._locale('commands:jankenpon.youLose', { 0: ctx._locale(`commands:jankenpon.choice.${clientDrawMappings[me]}`), 1: ctx._locale(`commands:jankenpon.choice.${clientDrawMappings[clientChoice]}`), 2: Number(value).toLocaleString() })
       user.comets -= Math.floor(value)
       client.comets += Math.floor(value)
