@@ -21,9 +21,9 @@
     "youWin": "você escolheu `{{0}}` e eu escolhi `{{1}}`. Parabéns, você ganhou. Aqui estão seus `{{2}}` cometinhas.",
     "youLose": "você escolheu `{{0}}` e eu escolhi `{{1}}`, eu ganhei! Estou pegando `{{2}}` cometinhas de você, queridinho(a)",
     "choice": {
-      "rock": "pedra",
-      "paper": "papel",
-      "scissors": "tesoura"
+      "pedra": "pedra",
+      "papel": "papel",
+      "tesoura": "tesoura"
     }
   },
   "daily": {
