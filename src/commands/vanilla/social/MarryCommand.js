@@ -25,8 +25,8 @@ module.exports = class MarryCommand extends Command {
     if (member.id === ctx.client.user.id) return ctx.replyT('broken_heart', 'commands:marry.cannotMarryWithMe')
     if (member.bot) return ctx.replyT('broken_heart', 'commands:marry.cannotMarryWithBot')
 
-    if (author.comets < Number(7500)) return ctx.replyT('error', 'commands:marry.youNeedToMarry', { 0: Number(7500 - author.yens).toLocaleString() })
-    if (couple.comets < Number(7500)) return ctx.replyT('error', 'commands:marry.theyNeedToMarry', { 0: member.mention, 1: Number(7500 - couple.yens).toLocaleString() })
+    if (author.comets < Number(7500)) return ctx.replyT('error', 'commands:marry.youNeedToMarry', { 0: Number(7500 - author.comets).toLocaleString() })
+    if (couple.comets < Number(7500)) return ctx.replyT('error', 'commands:marry.theyNeedToMarry', { 0: member.mention, 1: Number(7500 - couple.comets).toLocaleString() })
     
     if (author.isMarry) return ctx.replyT('error', 'commands:marry.youAlreadyMarried')
     if (couple.isMarry) return ctx.replyT('error', 'commands:marry.theyAlreadyMarried', { 0: member.mention })
