@@ -10,12 +10,12 @@ module.exports = class JanKenPonCommand extends Command {
       hasUsage: true,
       slash: new CommandBase()
         .setName('jankenpon')
-        .setDescription('Jogue pedra papel ou tesoura apostando.')
+        .setDescription('Jogue pedra papel tesoura.')
         .addOptions(
           new CommandOptions()
             .setType(3)
             .setName('choice')
-            .setDescription('Escolha uma dessas opçõs.')
+            .setDescription('Escolha uma das opções.')
             .addChoices(
               new Choice()
                 .setName('pedra')
@@ -27,6 +27,12 @@ module.exports = class JanKenPonCommand extends Command {
                 .setName('tesoura')
                 .setValue('tesoura'),
             )
+            .isRequired(),
+          new CommandOptions()
+            .setType(10)
+            .setName('value')
+            .setDescription('Cometinhas para apostar.')
+            .isRequired()
         )
     })
   }
@@ -35,12 +41,12 @@ module.exports = class JanKenPonCommand extends Command {
     const user = await ctx.db.user
     const client = await ctx.client.database.users.getOrCreate(ctx.client.user.id)
     const options = ['pedra', 'papel', 'tesoura']
-    if (!['pedra', 'papel', 'tesoura'].includes(ctx.args[0])) return ctx.replyT('error', 'commands:jankenpon.optionNotFound')
+    if (!['pedra', 'papel', 'tesoura'].includes(ctx.args.get('choice').value.toLowerCase())) return ctx.replyT('error', 'commands:jankenpon.optionNotFound')
     const clientChoice = options[Math.floor(Math.random() * options.length)]
-    const me = ctx.args[0].toLowerCase()
+    const me = ctx.args.get('choice').value.toLowerCase()
     let result
     let emoji
-    const value = ctx.args[1]
+    const value = ctx.args.get('value').value
     if (!value) return ctx.replyT('warn', 'commands:jankenpon.valueNotInputed')
     const invalidValue = Number(value) < 0 || Number(value) === Infinity || isNaN(value)
     if (invalidValue) return ctx.replyT('error', 'commands:pay.invalidValue')
@@ -79,7 +85,7 @@ module.exports = class JanKenPonCommand extends Command {
       client.save()
     }
 
-    ctx.send('Pedra papel tesoura...').then(msg => {
+    ctx.send('Jan ken pon').then(msg => {
       setTimeout(() => {
         msg.delete()
         ctx.reply(emoji, result)

@@ -45,7 +45,7 @@ module.exports = class PayCommand extends Command {
         const ack = new ResponseAck(message)
         ack.on('collect', (data) => {
           if ((data.d.member.user.id !== message.mentions[0].id && message.member.id === ctx.client.user.id)) return
-          switch (data.d.data.custom_id) {
+          switch (data.interaction.buttonEvent.customID) {
             case 'confirm_button': {
               fromUser.comets -= totalcomets
               toUser.comets += totalcomets
