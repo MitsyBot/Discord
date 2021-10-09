@@ -17,64 +17,73 @@ module.exports = class MarryCommand extends Command {
   async run(ctx) {
     const member = await ctx.getUser(ctx.args[0])
     if (!member) return ctx.replyT('error', 'basic:invalidUser')
+
     const author = ctx.db.user
     const couple = await ctx.client.database.users.getOrCreate(member.id)
+
     if (member.id === ctx.message.author.id) return ctx.replyT('broken_heart', 'commands:marry.cannotMarryWithYourself')
     if (member.id === ctx.client.user.id) return ctx.replyT('broken_heart', 'commands:marry.cannotMarryWithMe')
     if (member.bot) return ctx.replyT('broken_heart', 'commands:marry.cannotMarryWithBot')
-    if (author.comets < Number(7500)) return ctx.replyT('error', 'commands:marry.youNeedToMarry', { 0: Number(7500 - author.comets).toLocaleString() })
-    if (couple.comets < Number(7500)) return ctx.replyT('error', 'commands:marry.theyNeedToMarry', { 0: member.mention, 1: Number(7500 - couple.comets).toLocaleString() })
+
+    if (author.comets < Number(7500)) return ctx.replyT('error', 'commands:marry.youNeedToMarry', { 0: Number(7500 - author.yens).toLocaleString() })
+    if (couple.comets < Number(7500)) return ctx.replyT('error', 'commands:marry.theyNeedToMarry', { 0: member.mention, 1: Number(7500 - couple.yens).toLocaleString() })
+    
     if (author.isMarry) return ctx.replyT('error', 'commands:marry.youAlreadyMarried')
     if (couple.isMarry) return ctx.replyT('error', 'commands:marry.theyAlreadyMarried', { 0: member.mention })
+
     ctx.interaction()
       .components(new Button()
-        .setLabel(ctx._locale('basic:boolean.true'))
-        .customID('confirm_button')
-        .setStyle(3),
-        new Button()
+          .setLabel(ctx._locale('basic:boolean.true'))
+          .customID('confirm_button')
+          .setStyle(3),
+        
+      new Button()
           .setLabel(ctx._locale('basic:boolean.false'))
           .customID('reject_button')
           .setStyle(4))
-      .returnCtx()
-      .sendT('commands:marry.requestConfirm', { 0: member.mention, 1: ctx.message.author.mention })
+          .returnCtx()
+          .sendT('commands:marry.requestConfirm', { 0: member.mention, 1: ctx.message.author.mention })
       .then(message => {
-        const ack = new ResponseAck(message)
+      
+      const ack = new ResponseAck(message)
         ack.on('collect', (data) => {
-          if ((data.d.member.user.id !== member.id && message.author.id === ctx.client.user.id)) return
+          if ((data.interaction.buttonEvent.member.id !== member.id && message.author.id === ctx.client.user.id)) return
+
           switch (data.interaction.buttonEvent.customID) {
-            case 'confirm_button': {
-              author.comets -= Number(7500)
-              author.isMarry = true
-              author.marryWith = member.id
-              couple.comets -= Number(7500)
-              couple.isMarry = true
-              couple.marryWith = ctx.message.author.id
-              author.save()
-              couple.save().then(() => {
-                ack.sendAck('update', {
-                  content: `${Emoji.getEmoji('ring_couple').mention} **|** ${message.author.mention}, ${ctx._locale('commands:marry.successfullyMarried')}`,
-                  components: [
-                    {
-                      type: 1,
+              case 'confirm_button': {
+                  author.comets -= Number(7500)
+                  author.isMarry = true
+                  author.marryWith = member.id
+                  couple.comets -= Number(7500)
+                  couple.isMarry = true
+                  couple.marryWith = ctx.message.author.id
+                  
+                  author.save()
+                  couple.save().then(() => {
+                    ack.sendAck('update', {
+                      content: `${Emoji.getEmoji('ring_couple').mention} **|** ${message.author.mention}, ${ctx._locale('commands:marry.successfullyMarried')}`,
                       components: [
-                        new Button()
-                          .setLabel(ctx._locale('basic:boolean.true'))
-                          .customID('confirm_button')
-                          .setStyle(3)
-                          .setStatus(true)
-                          .data(),
-                        new Button()
-                          .setLabel(ctx._locale('basic:boolean.false'))
-                          .customID('reject_button')
-                          .setStyle(4)
-                          .setStatus(true)
-                          .data()
+                        {
+                          type: 1,
+                          components: [
+                            new Button()
+                              .setLabel(ctx._locale('basic:boolean.true'))
+                              .customID('confirm_button')
+                              .setStyle(3)
+                              .setStatus(true)
+                              .data(),
+                            new Button()
+                              .setLabel(ctx._locale('basic:boolean.false'))
+                              .customID('reject_button')
+                              .setStyle(4)
+                              .setStatus(true)
+                              .data()
+                          ]
+                        }
                       ]
-                    }
-                  ]
-                })
-              })
-            }
+                    })
+                  })
+              }
               break
             case 'reject_button': {
               ack.sendAck('update', {
