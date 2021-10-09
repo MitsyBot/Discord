@@ -1,0 +1,24 @@
+module.exports = class ColorResolver {
+  /**
+     * @param color {string}
+     * @returns {string | Error}
+     */
+  static resolve (color) {
+    if (typeof (color) !== 'string') throw new Error(`Tipo ${typeof color} não era esperado ao construir o embed`)
+    color = color.toUpperCase()
+    const defaultColors = {
+      DEFAULT: 0xF895FB,
+      ERROR: 0xFA704D,
+      MINECRAFT: 0x7BE37B,
+      MODERATION: 0xFF4A4A,
+      ACTION: 0xC68AFF,
+    }
+
+    if (!color) color = null
+    if (defaultColors[color]) {
+      return defaultColors[color]
+    }
+
+    return parseInt(color.replace('#', ''), 16)
+  }
+}

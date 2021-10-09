@@ -1,0 +1,19 @@
+module.exports = {
+  mitsy_think: '<:mitsy_think:834129966299217950>',
+  error: '<:mitsy_rage:842775933285826644>',
+  warn: '<:mitsy_notlikethis:873337141671911495>',
+  success: '<:mitsy_ok:834129966487699456>',
+  comet: '💴',
+  minecraft: '<:minecraft:504670650498285603>',
+  moneybag: '💰',
+  map: '🗺️',
+  ping_pong: '🏓',
+  trash: '🗑️',
+  brazil: '🇧🇷',
+  heart: '❤️',
+  ring_couple: '<:ring_couple:791360830221844512>',
+  broken_heart: '💔',
+  tada: '🎉',
+  mitsy_what: '<:mitsy_what:825404965564448789>',
+  mitsy_whoa: '<:mitsy_Woah:825404965640077312>'
+}
