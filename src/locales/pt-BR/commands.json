@@ -14,7 +14,7 @@
   },
   "jankenpon": {
     "usage": "<escolha> <valor>",
-    "description": "Jogue pedra papel ou tesoura e ganhe ou perda cometinhas.",
+    "description": "Jogue pedra papel ou tesoura e ganhe ou perca cometinhas.",
     "optionNotFound": "você só pode escolher entre `pedra`, `papel` ou `tesoura`.",
     "valueNotInputed": "você não forneceu nenhum valor para apostar.",
     "tie": "empate! Ninguém ganhou ou perdeu.",
