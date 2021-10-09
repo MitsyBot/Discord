@@ -52,7 +52,7 @@ module.exports = class MarryCommand extends Command {
       .then(message => {
         const ack = new ResponseAck(message)
         ack.on('collect', (data) => {
-          if ((data.d.member.user.id !== member.id && message.author.id === ctx.client.user.id)) return
+          if(data.interaction.buttonEvent.member.id !== couple.id) return;
           switch (data.interaction.buttonEvent.customID) {
             case 'confirm_button': {
               author.comets -= Number(7500)
