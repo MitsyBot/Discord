@@ -18,16 +18,20 @@ module.exports = class PayCommand extends Command {
     const member = await ctx.getUser(ctx.args[0])
     if (!member) return ctx.replyT('error', 'basic:invalidUser')
 
+    if (member.id === ctx.client.user.id) return ctx.replyT('broken_heart', 'commands:pay.cannotPayToMe')
+    if (member.bot) return ctx.replyT('broken_heart', 'commands:pay.cannotPayToBot')
+    if (ctx.message.author.id === member.id) return ctx.replyT('error', 'commands:pay.userMismatch')
+
     const fromUser = ctx.db.user
     const value = ctx.args[1]
     const toUser = await ctx.db.db.getOrCreate(member.id)
 
-    if (ctx.message.author.id === member.id) return ctx.replyT('error', 'commands:pay.userMismatch')
     if (!value) return ctx.replyT('error', 'commands:pay.valueMismatch')
-    if (isNaN(Number(value))) return ctx.replyT('error', 'commands:pay.valueMismatch')
-    if (Number(value) === Infinity) return ctx.replyT('error', 'commands:pay.valueMismatch')
+        if (isNaN(Number(value))) return ctx.replyT('error', 'commands:pay.valueMismatch')
+        if (Number(value) === Infinity) return ctx.replyT('error', 'commands:pay.valueMismatch')
     if (value <= 0) return ctx.replyT('error', 'commands:pay.valueMismatch')
     if (value > fromUser.comets) return ctx.replyT('error', 'commands:pay.poorUser')
+    
     const totalcomets = Math.round(value)
 
     ctx.interaction()
