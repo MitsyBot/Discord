@@ -10,7 +10,8 @@ module.exports = class ReadyListener extends Listener {
 
   async on(client) {
     if (!this.send) {
-      client.emit('readyConnection', client)
+      client.emit('readyConnection', client),
+      client.emit('sendData', client)
 
     }
   }
