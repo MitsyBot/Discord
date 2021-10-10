@@ -44,7 +44,7 @@ module.exports = class PayCommand extends Command {
       .then(message => {
         const ack = new ResponseAck(message)
         ack.on('collect', (data) => {
-          if(data.interaction.buttonEvent.member.id !== author.id) return;
+          if(data.interaction.buttonEvent.member.id !== fromUser.id) return;
 
           switch (data.interaction.buttonEvent.customID) {
             case 'confirm_button': {
