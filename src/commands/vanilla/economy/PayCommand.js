@@ -18,8 +18,8 @@ module.exports = class PayCommand extends Command {
     const member = await ctx.getUser(ctx.args[0])
     if (!member) return ctx.replyT('error', 'basic:invalidUser')
 
-    if (member.id === ctx.client.user.id) return ctx.replyT('broken_heart', 'commands:pay.cannotPayToMe')
-    if (member.bot) return ctx.replyT('broken_heart', 'commands:pay.cannotPayToBot')
+    if (member.id === ctx.client.user.id) return ctx.replyT('mitsy_what', 'commands:pay.cannotPayToMe')
+    if (member.bot) return ctx.replyT('mitsy_what', 'commands:pay.cannotPayToBot')
     if (ctx.message.author.id === member.id) return ctx.replyT('error', 'commands:pay.userMismatch')
 
     const fromUser = ctx.db.user
