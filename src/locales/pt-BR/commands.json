@@ -17,6 +17,8 @@
     "description": "Jogue pedra papel ou tesoura e ganhe ou perca cometinhas.",
     "optionNotFound": "você só pode escolher entre `pedra`, `papel` ou `tesoura`.",
     "valueNotInputed": "você não forneceu nenhum valor para apostar.",
+    "invalidValue": "Insira um valor válido!",
+    "poorUser": "você não possui cometinhas o suficiente!",
     "tie": "empate! Ninguém ganhou ou perdeu.",
     "youWin": "você escolheu `{{0}}` e eu escolhi `{{1}}`. Parabéns, você ganhou. Aqui estão seus `{{2}}` cometinhas.",
     "youLose": "você escolheu `{{0}}` e eu escolhi `{{1}}`, eu ganhei! Estou pegando `{{2}}` cometinhas de você, queridinho(a)",

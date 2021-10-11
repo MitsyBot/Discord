@@ -27,8 +27,8 @@ module.exports = class JanKenPonCommand extends Command {
       if(!value) return ctx.replyT('warn', 'commands:jankenpon.valueNotInputed')
     
     const invalidValue = Number(value) < 0 || Number(value) === Infinity || isNaN(value)
-      if (invalidValue) return ctx.replyT('error', 'commands:pay.invalidValue')
-      if (user.comets < value) return ctx.replyT('error', 'commands:pay.poorUser')
+      if (invalidValue) return ctx.replyT('error', 'commands:jankenpon.invalidValue')
+      if (user.comets < value) return ctx.replyT('error', 'commands:jankenpon.poorUser')
     
     const clientChoiceMappings = {
       tesoura: ['pedra'],
@@ -69,7 +69,7 @@ module.exports = class JanKenPonCommand extends Command {
       client.save()
     }
 
-    ctx.send('Pedra papel tesoura...').then(msg => {
+    ctx.send('Pedra, papel... Tesoura!').then(msg => {
       setTimeout(() => {
         msg.delete()
         ctx.reply(emoji, result)

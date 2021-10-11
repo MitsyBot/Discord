@@ -18,14 +18,14 @@ module.exports = class JanKenPonCommand extends Command {
             .setDescription('Escolha uma das opções.')
             .addChoices(
               new Choice()
-                .setName('escolha')
-                .setValue('Pedra'),
+                .setName('pedra')
+                .setValue('pedra'),
               new Choice()
-                .setName('escolha')
-                .setValue('Papel'),
+                .setName('papel')
+                .setValue('papel'),
               new Choice()
-                .setName('escolha')
-                .setValue('Tesoura'),
+                .setName('tesoura')
+                .setValue('tesoura'),
             )
             .isRequired(),
           new CommandOptions()
@@ -40,20 +40,29 @@ module.exports = class JanKenPonCommand extends Command {
   async run(ctx) {
     const user = await ctx.db.user
     const client = await ctx.client.database.users.getOrCreate(ctx.client.user.id)
-    const options = ['Pedra', 'Papel', 'Tesoura']
+    const options = ['pedra', 'papel', 'tesoura']
 
     const clientChoice = options[Math.floor(Math.random() * options.length)]
-    const me = ctx.args.get('escolha')
     
+    function getArgs(args){
+      var userChoice  = args.get('choice').value
+      var userValue   = args.get('value').value
+
+      var returnArray = [userChoice, userValue]
+
+      return returnArray;
+    }
+
     let result
     let emoji
 
-    const value = ctx.args.get('value').value
-      if (!value) return ctx.replyT('warn', 'commands:jankenpon.valueNotInputed')
+    const userOptions = getArgs(ctx.args)
+    const me    = userOptions[0]
+    const value = userOptions[1]
     
     const invalidValue = Number(value) < 0 || Number(value) === Infinity || isNaN(value)
-      if (invalidValue) return ctx.replyT('error', 'commands:pay.invalidValue')
-      if (user.comets < value) return ctx.replyT('error', 'commands:pay.poorUser')
+      if (invalidValue) return ctx.replyT('error', 'commands:jankenpon.invalidValue')
+      if (user.comets < value) return ctx.replyT('error', 'commands:jankenpon.poorUser')
     
     const clientChoiceMappings = {
       tesoura: ['pedra'],
@@ -94,11 +103,6 @@ module.exports = class JanKenPonCommand extends Command {
       client.save()
     }
 
-    ctx.send('Jan ken pon').then(msg => {
-      setTimeout(() => {
-        msg.delete()
-        ctx.reply(emoji, result)
-      }, 2000)
-    })
+    ctx.send(`:${emoji}: **|** ${result}`)
   }
 }
