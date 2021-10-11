@@ -1,4 +1,4 @@
-const { Command } = require('../../../utils')
+const { Command, Emoji} = require('../../../utils')
 const { CommandBase, CommandOptions, Choice } = require('eris')
 
 module.exports = class JanKenPonCommand extends Command {
@@ -103,6 +103,6 @@ module.exports = class JanKenPonCommand extends Command {
       client.save()
     }
 
-    ctx.send(emoji + '**|**' + result)
+    ctx.reply(emoji, result)
   }
 }
