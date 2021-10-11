@@ -32,18 +32,21 @@ module.exports = class PayCommand extends Command {
 
   async run(ctx) {
     const member = await ctx.getUser(ctx.args.get('user').value?.id ?? ctx.args.get('user').value)
-    if (!member) return ctx.replyT('error', 'basic:invalidUser')
 
     const fromUser = ctx.db.user
     const value = ctx.args.get('amount').value
     const toUser = await ctx.db.db.getOrCreate(member.id)
 
+    if (member.id === ctx.client.user.id) return ctx.replyT('broken_heart', 'commands:pay.cannotPayToMe')
+    if (member.bot) return ctx.replyT('broken_heart', 'commands:pay.cannotPayToBot')
     if (ctx.message.member.id === member.id) return ctx.replyT('error', 'commands:pay.userMismatch')
-    if (!value) return ctx.replyT('error', 'commands:pay.valueMismatch')
+    
     if (isNaN(Number(value))) return ctx.replyT('error', 'commands:pay.valueMismatch')
     if (Number(value) === Infinity) return ctx.replyT('error', 'commands:pay.valueMismatch')
+    
     if (value <= 0) return ctx.replyT('error', 'commands:pay.valueMismatch')
     if (value > fromUser.comets) return ctx.replyT('error', 'commands:pay.poorUser')
+    
     const totalcomets = Math.round(value)
 
     ctx.interaction()
@@ -51,16 +54,20 @@ module.exports = class PayCommand extends Command {
         .setLabel(ctx._locale('basic:boolean.true'))
         .customID('confirm_button')
         .setStyle(3),
+        
         new Button()
           .setLabel(ctx._locale('basic:boolean.false'))
           .customID('reject_button')
           .setStyle(4))
-      .returnCtx()
+      
+        .returnCtx()
       .replyT('warn', 'commands:pay.confirm', { user: member.mention, comets: totalcomets, total: value })
       .then(message => {
+        
         const ack = new ResponseAck(message)
+        
         ack.on('collect', (data) => {
-          if(data.interaction.buttonEvent.member.id !== message.author.id) return;
+          if(data.interaction.buttonEvent.member.id !== fromUser.id) return;
 
           switch (data.interaction.buttonEvent.customID) {
             case 'confirm_button': {
