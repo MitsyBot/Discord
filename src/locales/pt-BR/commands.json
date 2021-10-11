@@ -366,6 +366,8 @@
     "usage": "<usuário> <quantia>",
     "description": "Envia dinheiro para um usuário",
     "userMismatch": "você não pode fazer uma transferência para você mesmo!",
+    "cannotPayToMe": "me desculpe. Você não pode transferir esse dinheiro para mim... Seria injusto eu aceitar!",
+    "cannotPayToBot": "me desculpe. Você não pode transferir dinheiro para robôs, eles não precisam disso!",
     "valueMismatch": "você inseriu um valor inválido",
     "success": "transferência de {{comets}} cometinhas efetuada para {{user}} com sucesso",
     "poorUser": "você não possui cometinhas para completar essa transferência",
