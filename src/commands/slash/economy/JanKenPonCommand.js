@@ -103,6 +103,6 @@ module.exports = class JanKenPonCommand extends Command {
       client.save()
     }
 
-    ctx.send(`:${emoji}: **|** ${result}`)
+    ctx.send(`${emoji} **|** ${result}`)
   }
 }
