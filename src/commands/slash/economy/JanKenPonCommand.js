@@ -43,7 +43,7 @@ module.exports = class JanKenPonCommand extends Command {
     const options = ['Pedra', 'Papel', 'Tesoura']
 
     const clientChoice = options[Math.floor(Math.random() * options.length)]
-    const me = ctx.args.get('choice')
+    const me = ctx.args.get('escolha')
     
     let result
     let emoji
