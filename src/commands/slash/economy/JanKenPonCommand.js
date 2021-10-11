@@ -18,14 +18,14 @@ module.exports = class JanKenPonCommand extends Command {
             .setDescription('Escolha uma das opções.')
             .addChoices(
               new Choice()
-                .setName('pedra')
-                .setValue('pedra'),
+                .setName('escolha')
+                .setValue('Pedra'),
               new Choice()
-                .setName('papel')
-                .setValue('papel'),
+                .setName('escolha')
+                .setValue('Papel'),
               new Choice()
-                .setName('tesoura')
-                .setValue('tesoura'),
+                .setName('escolha')
+                .setValue('Tesoura'),
             )
             .isRequired(),
           new CommandOptions()
@@ -40,10 +40,10 @@ module.exports = class JanKenPonCommand extends Command {
   async run(ctx) {
     const user = await ctx.db.user
     const client = await ctx.client.database.users.getOrCreate(ctx.client.user.id)
-    const options = ['pedra', 'papel', 'tesoura']
+    const options = ['Pedra', 'Papel', 'Tesoura']
 
     const clientChoice = options[Math.floor(Math.random() * options.length)]
-    const me = ctx.get('choice')
+    const me = ctx.args.get('choice')
     
     let result
     let emoji
