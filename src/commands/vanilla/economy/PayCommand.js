@@ -57,7 +57,7 @@ module.exports = class PayCommand extends Command {
               ctx.db.user.save()
               toUser.save().then(() => {
                 ack.sendAck('update', {
-                  content: `${Emoji.getEmoji('comet').mention} **|** ${message.author.mention}, ${ctx._locale('commands:pay.success', { comets: totalcomets, user: member.mention })}`,
+                  content: `${Emoji.getEmoji('comet').mention} **|** <@${fromUser.id}>, ${ctx._locale('commands:pay.success', { comets: totalcomets, user: member.mention })}`,
                   components: [
                     {
                       type: 1,
@@ -83,7 +83,7 @@ module.exports = class PayCommand extends Command {
               break
             case 'reject_button': {
               ack.sendAck('update', {
-                content: `${Emoji.getEmoji('error').mention} **|** ${message.author.mention}, ${ctx._locale('commands:pay.cancelled')}`,
+                content: `${Emoji.getEmoji('error').mention} **|** <@${fromUser.id}>, ${ctx._locale('commands:pay.cancelled')}`,
                 components: [
                   {
                     type: 1,

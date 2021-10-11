@@ -37,8 +37,8 @@ module.exports = class PayCommand extends Command {
     const value = ctx.args.get('amount').value
     const toUser = await ctx.db.db.getOrCreate(member.id)
 
-    if (member.id === ctx.client.user.id) return ctx.replyT('mitsy_what', 'commands:pay.cannotPayToMe')
-    if (member.bot) return ctx.replyT('mitsy_what', 'commands:pay.cannotPayToBot')
+    //if (member.id === ctx.client.user.id) return ctx.replyT('mitsy_what', 'commands:pay.cannotPayToMe')
+    //if (member.bot) return ctx.replyT('mitsy_what', 'commands:pay.cannotPayToBot')
     if (ctx.message.member.id === member.id) return ctx.replyT('error', 'commands:pay.userMismatch')
     
     if (isNaN(Number(value))) return ctx.replyT('error', 'commands:pay.valueMismatch')
@@ -76,7 +76,7 @@ module.exports = class PayCommand extends Command {
               ctx.db.user.save()
               toUser.save().then(() => {
                 ack.sendAck('update', {
-                  content: `${Emoji.getEmoji('comet').mention} **|** ${message.author.mention}, ${ctx._locale('commands:pay.success', { comets: totalcomets, user: member.mention })}`,
+                  content: `${Emoji.getEmoji('comet').mention} **|** <@${fromUser.id}>, ${ctx._locale('commands:pay.success', { comets: totalcomets, user: member.mention })}`,
                   components: [
                     {
                       type: 1,
@@ -102,7 +102,7 @@ module.exports = class PayCommand extends Command {
               break
             case 'reject_button': {
               ack.sendAck('update', {
-                content: `${Emoji.getEmoji('error').mention} **|** ${message.author.mention}, ${ctx._locale('commands:pay.cancelled')}`,
+                content: `${Emoji.getEmoji('error').mention} **|** <@${fromUser.id}>, ${ctx._locale('commands:pay.cancelled')}`,
                 components: [
                   {
                     type: 1,
