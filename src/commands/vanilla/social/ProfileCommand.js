@@ -67,8 +67,7 @@ module.exports = class ProfileCommand extends Command {
     const user = await ctx.client.database.users.getOrCreate(member.id)
     const couple = user.isMarry ? await ctx.getUser(user.marryWith) : { username: '', discriminator: '' }
 
-    const arrayBadges = [
-    ]
+    const arrayBadges = []
 
     for (const flag of flags) {
       switch ((flag.flag & member.publicFlags) === flag.flag) {
@@ -76,18 +75,21 @@ module.exports = class ProfileCommand extends Command {
           arrayBadges.push(flag.name)
           break
         case false:
-        /**
-               * @returns null
-               */
+          /**
+          *@returns null
+          */
+        
         default:
-        /**
-       * @returns null
-       */
+          /**
+          *@returns null
+          */
       }
     }
 
+    const guildMember = await ctx.message.guild.members.get(member.id) ?? undefined
+
     axios({
-      url: 'http://127.0.0.1:1234/render/profile',
+      url: 'http://185.106.96.238:1234/render/profile',
       method: 'post',
       data: {
         type: user.profileType,
@@ -99,16 +101,16 @@ module.exports = class ProfileCommand extends Command {
         bgId: user.background,
         stickerId: user.sticker,
         favColor: user.profileColor,
-        avatarUrl: ctx.message.guild.members.get(member.id)?.guildAvatar ?? member.dynamicAvatarURL('png', 2048),
+        avatarUrl: guildMember?.guildAvatar ?? member.dynamicAvatarURL('png', 2048),
         badges: arrayBadges
       },
       responseType: 'arraybuffer'
     }).then(profile => {
       ctx.send('', {
-        file: {
-          file: profile.data,
-          name: 'profile.png'
-        }
+          file: {
+            file: profile.data,
+            name: 'profile.png'
+          }
       })
     })
   }

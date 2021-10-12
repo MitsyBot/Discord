@@ -25,30 +25,39 @@ module.exports = class RepCommand extends Command {
 
   async run(ctx) {
     const user = ctx.args.get('user')?.value
+    
     const member = await ctx.getUser(user?.id ?? user)
-    if (!member) return ctx.replyT('error', 'basic:invalidUser')
+        if (!member) return ctx.replyT('error', 'basic:invalidUser')
+
     const author = ctx.db.user
     const receiver = await ctx.client.database.users.getOrCreate(member.id)
-    if (member.id === ctx.message.author.id) return ctx.replyT('error', 'commands:rep.cannotGiveRepForYourself')
+    
+    if (member.id == ctx.message.author.id) return ctx.replyT('error', 'commands:rep.cannotGiveRepForYourself')
+    
     if (member.id === ctx.client.user.id) {
       author.repTime = 3600000 + Date.now()
       receiver.rep += 1
       receiver.save().then(() => {
-        ctx.replyT('mitsy_woah', 'commands:rep.forTheClient', { 0: user.rep })
+        ctx.replyT('mitsy_woah', 'commands:rep.forTheClient', { 0: receiver.rep })
       })
-      author.save()
 
+      author.save()
       return
     }
+
     const time = (parseInt(author.repTime) - Date.now() > 3600000) ? moment.utc(parseInt(author.time - Date.now())).format('hh:mm:ss') : moment.utc(parseInt(author.repTime - Date.now())).format('mm:ss')
+    
     if (parseInt(author.repTime) < Date.now()) {
-      author.repTime = 3600000 + Date.now()
-      receiver.rep += 1
-      author.save()
-      receiver.save().then(() => {
-        ctx.replyT('success', 'commands:rep.successffully', { 0: member.mention, 1: user.rep })
-      })
-    } else {
+        author.repTime = 3600000 + Date.now()
+        receiver.rep += 1
+        author.save()
+
+        receiver.save().then(() => {
+          ctx.replyT('success', 'commands:rep.successffully', { 0: member.mention, 1: receiver.rep })
+        })
+    } 
+    
+    else {
       ctx.replyT('warn', 'commands:rep.cooldown', { 0: time })
     }
   }

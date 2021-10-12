@@ -31,16 +31,19 @@ module.exports = class DivorceCommand extends Command {
           .setLabel(ctx._locale('basic:boolean.true'))
           .customID('confirm_button')
           .setStyle(3),
+      
       new Button()
           .setLabel(ctx._locale('basic:boolean.false'))
           .customID('reject_button')
           .setStyle(4))
+      
       .returnCtx()
       .replyT('warn', 'commands:divorce.requestConfirm')
       .then(message => {
+        
         const ack = new ResponseAck(message)
-        ack.on('collect', ({packet}) => {
-          const data = packet
+        
+        ack.on('collect', (data) => {
           if(data.interaction.buttonEvent.member.id !== author.id) return;
 
           switch (data.interaction.buttonEvent.customID) {

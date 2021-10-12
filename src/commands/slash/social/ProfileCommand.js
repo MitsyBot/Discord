@@ -74,12 +74,11 @@ module.exports = class ProfileCommand extends Command {
 
   async run(ctx) {
     const user1 = ctx.args.get('user')?.value
-    const member = await ctx.getUser(user1?.id ?? user1, true)
+    const member = await ctx.getUser(user1?.id ?? ctx.message.author.id, true)
     const user = await ctx.client.database.users.getOrCreate(member.id)
     const couple = user.isMarry ? await ctx.getUser(user.marryWith) : { username: '', discriminator: '' }
 
-    const arrayBadges = [
-    ]
+    const arrayBadges = []
 
     for (const flag of flags) {
       switch ((flag.flag & member.publicFlags) === flag.flag) {
@@ -87,18 +86,21 @@ module.exports = class ProfileCommand extends Command {
           arrayBadges.push(flag.name)
           break
         case false:
-        /**
-               * @returns null
-               */
+          /**
+          *@returns null
+          */
+        
         default:
-        /**
-       * @returns null
-       */
+          /**
+          *@returns null
+          */
       }
     }
-    const guildMember = await ctx.getMember(member.id) ?? undefined
+
+    const guildMember = await ctx.message.guild.members.get(member.id)
+
     axios({
-      url: 'http://127.0.0.1:1234/render/profile',
+      url: 'http://185.106.96.238:1234/render/profile',
       method: 'post',
       data: {
         type: user.profileType,
@@ -110,7 +112,7 @@ module.exports = class ProfileCommand extends Command {
         bgId: user.background,
         stickerId: user.sticker,
         favColor: user.profileColor,
-        avatarUrl: guildMember?.guildAvatar ?? member.avatarURL,
+        avatarUrl: guildMember?.guildAvatar,
         badges: arrayBadges
       },
       responseType: 'arraybuffer'
