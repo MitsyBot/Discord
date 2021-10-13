@@ -89,7 +89,7 @@ module.exports = class ProfileCommand extends Command {
     const guildMember = await ctx.message.guild.members.get(member.id) ?? undefined
 
     axios({
-      url: 'http://185.106.96.238:1234/render/profile',
+      url: `${process.env.IMAGESERVER_URL}/render/profile`,
       method: 'post',
       data: {
         type: user.profileType,

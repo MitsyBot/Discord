@@ -13,11 +13,15 @@ module.exports = class SendDataListener extends Listener {
     if (process.env.PRODUCTION === 'true') {
     setInterval(() => {
         axios({
-            url: 'http://127.0.0.1:3000/api/v2/guildsusers',
+            url: `${process.env.API_URL}/guildsusers`,
             method: 'put',
             data: {
               guilds: client.guilds.size,
               users: client.users.size,
+            },
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: process.env.API_TOKEN,
             },
           })
         Logger.debug(`Servidores e usuarios enviados para o a Api`)
