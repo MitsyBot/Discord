@@ -25,7 +25,7 @@ module.exports = class RepCommand extends Command {
     }).then(response => {
         const url = response.data.url
 
-        embedTitle = ctx._locale('commands:pat.patTitle', { user: author.username, member: member.username })
+        embedTitle = ctx._locale('commands:userInteraction.patTitle', { user: author.username, member: member.username })
 
         const embed = new EmbedBuilder()
         embed.setTitle(embedTitle)
@@ -35,7 +35,7 @@ module.exports = class RepCommand extends Command {
         embed.setTimestamp()
 
         ctx.send(embed.build()).then(message => {
-            message.addReaction('💚')
+            message.addReaction('🔁')
 
             ctx.client.on('messageReactionAdd', async (msg, emoji, reactor) => {
                 if(msg.id !== message.id) return;
@@ -48,7 +48,7 @@ module.exports = class RepCommand extends Command {
                 }).then(answerResponse => {
                   const responseUrl = answerResponse.data.url
 
-                  embedTitle =  ctx._locale('commands:pat.patTitle', { user: member.username, member: author.username})
+                  embedTitle =  ctx._locale('commands:userInteraction.patTitle', { user: member.username, member: author.username})
 
                   const embed = new EmbedBuilder()
                   embed.setTitle(embedTitle)

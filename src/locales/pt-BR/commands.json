@@ -42,8 +42,16 @@
     "proceed": "Você deseja continuar?",
     "confirm": "Se sim, clique [aqui](https://top.gg/bot/762476895202967563/vote) para votar em mim. Quando tiver votado, execute este comando novamente."
   },
-  "pat": {
-    "patTitle": "{{user}} fez cafuné em {{member}}!"
+  "userInteraction": {
+    "patTitle": "{{user}} fez cafuné em {{member}}!",
+    "kissTitle": "{{user}} beijou {{member}}!",
+    "hugTitle": "{{user}} abraçou {{member}}!",
+    "punchTitle": "{{user}} deu um soco em {{member}}!",
+    "slapTitle": "{{user}} deu um tapa em {{member}}!",
+    "biteTitle": "{{user}} mordeu {{member}}!",
+    "angryTitle": "{{user}} se irritou!",
+    "cryTitle": "{{user}} chorou!",
+    "shyTitle": "{{user}} se envergonhou!"
   },
   "channelinfo": {
     "title": "`Informações sobre #{{0}}`",
