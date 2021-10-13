@@ -1,4 +1,4 @@
-const { Command } = require('../../../utils')
+const { Command, Emoji } = require('../../../utils')
 const axios = require('axios')
 const { CommandOptions, CommandBase } = require('eris')
 
@@ -73,6 +73,9 @@ module.exports = class ProfileCommand extends Command {
   }
 
   async run(ctx) {
+    // Slash disabled command
+    return ctx.replyT('mitsy_what', 'commands:disabled.slashDisabled', {0: `${ctx.db.guild.prefix}profile`})
+
     const user1 = ctx.args.get('user')?.value
     const member = await ctx.getUser(user1?.id ?? ctx.message.author.id, true)
     const user = await ctx.client.database.users.getOrCreate(member.id)

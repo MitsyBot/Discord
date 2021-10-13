@@ -12,6 +12,10 @@
       "reason": "Motivo"
     }
   },
+  "disabled": {
+    "slashDisabled": "Por algum motivo esse comando está desativado na sua versão `slash`, você pode tentar usar esse comando na sua versão por prefixo com o comando `{{0}}`",
+    "vanillaDisabled": "Por algum motivo esse comando está desativado na sua versão `prefixo`, você pode tentar usar esse comando na sua versão por slash com o comando `{{0}}`"
+  },
   "jankenpon": {
     "usage": "<escolha> <valor>",
     "description": "Jogue pedra papel ou tesoura e ganhe ou perca cometinhas.",
