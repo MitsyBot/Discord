@@ -39,7 +39,7 @@ module.exports = class RepCommand extends Command {
 
             ctx.client.on('messageReactionAdd', async (msg, emoji, reactor) => {
                 if(msg.id !== message.id) return;
-                if(emoji.name !== '💚') return;
+                if(emoji.name !== '🔁') return;
                 if(reactor.id !== member.id || reactor.id === ctx.client.user.id || reactor.id === author.id) return; 
 
                 axios({
