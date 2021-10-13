@@ -1,6 +1,7 @@
 const { Command, EmbedBuilder, Emoji } = require('../../../utils')
 const { CommandBase, CommandOptions } = require('eris')
 const axios = require('axios')
+const { CommandBase, CommandOptions } = require('eris')
 
 module.exports = class RepCommand extends Command {
   constructor() {
