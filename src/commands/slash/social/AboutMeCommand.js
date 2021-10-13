@@ -22,10 +22,13 @@ module.exports = class AboutMeCommand extends Command {
   }
 
   async run(ctx) {
-    if (ctx.args.join(' ').length > 128) return ctx.replyT('error', 'commands:aboutme.bioLimit')
-    const bio = ctx.args.join(' ').replace(/[`]/g, '')
-    ctx.db.user.aboutme = bio
-    ctx.db.user.save()
+    const textValue = ctx.args.get('text').value
+      if (textValue.length > 128) return ctx.replyT('error', 'commands:aboutme.bioLimit')
+    
+    const bio = textValue.replace(/[`]/g, '')
+          ctx.db.user.aboutme = bio
+          ctx.db.user.save()
+          
     await ctx.replyT('success', 'commands:aboutme.success', { bio: bio })
   }
 }
