@@ -9,6 +9,9 @@ module.exports = class ColorResolver {
     const defaultColors = {
       DEFAULT: 0xF895FB,
       ERROR: 0xFA704D,
+      CONNECTED: 0x28D23B,
+      RESUMED: 0x3D9958,
+      RESTARTING: 0xFAFA29, 
       MINECRAFT: 0x7BE37B,
       MODERATION: 0xFF4A4A,
       ACTION: 0xC68AFF,

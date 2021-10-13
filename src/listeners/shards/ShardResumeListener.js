@@ -11,7 +11,9 @@ module.exports = class ShardResumeListener extends Listener {
     if (!process.env.SHARD_CHANNEL_LOG) return
     client.getRESTChannel(process.env.SHARD_CHANNEL_LOG).then(async (channel) => {
       if (!channel) return
+      
       const webhooks = await channel.getWebhooks()
+      
       let webhook = webhooks.filter((w) => w.name === 'Mitsy Sharder' && w.user.id === client.user.id)[0]
       if (!webhook) {
         webhook = await channel.createWebhook({
@@ -23,10 +25,10 @@ module.exports = class ShardResumeListener extends Listener {
       }
 
       const embed = new EmbedBuilder()
-      embed.setColor('ERROR')
-      embed.setTitle('Shard Resumida')
-      embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Resumida\``)
-      embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
+            embed.setColor('RESUMED')
+            embed.setTitle('Shard Resumida')
+            embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Resumida\``)
+            embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
 
       client.executeWebhook(webhook.id, webhook.token, {
         embeds: [embed],

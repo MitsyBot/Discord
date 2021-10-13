@@ -9,10 +9,15 @@ module.exports = class ErrorListener extends Listener {
 
   async on(client, error, shard) {
     const _locale = client.i18nRegistry.getT('pt-BR')
+    
     if (!process.env.ERROR_CHANNEL_LOG) return
+    if(error.message.includes('Connection reset by peer')) return; // Safe to ignore error de acordo com as docs do Eris.
+
     client.getRESTChannel(process.env.ERROR_CHANNEL_LOG).then(async (channel) => {
       if (!channel) return
+      
       const webhooks = await channel.getWebhooks()
+      
       let webhook = webhooks.filter((w) => w.name === 'Mitsy Errors' && w.user.id === client.user.id)[0]
       if (!webhook) {
         webhook = await channel.createWebhook({
@@ -24,10 +29,11 @@ module.exports = class ErrorListener extends Listener {
       }
 
       const embed = new EmbedBuilder()
-      embed.setColor('ERROR')
-      embed.setTitle(_locale('events:executionFailure.embedTitle'))
-      embed.setDescription(`\`\`\`js\n${error.stack.slice(0, 1800)}\`\`\``)
-      embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
+            embed.setColor('ERROR')
+            embed.setTitle(_locale('events:executionFailure.embedTitle'))
+            embed.setDescription(`\`\`\`js\n${error.stack.slice(0, 1800)}\`\`\``)
+            embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
+      
       client.executeWebhook(webhook.id, webhook.token, {
         embeds: [embed],
         avatarURL: 'https://i.imgur.com/zxj5oQ7.png',

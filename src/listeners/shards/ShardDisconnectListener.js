@@ -12,10 +12,15 @@ module.exports = class ShardDisconnectListener extends Listener {
       shardID,
       uptime: NaN
     })
-    if (!process.env.SHARD_CHANNEL_LOG) return
+    
+    if(!process.env.SHARD_CHANNEL_LOG) return;
+    if(error.message.includes('Connection reset by peer')) return; // Safe to ignore error de acordo com as docs do Eris.
+
     client.getRESTChannel(process.env.SHARD_CHANNEL_LOG).then(async (channel) => {
       if (!channel) return
+      
       const webhooks = await channel.getWebhooks()
+      
       let webhook = webhooks.filter((w) => w.name === 'Mitsy Sharder' && w.user.id === client.user.id)[0]
       if (!webhook) {
         webhook = await channel.createWebhook({
@@ -27,11 +32,11 @@ module.exports = class ShardDisconnectListener extends Listener {
       }
 
       const embed = new EmbedBuilder()
-      embed.setColor('ERROR')
-      embed.setTitle('Shard desconectada')
-      embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Desconectada\``)
-      embed.addField('Talvez o erro seja', error.message)
-      embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
+            embed.setColor('ERROR')
+            embed.setTitle('Shard desconectada')
+            embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Desconectada\``)
+            embed.addField('Talvez o erro seja', error.message)
+            embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
 
       client.executeWebhook(webhook.id, webhook.token, {
         embeds: [embed],

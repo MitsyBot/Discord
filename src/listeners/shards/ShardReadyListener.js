@@ -9,6 +9,7 @@ module.exports = class ShardReadyListener extends Listener {
 
   async on(client, shardID) {
     if (!process.env.SHARD_CHANNEL_LOG) return
+    
     client.shardUptime.set(shardID, {
       shardID,
       uptime: Date.now()
@@ -16,7 +17,9 @@ module.exports = class ShardReadyListener extends Listener {
 
     client.getRESTChannel(process.env.SHARD_CHANNEL_LOG).then(async (channel) => {
       if (!channel) return
+      
       const webhooks = await channel.getWebhooks()
+      
       let webhook = webhooks.filter((w) => w.name === 'Mitsy Sharder' && w.user.id === client.user.id)[0]
       if (!webhook) {
         webhook = await channel.createWebhook({
@@ -28,10 +31,10 @@ module.exports = class ShardReadyListener extends Listener {
       }
 
       const embed = new EmbedBuilder()
-      embed.setColor('ERROR')
-      embed.setTitle('Shard Iniciada')
-      embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Iniciada\``)
-      embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
+            embed.setColor('CONNECTED')
+            embed.setTitle('Shard Iniciada')
+            embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Iniciada\``)
+            embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
 
       client.executeWebhook(webhook.id, webhook.token, {
         embeds: [embed],
