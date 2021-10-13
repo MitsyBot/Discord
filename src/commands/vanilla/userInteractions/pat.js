@@ -42,16 +42,23 @@ module.exports = class RepCommand extends Command {
                 if(emoji.name !== '💚') return;
                 if(reactor.id !== member.id || reactor.id === ctx.client.user.id || reactor.id === author.id) return; 
 
-                embedTitle =  ctx._locale('commands:pat.patTitle', { user: member.username, member: author.username})
+                axios({
+                  url: 'https://mitsy.website/api/v2/userinteraction/pat',
+                  method: 'GET',
+                }).then(answerResponse => {
+                  const responseUrl = answerResponse.data.url
 
-                const embed = new EmbedBuilder()
-                embed.setTitle(embedTitle)
-                embed.setColor('DEFAULT')
-                embed.setImage(url, 1024, 1024)
-                embed.setFooter(`©️ ${ctx.client.user.username}`)
-                embed.setTimestamp()
+                  embedTitle =  ctx._locale('commands:pat.patTitle', { user: member.username, member: author.username})
 
-                ctx.send(embed.build())
+                  const embed = new EmbedBuilder()
+                  embed.setTitle(embedTitle)
+                  embed.setColor('DEFAULT')
+                  embed.setImage(url, 1024, 1024)
+                  embed.setFooter(`©️ ${ctx.client.user.username}`)
+                  embed.setTimestamp()
+  
+                  ctx.send(embed.build())
+                })
             })
         })
     })
