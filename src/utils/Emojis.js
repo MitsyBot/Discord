@@ -13,6 +13,7 @@ module.exports = {
   heart: '❤️',
   ring_couple: '<:ring_couple:791360830221844512>',
   broken_heart: '💔',
+  mitsy_heart: '<:mitsy_heart:891887284922761308>',
   tada: '🎉',
   mitsy_what: '<:mitsy_what:825404965564448789>',
   mitsy_whoa: '<:mitsy_Woah:825404965640077312>',

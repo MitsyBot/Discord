@@ -42,6 +42,9 @@
     "proceed": "Você deseja continuar?",
     "confirm": "Se sim, clique [aqui](https://top.gg/bot/762476895202967563/vote) para votar em mim. Quando tiver votado, execute este comando novamente."
   },
+  "pat": {
+    "patTitle": "{{user}} fez cafuné em {{member}}!"
+  },
   "channelinfo": {
     "title": "`Informações sobre #{{0}}`",
     "noTopic": "Este canal não tem um tópico.",
