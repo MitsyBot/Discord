@@ -53,7 +53,7 @@ module.exports = class RepCommand extends Command {
                   const embed = new EmbedBuilder()
                   embed.setTitle(embedTitle)
                   embed.setColor('DEFAULT')
-                  embed.setImage(url, 1024, 1024)
+                  embed.setImage(responseUrl, 1024, 1024)
                   embed.setFooter(`©️ ${ctx.client.user.username}`)
                   embed.setTimestamp()
   
