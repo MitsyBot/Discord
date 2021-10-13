@@ -7,8 +7,7 @@ module.exports = class RepCommand extends Command {
     super({
       name: 'angry',
       aliases: ['bravo', 'brava', 'brave'],
-      arguments: 1,
-      hasUsage: true
+      hasUsage: false
     })
   }
 
