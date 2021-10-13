@@ -36,7 +36,7 @@ module.exports = class RepCommand extends Command {
         }).then(response => {
             const url = response.data.url
     
-            embedTitle = ctx._locale('commands:pat.patTitle', { user: author.username, member: member.username })
+            embedTitle = ctx._locale('commands:userInteraction.patTitle', { user: author.username, member: member.username })
     
             const embed = new EmbedBuilder()
             embed.setTitle(embedTitle)
@@ -53,7 +53,7 @@ module.exports = class RepCommand extends Command {
                     if(emoji.name !== '💚') return;
                     if(reactor.id !== member.id || reactor.id === ctx.client.user.id || reactor.id === author.id) return; 
     
-                    embedTitle =  ctx._locale('commands:pat.patTitle', { user: member.username, member: author.username})
+                    embedTitle =  ctx._locale('commands:userInteraction.patTitle', { user: member.username, member: author.username})
     
                     const embed = new EmbedBuilder()
                     embed.setTitle(embedTitle)
