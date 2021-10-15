@@ -13,6 +13,7 @@ module.exports = class ColorResolver {
       RESUMED: 0x3D9958,
       RESTARTING: 0xFAFA29, 
       MINECRAFT: 0x7BE37B,
+      TRANSACTION: 0x66ff66,
       MODERATION: 0xFF4A4A,
       ACTION: 0xC68AFF,
     }

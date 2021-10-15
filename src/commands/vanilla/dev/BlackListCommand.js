@@ -19,7 +19,7 @@ module.exports = class BlackListCommand extends Command {
         const dbUser = await ctx.db.db.getOrCreate(user.id)
         let reason = ctx.args.slice(2).join(' ')
         if (!reason) {
-          reason = 'No reason'
+          reason = 'Nenhum motivo'
         }
         dbUser.blacklist = true
         dbUser.blacklistReason = reason
@@ -33,7 +33,7 @@ module.exports = class BlackListCommand extends Command {
         if (!user) return ctx.reply('error', 'eu não posso editar algo de uma pessoa que não foi informada.')
         const dbUser = await ctx.db.db.getOrCreate(user.id)
         const userInfo = user ? `${user.username}#${user.discriminator} - (${user.id})` : dbUser.id
-        const msg = `\`\`\`asciidoc\n== USER BANNED INFO ==\n\n• User :: ${userInfo}\n• Banned :: ${dbUser.blacklist}\n• Reason :: ${dbUser.blacklistReason}\`\`\``
+        const msg = `\`\`\`asciidoc\n== Usuario banido ==\n\n• Usuario :: ${userInfo}\n• Banido :: ${dbUser.blacklist}\n• Motivo :: ${dbUser.blacklistReason}\`\`\``
         ctx.send(msg)
       }
         break

@@ -1,5 +1,6 @@
 const { Command, EmbedBuilder, TopGGUtils } = require('../../../utils')
 const moment = require('moment')
+const StarTracker = require('../../../structures/util/StarTracker')
 
 module.exports = class DailyCommand extends Command {
   constructor() {
@@ -45,5 +46,7 @@ module.exports = class DailyCommand extends Command {
 
       ctx.send(embed.build())
     })
+
+    StarTracker.singleuserDetected(ctx, 'Daily', amount, ctx.message.author)
   }
 }

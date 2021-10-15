@@ -1,4 +1,5 @@
 const { Command, Button, ResponseAck, Emoji } = require('../../../utils')
+const StarTracker = require('../../../structures/util/StarTracker')
 
 module.exports = class PayCommand extends Command {
   constructor() {
@@ -21,7 +22,8 @@ module.exports = class PayCommand extends Command {
     if (member.id === ctx.client.user.id) return ctx.replyT('mitsy_what', 'commands:pay.cannotPayToMe')
     if (member.bot) return ctx.replyT('mitsy_what', 'commands:pay.cannotPayToBot')
     if (ctx.message.author.id === member.id) return ctx.replyT('error', 'commands:pay.userMismatch')
-
+    
+    const user1 = ctx.message.author
     const fromUser = ctx.db.user
     const value = ctx.args[1]
     const toUser = await ctx.db.db.getOrCreate(member.id)
@@ -55,6 +57,7 @@ module.exports = class PayCommand extends Command {
               fromUser.comets -= totalcomets
               toUser.comets += totalcomets
               ctx.db.user.save()
+              StarTracker.multipleuserDetected(ctx, 'Pay', totalcomets, user1, member)
               toUser.save().then(() => {
                 ack.sendAck('update', {
                   content: `${Emoji.getEmoji('comet').mention} **|** <@${fromUser.id}>, ${ctx._locale('commands:pay.success', { comets: totalcomets, user: member.mention })}`,
