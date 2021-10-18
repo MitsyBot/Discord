@@ -1,5 +1,4 @@
 const Listener = require('../../structures/events/Listener')
-const Watchdog = require('../../structures/util/WatchDog')
 const { EmbedBuilder, Logger } = require('../../utils')
 
 module.exports = class ShardDisconnectListener extends Listener {

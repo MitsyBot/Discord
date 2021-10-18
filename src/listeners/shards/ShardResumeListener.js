@@ -26,8 +26,8 @@ module.exports = class ShardResumeListener extends Listener {
 
       const embed = new EmbedBuilder()
             embed.setColor('RESUMED')
-            embed.setTitle('Shard Resumida')
-            embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Resumida\``)
+            embed.setTitle('Shard Reconectada')
+            embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Reconectada\``)
             embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
 
       client.executeWebhook(webhook.id, webhook.token, {
@@ -39,8 +39,8 @@ module.exports = class ShardResumeListener extends Listener {
 
     const watchdoggoembed = new EmbedBuilder()
     watchdoggoembed.setColor('RESUMED')
-    watchdoggoembed.setTitle(`A shard ${shardID} foi retomada no cluster [${process.env.CLUSTER_ID}] `)
-    watchdoggoembed.setDescription(`A shard ${shardID} foi retomada!`)
+    watchdoggoembed.setTitle(`A shard ${shardID} foi reconectada no cluster [${process.env.CLUSTER_ID}] `)
+    watchdoggoembed.setDescription(`A shard ${shardID} foi reconectada!`)
 
 
     client.executeWebhook(process.env.WATCHDOGGO_ID, process.env.WATCHDOGGO_TOKEN, {
@@ -49,6 +49,6 @@ module.exports = class ShardResumeListener extends Listener {
       username: 'WatchDog'
     })
 
-    Logger.shardMessage(`LESGO! A shard ${shardID} foi retomada!`)
+    Logger.shardMessage(`LESGO! A shard ${shardID} foi reconectada!`)
   }
 }

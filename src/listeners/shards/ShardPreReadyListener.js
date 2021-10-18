@@ -26,8 +26,8 @@ module.exports = class ShardPreReadyListener extends Listener {
 
       const embed = new EmbedBuilder()
             embed.setColor('RESTARTING')
-            embed.setTitle('Shard Reconectando')
-            embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Reconectando\``)
+            embed.setTitle('Shard conectando')
+            embed.setDescription(`Cluster: #${process.env.CLUSTER_ID} = Shard: ${shardID} => \`Conectando\``)
             embed.setFooter(`Instancia: ${client.user.username}#${client.user.discriminator}`, client.user.avatarURL)
 
       client.executeWebhook(webhook.id, webhook.token, {
@@ -39,8 +39,8 @@ module.exports = class ShardPreReadyListener extends Listener {
 
     const watchdoggoembed = new EmbedBuilder()
     watchdoggoembed.setColor('RESTARTING')
-    watchdoggoembed.setTitle(`A shard ${shardID} esta se reconectando no cluster [${process.env.CLUSTER_ID}] `)
-    watchdoggoembed.setDescription(`A shard ${shardID} esta se reconectando, aguarde!`)
+    watchdoggoembed.setTitle(`A shard ${shardID} esta se conectando no cluster [${process.env.CLUSTER_ID}] `)
+    watchdoggoembed.setDescription(`A shard ${shardID} esta se conectando, aguarde!`)
 
 
     client.executeWebhook(process.env.WATCHDOGGO_ID, process.env.WATCHDOGGO_TOKEN, {
