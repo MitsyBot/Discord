@@ -8,6 +8,7 @@ module.exports = class BugReportCommand extends Command {
       aliases: ['reportarbug'],
       arguments: 1,
       hasUsage: true,
+      ephemeral: true,
       slash: new CommandBase()
         .setName('bugreport')
         .setDescription('Reporte um bug da mitsy')

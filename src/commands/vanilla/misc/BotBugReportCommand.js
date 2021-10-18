@@ -6,6 +6,7 @@ module.exports = class BotSuggestionCommand extends Command {
       name: 'bugreport',
       aliases: ['reportarbug'],
       arguments: 1,
+      ephemeral: true,
       hasUsage: true
     })
   }
