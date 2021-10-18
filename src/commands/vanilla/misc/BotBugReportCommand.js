@@ -38,6 +38,6 @@ module.exports = class BotSuggestionCommand extends Command {
           username: ctx.message.author.username
         })
       })
-      ctx.replyT({ content: 'alo!', ephemeral: true })
+      ctx.reply({ content: 'alo!', ephemeral: true })
 }
 }
