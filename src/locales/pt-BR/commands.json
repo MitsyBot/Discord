@@ -53,6 +53,11 @@
     "cryTitle": "{{user}} chorou!",
     "shyTitle": "{{user}} se envergonhou!"
   },
+  "suggestion": {
+    "usage": "Sua sugestão (você pode anexar imagens aqui, entre outros!",
+    "description": "Sugira uma função para a mitsy.",
+    "send": "Sua sugestão foi enviada com sucesso"
+  },
   "channelinfo": {
     "title": "`Informações sobre #{{0}}`",
     "noTopic": "Este canal não tem um tópico.",
