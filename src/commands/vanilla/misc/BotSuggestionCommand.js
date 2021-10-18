@@ -4,6 +4,7 @@ module.exports = class BotSuggestionCommand extends Command {
   constructor() {
     super({
       name: 'suggestion',
+      aliases: ['sugerir'],
       arguments: 1,
       hasUsage: true
     })
@@ -37,6 +38,6 @@ module.exports = class BotSuggestionCommand extends Command {
           username: ctx.message.author.username
         })
       })
-      ctx.replyT('mitsy_ok', 'commands:botsuggest.send')
+      ctx.replyT('mitsy_success', 'commands:suggestion.send')
 }
 }
