@@ -1,4 +1,5 @@
 const Listener = require('../../structures/events/Listener')
+const Watchdog = require('../../structures/util/WatchDog')
 const { EmbedBuilder, Logger } = require('../../utils')
 
 module.exports = class ShardDisconnectListener extends Listener {
@@ -44,7 +45,7 @@ module.exports = class ShardDisconnectListener extends Listener {
         username: 'Mitsy Sharder'
       })
     })
-
+    Watchdog.shardError(process.env.CLUSTER_ID, shardID, client)
     Logger.shardMessage(`Whoops, a shard ${shardID} foi desconectada forçadamente!`)
   }
 }

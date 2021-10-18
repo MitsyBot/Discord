@@ -1,4 +1,5 @@
 const Listener = require('../../structures/events/Listener')
+const Watchdog = require('../../structures/util/WatchDog')
 const { EmbedBuilder, Logger } = require('../../utils')
 
 module.exports = class ShardReadyListener extends Listener {
@@ -42,7 +43,7 @@ module.exports = class ShardReadyListener extends Listener {
         username: 'Mitsy Sharder'
       })
     })
-
+    Watchdog.shardError(process.env.CLUSTER_ID, shardID, 'foi conectada', client, 'CONNECTED')
     Logger.shardMessage(`Ok! A Shard ${shardID} foi conectada!`)
   }
 }
