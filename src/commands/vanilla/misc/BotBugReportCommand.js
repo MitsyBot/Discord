@@ -38,7 +38,6 @@ module.exports = class BotSuggestionCommand extends Command {
           username: ctx.message.author.username
         })
       })
-      ctx.replyT('success', 'commands:bugreport.send')
-      ctx.message.channel.createMessage({content: 'true', ephemeral: true})
+      ctx.replyT('success', 'commands:bugreport.send', ephemeral)
 }
 }
