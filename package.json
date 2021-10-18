@@ -1,6 +1,6 @@
 {
   "name": "mitsy-bot",
-  "version": "2021.10.09-rc1",
+  "version": "2021.10.18-rc1",
   "description": "Um simples bot para discord feito por brasileiros.",
   "main": "index.js",
   "scripts": {
