@@ -38,7 +38,7 @@ module.exports = class ShardPreReadyListener extends Listener {
     })
 
     const watchdoggoembed = new EmbedBuilder()
-    watchdoggoembed.setColor(color)
+    watchdoggoembed.setColor('RESTARTING')
     watchdoggoembed.setTitle(`A shard ${shardID} esta se reconectando no cluster [${process.env.CLUSTER_ID}] `)
     watchdoggoembed.setDescription(`A shard ${shardID} esta se reconectando, aguarde!`)
 

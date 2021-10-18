@@ -38,7 +38,7 @@ module.exports = class ShardResumeListener extends Listener {
     })
 
     const watchdoggoembed = new EmbedBuilder()
-    watchdoggoembed.setColor(color)
+    watchdoggoembed.setColor('RESUMED')
     watchdoggoembed.setTitle(`A shard ${shardID} foi retomada no cluster [${process.env.CLUSTER_ID}] `)
     watchdoggoembed.setDescription(`A shard ${shardID} foi retomada!`)
 

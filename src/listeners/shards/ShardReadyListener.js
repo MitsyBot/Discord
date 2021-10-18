@@ -44,7 +44,7 @@ module.exports = class ShardReadyListener extends Listener {
     })
 
     const watchdoggoembed = new EmbedBuilder()
-    watchdoggoembed.setColor(color)
+    watchdoggoembed.setColor('CONNECTED')
     watchdoggoembed.setTitle(`A shard ${shardID} está online no cluster [${process.env.CLUSTER_ID}] `)
     watchdoggoembed.setDescription(`A shard ${shardID} esta online, Yay!`)
 

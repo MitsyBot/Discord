@@ -47,7 +47,7 @@ module.exports = class ShardDisconnectListener extends Listener {
     })
     
     const watchdoggoembed = new EmbedBuilder()
-    watchdoggoembed.setColor(color)
+    watchdoggoembed.setColor('ERROR')
     watchdoggoembed.setTitle(`A shard ${shardID} se desconectou no cluster [${process.env.CLUSTER_ID}] `)
     watchdoggoembed.setDescription(`A shard ${shardID} foi desconectada, aguarde enquanto investigamos o motivo!`)
 
