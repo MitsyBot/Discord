@@ -1,9 +1,9 @@
 const { Command, EmbedBuilder } = require('../../../utils')
 
-module.exports = class AvatarCommand extends Command {
+module.exports = class BotSuggestionCommand extends Command {
   constructor() {
     super({
-      name: 'avatar',
+      name: 'suggestion',
       permissions: [{
         entity: 'bot',
         permissions: ['embedLinks']
