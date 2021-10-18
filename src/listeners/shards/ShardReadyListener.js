@@ -43,7 +43,7 @@ module.exports = class ShardReadyListener extends Listener {
         username: 'Mitsy Sharder'
       })
     })
-    Watchdog.shardError(process.env.CLUSTER_ID, shardID, 'foi conectada', 'CONNECTED')
+    Watchdog.shardError(process.env.CLUSTER_ID, shardID, 'foi conectada', client, 'CONNECTED')
     Logger.shardMessage(`Ok! A Shard ${shardID} foi conectada!`)
   }
 }
