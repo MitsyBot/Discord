@@ -42,6 +42,9 @@ module.exports = class ShardReadyListener extends Listener {
         username: 'Mitsy Sharder'
       })
     })
+if(process.env.WATCHDOGGO_ID === '' && process.env.WATCHDOGGO_TOKEN === '') {
+  return
+} else {
 
     const watchdoggoembed = new EmbedBuilder()
     watchdoggoembed.setColor('CONNECTED')
@@ -54,7 +57,7 @@ module.exports = class ShardReadyListener extends Listener {
       avatarURL: 'https://i.imgur.com/zxj5oQ7.png',
       username: 'WatchDog'
     })
-
+  }
     Logger.shardMessage(`Ok! A Shard ${shardID} foi conectada!`)
   }
 }
