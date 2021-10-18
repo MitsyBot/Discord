@@ -3,34 +3,34 @@ const { Command, EmbedBuilder } = require('../../../utils')
 module.exports = class BotSuggestionCommand extends Command {
   constructor() {
     super({
-      name: 'suggestion',
-      aliases: ['sugerir'],
+      name: 'bugreport',
+      aliases: ['reportarbug'],
       arguments: 1,
       hasUsage: true
     })
   }
 
   async run(ctx) {
-    const sugestion = ctx.args.join(' ')
-    ctx.client.getRESTChannel(process.env.SUGGESTION_CHANNEL).then(async (channel) => {
+    const bug = ctx.args.join(' ')
+    ctx.client.getRESTChannel(process.env.BUGREPORT_CHANNEL).then(async (channel) => {
         if (!channel) return
         
         const webhooks = await channel.getWebhooks()
         
-        let webhook = webhooks.filter((w) => w.name === 'Suggestion' && w.user.id === ctx.client.user.id)[0]
+        let webhook = webhooks.filter((w) => w.name === 'BugReport' && w.user.id === ctx.client.user.id)[0]
         if (!webhook) {
           webhook = await channel.createWebhook({
-            name: 'Suggestion',
+            name: 'BugReport',
             options: {
               type: 1
             }
           })
         }
         const embed = new EmbedBuilder()
-              embed.setColor('SUGGESTION')
-              embed.setTitle(`${ctx.message.author.username}#${ctx.message.author.discriminator} Fez uma sugestão`)
-              embed.setDescription(sugestion)
-              embed.setFooter(`Sua sugestão ira ser analisada`)
+              embed.setColor('BUG')
+              embed.setTitle(`${ctx.message.author.username}#${ctx.message.author.discriminator} Reportou um bug`)
+              embed.setDescription(bug)
+              embed.setFooter(`Iremos corrigir o bug`)
   
         ctx.client.executeWebhook(webhook.id, webhook.token, {
           embeds: [embed],
@@ -38,6 +38,6 @@ module.exports = class BotSuggestionCommand extends Command {
           username: ctx.message.author.username
         })
       })
-      ctx.replyT('success', 'commands:suggestion.send')
-  }
+      ctx.replyT('success', 'commands:bugreport.send')
+}
 }
