@@ -11,11 +11,11 @@ module.exports = class BotSuggestionCommand extends Command {
   }
 
   async run(ctx) {
-    const sugestion = ctx.args.join(' ')
+    const bug = ctx.args.join(' ')
     ctx.client.getRESTChannel(process.env.BUGREPORT_CHANNEL).then(async (channel) => {
         if (!channel) return
         
-        const bug = await channel.getWebhooks()
+        const webhooks = await channel.getWebhooks()
         
         let webhook = webhooks.filter((w) => w.name === 'BugReport' && w.user.id === ctx.client.user.id)[0]
         if (!webhook) {
