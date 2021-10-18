@@ -37,7 +37,7 @@ module.exports = class ShardPreReadyListener extends Listener {
         username: 'Mitsy Sharder'
       })
     })
-    Watchdog.shardError(process.env.CLUSTER_ID, shardID, 'esta reconectando', client, 'RESTARTING')
+    Watchdog.shardError(process.env.CLUSTER_ID, shardID, 'esta reconectando', 'RESTARTING')
     Logger.shardMessage(`Yay! conectando a shard ${shardID}...`)
   }
 }

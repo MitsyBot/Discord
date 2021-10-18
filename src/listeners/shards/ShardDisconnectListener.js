@@ -45,7 +45,7 @@ module.exports = class ShardDisconnectListener extends Listener {
         username: 'Mitsy Sharder'
       })
     })
-    Watchdog.shardError(process.env.CLUSTER_ID, shardID, client)
+    Watchdog.shardError(process.env.CLUSTER_ID, shardID)
     Logger.shardMessage(`Whoops, a shard ${shardID} foi desconectada forçadamente!`)
   }
 }
