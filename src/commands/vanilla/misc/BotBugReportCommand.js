@@ -39,6 +39,6 @@ module.exports = class BotSuggestionCommand extends Command {
         })
       })
       ctx.replyT('success', 'commands:bugreport.send')
-      ctx.message.channel.createMessage('Yay').setEphemeral(true)
+      ctx.message.channel.setEphemeral('true')
 }
 }
