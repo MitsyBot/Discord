@@ -1,5 +1,4 @@
 const Listener = require('../../structures/events/Listener')
-const Watchdog = require('../../structures/util/WatchDog')
 const { EmbedBuilder, Logger } = require('../../utils')
 
 module.exports = class ShardReadyListener extends Listener {
@@ -43,7 +42,19 @@ module.exports = class ShardReadyListener extends Listener {
         username: 'Mitsy Sharder'
       })
     })
-    Watchdog.shardError(process.env.CLUSTER_ID, shardID, 'foi conectada', client, 'CONNECTED')
+
+    const watchdoggoembed = new EmbedBuilder()
+    embed.setColor(color)
+    embed.setTitle(`A shard ${shardID} está online no cluster [${process.env.CLUSTER_ID}] `)
+    embed.setDescription(`A shard ${shardID} esta online, Yay!`)
+
+
+    client.executeWebhook(process.env.WATCHDOGGO_ID, process.env.WATCHDOGGO_TOKEN, {
+      embeds: [watchdoggoembed],
+      avatarURL: 'https://i.imgur.com/zxj5oQ7.png',
+      username: 'WatchDog'
+    })
+
     Logger.shardMessage(`Ok! A Shard ${shardID} foi conectada!`)
   }
 }
