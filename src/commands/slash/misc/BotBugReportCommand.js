@@ -21,6 +21,9 @@ module.exports = class BugReportCommand extends Command {
   }
 
   async run(ctx) {
+          // Slash disabled command
+    return ctx.replyT('mitsy_what', 'commands:disabled.slashDisabled', {0: `${ctx.db.guild.prefix}profile`})
+
     const bug = ctx.args.get('bug')
     ctx.client.getRESTChannel(process.env.BUGREPORT_CHANNEL).then(async (channel) => {
         if (!channel) return
