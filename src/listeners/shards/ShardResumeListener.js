@@ -38,9 +38,9 @@ module.exports = class ShardResumeListener extends Listener {
     })
 
     const watchdoggoembed = new EmbedBuilder()
-    embed.setColor(color)
-    embed.setTitle(`A shard ${shardID} foi retomada no cluster [${process.env.CLUSTER_ID}] `)
-    embed.setDescription(`A shard ${shardID} foi retomada!`)
+    watchdoggoembed.setColor(color)
+    watchdoggoembed.setTitle(`A shard ${shardID} foi retomada no cluster [${process.env.CLUSTER_ID}] `)
+    watchdoggoembed.setDescription(`A shard ${shardID} foi retomada!`)
 
 
     client.executeWebhook(process.env.WATCHDOGGO_ID, process.env.WATCHDOGGO_TOKEN, {
