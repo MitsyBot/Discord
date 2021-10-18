@@ -4,10 +4,8 @@ module.exports = class BotSuggestionCommand extends Command {
   constructor() {
     super({
       name: 'suggestion',
-      permissions: [{
-        entity: 'bot',
-        permissions: ['embedLinks']
-      }]
+      arguments: 1,
+      hasUsage: true
     })
   }
 
