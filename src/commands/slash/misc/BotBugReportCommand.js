@@ -15,13 +15,13 @@ module.exports = class BugReportCommand extends Command {
           new CommandOptions()
             .setType(6)
             .setName('bug')
-            .setDescription('Mencione o membro no servidor.'),
+            .setDescription('O bug para reportar.'),
         )
     })
   }
 
   async run(ctx) {
-    const bug = ctx.args.get('user')
+    const bug = ctx.args.get('bug')
     ctx.client.getRESTChannel(process.env.BUGREPORT_CHANNEL).then(async (channel) => {
         if (!channel) return
         
