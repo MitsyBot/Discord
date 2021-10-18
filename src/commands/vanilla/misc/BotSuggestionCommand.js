@@ -29,7 +29,7 @@ module.exports = class BotSuggestionCommand extends Command {
         const embed = new EmbedBuilder()
               embed.setColor('SUGGESTION')
               embed.setTitle(`${ctx.message.author.username}#${ctx.message.author.discriminator} Fez uma sugestão`)
-              embed.addField(sugestion)
+              embed.setDescription(sugestion)
               embed.setFooter(`Sua sugestão ira ser analisada`)
   
         ctx.client.executeWebhook(webhook.id, webhook.token, {
@@ -38,6 +38,6 @@ module.exports = class BotSuggestionCommand extends Command {
           username: ctx.message.author.username
         })
       })
-      ctx.replyT('mitsy_success', 'commands:suggestion.send')
+      ctx.replyT('success', 'commands:suggestion.send')
 }
 }
