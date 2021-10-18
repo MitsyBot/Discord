@@ -23,6 +23,8 @@ module.exports = class RepCommand extends Command {
   }
 
   async run(ctx) {
+    return ctx.replyT('mitsy_what', 'commands:disabled.slashDisabled', {0: `${ctx.db.guild.prefix}hug`})
+
     const user = ctx.args.get('user')?.value
     const member = await ctx.getUser(user?.id ?? user)
         if (!member) return ctx.replyT('error', 'basic:invalidUser')
