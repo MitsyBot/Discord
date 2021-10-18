@@ -36,7 +36,9 @@ module.exports = class ShardResumeListener extends Listener {
         username: 'Mitsy Sharder'
       })
     })
-
+    if(process.env.WATCHDOGGO_ID === '' && process.env.WATCHDOGGO_TOKEN === '') {
+      return
+    } else {
     const watchdoggoembed = new EmbedBuilder()
     watchdoggoembed.setColor('RESUMED')
     watchdoggoembed.setTitle(`A shard ${shardID} foi reconectada no cluster [${process.env.CLUSTER_ID}] `)
@@ -48,7 +50,7 @@ module.exports = class ShardResumeListener extends Listener {
       avatarURL: 'https://i.imgur.com/zxj5oQ7.png',
       username: 'WatchDog'
     })
-
+  }
     Logger.shardMessage(`LESGO! A shard ${shardID} foi reconectada!`)
   }
 }

@@ -44,7 +44,9 @@ module.exports = class ShardDisconnectListener extends Listener {
         username: 'Mitsy Sharder'
       })
     })
-    
+    if(process.env.WATCHDOGGO_ID === '' && process.env.WATCHDOGGO_TOKEN === '') {
+      return
+    } else {
     const watchdoggoembed = new EmbedBuilder()
     watchdoggoembed.setColor('ERROR')
     watchdoggoembed.setTitle(`A shard ${shardID} se desconectou no cluster [${process.env.CLUSTER_ID}] `)
@@ -56,7 +58,7 @@ module.exports = class ShardDisconnectListener extends Listener {
       avatarURL: 'https://i.imgur.com/zxj5oQ7.png',
       username: 'WatchDog'
     })
-
+  }
     Logger.shardMessage(`Whoops, a shard ${shardID} foi desconectada forçadamente!`)
   }
 }
