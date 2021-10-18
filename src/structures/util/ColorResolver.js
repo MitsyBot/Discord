@@ -16,7 +16,8 @@ module.exports = class ColorResolver {
       TRANSACTION: 0x66ff66,
       MODERATION: 0xFF4A4A,
       ACTION: 0xC68AFF,
-      SUGGESTION: 0xFF4A4A,
+      SUGGESTION: 0x3D9958,
+      BUG: 0xFF4A4A,
     }
 
     if (!color) color = null

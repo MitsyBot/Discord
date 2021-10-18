@@ -58,6 +58,11 @@
     "description": "Sugira uma função para a mitsy.",
     "send": "Sua sugestão foi enviada com sucesso"
   },
+  "bugreport": {
+    "usage": "O bug para reportar (você pode anexar arquivos)!",
+    "description": "Reporte um bug da mitsy, certifique-se de mostrar como reproduzir o bug.",
+    "send": "O Bug sera analizado e corrigido"
+  },
   "channelinfo": {
     "title": "`Informações sobre #{{0}}`",
     "noTopic": "Este canal não tem um tópico.",
