@@ -1,7 +1,7 @@
 {
   "name": "mitsy",
   "description": "um simples bot para discord",
-  "authors": "Duuuuardo, Giovanne Cerione",
+  "authors": "Duuuuardo, homelessAlec",
   "version": "indev-2021.19.10",
   "main": "index.js",
   "dependencies": {
