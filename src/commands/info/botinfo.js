@@ -28,7 +28,9 @@ module.exports = {
 					.setThumbnail(client.user.displayAvatarURL())
 					.addField('Servidores: ', `${totalGuilds}`, true)
 					.addField('Usuários: ', `${totalMembers}`, true)
-					.addField('Shards: ', `${totalShards}`);
+					.addField('Shards: ', `${totalShards}`)
+					.setFooter(`${interaction.user.username}`, interaction.user.displayAvatarURL())
+					.setTimestamp();
 
 				interaction.editReply({
 					embeds: [embed],

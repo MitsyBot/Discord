@@ -24,7 +24,9 @@ module.exports = {
 			.setAuthor(`Avatar de ${member.user.username}`)
 			.setDescription(`Para baixar essa imagem [clique aqui](${avatarUrl})`)
 			.setColor('DARK_VIVID_PINK')
-			.setImage(avatarUrl);
+			.setImage(avatarUrl)
+			.setFooter(`${interaction.user.username}`, interaction.user.displayAvatarURL())
+			.setTimestamp();
 
 		interaction.editReply({
 			embeds: [embed],

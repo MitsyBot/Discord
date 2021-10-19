@@ -13,7 +13,9 @@ module.exports = {
 	run: async (client, interaction) => {
 		const embed = new MessageEmbed()
 			.setColor('LUMINOUS_VIVID_PINK')
-			.setDescription(`:ping_pong: **WebSocket:** ${client.ws.ping}ms`);
+			.setDescription(`:ping_pong: **WebSocket:** ${client.ws.ping}ms`)
+			.setFooter(`${interaction.user.username}`, interaction.user.displayAvatarURL())
+			.setTimestamp();
 
 		interaction.editReply({
 			embeds: [embed],
