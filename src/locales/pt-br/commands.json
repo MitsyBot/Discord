@@ -17,5 +17,9 @@
         "tag": "Tag de usuário:",
         "id": "ID:",
         "createdAt": "Criado em:"
+    },
+    "daily": {
+        "alreadyClaim": "Você já recebeu seu prêmio diário! Volte novamente em {{0}}",
+        "sucessClaim": "Você recebeu seu prêmio diário de {{0}} cometinhas!"
     }
 }
