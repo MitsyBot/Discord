@@ -3,7 +3,11 @@ const { Client, Collection, Intents } = require('discord.js');
 const fs = require('fs');
 
 const client = new Client({
-	intents: [Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILDS],
+	intents: [
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.GUILD_MEMBERS,
+		Intents.FLAGS.GUILDS,
+	],
 });
 
 module.exports = client;

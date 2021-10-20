@@ -6,8 +6,12 @@ const shardManager = new ShardingManager('./bot.js', {
 	token: token,
 });
 
-shardManager.on('shardCreate', shard => {
-	console.log(`${chalk.greenBright('[SHARD MANAGER]')} A shard de id ${shard.id} foi iniciada corretamente`);
+shardManager.on('shardCreate', (shard) => {
+	console.log(
+		`${chalk.greenBright('[SHARD MANAGER]')} A shard de id ${
+			shard.id
+		} foi iniciada corretamente`,
+	);
 });
 
 shardManager.spawn();

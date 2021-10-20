@@ -1,6 +1,6 @@
 const client = require('../bot');
 
-client.on('interactionCreate', async interaction => {
+client.on('interactionCreate', async (interaction) => {
 	if (interaction.isCommand()) {
 		await interaction.deferReply({ ephemeral: false }).catch();
 
@@ -16,10 +16,14 @@ client.on('interactionCreate', async interaction => {
 					if (x.value) args.push(x.value);
 				});
 			}
-			else if (option.value) {args.push(option.value);}
+			else if (option.value) {
+				args.push(option.value);
+			}
 		}
 
-		interaction.member = interaction.guild.members.cache.get(interaction.user.id);
+		interaction.member = interaction.guild.members.cache.get(
+			interaction.user.id,
+		);
 
 		if (cmd) {
 			cmd.run(client, interaction, args);

@@ -1,16 +1,18 @@
 const fs = require('fs');
 
 /**
-* @param {Client} client
-*/
+ * @param {Client} client
+ */
 
 module.exports = (client) => {
 	try {
 		const arrayOfCommands = [];
 		let cmds;
 
-		fs.readdirSync('./commands').forEach(cmd => {
-			const commands = fs.readdirSync(`./commands/${cmd}/`).filter((file) => file.endsWith('.js'));
+		fs.readdirSync('./commands').forEach((cmd) => {
+			const commands = fs
+				.readdirSync(`./commands/${cmd}/`)
+				.filter((file) => file.endsWith('.js'));
 			for (cmds of commands) {
 				const pull = require(`../commands/${cmd}/${cmds}`);
 				if (pull.name) {

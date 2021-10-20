@@ -5,18 +5,20 @@ const moment = require('moment');
 module.exports = {
 	name: 'userinfo',
 	description: 'Mostra as informações de um usuário!',
-	options: [{
-		name: 'usuário',
-		type: 'USER',
-		description: 'Mencione um usuário',
-		required: false,
-	}],
-	permissions : [''],
+	options: [
+		{
+			name: 'usuário',
+			type: 'USER',
+			description: 'Mencione um usuário',
+			required: false,
+		},
+	],
+	permissions: [''],
 	/**
-     * @param {Client} client
-     * @param {CommandInteraction} interaction
-     * @param {String[]} args
-     */
+   * @param {Client} client
+   * @param {CommandInteraction} interaction
+   * @param {String[]} args
+   */
 
 	run: async (client, interaction, args) => {
 		const user = args[0] ?? interaction.user.id;
@@ -29,7 +31,10 @@ module.exports = {
 			.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
 			.setColor('DARK_VIVID_PINK')
 			.addField('Criado em: ', `${createdAt}`)
-			.setFooter(`${interaction.user.username}`, interaction.user.displayAvatarURL())
+			.setFooter(
+				`${interaction.user.username}`,
+				interaction.user.displayAvatarURL(),
+			)
 			.setTimestamp();
 
 		interaction.editReply({
