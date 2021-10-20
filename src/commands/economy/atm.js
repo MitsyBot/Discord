@@ -17,10 +17,10 @@ module.exports = {
    */
 
 	run: async (client, interaction, args, data) => {
-		const userComets = data.user.coments ?? data.author.comets;
+		const user = data.user ?? data.author;
 
 		interaction.editReply({
-			content: `Você tem atualmente \`${userComets}\` cometinhas!`,
+			content: `Você tem atualmente \`${user.comets}\` cometinhas!`,
 		});
 	},
 };

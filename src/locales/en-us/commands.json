@@ -1,0 +1,21 @@
+{
+    "atm": {
+        "balance": "{{0}} tem atualmente `{{1}}` cometinhas!"
+    },
+    "avatar": {
+        "title": "Avatar de {{0}}",
+        "download": "Você pode baixar esse avatar [clicando aqui]({{0}})!"
+    },
+    "botinfo": {
+        "title": "Informações sobre a Mitsy!",
+        "servers": "Servidores:",
+        "users": "Usuários:",
+        "shards": "Shards:"
+    },
+    "userinfo": {
+        "title": "Informações de ${{0}}!",
+        "tag": "Tag de usuário:",
+        "id": "ID:",
+        "createdAt": "Criado em:"
+    }
+}

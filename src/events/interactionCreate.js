@@ -27,16 +27,17 @@ client.on('interactionCreate', async (interaction) => {
 
 		const authorData = await client.database.fetchUser(interaction.user.id);
 		const guildData = await client.database.fetchGuild(interaction.guild.id);
-		const userData = await client.database.fetchUser(interaction.options._hoistedOptions[0].user.id);
 
 		const data = {};
 
-		// Autor da interação
 		data.author = authorData;
-		// Servidor da interação
 		data.guild = guildData;
-		// Primeiro usuário mencionado na interação
-		data.user = userData;
+		data.user = null;
+
+		if (interaction.options._hoistedOptions[0]) {
+			const userData = await client.database.fetchUser(interaction.options._hoistedOptions[0].user.id);
+			data.user = userData;
+		}
 
 		if (cmd) {
 			cmd.run(client, interaction, args, data);
