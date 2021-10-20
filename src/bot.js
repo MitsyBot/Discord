@@ -18,6 +18,7 @@ const token = config.token;
 client.commands = new Collection();
 client.events = new Collection();
 client.cooldowns = new Collection();
+client.database = require('./utils/Database');
 client.categories = fs.readdirSync('./commands/');
 
 ['events', 'commands'].forEach((handler) => {
