@@ -30,7 +30,9 @@ module.exports = {
 		const embed = new MessageEmbed()
 			.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
 			.setColor('DARK_VIVID_PINK')
-			.addField('Criado em: ', `${createdAt}`)
+			.addField('Tag do Usuário:', `${member.user.tag}`)
+			.addField('ID:', `${member.user.id}`)
+			.addField('Criado em:', `${createdAt}`)
 			.setFooter(
 				`${interaction.user.username}`,
 				interaction.user.displayAvatarURL(),
