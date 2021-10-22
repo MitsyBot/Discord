@@ -20,7 +20,10 @@ module.exports = {
 		const user = data.user ?? data.author;
 
 		interaction.editReply({
-			content: `Você tem atualmente \`${user.comets}\` cometinhas!`,
+			content: `Você tem atualmente \`$${user.comets.toLocaleString('pt-BR', {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			})}\` cometinhas!`,
 		});
 	},
 };
