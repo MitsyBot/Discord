@@ -36,7 +36,7 @@ client.on('interactionCreate', async (interaction) => {
 
 		const cmdOptions = interaction.options._hoistedOptions[0];
 
-		if (cmdOptions && cmdOptions.type === 'USER' || cmdOptions.type === 'MENTIONABLE') {
+		if (cmdOptions && cmdOptions.type === 'USER') {
 			const userData = await client.database.fetchUser(interaction.options._hoistedOptions[0].user.id);
 			data.user = userData;
 		}
