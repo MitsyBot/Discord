@@ -8,6 +8,8 @@ const Guilds = new mongoose.Schema({
 	punishChannel: { type: String, default: '' },
 	punishModule: { type: Boolean, default: false },
 	partner: { type: Boolean, default: false },
+	customCommands: { type: Array },
+	blacklistedTerms: { type: Array },
 	blacklist: { type: Boolean, default: false },
 	blacklistReason: { type: String, default: '' },
 	allowedChannel: { type: Object, default: { roles: [], channels: [] } },

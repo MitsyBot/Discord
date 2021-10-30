@@ -36,6 +36,17 @@ client.on('interactionCreate', async (interaction) => {
 
 		const cmdOptions = interaction.options._hoistedOptions[0];
 
+		if (data.guild.blacklist) {
+			interaction.editReply({
+				content: `ERROR: Blacklisted server. Reason: ${data.guild.blacklistReason}`,
+			}).then(() => {
+				client.guilds.cache.get(data.guild.id)
+					.leave()
+					.then(g => console.log(`Mitsy saiu de ${g} por ${data.guild.blacklistReason}`))
+					.catch(console.error);
+			});
+		}
+
 		if (cmdOptions && cmdOptions.type === 'USER') {
 			const userData = await client.database.fetchUser(interaction.options._hoistedOptions[0].user.id);
 			data.user = userData;
