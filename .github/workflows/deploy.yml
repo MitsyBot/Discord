@@ -1,0 +1,29 @@
+name: Test and Deploy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build_and_push:
+    name: Deploy para o ghcr
+    runs-on: ubuntu-latest
+    steps:
+    - name: Logar no container registry do github
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.TOKEN }}
+    - name: Check out
+      uses: actions/checkout@v2
+    
+    - name: Buildar a imagem
+      run: |
+        docker build -t ghcr.io/mitsybot/mitsy:latest .
+        docker run ghcr.io/mitsybot/mitsy:latest
+  
+    - name: Enviar a imagem para o ghcr
+      run: docker push ghcr.io/mitsybot/mitsy:latest
