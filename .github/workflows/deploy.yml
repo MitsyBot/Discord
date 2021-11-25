@@ -1,29 +1,34 @@
-name: Test and Deploy
+name: GHCR-MITSY
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
-  build_and_push:
-    name: Deploy para o ghcr
+  push_to_registry:
+    name: Push para ghcr
     runs-on: ubuntu-latest
+
     steps:
-    - name: Logar no container registry do github
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.TOKEN }}
-    - name: Check out
-      uses: actions/checkout@v2
-    
-    - name: Buildar a imagem
-      run: |
-        docker build -t ghcr.io/mitsybot/mitsy:latest .
-        docker run ghcr.io/mitsybot/mitsy:latest
-  
-    - name: Enviar a imagem para o ghcr
-      run: docker push ghcr.io/mitsybot/mitsy:latest
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Docker builder
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.TOKEN }}
+
+      - name: Fazer o build e o push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          version: latest
+          file: Dockerfile
+          push: true
+          tags: ghcr.io/mitsybot/mitsy:latest
