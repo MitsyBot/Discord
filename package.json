@@ -2,8 +2,11 @@
   "name": "mitsy",
   "description": "um simples bot para discord",
   "authors": "Duuuuardo, homelessAlec",
-  "version": "indev-2021.19.10",
-  "main": "index.js",
+  "version": "2021.25.11",
+  "scripts": {
+    "start": "node -r dotenv/config ."
+  },
+  "main": "src/sharder.js",
   "dependencies": {
     "axios": "^0.23.0",
     "chalk": "^4.1.2",

@@ -35,7 +35,7 @@ module.exports = {
 		amount = Math.floor(amount);
 
 		const embed = new MessageEmbed()
-			.setColor('LUMINOUS_VIVID_PINK')
+			.setColor('#f895fb')
 			.setDescription(
 				`Yay! Você acaba de receber ${amount} cometinhas como seu prêmio diário!`,
 			)

@@ -29,7 +29,7 @@ module.exports = {
 
 		const embed = new MessageEmbed()
 			.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-			.setColor('DARK_VIVID_PINK')
+			.setColor('#f895fb')
 			.addField('Tag do Usuário:', `${member.user.tag}`)
 			.addField('ID:', `${member.user.id}`)
 			.addField('Criado em:', `${createdAt}`)

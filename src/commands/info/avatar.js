@@ -28,7 +28,7 @@ module.exports = {
 		const embed = new MessageEmbed()
 			.setAuthor(`Avatar de ${member.user.username}`)
 			.setDescription(`Para baixar essa imagem [clique aqui](${avatarUrl})`)
-			.setColor('DARK_VIVID_PINK')
+			.setColor('#f895fb')
 			.setImage(avatarUrl)
 			.setFooter(
 				`${interaction.user.username}`,

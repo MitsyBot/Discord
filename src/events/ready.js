@@ -9,9 +9,7 @@ client.on('ready', () => {
 		)} foi iniciada corretamente e está online!`,
 	);
 
-	const { mongo_uri } = require('../utils/config.json');
-
-	mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+	mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
 		if (err) {
 			return console.log(chalk.redBright('[DATABASE]') + ` Não foi possível se conectar a database: ${err}`);
 		}

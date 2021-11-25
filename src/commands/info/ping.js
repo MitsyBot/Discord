@@ -12,7 +12,7 @@ module.exports = {
 
 	run: async (client, interaction) => {
 		const embed = new MessageEmbed()
-			.setColor('LUMINOUS_VIVID_PINK')
+			.setColor('#f895fb')
 			.setDescription(`:ping_pong: **WebSocket:** ${client.ws.ping}ms`)
 			.setFooter(
 				`${interaction.user.username}`,

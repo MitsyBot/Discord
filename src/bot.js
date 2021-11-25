@@ -12,9 +12,6 @@ const client = new Client({
 
 module.exports = client;
 
-const config = require('./utils/config.json');
-const token = config.token;
-
 client.commands = new Collection();
 client.events = new Collection();
 client.cooldowns = new Collection();
@@ -25,4 +22,4 @@ client.categories = fs.readdirSync('./commands/');
 	require(`./handlers/${handler}`)(client);
 });
 
-client.login(token);
+client.login(process.env.BOT_TOKEN);

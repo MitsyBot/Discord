@@ -32,7 +32,7 @@ module.exports = {
 
 				const embed = new MessageEmbed()
 					.setTitle('Informações sobre a Mitsy!')
-					.setColor('LUMINOUS_VIVID_PINK')
+					.setColor('#f895fb')
 					.setThumbnail(client.user.displayAvatarURL())
 					.addField('Servidores: ', `${totalGuilds}`, true)
 					.addField('Usuários: ', `${totalMembers}`, true)
