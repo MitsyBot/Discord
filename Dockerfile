@@ -1,5 +1,4 @@
 FROM node:16-alpine as builder
-LABEL org.opencontainers.image.source="https://github.com/MitsyBot/Mitsy"
 
 RUN mkdir -p /usr/src/mitsy
 WORKDIR /usr/src/mitsy
