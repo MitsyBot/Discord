@@ -31,4 +31,4 @@ jobs:
           version: latest
           file: Dockerfile
           push: true
-          tags: ghcr.io/mitsybot/mitsy:latest
+          tags: ghcr.io/mitsybot/bot:latest
