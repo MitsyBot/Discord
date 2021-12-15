@@ -2,7 +2,7 @@
   "name": "mitsy",
   "description": "um simples bot para discord",
   "authors": "Duuuuardo, homelessAlec",
-  "version": "2021.25.11",
+  "version": "1.0.2",
   "scripts": {
     "start": "node -r dotenv/config ."
   },
@@ -17,6 +17,12 @@
     "mongoose": "^6.0.11"
   },
   "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

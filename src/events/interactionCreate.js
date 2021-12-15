@@ -38,7 +38,7 @@ client.on('interactionCreate', async (interaction) => {
 
 		if (data.guild.blacklist) {
 			interaction.editReply({
-				content: `ERROR: Blacklisted server. Reason: ${data.guild.blacklistReason}`,
+				content: `Este servidor esta banido da mitsy. Motivo: ${data.guild.blacklistReason}`,
 			}).then(() => {
 				client.guilds.cache.get(data.guild.id)
 					.leave()
