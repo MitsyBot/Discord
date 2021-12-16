@@ -1,0 +1,22 @@
+const mongoose = require('mongoose');
+const Guilds = new mongoose.Schema({
+	id: { type: String, index: { unique: true } },
+	prefix: { type: String, default: process.env.BOT_PREFIX },
+	channelReport: { type: String, default: '' },
+	reportModule: { type: Boolean, default: false },
+	lang: { type: String, default: 'pt-BR' },
+	punishChannel: { type: String, default: '' },
+	punishModule: { type: Boolean, default: false },
+	partner: { type: Boolean, default: false },
+	logChannel: { type: String, default: '' },
+	customCommands: { type: Array },
+	blacklistedTerms: { type: Array, default: undefined },
+	blacklist: { type: Boolean, default: false },
+	blacklistReason: { type: String, default: '' },
+	allowedChannel: { type: Object, default: { roles: [], channels: [] } },
+	antiflood: { type: Object, default: { enabled: false, messagesLimit: 5 } },
+	isPremium: { type: Boolean, default: false },
+	premiumLevel: { type: Number, default: 0 },
+});
+
+module.exports = mongoose.model('Guilds', Guilds);

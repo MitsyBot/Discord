@@ -1,25 +1,12 @@
 {
-    "atm": {
-        "balance": "{{0}} tem atualmente `{{1}}` cometinhas!"
-    },
-    "avatar": {
-        "title": "Avatar de {{0}}",
-        "download": "Você pode baixar esse avatar [clicando aqui]({{0}})!"
-    },
-    "botinfo": {
-        "title": "Informações sobre a Mitsy!",
-        "servers": "Servidores:",
-        "users": "Usuários:",
-        "shards": "Shards:"
-    },
-    "userinfo": {
-        "title": "Informações de ${{0}}!",
-        "tag": "Tag de usuário:",
-        "id": "ID:",
-        "createdAt": "Criado em:"
-    },
-    "daily": {
-        "alreadyClaim": "Você já recebeu seu prêmio diário! Volte novamente em {{0}}",
-        "sucessClaim": "Você recebeu seu prêmio diário de {{0}} cometinhas!"
-    }
+      "atm": {
+        "current": {
+          "me": "Você tem atualmente {{current}} cometinhas",
+          "other": "<@{{user}}> tem atualmente {{current}} cometinhas"
+        }
+      },
+      "daily": {
+        "get": "<:Mitsy_Rica:872870327049396274> **|** <@{{user}}> Você pode conseguir seus cometinhas diarios [Clicando aqui](https://mitsy.xyz/dashboard/daily)\nCaso você não fique satisfeito com a quantia de cometinhas que ganhar você pode comprar mais cometinhas [Clicando aqui](https://mitsy.xyz/dashboard/shop/comets)",
+        "getted": "<:Mitsy_Rica:872870327049396274> Você ja pegou seu premio diario hoje, mas você ira poder pegar novamente em {{getagain}}"
+      }
 }

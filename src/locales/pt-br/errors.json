@@ -1,0 +1,4 @@
+{
+    "GUILD_BLACKLISTED": "Este servidor esta banido da mitsy! Por que? pelo seguinte motivo: {{reason}} caso ache que o motivo foi injusto abra um ticket (No meu website)[https://mitsy.xyz/faq]",
+    "UNKNOWN_SLASH": "Whoops, este comando não existe ou foi desativado nas novas versões da mitsy."
+}

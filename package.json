@@ -2,18 +2,19 @@
   "name": "mitsy",
   "description": "um simples bot para discord",
   "authors": "Duuuuardo, homelessAlec",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "start": "node -r dotenv/config .",
     "commit": "cz"
   },
-  "main": "src/sharder.js",
+  "main": "sharder.js",
   "dependencies": {
     "axios": "^0.23.0",
     "chalk": "^4.1.2",
     "discord.js": "^13.2.0",
     "dotenv": "^10.0.0",
-    "i18next": "^21.3.2",
+    "i18next": "^21.6.0",
+    "i18next-fs-backend": "^1.1.4",
     "moment": "^2.29.1",
     "mongoose": "^6.0.11"
   },
