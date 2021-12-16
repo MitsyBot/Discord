@@ -17,7 +17,7 @@ module.exports = class CommandLoader extends Loader {
 			return true;
 		}
 		catch (e) {
-			this.client.logger.error(e);
+			console.error(e);
 		}
 		return false;
 	}

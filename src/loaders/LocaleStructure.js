@@ -18,7 +18,7 @@ module.exports = class LocaleLoader extends Loader {
 			return true;
 		}
 		catch (e) {
-			this.client.logger.error(e);
+			console.error(e);
 		}
 		return false;
 	}
@@ -45,7 +45,7 @@ module.exports = class LocaleLoader extends Loader {
 				});
 			}
 			catch (e) {
-				this.client.logger.error(e);
+				console.error(e);
 			}
 		});
 	}
