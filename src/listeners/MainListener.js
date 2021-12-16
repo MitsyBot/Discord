@@ -8,7 +8,6 @@ module.exports = class MainListener extends EventListener {
 	}
 
 	onReady() {
-		this.user.setActivity(`@${this.user.username} help`, { type: 'PLAYING' });
 		Mongodb.connect();
 	}
 };
