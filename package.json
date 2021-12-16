@@ -2,7 +2,7 @@
   "name": "mitsy",
   "description": "um simples bot para discord",
   "authors": "Duuuuardo, homelessAlec",
-  "version": "1.0.3",
+  "version": "2.0.3",
   "scripts": {
     "start": "node -r dotenv/config .",
     "commit": "cz"
@@ -15,7 +15,10 @@
     "dotenv": "^10.0.0",
     "i18next": "^21.6.0",
     "i18next-fs-backend": "^1.1.4",
+    "i18next-node-fs-backend": "^2.1.3",
+    "intl": "^1.2.5",
     "moment": "^2.29.1",
+    "moment-duration-format": "^2.3.2",
     "mongoose": "^6.0.11"
   },
   "devDependencies": {
