@@ -7,10 +7,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 			name: 'daily',
 			description: 'Receba seu premio diario',
 			category: 'economy',
-			defaultPermission: false,
-			devsOnly: false,
 			cooldown: 5,
-			clientPermissions: ['EMBED_LINKS'],
 		});
 	}
 

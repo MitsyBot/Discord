@@ -38,6 +38,6 @@
       },
       "checkstaff": {
         "isstaff": "{{mitsy_happy}} Oba,\nSim. <@{{user}}> é {{level}} da mitsy",
-        "notstaff": "<@{{user> Não é da equipe da mitsy."
+        "notstaff": "<@{{user}}> Não é da equipe da mitsy."
       }
 }
