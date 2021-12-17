@@ -14,4 +14,4 @@ FROM node:16-alpine as runner
 WORKDIR /usr/src/mitsy
 COPY --from=builder /usr/src/mitsy /usr/src/mitsy
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "prod"]

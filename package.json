@@ -4,7 +4,8 @@
   "authors": "Duuuuardo, homelessAlec",
   "version": "2.0.3",
   "scripts": {
-    "start": "node -r dotenv/config .",
+    "prod": "node -r dotenv/config sharder.js",
+    "dev": "nodemon --exec node -r dotenv/config sharder.js",
     "commit": "cz"
   },
   "main": "sharder.js",
