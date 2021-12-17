@@ -17,7 +17,7 @@ module.exports = class ListenerLoader extends Loader {
 			return true;
 		}
 		catch (e) {
-			console.log(e);
+			this.lgger.error(e);
 		}
 		return false;
 	}
@@ -28,15 +28,15 @@ module.exports = class ListenerLoader extends Loader {
 		return FileUtils.requireDirectory(dirPath, (NewListener) => {
 			if (Object.getPrototypeOf(NewListener) !== EventListener) return;
 			this.addListener(new NewListener(this.client)) ? success++ : failed++;
-		}, (e) => console.log(e)).then(() => {
-			if (failed) console.log(`${success} listeners carregados, porem ${failed} falharam ao carregar.`);
-			else console.log(`Todos os ${success} listeners foram carregados com sucesso.`);
+		}, (e) => this.client.logger.error(e)).then(() => {
+			if (failed) this.client.logger.info({ tag: 'Listeners' }, `${success} listeners carregados, porem ${failed} falharam ao carregar.`);
+			else this.client.logger.info({ tag: 'Listeners' }, `Todos os ${success} listeners foram carregados com sucesso.`);
 		});
 	}
 
 	addListener(listener) {
 		if (!(listener instanceof EventListener)) {
-			console.log(`Ocorreu um erro ao carregar o listener ${listener.name}, Não parece ser um listener`);
+			this.client.logger.error(`Ocorreu um erro ao carregar o listener ${listener.name}, Não parece ser um listener`);
 			return false;
 		}
 

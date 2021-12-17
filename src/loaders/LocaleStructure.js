@@ -41,7 +41,7 @@ module.exports = class LocaleLoader extends Loader {
 					returnEmptyString: false,
 				}, () => {
 					resolve(this.loadLanguagesDisplayNames(Object.keys(i18next.store.data)));
-					console.log('[LOCALES] Sistema de locales inicializado com sucesso');
+					this.client.logger.info({ tag: 'Locales' }, 'Sistema de locales inicializado com sucesso');
 				});
 			}
 			catch (e) {

@@ -1,10 +1,13 @@
 const { Client } = require('discord.js');
 const Loaders = require('./loaders');
+const Logger = require('./utils/Logger/Logger');
 
 module.exports = class MitsyClient extends Client {
 	constructor(options = {}) {
 		super(options);
 		this.shardId = options.shardId;
+		this.logger = new Logger();
+
 		this.loaded = false;
 	}
 
@@ -18,8 +21,8 @@ module.exports = class MitsyClient extends Client {
 		}
 
 		await this.login()
-			.then(() => console.log('Bot logado com sucesso!'))
-			.catch((e) => console.log(e));
+			.then(() => this.logger.info({ tag: 'Discord' }, 'Bot logado com sucesso!'))
+			.catch((e) => this.logger.error(e));
 
 		for (const l of normal) {
 			await this.initializeLoader(l);
@@ -34,7 +37,7 @@ module.exports = class MitsyClient extends Client {
 			success = await loader.load();
 		}
 		catch (e) {
-			console.error(e);
+			this.logger.error(e);
 		}
 		finally {
 			if (!success && loader.critical) process.exit(1);

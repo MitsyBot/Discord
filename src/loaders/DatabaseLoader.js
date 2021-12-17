@@ -17,7 +17,7 @@ module.exports = class ListenerLoader extends Loader {
 			return true;
 		}
 		catch (e) {
-			console.log(e);
+			this.client.logger.error(e);
 		}
 		return false;
 	}
@@ -25,10 +25,10 @@ module.exports = class ListenerLoader extends Loader {
 	loadDatabase() {
 		mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
 			if (err) {
-				return console.log(`[DATABASE] Não foi possível se conectar a database: ${err}`);
+				return this.client.logger.error(`Não foi possível se conectar a database: ${err}`);
 			}
 
-			console.log('[DATABASE] Conectado a database');
+			this.client.logger.info({ tag: 'Database' }, 'Conectado a database');
 		});
 	}
 

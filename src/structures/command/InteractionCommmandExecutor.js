@@ -35,7 +35,7 @@ module.exports = class InteractionCommandExecutor {
 				}).then(() => {
 					client.guilds.cache.get(data.guild.id)
 						.leave()
-						.then(g => console.log(`Mitsy saiu de ${g} por ${data.guild.blacklistReason}`))
+						.then(g => client.logger.info({ tag: 'Discord' }, `Mitsy saiu de ${g} por ${data.guild.blacklistReason}`))
 						.catch(console.error);
 				});
 			return;
@@ -52,7 +52,7 @@ module.exports = class InteractionCommandExecutor {
 		if (!command.run) return;
 
 		await command.run(ctx).catch(async (error) => {
-			console.log(error);
+			client.logger.error(error);
 		});
 	}
 

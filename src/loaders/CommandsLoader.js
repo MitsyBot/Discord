@@ -28,9 +28,9 @@ module.exports = class CommandLoader extends Loader {
 		let failed = 0;
 		return FileUtils.requireDirectory(dirPath, (NewCommand, path) => {
 			this.addCommand(new NewCommand(this.client), path) ? success++ : failed++;
-		}, (e) => console.log(e)).then(() => {
-			if (failed) console.log(`${success} Comandos carregados, porem ${failed} falharam ao carregar.`);
-			else console.log(`Todos os ${success} Comandos foram carregados sem nenhum erro.`);
+		}, (e) => this.client.logger.error(e)).then(() => {
+			if (failed) this.client.logger.info({ tag: 'Comandos' }, `${success} Comandos carregados, porem ${failed} falharam ao carregar.`);
+			else this.client.logger.info({ tag: 'Comandos' }, `Todos os ${success} Comandos foram carregados sem nenhum erro.`);
 		});
 	}
 
@@ -44,12 +44,12 @@ module.exports = class CommandLoader extends Loader {
 	}
 	checkCommand(command) {
 		if (!(command instanceof InteractionCommand)) {
-			console.log(`Falha ao carregar, ${command}  não é um comando`);
+			this.client.logger.warn({ tag: 'Comandos' }, `Falha ao carregar, ${command}  não é um comando`);
 			return false;
 		}
 
 		if (command.canLoad() !== true) {
-			console.log(`Falha ao carregar ${command.fullName}  ${command.canLoad() || 'A função canload não retornou true.'}`);
+			this.client.logger.warn({ tag: 'Comandos' }, `Falha ao carregar ${command.fullName}  ${command.canLoad() || 'A função canload não retornou true.'}`);
 			return false;
 		}
 

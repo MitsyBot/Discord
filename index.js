@@ -20,7 +20,7 @@ const CLIENT_OPTIONS = {
 const MitsyClient = require('./src/MitsyClient.js');
 const client = new MitsyClient(CLIENT_OPTIONS);
 
-client.on('debug', (...args) => console.log(...args));
-client.on('rateLimit', (...args) => console.log(...args));
+client.on('debug', (...args) => client.logger.debug(...args));
+client.on('rateLimit', (...args) => client.logger.info({ tag: 'rateLimit' }, ...args));
 
 client.initialize();
