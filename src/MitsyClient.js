@@ -6,7 +6,6 @@ module.exports = class MitsyClient extends Client {
 		super(options);
 		this.shardId = options.shardId;
 		this.loaded = false;
-		this.database = require('./database/Database');
 	}
 
 

@@ -1,4 +1,4 @@
-const { EventListener, Mongodb } = require('../');
+const { EventListener } = require('../');
 
 module.exports = class MainListener extends EventListener {
 	constructor(client) {
@@ -8,6 +8,6 @@ module.exports = class MainListener extends EventListener {
 	}
 
 	onReady() {
-		Mongodb.connect();
+		console.log('passou aqui');
 	}
 };
