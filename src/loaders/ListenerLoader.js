@@ -17,7 +17,7 @@ module.exports = class ListenerLoader extends Loader {
 			return true;
 		}
 		catch (e) {
-			this.lgger.error(e);
+			this.logger.error(e);
 		}
 		return false;
 	}
