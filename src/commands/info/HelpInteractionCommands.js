@@ -6,10 +6,7 @@ module.exports = class HelpInteractionCommand extends InteractionCommand {
 			name: 'ajuda',
 			description: 'Precisando de ajuda? veio ao lugar certo.',
 			category: 'info',
-			defaultPermission: false,
-			devsOnly: false,
 			cooldown: 5,
-			clientPermissions: ['EMBED_LINKS'],
 		});
 	}
 

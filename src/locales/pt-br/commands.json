@@ -31,5 +31,13 @@
         "embed_title": "{{mitsy_heart}} Nivel",
         "embed_description": "{{mitsy_confetti} Card de {{username}}\nNivel ``{{level}}``\nXp ``{{xp}}``",
         "embed_footer": "Continue tentando subir de nivel."      
+      },
+      "checkpremium": {
+        "ispremium": "{{mitsy_rica}} <@{{user}}> é um usuario premium da mitsy tier {{tier}}",
+        "notpremium": "<@{{user}}}} Não é um usuario premium da mitsy\n\nps: caso queira se tornar um basta [clicar aqui](https://mitsy.xyz/premium)"
+      },
+      "checkstaff": {
+        "isstaff": "{{mitsy_happy}} Oba,\nSim. <@{{user}}> é {{level}} da mitsy",
+        "notstaff": "<@{{user> Não é da equipe da mitsy."
       }
 }

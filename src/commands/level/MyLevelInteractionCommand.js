@@ -14,10 +14,7 @@ module.exports = class HelpInteractionCommand extends InteractionCommand {
 					required: false,
 				},
 			],
-			defaultPermission: false,
-			devsOnly: false,
 			cooldown: 5,
-			clientPermissions: ['EMBED_LINKS'],
 		});
 	}
 
