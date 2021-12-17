@@ -26,5 +26,10 @@
         "embed_title": "{{mitsy_coffe}} Precisando de ajuda?",
         "embed_description": "Caso esteja precisando de ajuda você pode acessar o meu faq no [meu website](https://mitsy.xyz/faq) para abrir um ticket ou entrar [no meu servidor de suporte](https://mitsy.xyz/suporte).",
         "embed_footer": "Yay."      
+      },
+      "level": {
+        "embed_title": "{{mitsy_heart}} Nivel",
+        "embed_description": "{{mitsy_confetti} Card de {{username}}\nNivel ``{{level}}``\nXp ``{{xp}}``",
+        "embed_footer": "Continue tentando subir de nivel."      
       }
 }
