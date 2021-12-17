@@ -1,4 +1,6 @@
 {
-    "GUILD_BLACKLISTED": "Este servidor esta banido da mitsy! Por que? pelo seguinte motivo: {{reason}} caso ache que o motivo foi injusto abra um ticket (No meu website)[https://mitsy.xyz/faq]",
-    "UNKNOWN_SLASH": "Whoops, este comando não existe ou foi desativado nas novas versões da mitsy."
+    "GUILD_BLACKLISTED": "<:mitsy_ban:894277577731084308> Whoops\nEste servidor esta proibido de me usar! Por que? pelo seguinte motivo: ```{{reason}}```\nCaso ache que o motivo foi injusto abra um ticket [No meu website](https://mitsy.xyz/faq)",
+    "UNKNOWN_SLASH": "Whoops, este comando não existe ou foi desativado nas novas versões da mitsy.",
+    "sharding_in_progress": "Ops, eu ainda não inicializei completamente, agurade alguns segundos.",
+    "USER_BLACKLISTED": "<:mitsy_ban:894277577731084308> Que feio (eu acho <:mitsy_sob:834129966328709193>)\nVocê esta proibido de usar minhas funcionalidades pelo motivo: ```{{reason}}```\nCaso ache que o motivo do seu ban foi injusto abra um ticket [No meu website](https://mitsy.xyz/faq)"
 }

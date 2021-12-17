@@ -8,5 +8,23 @@
       "daily": {
         "get": "<:Mitsy_Rica:872870327049396274> **|** <@{{user}}> Você pode conseguir seus cometinhas diarios [Clicando aqui](https://mitsy.xyz/dashboard/daily)\nCaso você não fique satisfeito com a quantia de cometinhas que ganhar você pode comprar mais cometinhas [Clicando aqui](https://mitsy.xyz/dashboard/shop/comets)",
         "getted": "<:Mitsy_Rica:872870327049396274> Você ja pegou seu premio diario hoje, mas você ira poder pegar novamente em {{getagain}}"
+      },
+      "ping": {
+        "latency": "Latência:",
+        "api": "Latência da API:"
+      },
+      "botinfo": {
+        "embed_description": "Oie, eu me chamo Mitsy e sou um bot multifuncional para discord, entrei no discord em **{{joinedAt}}**. Eu tenho muitas funções incriveis para deixar o seu servidor divertido, seguro, ou feliz.\n\nAtualmente eu estou em **{{guilds}}** servidores e tenho **{{users}}** usuarios, estou online por **{{uptime}}**.\nCaso queira saber mais sobre mim você pode [acessar o meu website](https://mitsy.xyz) ou entrar no meu [servidor de suporte](https://mitsy.xyz/suporte).",
+        "embed_footer": "Mitsy é um produto mantido por poluxtrail & duuuuardo, todos os direitos reservados."
+      },
+      "help": {
+        "embed_title": "{{mitsy_heart}} Precisando de ajuda?",
+        "embed_description": "Oie, eu me chamo mitsy e sou um bot multifuncional para discord focado em diversão, moderação e midia\n\nEu tenho muitas funções incriveis para os membros do seu servidor se divertirem enquanto conversam. alem de ser simples de configurar é muito facil de usar!",
+        "embed_footer": "Yay."      
+      },
+      "support": {
+        "embed_title": "{{mitsy_coffe}} Precisando de ajuda?",
+        "embed_description": "Caso esteja precisando de ajuda você pode acessar o meu faq no [meu website](https://mitsy.xyz/faq) para abrir um ticket ou entrar [no meu servidor de suporte](https://mitsy.xyz/suporte).",
+        "embed_footer": "Yay."      
       }
 }

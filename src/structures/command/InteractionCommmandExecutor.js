@@ -31,7 +31,7 @@ module.exports = class InteractionCommandExecutor {
 					content: `${t('errors:GUILD_BLACKLISTED', {
 						reason: data.guild.blacklistReason,
 					})}`,
-					ephemeral: true,
+					ephemeral: false,
 				}).then(() => {
 					client.guilds.cache.get(data.guild.id)
 						.leave()
@@ -40,6 +40,18 @@ module.exports = class InteractionCommandExecutor {
 				});
 			return;
 		}
+
+		if (data.author.blacklist) {
+			await interaction
+				.reply({
+					content: `${t('errors:USER_BLACKLISTED', {
+						reason: data.author.blacklistReason,
+					})}`,
+					ephemeral: true,
+				});
+			return;
+		}
+
 
 		const ctx = new InteractionCommandContext({
 			interaction,
@@ -54,6 +66,10 @@ module.exports = class InteractionCommandExecutor {
 		await command.run(ctx).catch(async (error) => {
 			client.logger.error(error);
 		});
+
+		if (!data.author.isPremium && Math.random() < 0.7) {
+			await interaction.webhook.send({ content: t('common:NOT_PREMIUM'), ephemeral: true });
+		}
 	}
 
 };

@@ -44,6 +44,14 @@ module.exports = class MitsyClient extends Client {
 		}
 	}
 
+	async ShardingEnded() {
+		if (!this.shard) return false;
+		return this.shard
+			.broadcastEval((c) => c.isReady())
+			.catch(() => false)
+			.then(() => true);
+	}
+
 	login(token = process.env.BOT_TOKEN) {
 		return super.login(token);
 	}

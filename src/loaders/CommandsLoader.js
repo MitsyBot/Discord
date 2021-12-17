@@ -14,6 +14,7 @@ module.exports = class CommandLoader extends Loader {
 		try {
 			await this.initializeCommands();
 			this.client.slashCommands = this.slashCommands;
+			await this.deploySlashCommands();
 			return true;
 		}
 		catch (e) {
@@ -32,6 +33,30 @@ module.exports = class CommandLoader extends Loader {
 			if (failed) this.client.logger.info({ tag: 'Comandos' }, `${success} Comandos carregados, porem ${failed} falharam ao carregar.`);
 			else this.client.logger.info({ tag: 'Comandos' }, `Todos os ${success} Comandos foram carregados sem nenhum erro.`);
 		});
+	}
+
+	async deploySlashCommands() {
+		if (this.client.shard.ids.toString() === '0') {
+			const toAPIData = new Map();
+			const allCommands = this.client.slashCommands.reduce((p, c) => {
+				toAPIData.set(c.config.name, {
+					name: c.config.name,
+					category: c.config.category,
+					cooldown: c.config.cooldown ?? 0,
+					description: c.config.description,
+					options: c.config.options ?? [],
+				});
+				p.push({
+					name: c.config.name,
+					description: c.config.description,
+					options: c.config.options,
+					defaultPermission: c.config.defaultPermission,
+				});
+				return p;
+			}, []);
+			await this.client.application.commands.set(allCommands);
+			this.client.logger.info({ tag: 'Discord' }, 'Deploy global de slash commands realizado com sucesso');
+		}
 	}
 
 	addCommand(command, path) {

@@ -14,7 +14,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 				},
 			],
 			defaultPermission: false,
-			devsOnly: true,
+			devsOnly: false,
 			cooldown: 5,
 			clientPermissions: ['EMBED_LINKS'],
 		});
@@ -23,7 +23,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 	async run(ctx) {
 		const user = ctx.data.user ?? ctx.data.author;
 
-		ctx.interaction.reply({
+		ctx.makeMessage({
 			content: ctx.t('commands:atm.current.me', { current: user.comets.toLocaleString('pt-BR', {
 				minimumFractionDigits: 2,
 				maximumFractionDigits: 2,

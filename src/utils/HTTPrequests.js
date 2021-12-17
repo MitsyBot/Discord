@@ -6,7 +6,7 @@ const request = axios.create({
 	timeout: 5000,
 	headers: {
 		'Content-Type': 'application/json',
-		'User-Agent': process.env.MENHERA_AGENT,
+		'User-Agent': process.env.MITSY_AGENT,
 		Authorization: process.env.API_TOKEN,
 	},
 });
@@ -16,7 +16,7 @@ const apiRequest = axios.create({
 	timeout: 5000,
 	headers: {
 		'Content-Type': 'application/json',
-		'User-Agent': process.env.MENHERA_AGENT,
+		'User-Agent': process.env.MITSY_AGENT,
 		Authorization: process.env.API_TOKEN,
 	},
 });
