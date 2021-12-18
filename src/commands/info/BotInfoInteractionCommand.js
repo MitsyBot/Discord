@@ -20,7 +20,7 @@ module.exports = class BotInfoInteractionCommand extends InteractionCommand {
 
 		if (!(await ctx.client.ShardingEnded())) {
 			ctx.makeMessage({
-				content: ctx.t('errors:sharding_in_progress'),
+				content: ctx.locale('errors:sharding_in_progress'),
 			});
 			return;
 		}
@@ -35,7 +35,7 @@ module.exports = class BotInfoInteractionCommand extends InteractionCommand {
 
 		const embed = new MitsyEmbed()
 			.setDescription(
-				ctx.t('commands:botinfo.embed_description', {
+				ctx.locale('commands:botinfo.embed_description', {
 					guilds: getReduced(AllGuilds),
 					users: getReduced(AllUsers),
 					joinedAt: moment.utc(ctx.client.user.createdAt).format('LLLL'),
@@ -43,7 +43,7 @@ module.exports = class BotInfoInteractionCommand extends InteractionCommand {
 				}),
 			)
 			.setFooter(
-				ctx.t('commands:botinfo.embed_footer'),
+				ctx.locale('commands:botinfo.embed_footer'),
 				owner.displayAvatarURL({
 					format: 'png',
 					dynamic: true,

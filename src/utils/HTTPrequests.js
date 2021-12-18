@@ -22,6 +22,18 @@ const apiRequest = axios.create({
 });
 
 module.exports = class HttpRequests {
+
+	static async getAssetImageUrl(type) {
+		try {
+			const data = await apiRequest.get(`/assets/${type}`);
+			return data.data.url;
+		}
+		catch {
+			return 'https://http.cat/404';
+		}
+	}
+
+
 	static async postCommandStatus(commands) {
 		await apiRequest.post('/commands', { data: { commands } });
 	}

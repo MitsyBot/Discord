@@ -146,11 +146,11 @@ module.exports = class InteractionCommandExecutor {
 		});
 
 		if (client.maintenance.enabled) {
-			await interaction.webhook.send({ content: t('common:MAINTENANCE', { hour: client.maintenance.time }), ephemeral: true });
+			await interaction.followUp({ content: t('common:MAINTENANCE', { hour: client.maintenance.time }), ephemeral: true });
 		}
 
 		if (!data.author.isPremium && Math.random() < 0.7) {
-			await interaction.webhook.send({ content: t('common:NOT_PREMIUM'), ephemeral: true });
+			await interaction.followUp({ content: t('common:NOT_PREMIUM'), ephemeral: true });
 		}
 	}
 

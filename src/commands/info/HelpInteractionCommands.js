@@ -11,9 +11,9 @@ module.exports = class HelpInteractionCommand extends InteractionCommand {
 
 	async run(ctx) {
 		const embed = new MitsyEmbed()
-			.setTitle(ctx.t('commands:help.embed_title', { mitsy_heart: Emotes.MITSY_HEART }))
-			.setDescription(ctx.t('commands:help.embed_description', { user: ctx.data.author.id }))
-			.setFooter(ctx.t('commands:help.embed_footer'));
+			.setTitle(ctx.locale('commands:help.embed_title', { mitsy_heart: Emotes.MITSY_HEART }))
+			.setDescription(ctx.locale('commands:help.embed_description', { user: ctx.author.id }))
+			.setFooter(ctx.locale('commands:help.embed_footer'));
 
 		await ctx.makeMessage({ embeds: [embed], ephemeral: true });
 

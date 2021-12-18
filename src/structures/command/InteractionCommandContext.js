@@ -1,15 +1,44 @@
 const {	Message } = require('discord.js');
+const { Emotes } = require('../../');
 module.exports = class InteractionCommandContext {
 
 	constructor(options = {}) {
 		this.client = options.client;
 		this.data = options.data;
-		this.t = options.t;
+		this.i18n = options.t;
 		this.interaction = options.interaction;
 	}
 
+	get options() {
+		return this.interaction.options;
+	}
+
+	get channel() {
+		return this.interaction.channel;
+	}
+
+	get author() {
+		return this.interaction.user;
+	}
+
+	async defer(
+		options,
+		ephemeral = false,
+	) {
+		if (this.interaction.deferred && options) {
+			await this.send(options);
+			return;
+		}
+
+		await this.interaction.deferReply({ ephemeral });
+	}
+
+	emoteResponse(emoji, text, translateOptions = {}) {
+		return `${Emotes[emoji] || '🐛'} **|** ${this.locale(text, translateOptions)}`;
+	}
+
 	setFixedT(translate) {
-		this.t = translate;
+		this.i18n = translate;
 	}
 
 	resolveMessage(message) {
@@ -24,6 +53,22 @@ module.exports = class InteractionCommandContext {
 		return this.resolveMessage(
 			await this.interaction.reply({ ...options, fetchReply: true }),
 		);
+	}
+
+	async send(options) {
+		return this.resolveMessage(await this.interaction.followUp(options));
+	}
+
+	async fetchReply() {
+		return this.resolveMessage(await this.interaction.fetchReply());
+	}
+
+	async deleteReply() {
+		return this.interaction.deleteReply().catch;
+	}
+
+	locale(text, translateVars = {}) {
+		return this.i18n(text, translateVars);
 	}
 
 };

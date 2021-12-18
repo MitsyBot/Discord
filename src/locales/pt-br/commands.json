@@ -39,5 +39,39 @@
       "checkstaff": {
         "isstaff": "{{mitsy_happy}} Oba,\nSim. <@{{user}}> é {{level}} da mitsy",
         "notstaff": "<@{{user}}> Não é da equipe da mitsy."
+      },
+      "angry": {
+        "mitsy": "Poxa eu te deixei triste? me desculpe, não foi a intenção.",
+        "embed_title": "Grrrrr",
+        "embed_description": "{{author}} esta com raiva de {{mention}}, (espero que os 2 consigam resolver isso pacificamente)"
+      },
+      "bite": {
+        "embed_title": ":3 eu te moido",
+        "embed_description": "{{author}} mordeu {{mention}}, (espero que não tenha doido :) )"
+      },
+      "cry": {
+        "embed_title": "#Chateado(a)",
+        "embed_description": "{{author}} esta chorando para {{mention}}, (Que tristeza gente...)"
+      },
+      "hug": {
+        "embed_title": ":hugging:",
+        "embed_description": "{{author}} deu um abraço apertado em {{mention}}, (Cuidado para não sufocar ele(a)...)"
+      },
+      "kiss": {
+        "mitsy": "Ah, eu não quero te beijar... mas podemos continuar sendo amigos :)",
+        "embed_title": "Ownt, que fofinhos",
+        "embed_description": "{{author}} deu um beijo em {{mention}}"
+      },
+      "pat": {
+        "embed_title": "<:Mitsy_Pat:872870327028437062>",
+        "embed_description": "{{author}} Fez cafuné em {{mention}}"
+      },
+      "punch": {
+        "embed_title": "Cuidad-",
+        "embed_description": "{{author}} Deu um soco em {{mention}}, (Alguem ai consegue chamar os medicos?)"
+      },
+      "slap": {
+        "embed_title": "🖐️",
+        "embed_description": "{{author}} Deu um tapa em {{mention}}, (Gente que perigo, o que sera que ele fez?)"
       }
 }

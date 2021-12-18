@@ -21,7 +21,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 		const user = ctx.data.user ?? ctx.data.author;
 
 		ctx.makeMessage({
-			content: ctx.t('commands:atm.current.me', { current: user.comets.toLocaleString('pt-BR', {
+			content: ctx.locale('commands:atm.current.me', { current: user.comets.toLocaleString('pt-BR', {
 				minimumFractionDigits: 2,
 				maximumFractionDigits: 2,
 			}),

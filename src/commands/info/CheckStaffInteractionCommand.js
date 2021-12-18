@@ -31,10 +31,10 @@ module.exports = class IsStaffInteractionCommand extends InteractionCommand {
 		}
 
 		if (user.isStaff) {
-			await ctx.makeMessage({ content: ctx.t('commands:checkstaff.isstaff', { user: ctx.data.author.id, mitsy_happy: Emotes.MITSY_HAPPY, level: staffLevel }), ephemeral: false });
+			await ctx.makeMessage({ content: ctx.locale('commands:checkstaff.isstaff', { user: ctx.author.id, mitsy_happy: Emotes.MITSY_HAPPY, level: staffLevel }), ephemeral: false });
 		}
 		else {
-			await ctx.makeMessage({ content: ctx.t('commands:checkstaff.notstaff', { user: ctx.data.author.id }), ephemeral: false });
+			await ctx.makeMessage({ content: ctx.locale('commands:checkstaff.notstaff', { user: ctx.author.id }), ephemeral: false });
 		}
 	}
 };

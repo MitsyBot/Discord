@@ -29,12 +29,12 @@ module.exports = class PingInteractionCommand extends InteractionCommand {
 
 	async run(ctx) {
 		if (!ctx.client.shard) return;
-		const avatar = ctx.interaction.user.displayAvatarURL({ format: 'png', dynamic: true });
+		const avatar = ctx.author.displayAvatarURL({ format: 'png', dynamic: true });
 
-		if (ctx.interaction.options.getString('opções') === 'shards') {
+		if (ctx.options.getString('opções') === 'shards') {
 			if (!(await ctx.client.ShardingEnded())) {
 				ctx.makeMessage({
-					content: ctx.t('common:sharding_in_progress'),
+					content: ctx.locale('common:sharding_in_progress'),
 				});
 				return;
 			}
@@ -119,13 +119,13 @@ module.exports = class PingInteractionCommand extends InteractionCommand {
 		const embed = new MitsyEmbed()
 			.setTitle('🏓 | Pong!')
 			.setDescription(
-				`${Emotes.MITSY_OK} | ${ctx.t('commands:ping.api')} **${
+				`${Emotes.MITSY_OK} | ${ctx.locale('commands:ping.api')} **${
 					Date.now() - ctx.interaction.createdTimestamp
-				}ms**\n📡 | ${ctx.t('commands:ping.latency')} **${Math.round(
+				}ms**\n📡 | ${ctx.locale('commands:ping.latency')} **${Math.round(
 					ctx.client.ws.ping,
 				)}ms**\n${Emotes.MITSY_CONFETTI} | Shard: **${ctx.client.shard.ids}** / **${ctx.client.shard.count - 1}**`,
 			)
-			.setFooter(ctx.interaction.user.tag, avatar)
+			.setFooter(ctx.author.tag, avatar)
 			.setTimestamp();
 
 		await ctx.makeMessage({ embeds: [embed] });
