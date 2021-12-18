@@ -1,4 +1,5 @@
 const InteractionCommandContext = require('./InteractionCommandContext');
+const { Collection } = require('discord.js');
 module.exports = class InteractionCommandExecutor {
 	constructor(client, interaction) {
 		client;
@@ -24,7 +25,6 @@ module.exports = class InteractionCommandExecutor {
 			return;
 		}
 
-
 		if (data.guild.blacklist) {
 			await interaction
 				.reply({
@@ -44,13 +44,91 @@ module.exports = class InteractionCommandExecutor {
 		if (data.author.blacklist) {
 			await interaction
 				.reply({
-					content: `${t('errors:USER_BLACKLISTED', {
-						reason: data.author.blacklistReason,
-					})}`,
+					content: t('errors:USER_BLACKLISTED', { reason: data.author.blacklistReason }),
 					ephemeral: true,
 				});
 			return;
 		}
+
+		if (command.config.devsOnly && data.author.staffLevel < 3) {
+			await interaction.reply({ content: t('permissions:ONLY_DEVS'), ephemeral: true });
+			return;
+		}
+
+		if (command.config.staffOnly && data.author.staffLevel < 2) {
+			await interaction.reply({ content: t('permissions:ONLY_STAFF'), ephemeral: true });
+			return;
+		}
+
+		if (command.config.clientPermissions) {
+			const clientMember = interaction.guild.members.cache.get(
+				client.user.id,
+			);
+			const missing = interaction.channel
+				.permissionsFor(clientMember)
+				.missing(command.config.clientPermissions);
+			if (missing?.length) {
+				const perm = missing.map((value) => t(`permissions:${value}`)).join(', ');
+				await interaction
+					.reply({
+						content: t('permissions:CLIENT_MISSING_PERMISSION', {
+							perm,
+						}),
+						ephemeral: true,
+					});
+				return;
+			}
+		}
+
+		if (command.config.userPermissions) {
+			const member = interaction.member
+				? interaction.member
+				: await (await client.guilds.fetch(interaction.guildId)).members.fetch(interaction.user.id);
+			const missing = interaction.channel
+				?.permissionsFor(member)
+				?.missing(command.config.userPermissions);
+			if (missing?.length) {
+				const perm = missing.map((value) => t(`permissions:${value}`)).join(', ');
+				await interaction
+					.reply({
+						content: t('permissions:USER_MISSING_PERMISSION', {
+							perm,
+						}),
+						ephemeral: true,
+					});
+				return;
+			}
+		}
+
+		if (!client.cooldowns.has(command.config.name)) {client.cooldowns.set(command.config.name, new Collection());}
+
+		const now = Date.now();
+		const timestamps = client.cooldowns.get(command.config.name);
+		const cooldownAmount = (command.config.cooldown || 3) * 1000;
+
+		if (now - interaction.createdTimestamp >= 3000) return;
+
+		if (timestamps.has(interaction.user.id)) {
+			const expirationTime = (timestamps.get(interaction.user.id)) + cooldownAmount;
+
+			if (now < expirationTime) {
+				const timeLeft = (expirationTime - now) / 1000;
+				await interaction
+					.reply({
+						content: t('events:cooldown', {
+							time: timeLeft.toFixed(2),
+							cmd: command.config.name,
+						}),
+						ephemeral: true,
+					});
+				return;
+			}
+		}
+
+		timestamps.set(interaction.user.id, now);
+		setTimeout(() => {
+			timestamps.delete(interaction.user.id);
+		}, cooldownAmount);
 
 
 		const ctx = new InteractionCommandContext({
@@ -66,6 +144,10 @@ module.exports = class InteractionCommandExecutor {
 		await command.run(ctx).catch(async (error) => {
 			client.logger.error(error);
 		});
+
+		if (client.maintenance.enabled) {
+			await interaction.webhook.send({ content: t('common:MAINTENANCE', { hour: client.maintenance.time }), ephemeral: true });
+		}
 
 		if (!data.author.isPremium && Math.random() < 0.7) {
 			await interaction.webhook.send({ content: t('common:NOT_PREMIUM'), ephemeral: true });

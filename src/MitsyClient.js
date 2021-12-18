@@ -1,4 +1,4 @@
-const { Client } = require('discord.js');
+const { Client, Collection } = require('discord.js');
 const Loaders = require('./loaders');
 const Logger = require('./utils/Logger/Logger');
 
@@ -7,6 +7,8 @@ module.exports = class MitsyClient extends Client {
 		super(options);
 		this.shardId = options.shardId;
 		this.logger = new Logger();
+		this.maintenance = {};
+		this.cooldowns = new Collection();
 
 		this.loaded = false;
 	}
