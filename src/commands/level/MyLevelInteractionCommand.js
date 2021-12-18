@@ -1,6 +1,5 @@
-const { InteractionCommand, Constants, Emotes } = require('../../');
-const { MessageEmbed } = require('discord.js');
-module.exports = class HelpInteractionCommand extends InteractionCommand {
+const { InteractionCommand, MitsyEmbed, Emotes } = require('../../');
+module.exports = class LevelInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'level',
@@ -23,8 +22,7 @@ module.exports = class HelpInteractionCommand extends InteractionCommand {
 		const user = ctx.data.user ?? ctx.data.author;
 		const member = ctx.interaction.guild.members.cache.get(user.id);
 
-		const embed = new MessageEmbed()
-			.setColor(Constants.MITSY_COLOR)
+		const embed = new MitsyEmbed()
 			.setTitle(ctx.t('commands:level.embed_title', { mitsy_heart: Emotes.MITSY_HEART }))
 			.setDescription(ctx.t('commands:level.embed_description', { mitsy_confetti:Emotes.MITSY_CONFETTI, username: member.user.username, level: user.level, xp: user.xp }))
 			.setFooter(ctx.t('commands:level.embed_footer'));

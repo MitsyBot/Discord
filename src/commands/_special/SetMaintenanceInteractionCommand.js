@@ -1,5 +1,5 @@
 const { InteractionCommand } = require('../../');
-module.exports = class HelpInteractionCommand extends InteractionCommand {
+module.exports = class MaintenanceDevInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'manutenção',
@@ -30,6 +30,7 @@ module.exports = class HelpInteractionCommand extends InteractionCommand {
 	}
 
 	async run(ctx) {
+		ctx.makeMessage({ content: '...' });
 		if (ctx.interaction.options.getString('opções') === 'desativar') {
 			ctx.client.maintenance.enabled = false;
 			ctx.makeMessage({ content: 'Manutenção desativada' });

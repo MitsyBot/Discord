@@ -1,7 +1,7 @@
 const moment = require('moment');
 
 const { InteractionCommand } = require('../../');
-module.exports = class CometsInteractionCommand extends InteractionCommand {
+module.exports = class DailyInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'daily',

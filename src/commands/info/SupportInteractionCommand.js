@@ -1,5 +1,4 @@
-const { InteractionCommand, Constants, Emotes } = require('../../');
-const { MessageEmbed } = require('discord.js');
+const { InteractionCommand, MitsyEmbed, Emotes } = require('../../');
 module.exports = class SupportInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
@@ -11,8 +10,7 @@ module.exports = class SupportInteractionCommand extends InteractionCommand {
 	}
 
 	async run(ctx) {
-		const embed = new MessageEmbed()
-			.setColor(Constants.MITSY_COLOR)
+		const embed = new MitsyEmbed()
 			.setTitle(ctx.t('commands:support.embed_title', { mitsy_coffe: Emotes.MITSY_COFFE }))
 			.setDescription(ctx.t('commands:support.embed_description', { user: ctx.data.author.id }))
 			.setFooter(ctx.t('commands:support.embed_footer'));

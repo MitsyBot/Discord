@@ -1,6 +1,5 @@
 const moment = require('moment');
-const { MessageEmbed } = require('discord.js');
-const { InteractionCommand, Constants } = require('../../');
+const { InteractionCommand, MitsyEmbed } = require('../../');
 module.exports = class BotInfoInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
@@ -34,8 +33,7 @@ module.exports = class BotInfoInteractionCommand extends InteractionCommand {
 
 		const [AllGuilds, AllUsers] = (await Promise.all(promises));
 
-		const embed = new MessageEmbed()
-			.setColor(Constants.MITSY_COLOR)
+		const embed = new MitsyEmbed()
 			.setDescription(
 				ctx.t('commands:botinfo.embed_description', {
 					guilds: getReduced(AllGuilds),

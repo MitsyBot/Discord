@@ -1,9 +1,8 @@
 const moment = require('moment');
-const { MessageEmbed } = require('discord.js');
 
 const { Console } = require('node:console');
 const { Transform } = require('node:stream');
-const { InteractionCommand, Emotes } = require('../../');
+const { InteractionCommand, Emotes, MitsyEmbed } = require('../../');
 module.exports = class PingInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
@@ -117,7 +116,7 @@ module.exports = class PingInteractionCommand extends InteractionCommand {
 			});
 			return;
 		}
-		const embed = new MessageEmbed()
+		const embed = new MitsyEmbed()
 			.setTitle('🏓 | Pong!')
 			.setDescription(
 				`${Emotes.MITSY_OK} | ${ctx.t('commands:ping.api')} **${
@@ -127,8 +126,7 @@ module.exports = class PingInteractionCommand extends InteractionCommand {
 				)}ms**\n${Emotes.MITSY_CONFETTI} | Shard: **${ctx.client.shard.ids}** / **${ctx.client.shard.count - 1}**`,
 			)
 			.setFooter(ctx.interaction.user.tag, avatar)
-			.setTimestamp()
-			.setColor('#eab3fa');
+			.setTimestamp();
 
 		await ctx.makeMessage({ embeds: [embed] });
 	}
