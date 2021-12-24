@@ -10,13 +10,13 @@ class MongoDB extends DBWrapper {
 	}
 
 	async connect() {
-		return mongoose.connect(process.env.MONGODB_URI, this.options).then((m) => {
+		return mongoose.connect(process.env.MONGO_URI, this.options).then((m) => {
 			this.guilds = new GuildRepository(m);
 			this.users = new UserRepository(m);
 		});
 	}
 }
 
-MongoDB.envVars = ['MONGODB_URI'];
+MongoDB.envVars = ['MONGO_URI'];
 
 module.exports = MongoDB;
