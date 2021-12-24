@@ -10,7 +10,6 @@ const WebSocketController = async (socket, rawRequest) => {
 			const botMembers = size - userMembers;
 			const newdata = { guildid, name, icon, totalMembers: size, userMembers, botMembers };
 			return socket.send(JSON.stringify({ id, newdata }));
-
 		}
 		socket.send(JSON.stringify({ id, error: 'Servidor não encontrado' }));
 		break;
