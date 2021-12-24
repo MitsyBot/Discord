@@ -9,7 +9,8 @@ module.exports = class MainListener extends EventListener {
 	}
 
 	onReady() {
-		if (process.env.API_URL) {
+
+		if (process.env.DESATIVANDO_TEMPORARIAMENTE) {
 			const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
 
 			const shardId = this.shard.ids.toString();
@@ -19,8 +20,11 @@ module.exports = class MainListener extends EventListener {
 			}, 1000 * 30);
 		}
 		else {
+			const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
+			const shardId = this.shard.ids.toString();
+
 			this.logger.info({ tag: 'Atividade' }, 'Status rotativo desativado');
-			this.user.setActivity({ name: `❤️ | Howdy | Shard ${this.shard.ids.toString()}`, type: 'PLAYING' });
+			updateActivity(shardId);
 		}
 
 		if (process.env.LAVALINK_NODES) {
