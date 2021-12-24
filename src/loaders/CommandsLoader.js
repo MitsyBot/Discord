@@ -1,4 +1,4 @@
-const { Loader, InteractionCommand, FileUtils } = require('../');
+const { Loader, InteractionCommand, FileUtils, HTTPrequests } = require('../');
 
 module.exports = class CommandLoader extends Loader {
 	constructor(client) {
@@ -39,6 +39,7 @@ module.exports = class CommandLoader extends Loader {
 		if (this.client.shard.ids.toString() === '0') {
 			const toAPIData = new Map();
 			const allCommands = this.client.slashCommands.reduce((p, c) => {
+				if (c.config.devsOnly) return p;
 				toAPIData.set(c.config.name, {
 					name: c.config.name,
 					category: c.config.category,
@@ -54,6 +55,7 @@ module.exports = class CommandLoader extends Loader {
 				});
 				return p;
 			}, []);
+			await HTTPrequests.postCommandStatus(Array.from(toAPIData.values()));
 			await this.client.application.commands.set(allCommands);
 			this.client.logger.info({ tag: 'Discord' }, 'Deploy global de slash commands realizado com sucesso');
 		}

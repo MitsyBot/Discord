@@ -7,10 +7,15 @@ module.exports = class InteractionCommandExecutor {
 	}
 
 	async CommandExecuted(client, interaction) {
-		const authorData = await client.database.fetchUser(interaction.user.id);
-		const guildData = await client.database.fetchGuild(interaction.guild.id);
+		const authorData = await client.database.users.findOne(interaction.user.id);
+		const guildData = await client.database.guilds.findOne(interaction.guild.id);
 
 		const data = {};
+
+		if (interaction.options.getUser('usuário', false)) {
+			const interactionUserData = await client.database.users.findOne(interaction.options.getUser('usuário', false));
+			data.user = interactionUserData;
+		}
 
 		data.author = authorData;
 		data.guild = guildData;

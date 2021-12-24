@@ -1,6 +1,18 @@
-const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
-const Users = new mongoose.Schema({
+const BlacklistedSchema = new Schema({
+	reason: { type: String, required: true },
+	blacklister: { type: String, required: true },
+});
+
+const UserConnection = new Schema({
+	name: String,
+	tokens: Object,
+	config: Object,
+});
+
+module.exports = new Schema({
+	_id: String,
 	id: { type: String, index: { unique: true } },
 	comets: { type: Number, default: 0, index: true },
 	xp: { type: Number, default: 0, index: true },
@@ -26,6 +38,6 @@ const Users = new mongoose.Schema({
 	premiumLevel: { type: Number, default: 0 },
 	isStaff: { type: Boolean, default: false },
 	staffLevel: { type: Number, default: 0 },
+	blacklisted: BlacklistedSchema,
+	connections: [UserConnection],
 });
-
-module.exports = mongoose.model('Users', Users);

@@ -1,21 +1,16 @@
 const { Loader, WebSocketController } = require('../');
-
-const express = require('express');
-const cors = require('cors');
-const url = require('url');
-const { Server } = require('ws');
-
+const WebSocket = require('ws');
 module.exports = class HTTPLoader extends Loader {
 	constructor(client) {
 		super({}, client);
 
-		this.websocket = null;
+		this.ws = null;
 	}
 
 	async load() {
 		try {
 			await this.initializeHTTPServer();
-			this.client.websocket = this.app;
+			this.client.ws = this.ws;
 			return true;
 		}
 		catch (e) {
@@ -24,43 +19,86 @@ module.exports = class HTTPLoader extends Loader {
 		return false;
 	}
 
-	initializeHTTPServer(port = process.env.SOCKET_PORT) {
-		if (!port) return this.client.logger.warn({ tag: 'Websocket' }, 'Você não definiu a porta do websocket nas variaveis de ambiente.');
+	initializeHTTPServer(ws_url = process.env.API_URL) {
+		if (!ws_url) return this.client.logger.warn({ tag: 'Websocket' }, 'Você não inseriu a url do websocket da api.');
 		if (!this.client.shard.ids.includes(0)) return this.client.logger.info({ tag: 'Websocket' }, 'Servidor não iniciado, o cliente não pode gerenciar a shard 0');
 
-		this.app = express();
-		// Use CORS with Express
-		this.app.use(cors());
-		// Parse JSON body
-		this.app.use(express.json());
+		this.connect();
+	}
 
+	connect() {
+		try {
+			this.ws = new WebSocket(process.env.API_URL);
+			this.prepareListeners();
+			this.client.logger.info({ tag: 'Websocket' }, 'Cliente esta tentando se conectar ao servidor.');
+		}
+		catch (err) {
+			if (err instanceof Error) this.client.logger.error({ tag: 'Websocket' }, `Ocorreu um erro ao se conectar ao servidor: ${err.message}`);
+			this.ws = null;
 
-		const httpServer = this.app.listen(port, () => {
-			this.client.logger.info({ tag: 'Websocket' }, `Iniciado na porta ${port}`);
-		});
-		const ws = new Server({ server: httpServer });
+			this.isAlive = false;
+		}
+	}
 
-		ws.on('connection', (socket, req) => {
-			this.client.logger.info({ tag: 'Websocket' }, 'Nova conexão realizada');
-			socket.id = url.parse(req.url, true).query.id ?? 0;
-			socket.isAlive = true;
-			socket.uptime = Date.now();
+	heartbeat(data) {
+		this.ruuningError = false;
+		if (typeof this.pingTimeout !== 'undefined') clearTimeout(this.pingTimeout);
 
-			socket.on('message', (rawRequest) => WebSocketController(socket, rawRequest));
+		this.isAlive = true;
+		if (data) this.ws.pong(data);
 
-			socket.on('pong', (ms) => {
-				socket.isAlive = true;
-				socket.responseTime = Date.now() - ms.toString();
-			});
-		});
+		this.pingTimeout = setTimeout(
+			(manager) => {
+				if (manager && manager.readyState === manager.OPEN) manager.terminate();
+			},
+			20000,
+			this.ws,
+		);
+	}
 
-		setInterval(() => {
-			ws.clients.forEach((skt) => {
-				if (skt.isAlive === false) return skt.terminate();
+	onError(err) {
+		this.ruuningError = true;
+		this.isAlive = false;
+		if (this.retries >= 5) {
+			this.client.logger.info({ tag: 'Websocket' }, 'Cliente não vai mais tentar se conectar ao servidor');
+			if (this.ws) this.ws.removeAllListeners();
+			return;
+		}
 
-				skt.isAlive = false;
-				skt.ping(Date.now());
-			});
+		this.client.logger.info({ tag: 'Websocket' }, `Erro: ${err.message}`);
+		if (this.pingTimeout) clearTimeout(this.pingTimeout);
+
+		setTimeout(() => {
+			this.retries += 1;
+			this.connect();
 		}, 15000);
 	}
+
+	onClose() {
+		this.isAlive = false;
+		this.client.logger.info({ tag: 'Websocket' }, 'A conexão com o servidor foi fechada');
+		if (this.ruuningError) return;
+		if (this.ws) this.ws.terminate();
+		if (this.pingTimeout) clearTimeout(this.pingTimeout);
+
+		setTimeout(() => {
+			this.connect();
+		}, 5000);
+	}
+
+	prepareListeners() {
+		if (!this.ws) return;
+
+		this.ws
+			.on('open', () => {
+				this.client.logger.info({ tag: 'Websocket' }, 'Cliente foi conectado ao servidor');
+				this.retries = 0;
+				this.heartbeat();
+			})
+			.on('message', (rawRequest) => WebSocketController(this.ws, rawRequest))
+			.on('close', () => this.onClose())
+			.on('error', (err) => this.onError(err))
+			.on('ping', (data) => this.heartbeat(data));
+	}
+
 };

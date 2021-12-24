@@ -3,6 +3,14 @@ module.exports = class IsStaffInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'verificarequipe',
+			options: [
+				{
+					name: 'usuário',
+					type: 'USER',
+					description: 'Mencione um usuário',
+					required: false,
+				},
+			],
 			description: 'Verifique se um usuario é membro da equipe da mitsy da mitsy.',
 			category: 'info',
 			cooldown: 5,
@@ -11,6 +19,7 @@ module.exports = class IsStaffInteractionCommand extends InteractionCommand {
 
 	async run(ctx) {
 		const user = ctx.data.user ?? ctx.data.author;
+		const mentionUser = ctx.options.getUser('usuário', false) ?? `<@${ctx.author.id}>`;
 
 
 		let staffLevel;
@@ -31,10 +40,10 @@ module.exports = class IsStaffInteractionCommand extends InteractionCommand {
 		}
 
 		if (user.isStaff) {
-			await ctx.makeMessage({ content: ctx.locale('commands:checkstaff.isstaff', { user: ctx.author.id, mitsy_happy: Emotes.MITSY_HAPPY, level: staffLevel }), ephemeral: false });
+			await ctx.makeMessage({ content: ctx.locale('commands:checkstaff.isstaff', { user: mentionUser.toString(), mitsy_happy: Emotes.MITSY_HAPPY, level: staffLevel }), ephemeral: false });
 		}
 		else {
-			await ctx.makeMessage({ content: ctx.locale('commands:checkstaff.notstaff', { user: ctx.author.id }), ephemeral: false });
+			await ctx.makeMessage({ content: ctx.locale('commands:checkstaff.notstaff', { user: mentionUser.toString() }), ephemeral: false });
 		}
 	}
 };
