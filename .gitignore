@@ -7,3 +7,4 @@ coverage/
 config.json
 package-lock.json
 .vscode
+.github
