@@ -1,6 +1,6 @@
 FROM node:16-alpine as builder
 
-RUN apt-get update || : && apt-get install python -y
+RUN apt update && apt install python
 
 RUN mkdir -p /usr/src/mitsy
 WORKDIR /usr/src/mitsy
