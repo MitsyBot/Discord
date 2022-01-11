@@ -1,6 +1,6 @@
 FROM node:16-alpine as builder
 
-RUN apt update && apt install python
+RUN apk add g++ make python
 
 RUN mkdir -p /usr/src/mitsy
 WORKDIR /usr/src/mitsy
