@@ -4,7 +4,7 @@ RUN mkdir -p /usr/src/mitsy
 WORKDIR /usr/src/mitsy
 
 RUN apk update && apk upgrade
-RUN apk add git python3
+RUN apk add git python3 make g++
 
 COPY . /usr/src/mitsy/
 RUN npm install
