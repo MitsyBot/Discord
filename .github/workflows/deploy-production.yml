@@ -43,4 +43,4 @@ jobs:
           script: |
             docker pull ghcr.io/mitsybot/discord-prod:latest
             docker stop discord-prod
-            docker run -it --rm -d --name discord-prod ghcr.io/mitsybot/bot:latest
+            docker run -it --rm -d --name discord-prod ghcr.io/mitsybot/discord-prod:latest
