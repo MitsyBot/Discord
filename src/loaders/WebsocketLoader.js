@@ -4,13 +4,13 @@ module.exports = class HTTPLoader extends Loader {
 	constructor(client) {
 		super({}, client);
 
-		this.api.ws = null;
+		this.api = null;
 	}
 
 	async load() {
 		try {
 			await this.initializeHTTPServer();
-			this.client.ws = this.api.ws;
+			this.client.api.ws = this.api.ws;
 			return true;
 		}
 		catch (e) {
