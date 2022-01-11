@@ -20,7 +20,6 @@ module.exports = class HTTPLoader extends Loader {
 	}
 
 	initializeHTTPServer() {
-		if (!process.env.API_WEBSOCKET) return this.client.logger.warn({ tag: 'Websocket' }, 'Você não inseriu a url do websocket da api.');
 		if (!this.client.shard.ids.includes(0)) return this.client.logger.info({ tag: 'Websocket' }, 'Servidor não iniciado, o cliente não pode gerenciar a shard 0');
 
 		this.connect();
@@ -28,7 +27,7 @@ module.exports = class HTTPLoader extends Loader {
 
 	connect() {
 		try {
-			this.api = new WebSocket(process.env.API_WEBSOCKET);
+			this.api = new WebSocket('wss://api.mitsy.xyz');
 			this.prepareListeners();
 			this.client.logger.info({ tag: 'Websocket' }, 'Cliente esta tentando se conectar ao servidor.');
 		}
