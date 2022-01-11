@@ -42,5 +42,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             docker pull ghcr.io/mitsybot/discord-canary:latest
-            docker stop mitsy-canary
+            docker stop discord-canary
             docker run -it --rm -d --name discord-canary ghcr.io/mitsybot/discord-canary:latest
