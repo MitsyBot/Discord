@@ -31,7 +31,7 @@ jobs:
           version: latest
           file: Dockerfile
           push: true
-          tags: ghcr.io/mitsybot/bot-canary:latest
+          tags: ghcr.io/mitsybot/discord-canary:latest
 
       - name: Enviar os arquivos para maquina da mitsy
         uses: appleboy/ssh-action@master
@@ -41,6 +41,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            docker pull ghcr.io/mitsybot/bot-canary:latest
-            docker stop mitsy-canary
-            docker run -it --rm -d --name mitsy-canary ghcr.io/mitsybot/bot-canary:latest
+            docker pull ghcr.io/mitsybot/discord-canary:latest
+            docker stop discord-canary
+            docker run -it --rm -d --name discord-canary ghcr.io/mitsybot/discord-canary:latest
