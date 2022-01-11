@@ -10,7 +10,7 @@ module.exports = class HTTPLoader extends Loader {
 	async load() {
 		try {
 			await this.initializeHTTPServer();
-			this.client.api.ws = this.api.ws;
+			this.client.api.ws = this.api;
 			return true;
 		}
 		catch (e) {
@@ -28,13 +28,13 @@ module.exports = class HTTPLoader extends Loader {
 
 	connect() {
 		try {
-			this.api.ws = new WebSocket(process.env.API_URL);
+			this.api = new WebSocket(process.env.API_URL);
 			this.prepareListeners();
 			this.client.logger.info({ tag: 'Websocket' }, 'Cliente esta tentando se conectar ao servidor.');
 		}
 		catch (err) {
 			if (err instanceof Error) this.client.logger.error({ tag: 'Websocket' }, `Ocorreu um erro ao se conectar ao servidor: ${err.message}`);
-			this.api.ws = null;
+			this.api = null;
 
 			this.isAlive = false;
 		}
@@ -45,14 +45,14 @@ module.exports = class HTTPLoader extends Loader {
 		if (typeof this.pingTimeout !== 'undefined') clearTimeout(this.pingTimeout);
 
 		this.isAlive = true;
-		if (data) this.api.ws.pong(data);
+		if (data) this.api.pong(data);
 
 		this.pingTimeout = setTimeout(
 			(manager) => {
 				if (manager && manager.readyState === manager.OPEN) manager.terminate();
 			},
 			20000,
-			this.api.ws,
+			this.api,
 		);
 	}
 
@@ -61,7 +61,7 @@ module.exports = class HTTPLoader extends Loader {
 		this.isAlive = false;
 		if (this.retries >= 5) {
 			this.client.logger.info({ tag: 'Websocket' }, 'Cliente não vai mais tentar se conectar ao servidor');
-			if (this.api.ws) this.api.ws.removeAllListeners();
+			if (this.api) this.api.removeAllListeners();
 			return;
 		}
 
@@ -78,7 +78,7 @@ module.exports = class HTTPLoader extends Loader {
 		this.isAlive = false;
 		this.client.logger.info({ tag: 'Websocket' }, 'A conexão com o servidor foi fechada');
 		if (this.ruuningError) return;
-		if (this.api.ws) this.api.ws.terminate();
+		if (this.api) this.api.terminate();
 		if (this.pingTimeout) clearTimeout(this.pingTimeout);
 
 		setTimeout(() => {
@@ -87,15 +87,15 @@ module.exports = class HTTPLoader extends Loader {
 	}
 
 	prepareListeners() {
-		if (!this.api.ws) return;
+		if (!this.api) return;
 
-		this.api.ws
+		this.api
 			.on('open', () => {
 				this.client.logger.info({ tag: 'Websocket' }, 'Cliente foi conectado ao servidor');
 				this.retries = 0;
 				this.heartbeat();
 			})
-			.on('message', (rawRequest) => WebSocketController(this.api.ws, rawRequest))
+			.on('message', (rawRequest) => WebSocketController(this.api, rawRequest))
 			.on('close', () => this.onClose())
 			.on('error', (err) => this.onError(err))
 			.on('ping', (data) => this.heartbeat(data));
