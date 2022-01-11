@@ -4,13 +4,13 @@ module.exports = class HTTPLoader extends Loader {
 	constructor(client) {
 		super({}, client);
 
-		this.ws = null;
+		this.api.ws = null;
 	}
 
 	async load() {
 		try {
 			await this.initializeHTTPServer();
-			this.client.ws = this.ws;
+			this.client.ws = this.api.ws;
 			return true;
 		}
 		catch (e) {
@@ -28,13 +28,13 @@ module.exports = class HTTPLoader extends Loader {
 
 	connect() {
 		try {
-			this.ws = new WebSocket(process.env.API_URL);
+			this.api.ws = new WebSocket(process.env.API_URL);
 			this.prepareListeners();
 			this.client.logger.info({ tag: 'Websocket' }, 'Cliente esta tentando se conectar ao servidor.');
 		}
 		catch (err) {
 			if (err instanceof Error) this.client.logger.error({ tag: 'Websocket' }, `Ocorreu um erro ao se conectar ao servidor: ${err.message}`);
-			this.ws = null;
+			this.api.ws = null;
 
 			this.isAlive = false;
 		}
@@ -45,14 +45,14 @@ module.exports = class HTTPLoader extends Loader {
 		if (typeof this.pingTimeout !== 'undefined') clearTimeout(this.pingTimeout);
 
 		this.isAlive = true;
-		if (data) this.ws.pong(data);
+		if (data) this.api.ws.pong(data);
 
 		this.pingTimeout = setTimeout(
 			(manager) => {
 				if (manager && manager.readyState === manager.OPEN) manager.terminate();
 			},
 			20000,
-			this.ws,
+			this.api.ws,
 		);
 	}
 
@@ -61,7 +61,7 @@ module.exports = class HTTPLoader extends Loader {
 		this.isAlive = false;
 		if (this.retries >= 5) {
 			this.client.logger.info({ tag: 'Websocket' }, 'Cliente não vai mais tentar se conectar ao servidor');
-			if (this.ws) this.ws.removeAllListeners();
+			if (this.api.ws) this.api.ws.removeAllListeners();
 			return;
 		}
 
@@ -78,7 +78,7 @@ module.exports = class HTTPLoader extends Loader {
 		this.isAlive = false;
 		this.client.logger.info({ tag: 'Websocket' }, 'A conexão com o servidor foi fechada');
 		if (this.ruuningError) return;
-		if (this.ws) this.ws.terminate();
+		if (this.api.ws) this.api.ws.terminate();
 		if (this.pingTimeout) clearTimeout(this.pingTimeout);
 
 		setTimeout(() => {
@@ -87,15 +87,15 @@ module.exports = class HTTPLoader extends Loader {
 	}
 
 	prepareListeners() {
-		if (!this.ws) return;
+		if (!this.api.ws) return;
 
-		this.ws
+		this.api.ws
 			.on('open', () => {
 				this.client.logger.info({ tag: 'Websocket' }, 'Cliente foi conectado ao servidor');
 				this.retries = 0;
 				this.heartbeat();
 			})
-			.on('message', (rawRequest) => WebSocketController(this.ws, rawRequest))
+			.on('message', (rawRequest) => WebSocketController(this.api.ws, rawRequest))
 			.on('close', () => this.onClose())
 			.on('error', (err) => this.onError(err))
 			.on('ping', (data) => this.heartbeat(data));

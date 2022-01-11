@@ -10,22 +10,13 @@ module.exports = class MainListener extends EventListener {
 
 	onReady() {
 
-		if (process.env.DESATIVANDO_TEMPORARIAMENTE) {
-			const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
+		const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
 
-			const shardId = this.shard.ids.toString();
+		const shardId = this.shard.ids.toString();
 
-			setInterval(() => {
-				updateActivity(shardId);
-			}, 1000 * 30);
-		}
-		else {
-			const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
-			const shardId = this.shard.ids.toString();
-
-			this.logger.info({ tag: 'Atividade' }, 'Status rotativo desativado');
+		setInterval(() => {
 			updateActivity(shardId);
-		}
+		}, 1000 * 30);
 
 		if (process.env.LAVALINK_NODES) {
 			try {
