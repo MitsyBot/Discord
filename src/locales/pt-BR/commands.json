@@ -1,0 +1,77 @@
+{
+      "atm": {
+        "current": {
+          "me": "Você tem atualmente {{current}} cometinhas",
+          "other": "{{user}} tem atualmente {{current}} cometinhas"
+        }
+      },
+      "daily": {
+        "get": "<:Mitsy_Rica:872870327049396274> **|** <@{{user}}> Você pode conseguir seus cometinhas diarios [Clicando aqui](https://mitsy.xyz/dashboard/daily)\nCaso você não fique satisfeito com a quantia de cometinhas que ganhar você pode comprar mais cometinhas [Clicando aqui](https://mitsy.xyz/dashboard/shop/comets)",
+        "getted": "<:Mitsy_Rica:872870327049396274> Você ja pegou seu premio diario hoje, mas você ira poder pegar novamente em {{getagain}}"
+      },
+      "ping": {
+        "latency": "Latência:",
+        "api": "Latência da API:"
+      },
+      "botinfo": {
+        "embed_description": "Oie, eu me chamo Mitsy e sou um bot multifuncional para discord, entrei no discord em **{{joinedAt}}**. Eu tenho muitas funções incriveis para deixar o seu servidor divertido, seguro, ou feliz.\n\nAtualmente eu estou em **{{guilds}}** servidores e tenho **{{users}}** usuarios, estou online por **{{uptime}}**.\nCaso queira saber mais sobre mim você pode [acessar o meu website](https://mitsy.xyz) ou entrar no meu [servidor de suporte](https://mitsy.xyz/suporte).",
+        "embed_footer": "Mitsy é um produto mantido por poluxtrail & duuuuardo, todos os direitos reservados."
+      },
+      "help": {
+        "embed_title": "{{mitsy_heart}} Precisando de ajuda?",
+        "embed_description": "Oie, eu me chamo mitsy e sou um bot multifuncional para discord focado em diversão, moderação e midia\n\nEu tenho muitas funções incriveis para os membros do seu servidor se divertirem enquanto conversam. alem de ser simples de configurar é muito facil de usar!",
+        "embed_footer": "Yay."      
+      },
+      "support": {
+        "embed_title": "{{mitsy_coffe}} Precisando de ajuda?",
+        "embed_description": "Caso esteja precisando de ajuda você pode acessar o meu faq no [meu website](https://mitsy.xyz/faq) para abrir um ticket ou entrar [no meu servidor de suporte](https://mitsy.xyz/suporte).",
+        "embed_footer": "Yay."      
+      },
+      "level": {
+        "embed_title": "{{mitsy_heart}} Nivel",
+        "embed_description": "{{mitsy_confetti}} Card de {{username}}\nNivel ``{{level}}``\nXp ``{{xp}}``",
+        "embed_footer": "Continue tentando subir de nivel."      
+      },
+      "checkpremium": {
+        "ispremium": "{{mitsy_rica}} {{user}} é um usuario premium da mitsy tier {{tier}}",
+        "notpremium": "{{user}} Não é um usuario premium da mitsy\n\nps: caso queira se tornar um basta [clicar aqui](https://mitsy.xyz/premium)"
+      },
+      "checkstaff": {
+        "isstaff": "{{mitsy_happy}} Oba,\nSim. {{user}} é {{level}} da mitsy",
+        "notstaff": "{{user}} Não é da equipe da mitsy."
+      },
+      "angry": {
+        "mitsy": "Poxa eu te deixei triste? me desculpe, não foi a intenção.",
+        "embed_title": "Grrrrr",
+        "embed_description": "{{author}} esta com raiva de {{mention}}, (espero que os 2 consigam resolver isso pacificamente)"
+      },
+      "bite": {
+        "embed_title": ":3 eu te moido",
+        "embed_description": "{{author}} mordeu {{mention}}, (espero que não tenha doido :) )"
+      },
+      "cry": {
+        "embed_title": "#Chateado(a)",
+        "embed_description": "{{author}} esta chorando para {{mention}}, (Que tristeza gente...)"
+      },
+      "hug": {
+        "embed_title": ":hugging:",
+        "embed_description": "{{author}} deu um abraço apertado em {{mention}}, (Cuidado para não sufocar ele(a)...)"
+      },
+      "kiss": {
+        "mitsy": "Ah, eu não quero te beijar... mas podemos continuar sendo amigos :)",
+        "embed_title": "Ownt, que fofinhos",
+        "embed_description": "{{author}} deu um beijo em {{mention}}"
+      },
+      "pat": {
+        "embed_title": "<:Mitsy_Pat:872870327028437062>",
+        "embed_description": "{{author}} Fez cafuné em {{mention}}"
+      },
+      "punch": {
+        "embed_title": "Cuidad-",
+        "embed_description": "{{author}} Deu um soco em {{mention}}, (Alguem ai consegue chamar os medicos?)"
+      },
+      "slap": {
+        "embed_title": "🖐️",
+        "embed_description": "{{author}} Deu um tapa em {{mention}}, (Gente que perigo, o que sera que ele fez?)"
+      }
+}
