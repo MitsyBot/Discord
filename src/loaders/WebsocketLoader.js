@@ -93,6 +93,7 @@ module.exports = class HTTPLoader extends Loader {
 				this.client.logger.info({ tag: 'Websocket' }, 'Cliente foi conectado ao servidor');
 				this.retries = 0;
 				this.heartbeat();
+				this.api.send({ client_type: 'mitsy' })
 			})
 			.on('message', (rawRequest) => WebSocketController(this.api, rawRequest))
 			.on('close', () => this.onClose())
