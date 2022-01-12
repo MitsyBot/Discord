@@ -2,7 +2,7 @@ const moment = require('moment');
 
 const { Console } = require('node:console');
 const { Transform } = require('node:stream');
-const { InteractionCommand, Emotes, MitsyEmbed } = require('../../');
+const { InteractionCommand, Emotes, MitsyEmbed, HTTPrequests } = require('../../');
 module.exports = class PingInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
@@ -116,6 +116,8 @@ module.exports = class PingInteractionCommand extends InteractionCommand {
 			});
 			return;
 		}
+		const apiPing = await HTTPrequests.getMitsyApiPing();
+
 		const embed = new MitsyEmbed()
 			.setTitle('🏓 | Pong!')
 			.setDescription(
@@ -123,7 +125,7 @@ module.exports = class PingInteractionCommand extends InteractionCommand {
 					Date.now() - ctx.interaction.createdTimestamp
 				}ms**\n📡 | ${ctx.locale('commands:ping.latency')} **${Math.round(
 					ctx.client.ws.ping,
-				)}ms**\n${Emotes.MITSY_CONFETTI} | Shard: **${ctx.client.shard.ids}** / **${ctx.client.shard.count - 1}**`,
+				)}ms**\n${Emotes.MITSY_CONFETTI} ${ctx.locale('commands:ping.mitsyapi')} ${apiPing.ws[0].ping}ms\n${Emotes.MITSY_CONFETTI} | Shard: **${ctx.client.shard.ids}** / **${ctx.client.shard.count - 1}**`,
 			)
 			.setFooter(ctx.author.tag, avatar)
 			.setTimestamp();

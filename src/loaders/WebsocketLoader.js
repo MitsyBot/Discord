@@ -20,7 +20,7 @@ module.exports = class HTTPLoader extends Loader {
 	}
 
 	initializeHTTPServer() {
-		if (!this.client.shard.ids.includes(0)) return this.client.logger.info({ tag: 'Websocket' }, 'Servidor não iniciado, o cliente não pode gerenciar a shard 0');
+		if (!this.client.shard.ids.includes(0)) return this.client.logger.info({ tag: 'Websocket' }, 'Servidor não iniciado, esta não é a shard 0');
 
 		this.connect();
 	}

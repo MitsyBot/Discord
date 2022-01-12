@@ -33,6 +33,16 @@ module.exports = class HttpRequests {
 		}
 	}
 
+	static async getMitsyApiPing() {
+		try {
+			const data = await apiRequest.get('/ping');
+			return data.data;
+		}
+		catch {
+			return 'https://http.cat/404';
+		}
+	}
+
 
 	static async postCommandStatus(commands) {
 		await apiRequest.post('/commands', { data: { commands } });

@@ -11,7 +11,8 @@
       },
       "ping": {
         "latency": "Latência:",
-        "api": "Latência da API:"
+        "api": "Latência da API:",
+        "mitsy_api": "Latencia da api da mitsy:"
       },
       "botinfo": {
         "embed_description": "Oie, eu me chamo Mitsy e sou um bot multifuncional para discord, entrei no discord em **{{joinedAt}}**. Eu tenho muitas funções incriveis para deixar o seu servidor divertido, seguro, ou feliz.\n\nAtualmente eu estou em **{{guilds}}** servidores e tenho **{{users}}** usuarios, estou online por **{{uptime}}**.\nCaso queira saber mais sobre mim você pode [acessar o meu website](https://mitsy.xyz) ou entrar no meu [servidor de suporte](https://mitsy.xyz/suporte).",
