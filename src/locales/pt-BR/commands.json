@@ -10,7 +10,7 @@
         "getted": "<:Mitsy_Rica:872870327049396274> Você ja pegou seu premio diario hoje, mas você ira poder pegar novamente em {{getagain}}"
       },
       "ping": {
-        "latency": "Latência:",
+        "latency": "(Discord) Latência:",
         "api": "(Discord) Latência da API:",
         "mitsy_api": "(Mitsy) Latencia da API:"
       },
