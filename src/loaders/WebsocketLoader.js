@@ -27,7 +27,7 @@ module.exports = class HTTPLoader extends Loader {
 
 	connect() {
 		try {
-			this.api = new WebSocket('ws://0.0.0.0:1234');
+			this.api = new WebSocket('wss://api.mitsy.xyz');
 			this.prepareListeners();
 			this.client.logger.info({ tag: 'Websocket' }, 'Cliente esta tentando se conectar ao servidor.');
 		}
