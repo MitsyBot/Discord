@@ -146,8 +146,6 @@ module.exports = class InteractionCommandExecutor {
 
 		if (!command.run) return;
 
-		console.log(client);
-
 		await command.run(ctx).catch(async (error) => {
 			interaction.reply(t('errors:COMMAND', { error: error })),
 			client.logger.error(error);
