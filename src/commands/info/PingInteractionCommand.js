@@ -125,7 +125,7 @@ module.exports = class PingInteractionCommand extends InteractionCommand {
 					Date.now() - ctx.interaction.createdTimestamp
 				}ms**\n📡 | ${ctx.locale('commands:ping.latency')} **${Math.round(
 					ctx.client.ws.ping,
-				)}ms**\n${Emotes.MITSY_CONFETTI} ${ctx.locale('commands:ping.mitsyapi')} ${apiPing.ws[0].ping}ms\n${Emotes.MITSY_CONFETTI} | Shard: **${ctx.client.shard.ids}** / **${ctx.client.shard.count - 1}**`,
+				)}ms**\n${Emotes.MITSY_CONFETTI} ${ctx.locale('commands:ping.mitsy_api')} ${apiPing.ws[0].ping}ms\n${Emotes.MITSY_CONFETTI} | Shard: **${ctx.client.shard.ids}** / **${ctx.client.shard.count - 1}**`,
 			)
 			.setFooter(ctx.author.tag, avatar)
 			.setTimestamp();
