@@ -10,7 +10,6 @@ const WebSocketController = async (mitsy, rawRequest) => {
 			const userMembers = Array.from(guild.members).filter(m => !m.user.bot).size;
 			const botMembers = size - userMembers;
 			const newdata = { id: guild.id, name, icon, totalMembers: size, userMembers, botMembers };
-			console.log(mitsy.api);
 			return mitsy.api.send(JSON.stringify({ id, newdata }));
 		}
 		mitsy.api.send(JSON.stringify({ id, error: 'Servidor não encontrado' }));
