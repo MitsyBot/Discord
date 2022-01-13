@@ -8,7 +8,7 @@ const WebSocketController = async (mitsy, socket, rawRequest) => {
 		if (guild) {
 			const { name, icon, members: { size } } = guild;
 			console.log(guild.members);
-			const userMembers = Array.from(guild.members.values()).filter(m => !m.user.bot).size;
+			const userMembers = Array.from(guild.members).filter(m => !m.user.bot).size;
 			const botMembers = size - userMembers;
 			const newdata = { id: guild.id, name, icon, totalMembers: size, userMembers, botMembers };
 			return socket.send(JSON.stringify({ id, newdata }));
