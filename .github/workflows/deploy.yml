@@ -43,4 +43,4 @@ jobs:
           script: |
             docker pull ghcr.io/mitsybot/discord-canary:latest
             docker stop discord-canary
-            docker run -it --rm -d --name discord-canary ghcr.io/mitsybot/discord-canary:latest
+            docker run -it --rm -d  -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' --name discord-canary ghcr.io/mitsybot/discord-canary:latest
