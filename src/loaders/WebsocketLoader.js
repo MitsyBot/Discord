@@ -92,8 +92,7 @@ module.exports = class HTTPLoader extends Loader {
 			.on('open', () => {
 				this.client.logger.info({ tag: 'Websocket' }, 'Conectado');
 
-				this.client.logger.info({ tag: 'Websocket' }, this.api);
-				this.api.send({ client_type: 'mitsy' });
+				this.api.send(JSON.stringify({ 'client_type':'mitsy' }));
 
 				this.retries = 0;
 				this.heartbeat();
