@@ -7,7 +7,7 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		const guild = mitsy.client.guilds.cache.get(data.guildId);
 		if (guild) {
 			const { name, icon, members: { size } } = guild;
-			const userMembers = Array.from(guild.members).filter(m => !m.user.bot).size;
+			const userMembers = Array.from(guild.members.members).filter(m => !m.user.bot).size;
 			const botMembers = size - userMembers;
 			const newdata = { id: guild.id, name, icon, totalMembers: size, userMembers, botMembers };
 			return mitsy.api.send(JSON.stringify({ id, res: newdata }));
