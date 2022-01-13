@@ -3,7 +3,8 @@ const WebSocketController = async (socket, rawRequest) => {
 
 	switch (type) {
 	case 'guild': {
-		const guild = this.client.guilds.cache.get(data.guildId);
+		console.log(this);
+		const guild = this.guilds.cache.get(data.guildId);
 		if (guild) {
 			const { guildid, name, icon, members: { size } } = guild;
 			const userMembers = guild.members.filter(m => !m.user.bot).size;
