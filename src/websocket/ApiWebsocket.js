@@ -1,4 +1,4 @@
-const WebSocketController = async (mitsy, socket, rawRequest) => {
+const WebSocketController = async (mitsy, rawRequest) => {
 	const { type, data, id } = JSON.parse(rawRequest.toString());
 
 	switch (type) {
@@ -10,9 +10,10 @@ const WebSocketController = async (mitsy, socket, rawRequest) => {
 			const userMembers = Array.from(guild.members).filter(m => !m.user.bot).size;
 			const botMembers = size - userMembers;
 			const newdata = { id: guild.id, name, icon, totalMembers: size, userMembers, botMembers };
-			return socket.send(JSON.stringify({ id, newdata }));
+			console.log(mitsy.api.ws);
+			return mitsy.api.ws.send(JSON.stringify({ id, newdata }));
 		}
-		socket.send(JSON.stringify({ id, error: 'Servidor não encontrado' }));
+		mitsy.api.ws.send(JSON.stringify({ id, error: 'Servidor não encontrado' }));
 		break;
 	}
 	}

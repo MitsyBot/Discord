@@ -98,7 +98,7 @@ module.exports = class HTTPLoader extends Loader {
 				this.heartbeat();
 			})
 
-			.on('message', (rawRequest) => WebSocketController(this, this.api, rawRequest))
+			.on('message', (rawRequest) => WebSocketController(this, rawRequest))
 			.on('close', () => this.onClose())
 			.on('error', (err) => this.onError(err))
 			.on('ping', (data) => this.heartbeat(data));
