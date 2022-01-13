@@ -45,6 +45,8 @@ module.exports = class HTTPLoader extends Loader {
 
 		this.isAlive = true;
 		if (data) this.api.pong(data);
+
+		console.log(this.api);
 		this.api.send({ client_type: 'bot_canary' });
 
 		this.pingTimeout = setTimeout(
@@ -94,7 +96,6 @@ module.exports = class HTTPLoader extends Loader {
 				this.client.logger.info({ tag: 'Websocket' }, 'Cliente foi conectado ao servidor');
 				this.retries = 0;
 				this.heartbeat();
-				console.log(this.api);
 			})
 			.on('message', (rawRequest) => WebSocketController(this.api, rawRequest))
 			.on('close', () => this.onClose())
