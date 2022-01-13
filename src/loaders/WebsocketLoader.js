@@ -86,8 +86,6 @@ module.exports = class HTTPLoader extends Loader {
 	}
 
 	prepareListeners() {
-		if (!this.api) return;
-
 		this.api
 			.on('open', () => {
 				this.client.logger.info({ tag: 'Websocket' }, 'Cliente foi conectado ao servidor');
