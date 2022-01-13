@@ -24,7 +24,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.TOKEN }}
 
-      - name: Fazer o build e o push
+      - name: Fazer o build
         uses: docker/build-push-action@v2
         with:
           context: .
