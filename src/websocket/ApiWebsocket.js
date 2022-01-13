@@ -13,7 +13,7 @@ const WebSocketController = async (mitsy, rawRequest) => {
 			console.log(mitsy.api);
 			return mitsy.api.send(JSON.stringify({ id, newdata }));
 		}
-		mitsy.api.ws.send(JSON.stringify({ id, error: 'Servidor não encontrado' }));
+		mitsy.api.send(JSON.stringify({ id, error: 'Servidor não encontrado' }));
 		break;
 	}
 	}
