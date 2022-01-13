@@ -29,9 +29,7 @@ module.exports = class HTTPLoader extends Loader {
 		try {
 			this.api = new WebSocket('wss://api.mitsy.xyz');
 			this.prepareListeners();
-			this.client.logger.info({ tag: 'Websocket' }, 'Cliente esta tentando se conectar ao servidor.');
-			console.log(this.api);
-			this.api.send({ client_type: 'mitsy' });
+			this.client.logger.info({ tag: 'Websocket' }, 'Conectando ao servidor.');
 		}
 		catch (err) {
 			if (err instanceof Error) this.client.logger.error({ tag: 'Websocket' }, `Ocorreu um erro ao se conectar ao servidor: ${err.message}`);
@@ -88,13 +86,19 @@ module.exports = class HTTPLoader extends Loader {
 	}
 
 	prepareListeners() {
+		if (!this.api) return;
+
 		this.api
 			.on('open', () => {
-				this.client.logger.info({ tag: 'Websocket' }, 'Cliente foi conectado ao servidor');
+				this.client.logger.info({ tag: 'Websocket' }, 'Conectado');
+
+				this.client.logger.info({ tag: 'Websocket' }, this.api);
+				this.api.send({ client_type: 'mitsy' });
 
 				this.retries = 0;
 				this.heartbeat();
 			})
+
 			.on('message', (rawRequest) => WebSocketController(this.api, rawRequest))
 			.on('close', () => this.onClose())
 			.on('error', (err) => this.onError(err))
