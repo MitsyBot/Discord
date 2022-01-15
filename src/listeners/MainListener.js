@@ -35,7 +35,7 @@ module.exports = class MainListener extends EventListener {
 			}
 		}
 
-		if (!this.client.shard.ids.includes(0)) {
+		if (!this.shard.ids.includes(0)) {
 			setInterval(() => {
 				console.log('Status enviado');
 				postShardStatus(this);
