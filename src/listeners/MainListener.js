@@ -37,14 +37,12 @@ module.exports = class MainListener extends EventListener {
 
 		if (this.shard.ids.includes(0)) {
 			setInterval(() => {
-				console.log('Status enviado');
 				postShardStatus(this);
 			}, 15 * 1000);
 		}
 
 		async function postShardStatus(client) {
-			console.log('Passou pelo postShard');
-			const ShardingEnded = await client.isShardingProcessEnded();
+			const ShardingEnded = await client.ShardingEnded();
 			if (!ShardingEnded) return;
 
 			const getShardsInfo = (c) => {
