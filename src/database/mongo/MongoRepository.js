@@ -22,7 +22,7 @@ module.exports = class MongoRepository extends Repository {
 	}
 
 	findOne(id, projection) {
-		return this.model.findById(id, projection).then(this.parse);
+		return this.model.findOne(id, projection).then(this.parse);
 	}
 
 	findAll(projection) {
