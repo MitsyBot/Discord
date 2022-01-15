@@ -33,6 +33,10 @@ module.exports = class HttpRequests {
 		}
 	}
 
+	static async postShardStatus(shards) {
+		await apiRequest.put('/shards', { data: { shards } });
+	}
+
 	static async getMitsyApiPing() {
 		try {
 			const data = await apiRequest.get('/ping');

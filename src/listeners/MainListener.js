@@ -34,5 +34,42 @@ module.exports = class MainListener extends EventListener {
 				this.logger.error({ tag: 'Musica' }, e);
 			}
 		}
+
+		const isMasterShard = (id) => id === (this.shard.count) - 1;
+
+		if (isMasterShard(shardId)) {
+			setInterval(() => {
+				postShardStatus(this);
+			}, 15 * 1000);
+		}
+
+		async function postShardStatus(client) {
+			const ShardingEnded = await client.isShardingProcessEnded();
+			if (!ShardingEnded) return;
+
+			const getShardsInfo = (c) => {
+				const memoryUsed = process.memoryUsage().heapUsed;
+				const { uptime } = c;
+				const guilds = c.guilds.cache.size;
+				const unavailable = c.guilds.cache.reduce((p, b) => (b.available ? p : p + 1), 0);
+				const { ping } = c.ws;
+				const members = c.guilds.cache.reduce((p, b) => (b.available ? p + b.memberCount : p), 0);
+				const id = c.shard?.ids[0] ?? 0;
+
+				return { memoryUsed, uptime, guilds, unavailable, ping, members, id };
+			};
+
+			const results = await client.shard?.broadcastEval(getShardsInfo);
+			if (!results) return;
+
+			const toSendData = Array(client.shard?.count)
+				.fill('a')
+				.map((_, i) => ({
+					...results[i],
+					lastPingAt: Date.now(),
+				}));
+
+			await HTTPrequests.postShardStatus(toSendData);
+		}
 	}
 };
