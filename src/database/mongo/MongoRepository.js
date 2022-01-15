@@ -14,7 +14,7 @@ module.exports = class MongoRepository extends Repository {
 	}
 
 	parse(entity) {
-		return entity ? transformProps(entity.toObject({ versionKey: false }), castToString, '_id') : null;
+		return entity ? transformProps(entity.toObject({ versionKey: false }), castToString, 'id') : null;
 	}
 
 	add(entity) {
