@@ -12,6 +12,7 @@ const UserConnection = new Schema({
 });
 
 module.exports = new Schema({
+	_id: String,
 	id: { type: String, index: { unique: true } },
 	comets: { type: Number, default: 0, index: true },
 	xp: { type: Number, default: 0, index: true },

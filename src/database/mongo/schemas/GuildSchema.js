@@ -6,6 +6,7 @@ const ModuleSchema = new Schema({
 });
 
 module.exports = new Schema({
+	_id: String,
 	id: { type: String, index: { unique: true } },
 	prefix: { type: String, default: process.env.BOT_PREFIX },
 	lang: { type: String, default: 'pt-BR' },
