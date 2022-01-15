@@ -12,7 +12,6 @@ const UserConnection = new Schema({
 });
 
 module.exports = new Schema({
-	_id: String,
 	id: { type: String, index: { unique: true } },
 	comets: { type: Number, default: 0, index: true },
 	xp: { type: Number, default: 0, index: true },
@@ -21,7 +20,6 @@ module.exports = new Schema({
 	afk: { type: Boolean, default: false, index: true },
 	afkReason: { type: String, default: null },
 	blacklist: { type: Boolean, default: false, index: true },
-	blacklistReason: { type: String, default: null },
 	aboutme: { type: String, default: 'default' },
 	profileColor: { type: String, default: '#ec4ce8' },
 	isMarry: { type: Boolean, default: false },

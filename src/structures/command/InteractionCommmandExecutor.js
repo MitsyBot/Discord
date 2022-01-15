@@ -49,7 +49,7 @@ module.exports = class InteractionCommandExecutor {
 		if (data.author.blacklist) {
 			await interaction
 				.reply({
-					content: t('errors:USER_BLACKLISTED', { reason: data.author.blacklistReason }),
+					content: t('errors:USER_BLACKLISTED', { reason: data.author.blacklisted.reason }),
 					ephemeral: true,
 				});
 			return;
