@@ -14,7 +14,7 @@ module.exports = class DailyInteractionCommand extends InteractionCommand {
 	async run(ctx) {
 		if (parseInt(ctx.data.author.timeDaily) > Date.now()) {
 			return ctx.makeMessage({
-				content: ctx.locale('commands:daily.getted', { getagain: moment.utc(Date.now() + Number(ctx.data.author.timeDaily)).format('D[d], H[h], m[m], s[s]') }), ephemeral: true });
+				content: ctx.locale('commands:daily.getted', { getagain: moment.utc(Number(ctx.data.author.timeDaily)).format('D[d], H[h], m[m], s[s]') }), ephemeral: true });
 		}
 
 		ctx.makeMessage({
