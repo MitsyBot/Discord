@@ -35,15 +35,15 @@ module.exports = class MainListener extends EventListener {
 			}
 		}
 
-		const isMasterShard = (id) => id === (this.shard.count) - 1;
-
-		if (isMasterShard(shardId)) {
+		if (!this.client.shard.ids.includes(0)) {
 			setInterval(() => {
+				console.log('Status enviado');
 				postShardStatus(this);
 			}, 15 * 1000);
 		}
 
 		async function postShardStatus(client) {
+			console.log('Passou pelo postShard');
 			const ShardingEnded = await client.isShardingProcessEnded();
 			if (!ShardingEnded) return;
 
