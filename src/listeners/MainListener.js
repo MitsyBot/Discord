@@ -20,7 +20,9 @@ module.exports = class MainListener extends EventListener {
 
 		if (Config) {
 			try {
-				const nodes = Config;
+				const nodes = [
+					{ id: '1', host: '198.12.96.170', port: 2333, password: 'mitsybot123' },
+				];
 				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
