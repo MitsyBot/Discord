@@ -15,12 +15,12 @@ const DEFAULT_JOIN_OPTIONS = { selfdeaf: true };
 
 
 module.exports = class PlayerManager extends Manager {
-	constructor(client, nodes = [], options = {}) {
+	constructor(client, nodes = {}, options = {}) {
 		options.player = GuildPlayer;
 		super(client, nodes, options);
 
-		this.REST_ADDRESS = `${nodes[0].host}:${nodes[0].port}`;
-		this.REST_PASSWORD = nodes[0].password;
+		this.REST_ADDRESS = `${nodes.host}:${nodes.port}`;
+		this.REST_PASSWORD = nodes.password;
 	}
 
 	async fetchTracks(identifier) {
