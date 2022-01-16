@@ -18,7 +18,7 @@ module.exports = class MainListener extends EventListener {
 			updateActivity(shardId);
 		}, 1000 * 30);
 
-		if (process.env.LAVALINK_NODES) {
+		if (Config) {
 			try {
 				const nodes = Config;
 				this.playerManager = new PlayerManager(this, nodes, {
