@@ -21,7 +21,6 @@ module.exports = class MainListener extends EventListener {
 		if (process.env.LAVALINK_NODES) {
 			try {
 				const nodes = process.env.LAVALINK_NODES;
-				console.log(nodes);
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
 					shards: 1,
