@@ -1,6 +1,5 @@
 const { EventListener, HTTPrequests } = require('../');
-const { PlayerManager } = require('../media/music');
-const config = require('../media/music/config.json');
+const { PlayerManager, Config } = require('../media/music');
 
 module.exports = class MainListener extends EventListener {
 	constructor(client) {
@@ -10,7 +9,7 @@ module.exports = class MainListener extends EventListener {
 	}
 
 	onReady() {
-		console.log(config);
+
 		const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
 
 		const shardId = this.shard.ids.toString();
@@ -19,19 +18,21 @@ module.exports = class MainListener extends EventListener {
 			updateActivity(shardId);
 		}, 1000 * 30);
 
-		try {
-			this.playerManager = new PlayerManager(this, {
-				user: this.user.id,
-				shards: 1,
-			});
-			this.playerManager.connect()
-				.then(() => this.logger.info({ tag: 'Musica' }, 'Lavalink conectado!'))
-				.catch(() => this.logger.error({ tag: 'Music' }, 'Falha ao conectar com o lavalink.'));
+		if (process.env.LAVALINK_NODES) {
+			try {
+				const nodes = Config;
+				this.playerManager = new PlayerManager(this, nodes, {
+					user: this.user.id,
+					shards: 1,
+				});
+				this.playerManager.connect()
+					.then(() => this.logger.info({ tag: 'Musica' }, 'Lavalink conectado!'))
+					.catch(() => this.logger.error({ tag: 'Music' }, 'Falha ao conectar com o lavalink.'));
+			}
+			catch (e) {
+				this.logger.error({ tag: 'Musica' }, e);
+			}
 		}
-		catch (e) {
-			this.logger.error({ tag: 'Musica' }, e);
-		}
-
 
 		if (this.shard.ids.includes(0)) {
 			setInterval(() => {
