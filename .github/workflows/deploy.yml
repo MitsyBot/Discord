@@ -44,4 +44,4 @@ jobs:
             docker stop discord-canary
             docker image rm ghcr.io/mitsybot/discord-canary:latest
             docker pull ghcr.io/mitsybot/discord-canary:latest
-            docker run -it --rm -d -e SHARD_COUNT='1' -e LAVALINK_NODES="[{"host": "198.12.96.170", "port": 2333, "password": "mitsybot123", "region": "us"}]" -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' --name discord-canary ghcr.io/mitsybot/discord-canary:latest
+            docker run -it --rm -d -e SHARD_COUNT='1' -e LAVALINK_NODES="{"host": "198.12.96.170", "port": 2333, "password": "mitsybot123", "region": "us"}" -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' --name discord-canary ghcr.io/mitsybot/discord-canary:latest
