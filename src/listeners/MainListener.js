@@ -20,7 +20,8 @@ module.exports = class MainListener extends EventListener {
 
 		if (process.env.LAVALINK_NODES) {
 			try {
-				const nodes = JSON.parse(process.env.LAVALINK_NODES);
+				const nodes = process.env.LAVALINK_NODES;
+				console.log(nodes);
 				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
