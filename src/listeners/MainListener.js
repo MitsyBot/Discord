@@ -1,6 +1,6 @@
 const { EventListener, HTTPrequests } = require('../');
 const { PlayerManager } = require('../media/music');
-const config = require('./config.json');
+const config = require('../media/music/config.json');
 
 module.exports = class MainListener extends EventListener {
 	constructor(client) {
