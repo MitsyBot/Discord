@@ -18,22 +18,19 @@ module.exports = class MainListener extends EventListener {
 			updateActivity(shardId);
 		}, 1000 * 30);
 
-		if (process.env.LAVALINK_NODES) {
-			try {
-				const nodes = JSON.parse(process.env.LAVALINK_NODES);
-				console.log(nodes);
-				this.playerManager = new PlayerManager(this, nodes, {
-					user: this.user.id,
-					shards: 1,
-				});
-				this.playerManager.connect()
-					.then(() => this.logger.info({ tag: 'Musica' }, 'Lavalink conectado!'))
-					.catch(() => this.logger.error({ tag: 'Music' }, 'Falha ao conectar com o lavalink.'));
-			}
-			catch (e) {
-				this.logger.error({ tag: 'Musica' }, e);
-			}
+		try {
+			this.playerManager = new PlayerManager(this, {
+				user: this.user.id,
+				shards: 1,
+			});
+			this.playerManager.connect()
+				.then(() => this.logger.info({ tag: 'Musica' }, 'Lavalink conectado!'))
+				.catch(() => this.logger.error({ tag: 'Music' }, 'Falha ao conectar com o lavalink.'));
 		}
+		catch (e) {
+			this.logger.error({ tag: 'Musica' }, e);
+		}
+
 
 		if (this.shard.ids.includes(0)) {
 			setInterval(() => {

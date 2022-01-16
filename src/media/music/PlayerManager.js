@@ -7,7 +7,7 @@ const {
 } = require('./sources');
 
 const MusicUtils = require('./MusicUtils.js');
-
+const config = require('./config.json');
 const { Manager } = require('lavacord');
 const fetch = require('node-fetch');
 
@@ -15,12 +15,12 @@ const DEFAULT_JOIN_OPTIONS = { selfdeaf: true };
 
 
 module.exports = class PlayerManager extends Manager {
-	constructor(client, nodes = {}, options = {}) {
+	constructor(client, options = {}) {
 		options.player = GuildPlayer;
-		super(client, nodes, options);
+		super(client, options);
 
-		this.REST_ADDRESS = `${nodes.host}:${nodes.port}`;
-		this.REST_PASSWORD = nodes.password;
+		this.REST_ADDRESS = `${config.host}:${config.port}`;
+		this.REST_PASSWORD = config.password;
 	}
 
 	async fetchTracks(identifier) {

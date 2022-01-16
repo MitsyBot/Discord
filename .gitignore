@@ -3,8 +3,6 @@ node_modules/
 .env
 .idea
 coverage/
-*config.json
-config.json
 package-lock.json
 .vscode
 .github
