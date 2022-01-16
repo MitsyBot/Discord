@@ -21,6 +21,7 @@ module.exports = class MainListener extends EventListener {
 		if (Config) {
 			try {
 				const nodes = Config;
+				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
 					shards: 1,
