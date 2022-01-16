@@ -19,7 +19,6 @@ module.exports = class PlayerManager extends Manager {
 		options.player = GuildPlayer;
 		super(client, options);
 
-		console.log(config);
 		this.REST_ADDRESS = `${config.host}:${config.port}`;
 		this.REST_PASSWORD = config.password;
 	}

@@ -1,5 +1,6 @@
 const { EventListener, HTTPrequests } = require('../');
 const { PlayerManager } = require('../media/music');
+const config = require('./config.json');
 
 module.exports = class MainListener extends EventListener {
 	constructor(client) {
@@ -9,7 +10,7 @@ module.exports = class MainListener extends EventListener {
 	}
 
 	onReady() {
-
+		console.log(config);
 		const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
 
 		const shardId = this.shard.ids.toString();
