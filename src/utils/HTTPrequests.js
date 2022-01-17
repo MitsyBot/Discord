@@ -26,7 +26,7 @@ module.exports = class HttpRequests {
 	static async getAssetImageUrl(type) {
 		try {
 			const data = await apiRequest.get(`/assets/${type}`);
-			return data.data.url;
+			return data.url;
 		}
 		catch {
 			return 'https://http.cat/404';
