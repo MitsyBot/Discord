@@ -42,6 +42,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             docker stop discord-canary
+            docker rm discord-canary
             docker image rm ghcr.io/mitsybot/discord-canary:latest
             docker pull ghcr.io/mitsybot/discord-canary:latest
-            docker run -it --rm -d -e SHARD_COUNT='1' -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' --name discord-canary ghcr.io/mitsybot/discord-canary:latest
+            docker run -it -d -e SHARD_COUNT='1' -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' --name discord-canary ghcr.io/mitsybot/discord-canary:latest
