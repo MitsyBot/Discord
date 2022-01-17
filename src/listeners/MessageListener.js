@@ -11,7 +11,7 @@ module.exports = class MessageListener extends EventListener {
 		if (message.interaction) return;
 		if (message.author.bot) return;
 
-		const guildData = await this.database.fetchGuild(message.guild.id);
+		const guildData = await this.database.guilds.findOne(message.guild.id);
 		const customCommands = guildData.customCommands;
 		const blacklistedTerms = guildData.blacklistedTerms;
 		const msg = message.content.split(' ');
