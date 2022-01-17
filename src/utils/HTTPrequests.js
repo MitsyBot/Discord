@@ -26,6 +26,7 @@ module.exports = class HttpRequests {
 	static async getAssetImageUrl(type) {
 		try {
 			const data = await apiRequest.get(`/assets/${type}`);
+			console.log(data);
 			return data.url;
 		}
 		catch {
