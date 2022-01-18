@@ -4,7 +4,6 @@ const WebSocketController = async (mitsy, rawRequest) => {
 
 	function canManage(guild, member) {
 		if (guild.ownerId === member.id) return true;
-
 		if (member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) return true;
 	}
 
@@ -16,7 +15,7 @@ const WebSocketController = async (mitsy, rawRequest) => {
 
 		const member = await guild.members.fetch(data.userId).catch(() => null);
 		if (!member) return mitsy.api.send(JSON.stringify({ id, res: 'O usuario que fez a request não foi encontrado no servidor' }));
-
+		console.log(member);
 		if (!(await canManage(guild, member))) return mitsy.api.send(JSON.stringify({ id, res: 'Você não pode gerenciar este servidor' }));
 
 		guild.canManage = true;
