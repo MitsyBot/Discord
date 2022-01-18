@@ -12,8 +12,9 @@ const WebSocketController = async (mitsy, rawRequest) => {
 
 		const guild = mitsy.client.guilds.cache.get(data.guildId);
 		if (!guild) return mitsy.api.send(JSON.stringify({ id, res: 'Servidor não encontrado' }));
-
-		const member = await guild.members.fetch(data.userId).catch(() => null);
+		const user = data.userId.toString();
+		console.log(data);
+		const member = await guild.members.fetch(user);
 		if (!member) return mitsy.api.send(JSON.stringify({ id, res: 'O usuario que fez a request não foi encontrado no servidor' }));
 		console.log(member);
 		if (!(await canManage(guild, member))) return mitsy.api.send(JSON.stringify({ id, res: 'Você não pode gerenciar este servidor' }));
