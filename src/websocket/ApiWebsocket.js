@@ -1,11 +1,6 @@
-const { Permissions } = require('discord.js');
+const { ApiUtils } = require('../')
 const WebSocketController = async (mitsy, rawRequest) => {
 	const { type, data, id } = JSON.parse(rawRequest.toString());
-
-	function canManage(guild, member) {
-		if (guild.ownerId === member.id) return true;
-		if (member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) return true;
-	}
 
 	switch (type) {
 	case 'guild': {
@@ -13,11 +8,9 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		const guild = mitsy.client.guilds.cache.get(data.guildId);
 		if (!guild) return mitsy.api.send(JSON.stringify({ id, res: 'Servidor não encontrado' }));
 		const user = data.userId.toString();
-		console.log(data);
 		const member = await guild.members.fetch(user);
 		if (!member) return mitsy.api.send(JSON.stringify({ id, res: 'O usuario que fez a request não foi encontrado no servidor' }));
-		console.log(member);
-		if (!(await canManage(guild, member))) return mitsy.api.send(JSON.stringify({ id, res: 'Você não pode gerenciar este servidor' }));
+		if (!(await ApiUtils.canManage(guild, member))) return mitsy.api.send(JSON.stringify({ id, res: 'Você não pode gerenciar este servidor' }));
 
 		guild.canManage = true;
 
