@@ -1,3 +1,4 @@
+const { canManage } = require('../ApiUtils');
 const WebSocketController = async (mitsy, rawRequest) => {
 	const { type, data, id } = JSON.parse(rawRequest.toString());
 
@@ -5,14 +6,16 @@ const WebSocketController = async (mitsy, rawRequest) => {
 	case 'guild': {
 
 		const guild = mitsy.client.guilds.cache.get(data.guildId);
-		if (guild) {
-			const { name, icon, members: { size } } = guild;
-			const userMembers = Array.from(guild.members.members).filter(m => !m.user.bot).size;
-			const botMembers = size - userMembers;
-			const newdata = { id: guild.id, name, icon, totalMembers: size, userMembers, botMembers };
-			return mitsy.api.send(JSON.stringify({ id, res: newdata }));
-		}
-		mitsy.api.send(JSON.stringify({ id, error: 'Servidor não encontrado' }));
+		if (!guild) return mitsy.api.send(JSON.stringify({ id, res: 'Servidor não encontrado' }));
+
+		const member = await guild.members.fetch(data.userId).catch(() => null);
+		if (!member) return mitsy.api.send(JSON.stringify({ id, res: 'O usuario que fez a request não foi encontrado no servidor' }));
+
+		if (!(await canManage(guild, member))) return mitsy.api.send(JSON.stringify({ id, res: 'Você não pode gerenciar este servidor' }));
+
+		guild.canManage = true;
+
+		mitsy.api.send(JSON.stringify({ id, res: guild }));
 		break;
 	}
 	}
