@@ -1,4 +1,4 @@
-const { ApiUtils } = require('../')
+const { ApiUtils } = require('../');
 const WebSocketController = async (mitsy, rawRequest) => {
 	const { type, data, id } = JSON.parse(rawRequest.toString());
 
