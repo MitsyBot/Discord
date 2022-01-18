@@ -1,4 +1,4 @@
-const { canManage } = require('../utils/ApiUtils');
+const { canManage, flattenGuild } = require('../utils/Api/Utils');
 const WebSocketController = async (mitsy, rawRequest) => {
 	const { type, data, id } = JSON.parse(rawRequest.toString());
 
@@ -14,7 +14,7 @@ const WebSocketController = async (mitsy, rawRequest) => {
 
 		guild.canManage = true;
 
-		mitsy.api.send(JSON.stringify({ id, res: guild }));
+		mitsy.api.send(JSON.stringify({ id, res: { ...flattenGuild(guild) } }));
 		break;
 	}
 	}
