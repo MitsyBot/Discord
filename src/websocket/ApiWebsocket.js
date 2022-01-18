@@ -1,4 +1,4 @@
-const { ApiUtils } = require('../');
+const { canManage } = require('../utils/ApiUtils');
 const WebSocketController = async (mitsy, rawRequest) => {
 	const { type, data, id } = JSON.parse(rawRequest.toString());
 
@@ -10,7 +10,7 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		const user = data.userId.toString();
 		const member = await guild.members.fetch(user);
 		if (!member) return mitsy.api.send(JSON.stringify({ id, res: 'O usuario que fez a request não foi encontrado no servidor' }));
-		if (!(await ApiUtils.canManage(guild, member))) return mitsy.api.send(JSON.stringify({ id, res: 'Você não pode gerenciar este servidor' }));
+		if (!(await canManage(guild, member))) return mitsy.api.send(JSON.stringify({ id, res: 'Você não pode gerenciar este servidor' }));
 
 		guild.canManage = true;
 

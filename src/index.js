@@ -8,7 +8,6 @@ module.exports = {
 	EventListener: require('./structures/EventListener.js'),
 	FileUtils: require('./utils/FileUtils.js'),
 	HTTPrequests: require('./utils/HTTPrequests.js'),
-	ApiUtils: require('./utils/ApiUtils'),
 	Constants: require('./utils/Constants.js'),
 	Emotes: require('./utils/Emotes.js'),
 	MitsyEmbed: require('./structures/MitsyEmbed.js'),
