@@ -26,7 +26,7 @@ module.exports = class MessageListener extends EventListener {
 			}
 		}
 
-		const userData = await this.database.fetchUser(message.author.id);
+		const userData = await this.database.users.findOne(message.author.id);
 		const xpBonus = 1 + userData.premiumLevel;
 		const xpToLvlUp = userData.globalLevel * 1000;
 		const xp = (Math.floor(Math.random() * 10) + 1) * xpBonus;
