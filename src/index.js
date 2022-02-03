@@ -10,6 +10,7 @@ module.exports = {
 	HTTPrequests: require('./utils/HTTPrequests.js'),
 	Constants: require('./utils/Constants.js'),
 	Emotes: require('./utils/Emotes.js'),
+	Controller: require('./structures/Controller.js'),
 	MitsyEmbed: require('./structures/MitsyEmbed.js'),
 	WebSocketController: require('./websocket/ApiWebsocket'),
 	Module: require('./structures/Module'),
