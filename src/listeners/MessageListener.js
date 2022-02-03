@@ -32,11 +32,9 @@ module.exports = class MessageListener extends EventListener {
 		const xp = (Math.floor(Math.random() * 10) + 1) * xpBonus;
 
 		userData.xp += xp;
-		await userData.save();
 
 		if (userData.xp >= xpToLvlUp) {
 			userData.globalLevel += 1;
-			await userData.save();
 		}
 	}
 };
