@@ -1,5 +1,6 @@
 const InteractionCommandContext = require('./InteractionCommandContext');
 const { Collection } = require('discord.js');
+const { MitsyEmbed } = require('../');
 module.exports = class InteractionCommandExecutor {
 	constructor(client, interaction) {
 		client;
@@ -147,16 +148,39 @@ module.exports = class InteractionCommandExecutor {
 		if (!command.run) return;
 
 		await command.run(ctx).catch(async (error) => {
-			interaction.reply(t('errors:COMMAND', { error: error })),
-			client.logger.error(error);
+			const errorWebHook = await client.fetchWebhook(
+				process.env.BUG_HOOK_ID,
+				process.env.BUG_HOOK_TOKEN,
+			);
+
+			if (interaction.deferred) {
+				interaction.webhook
+					.send({ content: t('errors:COMMAND', { error: error }), ephemeral: true });
+			}
+			else {
+				interaction
+					.reply({ content: t('errors:COMMAND', { error: error }), ephemeral: true });
+			}
+
+			if (error instanceof Error && error.stack) {
+				const errorMessage = error.stack.length > 1800 ? `${error.stack.slice(0, 1800)}...` : error.stack;
+				const embed = new MitsyEmbed();
+				embed.setColor('#fd0000');
+				embed.setDescription(`\`\`\`js\n${errorMessage}\`\`\``);
+				embed.addField(
+					`ID de usuario: \`${interaction.user.id}\` \nServidor: \`${interaction.guild.id}\``,
+				);
+				embed.setTimestamp();
+				errorWebHook.send({ embeds: [embed] });
+			}
 		});
 
 		if (client.maintenance.enabled) {
-			await interaction.followUp({ content: t('common:MAINTENANCE', { hour: client.maintenance.time }), ephemeral: true });
+			await interaction.webhook.send({ content: t('common:MAINTENANCE', { hour: client.maintenance.time }), ephemeral: true });
 		}
 
 		if (!data.author.isPremium && Math.random() < 0.2) {
-			interaction.followUp({ content: t('common:NOT_PREMIUM'), ephemeral: true });
+			interaction.webhook.send({ content: t('common:NOT_PREMIUM'), ephemeral: true });
 		}
 	}
 
