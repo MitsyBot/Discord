@@ -1,9 +1,5 @@
 const { EventListener, MitsyEmbed, Constants } = require('../');
 
-const Intl = require('intl');
-Intl.__disableRegExpRestore();
-const formatter = new Intl.NumberFormat('pt-BR');
-
 module.exports = class GuildLogging extends EventListener {
 	constructor(client) {
 		super({
@@ -19,7 +15,7 @@ module.exports = class GuildLogging extends EventListener {
 				.setColor(Constants.GUILD_ADDED_COLOR)
 				.setTitle(`Fui adicionada á "${guild.name}"`)
 				.setDescription(`\`${guild.id}\``)
-				.setFooter({ text: `Ganhamos ${formatter.format(guild.members.cache.size)} usuarios` });
+				.setFooter({ text: `Ganhamos ${guild.members.cache.size} usuarios` });
 
 			channel.send({ embeds: [embed] });
 
@@ -36,7 +32,7 @@ module.exports = class GuildLogging extends EventListener {
 				.setColor(Constants.GUILD_LOST_COLOR)
 				.setTitle(`Fui removida de "${guild.name}"`)
 				.setDescription(`\`${guild.id}\``)
-				.setFooter({ text: `Perdemos ${formatter.format(guild.members.size)} usuarios` });
+				.setFooter({ text: `Perdemos ${guild.members.size} usuarios` });
 
 			channel.send({ embeds: [embed] });
 		}
