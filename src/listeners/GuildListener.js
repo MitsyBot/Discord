@@ -13,7 +13,7 @@ module.exports = class GuildLogging extends EventListener {
 			const channel = this.channels.cache.get(process.env.LOGGING_CHANNEL_ID);
 			const embed = new MitsyEmbed()
 				.setColor(Constants.GUILD_ADDED_COLOR)
-				.setTitle(`Fui adicionada á "${guild.name}"`)
+				.setTitle(`Fui adicionada a "${guild.name}"`)
 				.setDescription(`\`${guild.id}\``)
 				.setFooter({ text: `Ganhamos ${guild.members.cache.size} usuarios` });
 
