@@ -12,6 +12,7 @@ module.exports = class DailyInteractionCommand extends InteractionCommand {
 	async run(ctx) {
 
 		try {
+			await this.client.controllers.economy.daily.claimDaily(ctx.author.id);
 			ctx.makeMessage({
 				content: ctx.locale('commands:daily.get', { user: ctx.author.id }), ephemeral: false });
 		}
