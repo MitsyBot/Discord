@@ -40,16 +40,7 @@ class DailyController extends Controller {
 			throw new DailyCooldownError(lastDaily, this.formatClaimTime(lastDaily));
 		}
 
-		const collectedMoney = Math.ceil(Math.random() * 2000) + 750;
-		await this._users.update(_user, { $inc: { money: collectedMoney }, lastDaily: Date.now() });
-
-		return { collectedMoney };
-	}
-
-	async claimDBLDaily(_user) {
-		const collectedMoney = 250;
-		await this._users.update(_user, { $inc: { money: collectedMoney } });
-		return { collectedMoney };
+		return true;
 	}
 }
 
