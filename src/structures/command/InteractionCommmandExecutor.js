@@ -152,11 +152,21 @@ module.exports = class InteractionCommandExecutor {
 		});
 
 		if (client.maintenance.enabled) {
-			await interaction.followUp({ content: t('common:MAINTENANCE', { hour: client.maintenance.time }), ephemeral: true });
+			if (interaction.deferred) {
+				await interaction.webhook.send({ content: t('common:MAINTENANCE', { hour: client.maintenance.time }), ephemeral: true });
+			}
+			else {
+				await interaction.reply({ content: t('common:MAINTENANCE', { hour: client.maintenance.time }), ephemeral: true });
+			}
 		}
 
-		if (!data.author.isPremium && Math.random() < 0.7) {
-			await interaction.followUp({ content: t('common:NOT_PREMIUM'), ephemeral: true });
+		if (!data.author.isPremium && Math.random() < 0.7 && interaction.deferred) {
+			if (interaction.deferred) {
+				interaction.webhook.send({ content: t('common:NOT_PREMIUM'), ephemeral: true });
+			}
+			else {
+				interaction.reply({ content: t('common:NOT_PREMIUM'), ephemeral: true });
+			}
 		}
 	}
 
