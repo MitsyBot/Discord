@@ -20,11 +20,9 @@ const WebSocketController = async (mitsy, rawRequest) => {
 
 	case 'premiumbuy': {
 		const message = `Oba, parece que você comprou ${data.ref} no valor de ${data.price}, Seu pagamento foi aprovado e seu premium ja esta ativado na sua conta! Agora você possui o mitsy premium tier ${data.tier}. divirta-se!`;
-		const user = mitsy.client.users.fetch(data.userid);
-		console.log(user)
-		const person = mitsy.client.members.cache.get(data.userid);
-		console.log(person)
-		person.send(message);
+		const user = await mitsy.client.users.fetch(data.userid);
+		console.log(user);
+		user.send(message);
 		mitsy.api.send(JSON.stringify({ id, res: { message: 'Enviado com sucesso' } }));
 		break;
 	}
