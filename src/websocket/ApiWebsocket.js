@@ -18,6 +18,13 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		break;
 	}
 
+	case 'premiumbuy': {
+		const message = `Oba, parece que você comprou ${data.ref} no valor de ${data.price}, Seu pagamento foi aprovado e seu premium ja esta ativado na sua conta! Agora você possui o mitsy premium tier ${data.tier}. divirta-se!`;
+		mitsy.client.users.get(data.userid).send(message);
+		mitsy.api.send(JSON.stringify({ id, res: { message: 'Enviado com sucesso' } }));
+		break;
+	}
+
 	case 'common': {
 		mitsy.api.send(JSON.stringify({ id, res: { common: mitsy.client.guilds.cache.has(data.guild) } }));
 	}

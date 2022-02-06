@@ -11,6 +11,13 @@ const UserConnection = new Schema({
 	config: Object,
 });
 
+const KeySchema = new Schema({
+	id: String,
+	enabled: Boolean,
+	guild: String,
+	level: Number,
+});
+
 module.exports = new Schema({
 	_id: String,
 	id: { type: String, index: { unique: true } },
@@ -39,4 +46,9 @@ module.exports = new Schema({
 	staffLevel: { type: Number, default: 0 },
 	blacklisted: BlacklistedSchema,
 	connections: [UserConnection],
+	premium: {
+		time: { type: Number, default: 0 },
+		tier: { type: Number, default: 0 },
+		keys: [KeySchema],
+	},
 });
