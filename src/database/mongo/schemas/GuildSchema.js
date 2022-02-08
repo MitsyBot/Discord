@@ -19,7 +19,7 @@ module.exports = new Schema({
 	customCommands: { type: Array },
 	blacklist: { type: Boolean, default: false },
 	blacklistReason: { type: String, default: '' },
-	allowedChannel: { type: Object, default: { roles: [], channels: [] } },
+	blacklistedChannels: { type: Object, default: { channels: [], warn: false }	},
 	isPremium: { type: Boolean, default: false },
 	premiumLevel: { type: Number, default: 0 },
 });
