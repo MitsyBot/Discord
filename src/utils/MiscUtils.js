@@ -17,7 +17,9 @@ module.exports = class MiscUtils {
 	static disableComponents(label, components) {
 		components.map((c) => {
 			c.setDisabled(true);
-			c.setLabel(label);
+			console.log(c);
+			if (c) c.setPlaceholder(label);
+			else c.setLabel(label);
 			return c;
 		});
 	}
