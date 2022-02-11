@@ -5,5 +5,6 @@
     "USER_BLACKLISTED": "<:mitsy_ban:894277577731084308> Que feio (eu acho <:mitsy_sob:834129966328709193>)\nVocê esta proibido de usar minhas funcionalidades pelo motivo: ```{{reason}}```\nCaso ache que o motivo do seu ban foi injusto abra um ticket [No meu website](https://mitsy.xyz/faq)",
     "COMAND": "Poxa que pena... ocorreu um erro ``{{error}}``",
     "GENERIC": "Ops, alguma coisa aconteceu comigo. talvez eu só precise de um tempo para colocar as ideias no lugar!",
-    "CHANNEL_BLACKLISTED": "Ops, aparentemente você não pode usar comandos neste canal."
+    "CHANNEL_BLACKLISTED": "Ops, aparentemente você não pode usar comandos neste canal.",
+    "http-imager": "Ocorreu um erro ao comunicar com o servidor de geração de imagem ```502: The server is unavailable at this moment!```"
 }

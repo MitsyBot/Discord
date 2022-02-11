@@ -1,8 +1,8 @@
 const axios = require('axios');
 
 
-const request = axios.create({
-	baseURL: `${process.env.API_URL}/imageserver`,
+const image = axios.create({
+	baseURL: `${process.env.GENERATOR_URL}`,
 	timeout: 5000,
 	headers: {
 		'Content-Type': 'application/json',
@@ -52,13 +52,10 @@ module.exports = class HttpRequests {
 		await apiRequest.post('/commands', { data: { commands } });
 	}
 
-	static async profileRequest(user, marry) {
+	static async profileRequest(_data) {
 		try {
-			const data = await request.get('/profile', {
-				data: {
-					user,
-					marry,
-				},
+			const data = await image.post('/render/profile', {
+				data: _data,
 			});
 			return { err: false, data: Buffer.from(data.data) };
 		}
