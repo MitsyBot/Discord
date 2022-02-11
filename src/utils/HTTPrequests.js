@@ -1,17 +1,5 @@
 const axios = require('axios');
 
-
-const image = axios.create({
-	baseURL: `${process.env.GENERATOR_URL}`,
-	timeout: 5000,
-	responseType: 'arraybuffer',
-	headers: {
-		'Content-Type': 'application/json',
-		'User-Agent': process.env.MITSY_AGENT,
-		Authorization: process.env.API_TOKEN,
-	},
-});
-
 const apiRequest = axios.create({
 	baseURL: `${process.env.API_URL}`,
 	timeout: 5000,
@@ -55,8 +43,11 @@ module.exports = class HttpRequests {
 
 	static async profileRequest(_data) {
 		try {
-			const data = await image.post('/render/profile', {
-				data: _data,
+			const data = await axios({
+				url: `${process.env.GENERATOR_URL}/render/profile?w=600&h=400&type=thumb`,
+				method: 'post',
+				data: data,
+				responseType: 'arraybuffer',
 			});
 			console.log(_data);
 
