@@ -25,9 +25,9 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		const member = ctx.options.getUser('user') ?? ctx.author;
 		const avatar = member.displayAvatarURL({ format: 'png', size: 512 });
 		const marry = user.isMarry && user.isMarry !== 'false' ? await ctx.client.users.fetch(user.marryWith) : null;
-		const previousLevel = Math.floor((user.level / 0.2) ** 2);
+		const previousLevel = Math.floor((user.level - 1) * 1000);
 		console.log(previousLevel);
-		const nextLevel = Math.floor(((user.level + 1) / 0.2) ** 2);
+		const nextLevel = Math.floor((user.level + 1) * 1000);
 		console.log(nextLevel);
 		const progressBar = Math.max(Math.round(((user.xp - previousLevel) / (nextLevel - previousLevel)) * 396), 6);
 
