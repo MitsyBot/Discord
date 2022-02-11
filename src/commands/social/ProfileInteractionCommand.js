@@ -1,5 +1,6 @@
-const { InteractionCommand, HTTPrequests } = require('../../');
+const { InteractionCommand } = require('../../');
 const { MessageAttachment } = require('discord.js');
+const axios = require('axios');
 
 module.exports = class LevelInteractionCommand extends InteractionCommand {
 	constructor() {
@@ -51,15 +52,18 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		if (marry) {
 			data.partnername = marry.username;
 		}
-		const res = await HTTPrequests.profileRequest(data);
 
-		if (res.err) {
-			await ctx.makeMessage({ content: ctx.prettyResponse('error', 'error:http-imager') });
-			return;
-		}
-
-		await ctx.makeMessage({
-			files: [new MessageAttachment(res.data, 'profile.png')],
+		axios({
+			url: 'https://generator.poluxtrail.fun/render/profile',
+			method: 'post',
+			data: data,
+			responseType: 'arraybuffer',
+		}).then(async (profile) => {
+			await ctx.makeMessage({
+				files: [new MessageAttachment(profile.data, 'profile.png')],
+			});
 		});
+
+
 	}
 };
