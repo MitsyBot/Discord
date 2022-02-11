@@ -33,7 +33,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 
 			type: 'default',
 			level: user.level,
-			name: `${member.username}`,
+			name: `${member.username}#${member.discriminator}`,
 			xp: user.xp,
 			ranking: '4',
 			barlevel: progressBar,
