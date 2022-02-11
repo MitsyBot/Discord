@@ -79,7 +79,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 				toSendUser.id,
 				ctx.interaction.id,
 			);
-
+			console.log(selectedButton);
 			ctx.client.commandExecutions.delete(toSendUser.id);
 
 			if (!selectedButton) {

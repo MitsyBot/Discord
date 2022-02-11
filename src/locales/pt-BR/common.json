@@ -3,5 +3,6 @@
     "NOT_PREMIUM": "Opa, parece que você não tem premium na mitsy. caso tenha interesse em doar para me ajudar a me manter online e ainda ganhar vantagens incriveis [clique aqui](https://mitsy.xyz/premium)\nÉ claro que doar é opcional. caso não queira ou não possa doar ignore esta mensagem!",
     "MAINTENANCE": "Manutenção programada\nHoje as {{hour}} eu irei reiniciar para aplicar updates.",
     "negate": "Negar",
-    "accept": "Aceitar"
+    "accept": "Aceitar",
+    "timesup": "O tempo acabou!"
 }
