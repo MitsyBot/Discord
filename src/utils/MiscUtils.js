@@ -17,8 +17,7 @@ module.exports = class MiscUtils {
 	static disableComponents(label, components) {
 		components.map((c) => {
 			c.setDisabled(true);
-			if (c) c.setPlaceholder(label);
-			else c.setLabel(label);
+			c.setLabel(label);
 			return c;
 		});
 	}
@@ -27,7 +26,7 @@ module.exports = class MiscUtils {
 		channel,
 		authorID,
 		customId,
-		time = 7000,
+		time = 20000,
 	) {
 		return channel
 			.awaitMessageComponent({
