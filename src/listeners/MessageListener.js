@@ -26,15 +26,6 @@ module.exports = class MessageListener extends EventListener {
 			}
 		}
 
-		const userData = await this.database.users.findOne(message.author.id);
-		const xpBonus = 1 + userData.premiumLevel;
-		const xpToLvlUp = userData.globalLevel * 1000;
-		const newxp = (Math.floor(Math.random() * 10) + 1) * xpBonus;
-		userData.xp = +newxp;
-		userData.save();
-
-		if (userData.xp >= xpToLvlUp) {
-			this.database.users.update(message.author.id, { $inc: { level: +1 } });
-		}
+		this.controllers.social.addXp(message.author.id);
 	}
 };
