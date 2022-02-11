@@ -14,7 +14,7 @@
         "api": "(Discord) Latência da API:",
         "mitsy_api": "(Mitsy) Latencia da API:"
       },
-      "give": {
+      "pay": {
         "confirm": "{{user}}, {{author}} quer te pagar **{{count}}** cometinhas, você aceita?",
         "negated": "{{user}} recusou o pagamento!",
         "banned-user": "Você não pode pagar para este usuario, ele esta banido!",
