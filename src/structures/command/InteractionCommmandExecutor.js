@@ -13,7 +13,6 @@ module.exports = class InteractionCommandExecutor {
 
 		const data = {};
 		const user = interaction.options.getUser('usuário', false);
-		console.log(user);
 		if (user) {
 			const interactionUserData = await client.database.users.findOne(user.id);
 			data.user = interactionUserData;
