@@ -33,7 +33,7 @@ class DailyController extends Controller {
 	}
 
 	async claimDaily(_user) {
-		const user = await this._users.findOne(_user, 'money lastDaily');
+		const user = await this._users.findOne(_user, 'comets lastDaily');
 		const { lastDaily } = user;
 
 		if (this.checkClaim(lastDaily)) {
@@ -62,17 +62,17 @@ module.exports = class EconomyController extends Controller {
 	}
 
 	async transfer(_from, _to, amount) {
-		const from = await this._users.findOne(_from, 'money');
-		if (from.money < amount) return { sucess: false };
+		const from = await this._users.findOne(_from, 'comets');
+		if (from.comets < amount) return { sucess: false };
 		await Promise.all([
-			this._users.update(_from, { $inc: { money: -amount } }),
-			this._users.update(_to, { $inc: { money: amount } }),
+			this._users.update(_from, { $inc: { comets: -amount } }),
+			this._users.update(_to, { $inc: { comets: amount } }),
 		]);
 		return { sucess: true };
 	}
 
 	async balance(_user) {
-		const { money } = await this._users.findOne(_user, 'money');
-		return money;
+		const { comets } = await this._users.findOne(_user, 'comets');
+		return comets;
 	}
 };
