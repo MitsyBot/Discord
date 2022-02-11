@@ -79,18 +79,18 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 				toSendUser.id,
 				ctx.interaction.id,
 			);
-			console.log(selectedButton);
 			ctx.client.commandExecutions.delete(toSendUser.id);
 
 			if (!selectedButton) {
 				ctx.makeMessage({
+					content: ctx.locale('common:timeout'),
 					components: [
 						{
 							type: 'ACTION_ROW',
-							components: MiscUtils.disableComponents(ctx.locale('common:timesup'), [
-								confirmButton,
-								negateButton,
-							]),
+							components: [
+								confirmButton.setDisabled(true).setStyle('SECONDARY'),
+								negateButton.setDisabled(true),
+							],
 						},
 					],
 				});
