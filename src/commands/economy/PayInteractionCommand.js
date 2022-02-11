@@ -128,7 +128,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 		ctx.makeMessage({
 			components: [],
 			content: ctx.locale('commands:pay.transfered', {
-				input,
+				value: input,
 				user: toSendUser.toString(),
 			}),
 		});
