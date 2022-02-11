@@ -30,7 +30,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		const progressBar = Math.max(Math.round(((user.xp - previousLevel) / (nextLevel - previousLevel)) * 396), 6);
 
 
-		let data = {
+		const data = {
 
 			type: 'default',
 			level: `${user.level}`,
