@@ -30,9 +30,9 @@ module.exports = class MessageListener extends EventListener {
 		const xpBonus = 1 + userData.premiumLevel;
 		const xpToLvlUp = userData.globalLevel * 1000;
 		const newxp = (Math.floor(Math.random() * 10) + 1) * xpBonus;
+		userData.xp = +newxp;
+		userData.save();
 
-		this.database.users.update(message.author.id, { $inc: { xp: +newxp } });
-		console.log(userData);
 		if (userData.xp >= xpToLvlUp) {
 			this.database.users.update(message.author.id, { $inc: { level: +1 } });
 		}
