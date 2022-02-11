@@ -37,7 +37,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 
 		if (ctx.client.commandExecutions.has(toSendUser.id)) {
 			await ctx.makeMessage({
-				content: ctx.prettyResponse('error', 'common:economy_usage'),
+				content: ctx.prettyResponse('error', 'errors:economy_usage'),
 				ephemeral: true,
 			});
 			return;
