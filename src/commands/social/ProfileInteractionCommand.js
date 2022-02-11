@@ -22,7 +22,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 	async run(ctx) {
 
 		const user = ctx.data.user ?? ctx.data.author;
-		const member = ctx.options.getUser('user') ?? ctx.author;
+		const member = ctx.options.getUser('usuário') ?? ctx.author;
 		const avatar = member.displayAvatarURL({ format: 'png', size: 512 });
 		const marry = user.isMarry && user.isMarry !== 'false' ? await ctx.client.users.fetch(user.marryWith) : null;
 		const previousLevel = Math.floor((user.level - 1) * 1000);
