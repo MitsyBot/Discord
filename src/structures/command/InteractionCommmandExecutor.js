@@ -175,7 +175,7 @@ module.exports = class InteractionCommandExecutor {
 				const embed = new MitsyEmbed();
 				embed.setColor('#fd0000');
 				embed.setDescription(`\`\`\`js\n${errorMessage}\`\`\``);
-				embed.addField(
+				embed.setField(
 					`ID de usuario: \`${interaction.user.id}\` \nServidor: \`${interaction.guild.id}\``,
 				);
 				embed.setTimestamp();
