@@ -40,7 +40,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 			money: user.comets,
 			aboutme: user.aboutme,
 			married: user.isMarry,
-			partnername: marry.username,
+			partnername: marry.username || null,
 			bgId: user.background,
 			rep: user.repCount,
 			favcolor: user.profileColor,
