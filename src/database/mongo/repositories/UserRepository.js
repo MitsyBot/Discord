@@ -18,7 +18,7 @@ module.exports = class UserRepository extends MongoRepository {
 			background: 'mitsy_1',
 			level: 1,
 			xp: 0,
-			aboutme: 'Mitsy é incrivel demais, Você pode mudar esse texto no seu perfil do meu website.',
+			aboutme: 'Mitsy é minha melhor amiga, Você pode mudar esse texto no seu perfil do meu website.',
 			connections: [],
 			...(super.parse(entity) || {}),
 		};
