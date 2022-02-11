@@ -13,6 +13,7 @@ module.exports = class UserRepository extends MongoRepository {
 			repCount: 0,
 			repTime: 0,
 			isPremium: false,
+			premiumLevel: 0,
 			backgroundList: ['mitsy_1'],
 			background: 'mitsy_1',
 			level: 1,
