@@ -175,9 +175,7 @@ module.exports = class InteractionCommandExecutor {
 				const embed = new MitsyEmbed();
 				embed.setColor('#fd0000');
 				embed.setDescription(`\`\`\`js\n${errorMessage}\`\`\``);
-				embed.setField(
-					`ID de usuario: \`${interaction.user.id}\` \nServidor: \`${interaction.guild.id}\``,
-				);
+				embed.addField('Quem fez isso?', `ID de usuario: \`${interaction.user.id}\` \nServidor: \`${interaction.guild.id}\``, true);
 				embed.setTimestamp();
 				errorWebHook.send({ embeds: [embed] });
 			}
