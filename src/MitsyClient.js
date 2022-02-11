@@ -9,6 +9,7 @@ module.exports = class MitsyClient extends Client {
 		this.logger = new Logger();
 		this.maintenance = {};
 		this.cooldowns = new Collection();
+		this.commandExecutions = new Collection();
 
 		this.loaded = false;
 	}

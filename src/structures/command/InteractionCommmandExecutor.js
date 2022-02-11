@@ -155,6 +155,8 @@ module.exports = class InteractionCommandExecutor {
 
 		if (!command.run) return;
 
+		if (command.config.category === 'economy') {client.commandExecutions.add(ctx.author.id);}
+
 		await command.run(ctx).catch(async (error) => {
 			const errorWebHook = await client.fetchWebhook(
 				process.env.BUG_HOOK_ID,
@@ -180,6 +182,8 @@ module.exports = class InteractionCommandExecutor {
 				embed.setTimestamp();
 				errorWebHook.send({ embeds: [embed] });
 			}
+		}).finally(() => {
+			if (command.config.category === 'economy') {client.commandExecutions.delete(ctx.author.id);}
 		});
 
 		if (client.maintenance.enabled) {
