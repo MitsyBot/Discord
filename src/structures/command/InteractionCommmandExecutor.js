@@ -174,6 +174,7 @@ module.exports = class InteractionCommandExecutor {
 				const errorMessage = error.stack.length > 1800 ? `${error.stack.slice(0, 1800)}...` : error.stack;
 				const embed = new MitsyEmbed();
 				embed.setColor('#fd0000');
+				embed.setTitle('Ocorreu um erro');
 				embed.setDescription(`\`\`\`js\n${errorMessage}\`\`\``);
 				embed.addField('Quem fez isso?', `ID de usuario: \`${interaction.user.id}\` \nServidor: \`${interaction.guild.id}\``, true);
 				embed.setTimestamp();
