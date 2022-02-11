@@ -4,5 +4,5 @@
     "MAINTENANCE": "Manutenção programada\nHoje as {{hour}} eu irei reiniciar para aplicar updates.",
     "negate": "Negar",
     "accept": "Aceitar",
-    "timesup": "O tempo acabou!"
+    "timeout": "Que pena, O tempo maximo para concluir o pagamento acabou!"
 }

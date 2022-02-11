@@ -14,14 +14,6 @@ module.exports = class MiscUtils {
 		return formatter.format(value);
 	}
 
-	static disableComponents(label, components) {
-		components.map((c) => {
-			c.setDisabled(true);
-			c.setLabel(label);
-			return c;
-		});
-	}
-
 	static async collectComponentInteractionWithStartingId(
 		channel,
 		authorID,
