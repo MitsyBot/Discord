@@ -46,10 +46,9 @@ module.exports = class HttpRequests {
 			const data = await axios({
 				url: `${process.env.GENERATOR_URL}/render/profile?w=600&h=400&type=thumb`,
 				method: 'post',
-				data: data,
+				data: _data,
 				responseType: 'arraybuffer',
 			});
-			console.log(_data);
 
 			return { err: false, data: data.data };
 		}
