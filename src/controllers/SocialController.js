@@ -20,12 +20,12 @@ module.exports = class SocialController extends Controller {
 	async addXp(_user) {
 		const { premiumLevel, xp } = await this._users.findOne(_user, 'lastRep');
 
-		const xpBonus = 1 + premiumLevel;
+		const xpBonus = 1 + Number(premiumLevel);
 		const xpToLvlUp = xp * 1000;
 		const newxp = (Math.floor(Math.random() * 10) + 1) * xpBonus;
-
+		console.log(newxp);
 		await Promise.all([
-			this._users.update(_user, { $inc: { xp: newxp } }),
+			this._users.update(_user, { $inc: { xp: Number(newxp) } }),
 		]);
 
 		if (xp >= xpToLvlUp) {
