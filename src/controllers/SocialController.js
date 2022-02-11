@@ -27,8 +27,10 @@ module.exports = class SocialController extends Controller {
 			this._users.update(_user, { $inc: { xp: Number(newxp) } }),
 		]);
 
-		if (xp >= xpToLvlUp) {
-			this._users.update(_user, { $inc: { level: 1 } });
+		if (xp > xpToLvlUp) {
+			await Promise.all([
+				this._users.update(_user, { $inc: { level: 1 } }),
+			]);
 		}
 	}
 
