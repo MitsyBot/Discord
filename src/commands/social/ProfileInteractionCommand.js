@@ -6,7 +6,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		super({
 			name: 'profile',
 			description: 'Veja o seu perfil da mitsy.',
-			category: 'level',
+			category: 'social',
 			options: [
 				{
 					name: 'usuário',

@@ -63,11 +63,12 @@ module.exports = class EconomyController extends Controller {
 
 	async transfer(_from, _to, amount) {
 		const from = await this._users.findOne(_from, 'money');
-		if (from.money < amount) throw new Error('NOT_ENOUGH_MONEY');
+		if (from.money < amount) return { sucess: false };
 		await Promise.all([
 			this._users.update(_from, { $inc: { money: -amount } }),
 			this._users.update(_to, { $inc: { money: amount } }),
 		]);
+		return { sucess: true };
 	}
 
 	async balance(_user) {

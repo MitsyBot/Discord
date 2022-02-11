@@ -14,6 +14,16 @@
         "api": "(Discord) Latência da API:",
         "mitsy_api": "(Mitsy) Latencia da API:"
       },
+      "give": {
+        "confirm": "{{user}}, {{author}} quer te pagar **{{count}}** cometinhas, você aceita?",
+        "negated": "{{user}} recusou o pagamento!",
+        "banned-user": "Você não pode pagar para este usuario, ele esta banido!",
+        "self-mention": "Você não pode pagar para você mesmo, alias você iria perder cometinhas fazendo isso!",
+        "no-dbuser": "Este usuario não esta no banco de dados intergalactico!",
+        "invalid-value": "Ops, desculpa. mas o valor de cometinhas precisa se maior que 0",
+        "poor": "Você não possui esta quantidade de cometinhas!",
+        "transfered": "Você transferiu **{{value}}** cometinhas para {{user}}"
+      },
       "botinfo": {
         "embed_description": "Oie, eu me chamo Mitsy e sou um bot multifuncional para discord, entrei no discord em **{{joinedAt}}**. Eu tenho muitas funções incriveis para deixar o seu servidor divertido, seguro, ou feliz.\n\nAtualmente eu estou em **{{guilds}}** servidores e tenho **{{users}}** usuarios, estou online por **{{uptime}}**.\nCaso queira saber mais sobre mim você pode [acessar o meu website](https://mitsy.xyz) ou entrar no meu [servidor de suporte](https://mitsy.xyz/suporte).",
         "embed_footer": "Mitsy é um produto mantido por poluxtrail & duuuuardo, todos os direitos reservados."
