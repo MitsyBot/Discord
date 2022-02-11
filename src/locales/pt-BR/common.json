@@ -1,5 +1,7 @@
 {
     "tax": "Eu taxo todas transações em 20% de cometinhas como forma de incentivo para as pessoas me ajudarem a me manter online. Gostou da ideia? [Ajude a me manter online](https://mitsy.xyz/premium)",
     "NOT_PREMIUM": "Opa, parece que você não tem premium na mitsy. caso tenha interesse em doar para me ajudar a me manter online e ainda ganhar vantagens incriveis [clique aqui](https://mitsy.xyz/premium)\nÉ claro que doar é opcional. caso não queira ou não possa doar ignore esta mensagem!",
-    "MAINTENANCE": "Manutenção programada\nHoje as {{hour}} eu irei reiniciar para aplicar updates."
+    "MAINTENANCE": "Manutenção programada\nHoje as {{hour}} eu irei reiniciar para aplicar updates.",
+    "negate": "Negar",
+    "accept": "Aceitar"
 }

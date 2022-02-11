@@ -43,7 +43,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 			return;
 		}
 
-		if (await ctx.client.controllers.blacklist.isUserBanned(toSendUser.id)) {
+		if (await ctx.client.controllers.developer.blacklisted(toSendUser.id)) {
 			await ctx.makeMessage({
 				content: ctx.prettyResponse('error', 'commands:pay.banned-user'),
 				ephemeral: true,
