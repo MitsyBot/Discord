@@ -114,15 +114,15 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 			}
 		}
 
-		if (input > ctx.data.user.comets) {
+		if (input > ctx.data.author.comets) {
 			ctx.deleteReply();
-			ctx.send({
+			return ctx.send({
 				content: ctx.locale('commands:pay.poor'),
 			});
 		}
 
 
-		await this.client.controllers.economy.transfer(ctx.author.id, toSendUser.id, input);
+		await ctx.client.controllers.economy.transfer(ctx.author.id, toSendUser.id, input);
 
 
 		ctx.makeMessage({
