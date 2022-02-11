@@ -29,12 +29,9 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		const nextLevel = Math.floor(((user.level + 1) / 0.2) ** 2);
 		const progressBar = Math.max(Math.round(((user.xp - previousLevel) / (nextLevel - previousLevel)) * 396), 6);
 		let marryusername;
-		console.log(user);
-		if (marry) {
-			marryusername = marry.username;
-		}
 
-		const data = {
+
+		let data = {
 
 			type: 'default',
 			level: `${user.level}`,
@@ -45,7 +42,6 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 			money: `${user.comets}`,
 			aboutme: user.aboutme,
 			married: user.isMarry,
-			partnername: marryusername,
 			bgId: user.background,
 			rep: `${user.repCount}`,
 			favcolor: user.profileColor,
@@ -53,7 +49,9 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 			badges: [],
 
 		};
-
+		if (marry) {
+			data.partnername = marry.username;
+		}
 		const res = await HTTPrequests.profileRequest(data);
 
 		if (res.err) {
