@@ -4,6 +4,7 @@ const axios = require('axios');
 const image = axios.create({
 	baseURL: `${process.env.GENERATOR_URL}`,
 	timeout: 5000,
+	responseType: 'arraybuffer',
 	headers: {
 		'Content-Type': 'application/json',
 		'User-Agent': process.env.MITSY_AGENT,
@@ -57,8 +58,8 @@ module.exports = class HttpRequests {
 			const data = await image.post('/render/profile', {
 				data: _data,
 			});
-
 			console.log(_data);
+
 			return { err: false, data: data.data };
 		}
 		catch {
