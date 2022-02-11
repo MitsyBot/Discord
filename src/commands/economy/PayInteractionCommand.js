@@ -31,13 +31,13 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 			ctx.options.getUser('usuário', true),
 			ctx.options.getInteger('valor', true),
 		];
-		if (toSendUser.id === ctx.author.id) return ctx.makeMessage({ content: ctx.prettyResponse('error', 'commands:pay.self-mention'), ephemeral: true });
+		if (toSendUser.id === ctx.author.id) return ctx.makeMessage({ content: ctx.locale('commands:pay.self-mention'), ephemeral: true });
 
-		if (input < 1) return ctx.makeMessage({ content: ctx.prettyResponse('error', 'commands:pay.invalid-value'), ephemeral: true });
+		if (input < 1) return ctx.makeMessage({ content: ctx.locale('commands:pay.invalid-value'), ephemeral: true });
 
 		if (ctx.client.commandExecutions.has(toSendUser.id)) {
 			await ctx.makeMessage({
-				content: ctx.prettyResponse('error', 'errors:economy_usage'),
+				content: ctx.locale('errors:economy_usage'),
 				ephemeral: true,
 			});
 			return;
@@ -45,7 +45,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 
 		if (await ctx.client.controllers.developer.blacklisted(toSendUser.id)) {
 			await ctx.makeMessage({
-				content: ctx.prettyResponse('error', 'commands:pay.banned-user'),
+				content: ctx.locale('commands:pay.banned-user'),
 				ephemeral: true,
 			});
 			return;
@@ -66,7 +66,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 			ctx.client.commandExecutions.add(toSendUser.id);
 
 			await ctx.makeMessage({
-				content: ctx.prettyResponse('question', 'commands:pay.confirm', {
+				content: ctx.locale('commands:pay.confirm', {
 					user: toSendUser.toString(),
 					author: ctx.author.toString(),
 					count: input,
@@ -117,7 +117,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 		if (input > ctx.data.user.comets) {
 			ctx.deleteReply();
 			ctx.send({
-				content: ctx.prettyResponse('error', 'commands:pay.poor'),
+				content: ctx.locale('commands:pay.poor'),
 			});
 		}
 
@@ -127,7 +127,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 
 		ctx.makeMessage({
 			components: [],
-			content: ctx.prettyResponse('success', 'commands:pay.transfered', {
+			content: ctx.locale('commands:pay.transfered', {
 				input,
 				user: toSendUser.toString(),
 			}),
