@@ -45,7 +45,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 			rep: `${user.repCount}`,
 			favcolor: user.profileColor,
 			avatarurl: avatar,
-			badges: [],
+			badges: user.badgesEnabled,
 
 		};
 		if (marry) {
