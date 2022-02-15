@@ -38,6 +38,7 @@ module.exports = new Schema({
 	shipValue: String,
 	background: String,
 	profileType: String,
+	colorList: Array,
 	badgeList: Array,
 	badgesEnabled: Array,
 	backgroundList: Array,
