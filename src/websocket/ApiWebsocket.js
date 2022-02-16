@@ -27,8 +27,18 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		break;
 	}
 
+	case 'authorizecon': {
+		const connection = this.client.connections[data.connection];
+		if (!connection) return mitsy.api.send(JSON.stringify({ id, res: { error: 'Conexão não encontrada' } }));
+
+		await connection.callbackHandler(data.userID, data.code);
+		mitsy.api.send(JSON.stringify({ id, res: { success: true } }));
+		break;
+	}
+
 	case 'common': {
 		mitsy.api.send(JSON.stringify({ id, res: { common: mitsy.client.guilds.cache.has(data.guild) } }));
+		break;
 	}
 	}
 };

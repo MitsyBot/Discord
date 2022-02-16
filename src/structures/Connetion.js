@@ -35,9 +35,9 @@ module.exports = class Connection {
 		return `${process.env.WEBSITE_URL}/connections/${this.name}/callback/`;
 	}
 
-	async callbackHandler(req) {
-		const tokens = await this.callback(req);
-		const connect = await this.client.controllers.connection.connect(req.userId, this, tokens);
+	async callbackHandler(userID, code) {
+		const tokens = await this.callback(code);
+		const connect = await this.client.controllers.connection.connect(userID, this, tokens);
 		return connect;
 	}
 };

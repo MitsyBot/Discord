@@ -11,8 +11,8 @@ module.exports = class Osu extends Connection {
 		return `https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=${process.env.OSU_CLIENT_ID}&redirect_uri=${this.authCallbackURL}&state=ok&scope=identify`;
 	}
 
-	async callback(req) {
-		const accessToken = await this.client.apis.osu.getAccessToken(req.query.code);
+	async callback(code) {
+		const accessToken = await this.client.apis.osu.getAccessToken(code);
 		return {
 			token: accessToken.access_token,
 		};
