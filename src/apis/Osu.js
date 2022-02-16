@@ -2,6 +2,7 @@ const { APIWrapper } = require('../');
 
 const fetch = require('node-fetch');
 const qs = require('querystring');
+const { URLSearchParams } = require('url');
 
 const API_URL = 'https://osu.ppy.sh/api';
 
@@ -49,7 +50,7 @@ module.exports = class Osu extends APIWrapper {
 			grant_type: 'authorization_code',
 			client_id: process.env.OSU_CLIENT_ID,
 			client_secret: process.env.OSU_CLIENT_SECRET,
-			redirect_uri: `${process.env.WEBSITE_URL}/connections/osu/callback/`,
+			redirect_uri: `${process.env.WEBSITE_URL}/connections/osu/callback`,
 			code: authCode,
 		});
 	}
@@ -67,6 +68,8 @@ module.exports = class Osu extends APIWrapper {
 	}
 
 	post(url, body) {
+		const params = new URLSearchParams();
+		Object.keys(body).map(k => params.append(k, body[k]));
 		return fetch(url, {
 			method: 'POST',
 			body: body,
