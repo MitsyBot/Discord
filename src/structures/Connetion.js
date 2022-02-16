@@ -11,7 +11,7 @@ module.exports = class Connection {
 	}
 
 	canLoad() {
-		return !!(this.client.database && process.env.DASHBOARD_URL);
+		return !!(this.client.database && process.env.WEBSITE_URL);
 	}
 
 	load() {
@@ -32,7 +32,7 @@ module.exports = class Connection {
 	}
 
 	get authCallbackURL() {
-		return `${process.env.DASHBOARD_URL}/connections/${this.name}/callback/`;
+		return `${process.env.WEBSITE_URL}/connections/${this.name}/callback/`;
 	}
 
 	async callbackHandler(req) {
