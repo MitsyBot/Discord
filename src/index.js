@@ -8,6 +8,7 @@ module.exports = {
 	EventListener: require('./structures/EventListener.js'),
 	FileUtils: require('./utils/FileUtils.js'),
 	HTTPrequests: require('./utils/HTTPrequests.js'),
+	APIWrapper: require('./structures/APIWrapper'),
 	Constants: require('./utils/Constants.js'),
 	Emotes: require('./utils/Emotes.js'),
 	Controller: require('./structures/Controller.js'),
