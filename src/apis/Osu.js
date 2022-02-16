@@ -50,7 +50,7 @@ module.exports = class Osu extends APIWrapper {
 			grant_type: 'authorization_code',
 			client_id: process.env.OSU_CLIENT_ID,
 			client_secret: process.env.OSU_CLIENT_SECRET,
-			redirect_uri: `${process.env.WEBSITE_URL}/connections/osu/callback`,
+			redirect_uri: 'https://mitsy.xyz/connections/osu/callback',
 			code: authCode,
 		});
 	}

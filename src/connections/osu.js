@@ -13,6 +13,7 @@ module.exports = class Osu extends Connection {
 
 	async callback(code) {
 		const accessToken = await this.client.apis.osu.getAccessToken(code);
+		this.logger.log(accessToken);
 		return {
 			token: accessToken.access_token,
 		};
