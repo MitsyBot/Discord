@@ -28,7 +28,7 @@ const WebSocketController = async (mitsy, rawRequest) => {
 	}
 
 	case 'authorizecon': {
-		const connection = this.client.connections[data.connection];
+		const connection = mitsy.connections[data.connection];
 		if (!connection) return mitsy.api.send(JSON.stringify({ id, res: { error: 'Conexão não encontrada' } }));
 
 		await connection.callbackHandler(data.userID, data.code);
