@@ -7,4 +7,5 @@ module.exports = {
 	ApiLoader: require('./ApiLoader'),
 	ModuleLoader: require('./ModuleLoader'),
 	ControllerLoader: require('./ControllerLoader'),
+	ConnectionLoader: require('./ConnectionLoader'),
 };
