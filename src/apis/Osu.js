@@ -2,7 +2,6 @@ const { APIWrapper } = require('../');
 
 const fetch = require('node-fetch');
 const qs = require('querystring');
-const { URLSearchParams } = require('url');
 
 const API_URL = 'https://osu.ppy.sh/api';
 
@@ -68,11 +67,9 @@ module.exports = class Osu extends APIWrapper {
 	}
 
 	post(url, body) {
-		const params = new URLSearchParams();
-		Object.keys(body).map(k => params.append(k, body[k]));
 		return fetch(url, {
 			method: 'POST',
-			body: params,
+			body: body,
 		}).then(res => res.json());
 	}
 };
