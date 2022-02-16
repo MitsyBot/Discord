@@ -16,5 +16,5 @@ module.exports = {
 	WebSocketController: require('./websocket/ApiWebsocket'),
 	Module: require('./structures/Module'),
 	MiscUtils: require('./utils/MiscUtils'),
-	Connection: require('./structures/Connection.js'),
+	Connection: require('./structures/Connetion'),
 };
