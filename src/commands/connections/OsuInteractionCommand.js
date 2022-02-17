@@ -41,7 +41,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 
 		const mitsyembed = new MitsyEmbed(user)
 			.setAuthor('Osu', 'https://i.imgur.com/Ek0hnam.png')
-			.setColor('#ffff')
+			.setColor('#E7669F')
 			.setThumbnail(`https://a.ppy.sh/${userData.user_id}?${Date.now()}.png`)
 			.setDescriptionFromBlockArray([
 				[
@@ -67,6 +67,6 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 				],
 			]);
 
-		ctx.makeMessage({ embed: mitsyembed });
+		ctx.makeMessage({ embeds: mitsyembed });
 	}
 };
