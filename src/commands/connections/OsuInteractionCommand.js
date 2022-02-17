@@ -171,13 +171,13 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 		let osuUser;
 		if (!osuUser && osu.account) osuUser = osu.account.id;
 		const userData = await ctx.client.apis.osu.getUser(osuUser, 'osu');
-		const recentPlays = await this.client.apis.osu.getUserRecentPlays(userData, 'osu', 5);
+		const recentPlays = await ctx.client.apis.osu.getUserRecentPlays(userData, 'osu', 5);
 
 		if (recentPlays.length > 0) {
 			const description = [];
 
 			for (const int in recentPlays) {
-				const [firstBeatmap] = await this.client.apis.osu.getBeatmap(recentPlays[int].beatmap_id, 'osu');
+				const [firstBeatmap] = await ctx.client.apis.osu.getBeatmap(recentPlays[int].beatmap_id, 'osu');
 				console.log(firstBeatmap);
 				if (firstBeatmap) description.push(`#${parseInt(int) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${recentPlays[int].beatmap_id})** (${moment(recentPlays[int].date).fromNow()})`);
 			}
