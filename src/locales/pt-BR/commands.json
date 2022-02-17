@@ -29,8 +29,10 @@
             "playCount": "Vezes jogadas: **{{playCount}}**",
             "totalHits": "Total de acertos: **{{totalHits}}** (**{{300}}**, **{{100}}**, **{{50}}**)",
             "topScores": "Melhores pontuações de {{user}}:",
-            "NothingtopScores": "Poxa que pena, aparentemente o usuario {{user}} não possui nada no topscores dele!"
-      }
+            "NothingtopScores": "Poxa que pena, aparentemente o usuario {{user}} não possui nada no topscores dele!",
+            "NothingRecentPlays": "Poxa que pena, aparentemente o usuario {{user}} não jogou nenhum mapa nas ultimas 24 horas",
+            "recentPlays": "Jogadas mais recentes de {{user}} nas últimas 24 horas:"
+          } 
     }
   },
       "pay": {

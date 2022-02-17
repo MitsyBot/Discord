@@ -39,6 +39,19 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 								},
 							],
 						},
+						{
+							name: 'recent',
+							description: 'Veja informações sobre as plays recentes de um usuario',
+							type: 'SUB_COMMAND',
+							options: [
+								{
+									type: 'USER',
+									name: 'usuário',
+									description: 'Usuario que deseja ver as plays recentes de osu (opcional)',
+									required: false,
+								},
+							],
+						},
 					],
 				},
 			],
@@ -57,6 +70,8 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 
 			if (option === 'infos') return OsuInteractionCommand.playerGeneral(ctx);
 			if (option === 'top') return OsuInteractionCommand.playerTopScore(ctx);
+			if (option === 'recent') return OsuInteractionCommand.playerRecentPlays(ctx);
+
 		}
 	}
 
@@ -142,7 +157,44 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 			ctx.makeMessage({ content: ctx.locale('commands:osu.subcommands.player.NothingtopScores', { user: userData.username }) });
 
 		}
+	}
 
+	static async playerRecentPlays(ctx) {
+		moment.locale(ctx.data.guild.lang);
+		const user = ctx.data.user ?? ctx.data.author;
+		const connections = await ctx.client.controllers.connection.getConnectionsFiltered(user.id);
+		const osu = connections.find(c => c.name === 'osu');
+		if (!osu.account) {
+			return ctx.makeMessage({ content: ctx.locale('commands:osu.subcommands.player.noPlayer') });
+		}
+		let osuUser;
+		if (!osuUser && osu.account) osuUser = osu.account.id;
+		const userData = await ctx.client.apis.osu.getUser(osuUser, 'osu');
+		const recentPlays = await this.client.apis.osu.getUserRecentPlays(userData, 'osu', 5);
 
+		if (recentPlays.length > 0) {
+			const description = [];
+
+			for (const int in recentPlays) {
+				const [firstBeatmap] = await this.client.apis.osu.getBeatmap(recentPlays[int].beatmap_id, 'osu');
+				if (firstBeatmap) description.push(`#${parseInt(int) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${recentPlays[int].beatmap_id})** (${moment(recentPlays[int].date).fromNow()})`);
+			}
+
+			const embed = new MitsyEmbed(user)
+				.setAuthor('Osu', 'https://i.imgur.com/Ek0hnam.png')
+				.setColor('#E7669F')
+				.setDescriptionFromBlockArray([
+					[
+						ctx.locale('commands:osu.subcommands.player.recentPlays', { user: userData.username }),
+					],
+					[
+						description.join('\n'),
+					],
+				]);
+			ctx.makeMessage({ embeds: [embed] });
+		}
+		else {
+			ctx.makeMessage({ content: ctx.locale('commands:osu.subcommands.player.NothingRecentPlays', { user: userData.username }) });
+		}
 	}
 };
