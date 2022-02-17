@@ -28,7 +28,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 
 	}
 
-	async player(ctx) {
+	static async player(ctx) {
 		const user = ctx.data.author;
 		const connections = await ctx.client.controllers.connection.getConnectionsFiltered(user.id);
 		const osu = connections.find(c => c.name === 'osu');
