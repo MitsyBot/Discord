@@ -100,7 +100,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 					ctx.locale('commands:osu.subcommands.player.playTime', { time: moment.duration(userData.total_seconds_played * 1000).format('d[d] h[h] m[m] s[s]'), pp: MiscUtils.formatNumber(Math.floor(userData.pp_raw), ctx.data.guild.lang) }),
 				],
 				[
-					`**${MiscUtils.formatNumber(userData.count_rank_ssh, ctx.data.guild.lang)}** <:xh:943943260496351252>, **${MiscUtils.formatNumber(userData.count_rank_ss, ctx.data.guild.lang)}** <:x_:943943260420849674>, **${MiscUtils.formatNumber(userData.count_rank_sh, ctx.data.guild.lang)}** <:sh:943943260336980009>, **${MiscUtils.formatNumber(userData.count_rank_s, ctx.data.guild.lang)}** <:s_:943943260706066482>, **${MiscUtils.formatNumber(userData.count_rank_a, ctx.data.guild.lang)}** <:a_:943943921212465174>`,
+					`**<:xh:943943260496351252> ${MiscUtils.formatNumber(userData.count_rank_ssh, ctx.data.guild.lang)}**, <:x_:943943260420849674> **${MiscUtils.formatNumber(userData.count_rank_ss, ctx.data.guild.lang)}**, <:sh:943943260336980009> **${MiscUtils.formatNumber(userData.count_rank_sh, ctx.data.guild.lang)}**, <:s_:943943260706066482> **${MiscUtils.formatNumber(userData.count_rank_s, ctx.data.guild.lang)}**, <:a_:943943921212465174> **${MiscUtils.formatNumber(userData.count_rank_a, ctx.data.guild.lang)}**`,
 				],
 				[
 					ctx.locale('commands:osu.subcommands.player.globalRanking', { rank: MiscUtils.formatNumber(userData.pp_rank, ctx.data.guild.lang) }),
