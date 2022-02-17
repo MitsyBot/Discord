@@ -14,6 +14,23 @@
         "api": "(Discord) Latência da API:",
         "mitsy_api": "(Mitsy) Latencia da API:"
       },
+      "osu": {
+        "subcommands": {
+          "player": {
+            "noPlayer": "Whoops. Você precisa me dar um perfil de osu valido!",
+            "level": "Nivel **{{number}}**",
+            "joinedAt": "Entrou em **{{date}}** ({{timeAgo}})",
+            "globalRanking": "Classificação global: **#{{rank}}**",
+            "countryRanking": "Classificação do pais: **#{{rank}}**",
+            "rankedScore": "Pontuação na Ranqueada: **{{rankedScore}}**",
+            "playTime": "Jogou por **{{time}}** - **{{pp}}** pp",
+            "totalScore": "Pontuação total: **{{totalScore}}**",
+            "hitAccuracy": "Precisão: **{{accuracy}}%**",
+            "playCount": "Vezes jogadas: **{{playCount}}**",
+            "totalHits": "Total de acertos: **{{totalHits}}** (**{{300}}**, **{{100}}**, **{{50}}**)"
+      }
+    }
+  },
       "pay": {
         "confirm": "{{user}}, {{author}} quer te pagar **{{count}}** cometinhas, você aceita?",
         "negated": "{{user}} recusou o pagamento!",
