@@ -11,7 +11,22 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 				{
 					name: 'player',
 					description: 'Veja os status de um player',
-					type: 'SUB_COMMAND',
+					type: 'SUB_COMMAND_GROUP',
+					options: [
+						{
+							name: 'infos',
+							description: 'Veja informações sobre um perfil de osu',
+							type: 'SUB_COMMAND',
+							options: [
+								{
+									type: 'USER',
+									name: 'usuário',
+									description: 'Usuario que deseja ver o perfil de osu (opcional)',
+									required: false,
+								},
+							],
+						},
+					],
 				},
 			],
 			cooldown: 5,
@@ -20,16 +35,20 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 
 
 	async run(ctx) {
-		const option = ctx.options.getSubcommand();
+		const type = ctx.options.getSubcommandGroup(false);
 
-		if (!option) return OsuInteractionCommand.player(ctx);
+		if (!type) return OsuInteractionCommand.player(ctx);
 
-		if (option === 'player') return OsuInteractionCommand.player(ctx);
+		if (type === 'player') {
+			const option = ctx.options.getSubcommand();
 
+			if (option === 'infos') return OsuInteractionCommand.player(ctx);
+
+		}
 	}
 
-	static async player(ctx) {
-		const user = ctx.data.author;
+	static async playerGeneral(ctx) {
+		const user = ctx.data.user ?? ctx.data.author;
 		const connections = await ctx.client.controllers.connection.getConnectionsFiltered(user.id);
 		const osu = connections.find(c => c.name === 'osu');
 		if (!osu.account) {
