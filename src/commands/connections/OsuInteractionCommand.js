@@ -136,7 +136,6 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 
 			for (const i in topScores) {
 				const [firstBeatmap] = await ctx.client.apis.osu.getBeatmap(topScores[i].beatmap_id, 'osu');
-				console.log(Emotes.getOsuEmoji(topScores[i].rank.length === 1 ? `${topScores[i].rank.toLowerCase()}_` : topScores[i].rank.toLowerCase()));
 				if (firstBeatmap) description.push(`#${parseInt(i) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${topScores[i].beatmap_id})** ${Emotes.getOsuEmoji(topScores[i].rank.length === 1 ? `${topScores[i].rank.toLowerCase()}_` : topScores[i].rank.toLowerCase())} - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), ctx.data.guild.lang)}pp**`);
 			}
 
