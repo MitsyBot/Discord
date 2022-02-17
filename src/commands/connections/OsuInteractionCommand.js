@@ -100,7 +100,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 					ctx.locale('commands:osu.subcommands.player.playTime', { time: moment.duration(userData.total_seconds_played * 1000).format('d[d] h[h] m[m] s[s]'), pp: MiscUtils.formatNumber(Math.floor(userData.pp_raw), ctx.data.guild.lang) }),
 				],
 				[
-					`**${MiscUtils.formatNumber(userData.count_rank_ssh, ctx.data.guild.lang)}**, **${MiscUtils.formatNumber(userData.count_rank_ss, ctx.data.guild.lang)}**, **${MiscUtils.formatNumber(userData.count_rank_sh, ctx.data.guild.lang)}**, **${MiscUtils.formatNumber(userData.count_rank_s, ctx.data.guild.lang)}**, **${MiscUtils.formatNumber(userData.count_rank_a, ctx.data.guild.lang)}**`,
+					`**${MiscUtils.formatNumber(userData.count_rank_ssh, ctx.data.guild.lang)}** <:sh:943943260336980009>, **${MiscUtils.formatNumber(userData.count_rank_ss, ctx.data.guild.lang)}** <:x_:943943260420849674>, **${MiscUtils.formatNumber(userData.count_rank_sh, ctx.data.guild.lang)}** <:sh:943943260336980009>, **${MiscUtils.formatNumber(userData.count_rank_s, ctx.data.guild.lang)}** <:s_:943943260706066482>, **${MiscUtils.formatNumber(userData.count_rank_a, ctx.data.guild.lang)}** <:a_:943943921212465174>`,
 				],
 				[
 					ctx.locale('commands:osu.subcommands.player.globalRanking', { rank: MiscUtils.formatNumber(userData.pp_rank, ctx.data.guild.lang) }),
@@ -136,8 +136,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 
 			for (const i in topScores) {
 				const [firstBeatmap] = await ctx.client.apis.osu.getBeatmap(topScores[i].beatmap_id, 'osu');
-				console.log(topScores[i].rank.length === 1 ? `${topScores[i].rank.toLowerCase()}_` : topScores[i].rank.toLowerCase());
-				if (firstBeatmap) description.push(`#${parseInt(i) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${topScores[i].beatmap_id})** - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), ctx.data.guild.lang)}pp**`);
+				if (firstBeatmap) description.push(`#${parseInt(i) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${topScores[i].beatmap_id})** ${OsuInteractionCommand.getEmoji(topScores[i].rank.length === 1 ? `${topScores[i].rank.toLowerCase()}_` : topScores[i].rank.toLowerCase())} - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), ctx.data.guild.lang)}pp**`);
 			}
 
 			const embed = new MitsyEmbed(user)
@@ -177,7 +176,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 
 			for (const int in recentPlays) {
 				const [firstBeatmap] = await ctx.client.apis.osu.getBeatmap(recentPlays[int].beatmap_id, 'osu');
-				if (firstBeatmap) description.push(`#${parseInt(int) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${recentPlays[int].beatmap_id})** (${moment(recentPlays[int].date).fromNow()})`);
+				if (firstBeatmap) description.push(`#${parseInt(int) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${recentPlays[int].beatmap_id})** ${OsuInteractionCommand.getEmoji(recentPlays[int].rank.length === 1 ? `${recentPlays[int].rank.toLowerCase()}_` : recentPlays[int].rank.toLowerCase())} (${moment(recentPlays[int].date).fromNow()})`);
 			}
 
 			const embed = new MitsyEmbed(user)
@@ -196,5 +195,16 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 		else {
 			ctx.makeMessage({ content: ctx.locale('commands:osu.subcommands.player.NothingRecentPlays', { user: userData.username }) });
 		}
+	}
+
+	static async getEmoji(type) {
+		if (type === 'xh') return '<:xh:943943260496351252>';
+		if (type === 'x') return '<:x_:943943260420849674>';
+		if (type === 'sh') return '<:sh:943943260336980009>';
+		if (type === 'd_') return '<:d_:943943260357947433>';
+		if (type === 'b_') return '<:b_:943943260060135496>';
+		if (type === 's_') return '<:s_:943943260706066482>';
+		if (type === 'a_') return '<:a_:943943921212465174>';
+		if (type === 'c_') return '<:c_:943943260404072488>';
 	}
 };
