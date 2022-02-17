@@ -52,7 +52,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 		const connections = await ctx.client.controllers.connection.getConnectionsFiltered(user.id);
 		const osu = connections.find(c => c.name === 'osu');
 		if (!osu.account) {
-			ctx.makeMessage({ content: ctx.locale('commands:osu.subcommands.player.noPlayer') });
+			return ctx.makeMessage({ content: ctx.locale('commands:osu.subcommands.player.noPlayer') });
 		}
 		let osuUser;
 		if (!osuUser && osu.account) osuUser = osu.account.id;

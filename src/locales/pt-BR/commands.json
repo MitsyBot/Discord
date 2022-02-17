@@ -17,7 +17,7 @@
       "osu": {
         "subcommands": {
           "player": {
-            "noPlayer": "Whoops. Você precisa me dar um perfil de osu valido!",
+            "noPlayer": "Ops, este usuario não possui a conta de osu vinculada!",
             "level": "Nivel **{{number}}**",
             "joinedAt": "Entrou em **{{date}}** ({{timeAgo}})",
             "globalRanking": "Classificação global: **#{{rank}}**",
