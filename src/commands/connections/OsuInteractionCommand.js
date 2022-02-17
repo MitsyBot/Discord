@@ -37,15 +37,15 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 		}
 		let osuUser;
 		if (!osuUser && osu.account) osuUser = osu.account.id;
-		const userData = await this.client.apis.osu.getUser(osuUser, 'osu');
+		const userData = await ctx.client.apis.osu.getUser(osuUser, 'osu');
 
 		const mitsyembed = new MitsyEmbed(user)
-			.setAuthor('Osu', this.parentCommand.authorImage)
-			.setColor(this.parentCommand.embedColor)
+			.setAuthor('Osu', 'https://i.imgur.com/Ek0hnam.png')
+			.setColor('#ffff')
 			.setThumbnail(`https://a.ppy.sh/${userData.user_id}?${Date.now()}.png`)
 			.setDescriptionFromBlockArray([
 				[
-					`:flag_${userData.country.toLowerCase()}: **[${userData.username}](${this.parentCommand.authorURL}/u/${userData.user_id})** (${ctx.locale('commands:osu.subcommands.player.level', { number: MiscUtils.formatNumber(Math.floor(userData.level), ctx.data.guild.lang) })})`,
+					`:flag_${userData.country.toLowerCase()}: **[${userData.username}](https://osu.ppy.sh/u/${userData.user_id})** (${ctx.locale('commands:osu.subcommands.player.level', { number: MiscUtils.formatNumber(Math.floor(userData.level), ctx.data.guild.lang) })})`,
 				],
 				[
 					ctx.locale('commands:osu.subcommands.player.joinedAt', { date: moment(userData.join_date).format('LLL'), timeAgo: moment(userData.join_date).fromNow() }),
