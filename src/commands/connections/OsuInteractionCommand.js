@@ -198,6 +198,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 	}
 
 	static async getEmoji(type) {
+		console.log(type);
 		if (type === 'xh') return '<:xh:943943260496351252>';
 		if (type === 'x') return '<:x_:943943260420849674>';
 		if (type === 'sh') return '<:sh:943943260336980009>';
