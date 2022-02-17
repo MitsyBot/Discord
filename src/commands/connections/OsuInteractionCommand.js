@@ -171,7 +171,6 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 		if (!osuUser && osu.account) osuUser = osu.account.id;
 		const userData = await ctx.client.apis.osu.getUser(osuUser, 'osu');
 		const recentPlays = await ctx.client.apis.osu.getUserRecentPlays(userData, 'osu', 5);
-		console.log(recentPlays);
 		if (recentPlays.length > 0) {
 			const description = [];
 
