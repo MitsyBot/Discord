@@ -27,7 +27,7 @@
             "totalScore": "Pontuação total: **{{totalScore}}**",
             "hitAccuracy": "Precisão: **{{accuracy}}%**",
             "playCount": "Vezes jogadas: **{{playCount}}**",
-            "totalHits": "Total de acertos: **{{totalHits}}** (**{{300}}**, **{{100}}**, **{{50}}**)",
+            "totalHits": "Total de acertos: **{{totalHits}}** (<:hit300:943977662211305482> **{{300}}**, <:hit100:943977662202937454> **{{100}}**, <:hit50:943977662089691226> **{{50}}**)",
             "topScores": "Melhores pontuações de {{user}}:",
             "NothingtopScores": "Poxa que pena, aparentemente o usuario {{user}} não possui nada no topscores dele!",
             "NothingRecentPlays": "Poxa que pena, aparentemente o usuario {{user}} não jogou nenhum mapa nas ultimas 24 horas",
