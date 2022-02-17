@@ -42,7 +42,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 		if (type === 'player') {
 			const option = ctx.options.getSubcommand();
 
-			if (option === 'infos') return OsuInteractionCommand.player(ctx);
+			if (option === 'infos') return OsuInteractionCommand.playerGeneral(ctx);
 
 		}
 	}
