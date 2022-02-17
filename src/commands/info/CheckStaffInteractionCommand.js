@@ -40,7 +40,7 @@ module.exports = class IsStaffInteractionCommand extends InteractionCommand {
 		}
 
 		if (user.isStaff) {
-			await ctx.makeMessage({ content: ctx.locale('commands:checkstaff.isstaff', { user: mentionUser.toString(), mitsy_happy: Emotes.MITSY_HAPPY, level: staffLevel }), ephemeral: false });
+			await ctx.makeMessage({ content: ctx.locale('commands:checkstaff.isstaff', { user: mentionUser.toString(), mitsy_happy: Emotes.emotes.MITSY_HAPPY, level: staffLevel }), ephemeral: false });
 		}
 		else {
 			await ctx.makeMessage({ content: ctx.locale('commands:checkstaff.notstaff', { user: mentionUser.toString() }), ephemeral: false });
