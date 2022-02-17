@@ -27,7 +27,9 @@
             "totalScore": "Pontuação total: **{{totalScore}}**",
             "hitAccuracy": "Precisão: **{{accuracy}}%**",
             "playCount": "Vezes jogadas: **{{playCount}}**",
-            "totalHits": "Total de acertos: **{{totalHits}}** (**{{300}}**, **{{100}}**, **{{50}}**)"
+            "totalHits": "Total de acertos: **{{totalHits}}** (**{{300}}**, **{{100}}**, **{{50}}**)",
+            "topScores": "Melhores pontuações de {{user}}:",
+            "NothingtopScores": "Poxa que pena, aparentemente o usuario {{user}} não possui nada no topscores dele!"
       }
     }
   },

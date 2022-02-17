@@ -26,6 +26,19 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 								},
 							],
 						},
+						{
+							name: 'top',
+							description: 'Veja informações sobre o topscore de um usuario',
+							type: 'SUB_COMMAND',
+							options: [
+								{
+									type: 'USER',
+									name: 'usuário',
+									description: 'Usuario que deseja ver o topscore de osu (opcional)',
+									required: false,
+								},
+							],
+						},
 					],
 				},
 			],
@@ -43,11 +56,12 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 			const option = ctx.options.getSubcommand();
 
 			if (option === 'infos') return OsuInteractionCommand.playerGeneral(ctx);
-
+			if (option === 'top') return OsuInteractionCommand.playerTopScore(ctx);
 		}
 	}
 
 	static async playerGeneral(ctx) {
+		moment.locale(ctx.data.guild.lang);
 		const user = ctx.data.user ?? ctx.data.author;
 		const connections = await ctx.client.controllers.connection.getConnectionsFiltered(user.id);
 		const osu = connections.find(c => c.name === 'osu');
@@ -87,5 +101,48 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 			]);
 
 		ctx.makeMessage({ embeds: [embed] });
+	}
+
+	static async playerTopScore(ctx) {
+		moment.locale(ctx.data.guild.lang);
+		const user = ctx.data.user ?? ctx.data.author;
+		const connections = await ctx.client.controllers.connection.getConnectionsFiltered(user.id);
+		const osu = connections.find(c => c.name === 'osu');
+		if (!osu.account) {
+			return ctx.makeMessage({ content: ctx.locale('commands:osu.subcommands.player.noPlayer') });
+		}
+		let osuUser;
+		if (!osuUser && osu.account) osuUser = osu.account.id;
+		const userData = await ctx.client.apis.osu.getUser(osuUser, 'osu');
+
+		const topScores = await ctx.client.apis.osu.getUserTopScores(user, 'osu', 5);
+		if (topScores.length > 0) {
+			const description = [];
+
+			for (const i in topScores) {
+				const [firstBeatmap] = await ctx.client.apis.osu.getBeatmap(topScores[i].beatmap_id, 'osu');
+				if (firstBeatmap) description.push(`#${parseInt(i) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${topScores[i].beatmap_id})** - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), ctx.data.guild.lang)}pp**`);
+			}
+
+			const embed = new MitsyEmbed(user)
+				.setAuthor('Osu', 'https://i.imgur.com/Ek0hnam.png')
+				.setColor('#E7669F')
+				.setDescriptionFromBlockArray([
+					[
+						ctx.locale('commands:osu.subcommands.player.topScores', { user: userData.username }),
+					],
+					[
+						description.join('\n'),
+					],
+				]);
+			ctx.makeMessage({ embeds: [embed] });
+
+		}
+		else {
+			ctx.makeMessage({ content: ctx.locale('commands:osu.subcommands.player.NothingtopScores', { user: userData.username }) });
+
+		}
+
+
 	}
 };
