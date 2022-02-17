@@ -39,7 +39,7 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 		if (!osuUser && osu.account) osuUser = osu.account.id;
 		const userData = await ctx.client.apis.osu.getUser(osuUser, 'osu');
 
-		const mitsyembed = new MitsyEmbed(user)
+		const embed = new MitsyEmbed(user)
 			.setAuthor('Osu', 'https://i.imgur.com/Ek0hnam.png')
 			.setColor('#E7669F')
 			.setThumbnail(`https://a.ppy.sh/${userData.user_id}?${Date.now()}.png`)
@@ -67,6 +67,6 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 				],
 			]);
 
-		ctx.makeMessage({ embeds: mitsyembed });
+		ctx.makeMessage({ embeds: [embed] });
 	}
 };
