@@ -42,7 +42,7 @@ const WebSocketController = async (mitsy, rawRequest) => {
 	}
 
 	case 'removeconn': {
-		await this.client.controllers.connection.disconnectUser(data.userID, data.connection);
+		await mitsy.client.controllers.connection.disconnectUser(data.userID, data.connection);
 		mitsy.api.send(JSON.stringify({ id, res: { sucess: true } }));
 		break;
 	}
