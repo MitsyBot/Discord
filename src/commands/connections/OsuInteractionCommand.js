@@ -136,7 +136,6 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 
 			for (const i in topScores) {
 				const [firstBeatmap] = await ctx.client.apis.osu.getBeatmap(topScores[i].beatmap_id, 'osu');
-				console.log(firstBeatmap);
 				if (firstBeatmap) description.push(`#${parseInt(i) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${topScores[i].beatmap_id})** - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), ctx.data.guild.lang)}pp**`);
 			}
 
@@ -172,13 +171,12 @@ module.exports = class OsuInteractionCommand extends InteractionCommand {
 		if (!osuUser && osu.account) osuUser = osu.account.id;
 		const userData = await ctx.client.apis.osu.getUser(osuUser, 'osu');
 		const recentPlays = await ctx.client.apis.osu.getUserRecentPlays(userData, 'osu', 5);
-
+		console.log(recentPlays);
 		if (recentPlays.length > 0) {
 			const description = [];
 
 			for (const int in recentPlays) {
 				const [firstBeatmap] = await ctx.client.apis.osu.getBeatmap(recentPlays[int].beatmap_id, 'osu');
-				console.log(firstBeatmap);
 				if (firstBeatmap) description.push(`#${parseInt(int) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](https://osu.ppy.sh/b/${recentPlays[int].beatmap_id})** (${moment(recentPlays[int].date).fromNow()})`);
 			}
 
