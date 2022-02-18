@@ -25,7 +25,12 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		const member = ctx.interaction.guild.members.cache.get(user.id);
 		const voiceState = member ? member.voice : null;
 		console.log(voiceState);
-		if (!voiceState.joinable && !voiceState.channelId) {
+
+		if (!voiceState.channelId) {
+			return ctx.makeMessage({ content: ctx.locale('errors:notInVoice') });
+		}
+
+		if (!voiceState.joinable && ctx.interaction.guild.me.voice.channelID !== voiceState.channelID) {
 			return ctx.makeMessage({ content: ctx.locale('errors:voiceChannelJoin') });
 		}
 		let identifier = ctx.options.getString('link', true);

@@ -8,5 +8,6 @@
     "CHANNEL_BLACKLISTED": "Ops, aparentemente você não pode usar comandos neste canal.",
     "http-imager": "Ocorreu um erro ao comunicar com o servidor de geração de imagem ```502: The server is unavailable at this moment!```",
     "economy_usage": "Ops, acho que este usuario esta executando outro comando de economia. Aguarde ele terminar e tente novamente! :)",
-    "voiceChannelJoin": "Ops, Aparentemente você não esta em um canal de voz, ou eu não posso entrar nele."
+    "voiceChannelJoin": "Ops, Talvez eu não tenha permissão para acessar o canal em que você quer tocar musicas.",
+    "notInVoice": "Ops, Você deve entrar em um canal de voz antes de usar isto"
 }
