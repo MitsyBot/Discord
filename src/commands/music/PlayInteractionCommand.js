@@ -64,7 +64,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		interaction.makeMessage({ embeds: [
 			new MitsyEmbed()
 				.setThumbnail(playlist.artwork)
-				.setDescription(`${this.getEmoji('playButton')} ${t('music:addedFromPlaylist', { count, playlistName, duration })}`),
+				.setDescription(`▶️ ${t('music:addedFromPlaylist', { count, playlistName, duration })}`),
 		] });
 	}
 
