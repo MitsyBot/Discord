@@ -26,7 +26,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		const voiceState = member ? member.voice : null;
 		console.log(voiceState);
 		if (!voiceState.joinable && !voiceState.channelID) {
-			return ctx.makeMessage(ctx.locale('errors:voiceChannelJoin'));
+			return ctx.makeMessage({ content: ctx.locale('errors:voiceChannelJoin') });
 		}
 		let identifier = ctx.options.getString('link', true);
 		identifier = identifier.replace(/<?>?/g, '');
