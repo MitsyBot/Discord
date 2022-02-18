@@ -47,7 +47,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
-	loadSongs({ t, channel, interaction, voiceChannel }, res, playerManager) {
+	static loadSongs({ t, channel, interaction, voiceChannel }, res, playerManager) {
 		if (res instanceof Song) {
 			PlayInteractionCommand.songFeedback({ t, channel }, res, true, true);
 			return playerManager.play(res, voiceChannel);
@@ -62,7 +62,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		return Promise.reject(new Error('Invalid song instance.'));
 	}
 
-	playlistFeedback({ t, interaction }, playlist) {
+	static playlistFeedback({ t, interaction }, playlist) {
 		const duration = `\`(${playlist.formattedDuration})\``;
 		const count = playlist.songs.length;
 		const playlistName = `[${playlist.title}](${playlist.uri})`;
@@ -73,7 +73,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		] });
 	}
 
-	songFeedback({ t, interaction }, song, queueFeedback = true, startFeedback = true) {
+	static songFeedback({ t, interaction }, song, queueFeedback = true, startFeedback = true) {
 		const bEmbed = (d, u) => new MitsyEmbed(u).setDescription(d);
 		const send = (d, u) => interaction.makeMessage({ embeds: [bEmbed(d, u)] });
 		const sendWI = (d, i, u) => interaction.makeMessage({ embeds: [bEmbed(d, u).setThumbnail(i || song.artwork)] });
