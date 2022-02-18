@@ -38,7 +38,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 			PlayInteractionCommand.loadSongs({ t: ctx.locale, channel: ctx.interaction.channel, interaction: ctx, voiceChannel: voiceState.channel }, result, playerManager);
 		}
 		else {
-			ctx.makeMessage(ctx.locale('music:songNotFound'));
+			ctx.makeMessage({ content: ctx.locale('music:songNotFound') });
 		}
 	}
 
