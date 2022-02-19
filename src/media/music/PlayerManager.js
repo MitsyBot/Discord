@@ -89,6 +89,7 @@ module.exports = class PlayerManager extends Manager {
 				node: '1',
 			}, DEFAULT_JOIN_OPTIONS);
 			console.log(player);
+			console.log(song);
 			await player.play(song);
 			return song;
 		}
