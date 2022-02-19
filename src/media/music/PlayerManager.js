@@ -8,7 +8,7 @@ const {
 
 const MusicUtils = require('./MusicUtils.js');
 
-const { Manager } = require('@lavacord/discord.js');
+const { Manager } = require('lavacord');
 const fetch = require('node-fetch');
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true };
@@ -85,7 +85,7 @@ module.exports = class PlayerManager extends Manager {
 		console.log(channel);
 		if (song && song instanceof Song) {
 			const player = await this.join({
-				guild: channel.guildId,
+				guild: channel.guild.id,
 				channel: channel.id,
 				node: '1',
 			}, DEFAULT_JOIN_OPTIONS);

@@ -1,5 +1,5 @@
 const { EventListener, HTTPrequests } = require('../');
-const { PlayerManager } = require('../media/music');
+const { PlayerManager, Config } = require('../media/music');
 
 module.exports = class MainListener extends EventListener {
 	constructor(client) {
@@ -18,23 +18,21 @@ module.exports = class MainListener extends EventListener {
 			updateActivity(shardId);
 		}, 1000 * 30);
 
-		if (process.env.LAVALINK_NODES) {
+		if (Config) {
 			try {
-				const nodes = {
-					connect: [
-						{
-							id: '1',
-							host: '198.12.96.170',
-							port: '2333',
-							password: 'mitsybot123',
-						},
-					],
-				};
-				const connect = nodes.connect;
-				console.log(connect);
-				this.playerManager = new PlayerManager(this, connect, {
+				const nodes = [
+					{ id: '1', host: '198.12.96.170', port: 2333, password: 'mitsybot123' },
+				];
+				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
+				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
 					shards: 1,
+					send: (packet) => {
+						if (this.guilds.cache) {
+							const guild = this.guilds.cache.get(packet.d.guild_id);
+							if (guild) return guild.shard.send(packet);
+						}
+					},
 				});
 				this.playerManager.connect()
 					.then(() => this.logger.info({ tag: 'Musica' }, 'Lavalink conectado!'))
