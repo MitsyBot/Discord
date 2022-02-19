@@ -5,7 +5,7 @@ module.exports = class Song extends EventEmitter {
 	constructor(data = {}, requestedBy) {
 		super();
 
-		this.track = data.track.track;
+		this.track = data.track;
 		this.requestedBy = requestedBy || data.requestedBy;
 
 		this.identifier = data.info.identifier;
