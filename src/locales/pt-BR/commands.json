@@ -14,6 +14,13 @@
         "api": "(Discord) Latência da API:",
         "mitsy_api": "(Mitsy) Latencia da API:"
       },
+      "play": {
+        "queueEnd": "A musica {{- songName}} acabou!",
+        "queueEmpty": "A fila esta vazia, vou sair do canal de voz por que memoria ram não cresce em arvores!",
+        "leaveInactivity": "Espero que da proxima vez vocês não me deixem falando sozinha! ``Desconectada por inatividade``",
+        "startedPlaying": "Começei a tocar {{- songName}}, Espero que gostem dessa musica!",
+        "addedtoqueue": "{{- songName}} Foi adicionado a fila. A musica vai ser tocada em breve!"
+      },
       "osu": {
         "subcommands": {
           "player": {

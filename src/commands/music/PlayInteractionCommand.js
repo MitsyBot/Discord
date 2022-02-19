@@ -75,23 +75,19 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 	}
 
 	static songFeedback({ t, ctx }, song, queueFeedback = true, startFeedback = true) {
-		const bEmbed = (d, u) => new MitsyEmbed(u).setDescription(d);
-		const send = (d, u) => ctx.interaction.channel.send(bEmbed(d, u));
-		const sendWI = (d, i, u) => ctx.interaction.channel.send(bEmbed(d, u).setThumbnail(i || song.artwork));
-
 		const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``;
 		const songName = `[${song.title}](${song.uri}) ${duration}`;
 
-		song.on('end', () => send(`⏹️ ${t('music:hasEnded', { songName })}`));
-		song.once('stop', u => send(`⏹️ ${t('music:queueIsEmpty')}`, u));
-		song.once('abruptStop', () => send(`⏹️ ${t('music:leftDueToInactivity')}`));
+		song.on('end', () => ctx.makeMessage({ content: ctx.locale('commands:play.queueEnd', { songName }) }));
+		song.once('stop', u => ctx.makeMessage({ content: ctx.locale('commands:play.queueEmpty', { u }) }));
+		song.once('abruptStop', () => ctx.makeMessage({ content: ctx.locale('commands:play.leaveInactivity') }));
 
 		if (startFeedback) {
-			song.on('start', () => sendWI(`▶️ ${t('music:startedPlaying', { songName })}`));
+			song.on('start', () => ctx.makeMessage({ content: ctx.locale('commands:play.startedPlaying', { songName }) }));
 		}
 
 		if (queueFeedback) {
-			song.once('queue', () => sendWI(`▶️ ${t('music:addedToTheQueue', { songName })}`));
+			song.once('queue', () => ctx.makeMessage({ content: ctx.locale('commands:play.addedtoqueue', { songName }) }));
 		}
 	}
 };
