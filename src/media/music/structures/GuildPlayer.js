@@ -19,7 +19,7 @@ module.exports = class GuildPlayer extends Player {
 		});
 
 		this.queue = [];
-		this._volume = 10;
+		this._volume = 1;
 		this._loop = false;
 
 		this._previousVolume = null;
