@@ -88,8 +88,7 @@ module.exports = class PlayerManager extends Manager {
 				channel: channel.id,
 				node: '1',
 			}, DEFAULT_JOIN_OPTIONS);
-			console.log(player);
-			console.log(song);
+			console.log(song instanceof Song);
 			await player.play(song);
 			return song;
 		}
