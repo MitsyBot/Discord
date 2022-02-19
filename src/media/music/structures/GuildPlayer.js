@@ -3,8 +3,8 @@ const { Player } = require('@lavacord/discord.js');
 const moment = require('moment');
 
 module.exports = class GuildPlayer extends Player {
-	constructor(options, id) {
-		super(options, id);
+	constructor(node, id) {
+		super(node, id);
 
 		this.on('end', ({ reason }) => {
 			this.scrobbleSong(this.playingSong);
