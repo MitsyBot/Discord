@@ -20,7 +20,9 @@ module.exports = class MainListener extends EventListener {
 
 		if (process.env.LAVALINK_NODES) {
 			try {
-				const nodes = JSON.parse(process.env.LAVALINK_NODES);
+				const nodes = [
+					{ host: '198.12.96.170', port: 2333, password: 'mitsybot123' },
+				];
 				console.log(nodes);
 				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
 				this.playerManager = new PlayerManager(this, nodes, {
