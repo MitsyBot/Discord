@@ -23,8 +23,7 @@ module.exports = class MainListener extends EventListener {
 				const nodes = [
 					{ host: '198.12.96.170', port: 2333, password: 'mitsybot123' },
 				];
-				console.log(nodes);
-				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
+				console.log(Array.isArray(nodes));
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
 					shards: 1,
