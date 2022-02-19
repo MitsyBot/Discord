@@ -89,7 +89,7 @@ module.exports = class PlayerManager extends Manager {
 				channel: channel.id,
 				node: '1',
 			}, DEFAULT_JOIN_OPTIONS);
-			await player.play(song.track);
+			await player.play(song);
 			return song;
 		}
 		return null;
