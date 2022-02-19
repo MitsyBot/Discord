@@ -85,7 +85,7 @@ module.exports = class PlayerManager extends Manager {
 		console.log(channel);
 		if (song && song instanceof Song) {
 			const player = await this.join({
-				guild: channel.guild.id,
+				guild: channel.guildId,
 				channel: channel.id,
 				node: '1',
 			}, DEFAULT_JOIN_OPTIONS);
