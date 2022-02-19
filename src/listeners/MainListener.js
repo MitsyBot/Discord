@@ -23,7 +23,7 @@ module.exports = class MainListener extends EventListener {
 				const nodes = {
 					'connect': [
 						{
-							'id': '1',
+							'id': 1,
 							'host': '198.12.96.170',
 							'port': '2333',
 							'password': 'mitsybot123',
