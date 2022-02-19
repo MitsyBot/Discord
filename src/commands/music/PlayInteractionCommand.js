@@ -40,8 +40,6 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		const { result } = await playerManager.loadTracks(identifier, member);
 		if (result) {
 			// PlayInteractionCommand.loadSongs({ t: ctx.locale, channel: ctx.interaction.channel, interaction: ctx, voiceChannel: voiceState.channel }, result, playerManager);
-			result.track = result.track.track;
-			console.log(result);
 			playerManager.play(result, voiceState.channel);
 			ctx.makeMessage({ content: 'Tocando ' + result.title });
 		}
