@@ -78,7 +78,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 	songFeedback(ctx, song, queueFeedback = true, startFeedback = true) {
 		const duration = song.isStream ? `(${ctx.locale('music:live')})` : `\`(${song.formattedDuration})\``;
 		const songName = `[${song.title}](${song.uri}) ${duration}`;
-		ctx.send({ content: ctx.locale('commands:play.startedPlaying', { songName }) });
+		ctx.makeMessage({ content: ctx.locale('commands:play.startedPlaying', { songName }) });
 		song.on('end', () => ctx.send({ content: ctx.locale('commands:play.queueEnd', { songName }) }));
 		song.once('stop', u => ctx.send({ content: ctx.locale('commands:play.queueEmpty', { u }) }));
 		song.once('abruptStop', () => ctx.send({ content: ctx.locale('commands:play.leaveInactivity') }));
