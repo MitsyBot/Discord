@@ -17,7 +17,6 @@ const DEFAULT_JOIN_OPTIONS = { selfdeaf: true };
 module.exports = class PlayerManager extends Manager {
 	constructor(client, nodes = [], options = {}) {
 		options.player = GuildPlayer;
-		console.log(options);
 		super(client, nodes, options);
 
 		this.client = client;
@@ -90,7 +89,6 @@ module.exports = class PlayerManager extends Manager {
 				node: '1',
 			}, DEFAULT_JOIN_OPTIONS);
 			await player.play(song.track);
-			song.emit('start');
 			return song;
 		}
 		return null;
