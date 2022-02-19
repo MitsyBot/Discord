@@ -47,15 +47,13 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 	}
 
 	static loadSongs({ t, ctx, voiceChannel }, res, playerManager) {
-		const isInstanceOfSong = Boolean(res instanceof Song);
-		const isInstanceOfPlayList = Boolean(res instanceof Playlist);
-		if (isInstanceOfSong) {
-			PlayInteractionCommand.songFeedback({ t, interaction: ctx.interaction }, res, true, true);
+		if (res instanceof Song) {
+			PlayInteractionCommand.songFeedback({ t, ctx }, res, true, true);
 		}
-		else if (isInstanceOfPlayList) {
-			PlayInteractionCommand.playlistFeedback({ t, interaction: ctx.interaction }, res, t);
+		else if (res instanceof Playlist) {
+			PlayInteractionCommand.playlistFeedback({ t, ctx }, res, t);
 			return Promise.all(res.songs.map(song => {
-				PlayInteractionCommand.songFeedback({ t, interaction: ctx.interaction }, song, false, true);
+				PlayInteractionCommand.songFeedback({ t, ctx }, song, false, true);
 				return playerManager.play(song, voiceChannel);
 			}));
 		}
@@ -64,21 +62,21 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
-	static playlistFeedback({ t, interaction }, playlist) {
+	static playlistFeedback({ t, ctx }, playlist) {
 		const duration = `\`(${playlist.formattedDuration})\``;
 		const count = playlist.songs.length;
 		const playlistName = `[${playlist.title}](${playlist.uri})`;
-		interaction.makeMessage({ embeds: [
+		ctx.makeMessage({ embeds: [
 			new MitsyEmbed()
 				.setThumbnail(playlist.artwork)
 				.setDescription(`▶️ ${t('music:addedFromPlaylist', { count, playlistName, duration })}`),
 		] });
 	}
 
-	static songFeedback({ t, interaction }, song, queueFeedback = true, startFeedback = true) {
+	static songFeedback({ t, ctx }, song, queueFeedback = true, startFeedback = true) {
 		const bEmbed = (d, u) => new MitsyEmbed(u).setDescription(d);
-		const send = (d, u) => interaction.makeMessage({ embeds: [bEmbed(d, u)] });
-		const sendWI = (d, i, u) => interaction.makeMessage({ embeds: [bEmbed(d, u).setThumbnail(i || song.artwork)] });
+		const send = (d, u) => ctx.makeMessage({ embeds: [bEmbed(d, u)] });
+		const sendWI = (d, i, u) => ctx.makeMessage({ embeds: [bEmbed(d, u).setThumbnail(i || song.artwork)] });
 
 		const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``;
 		const songName = `[${song.title}](${song.uri}) ${duration}`;
