@@ -22,7 +22,7 @@
     "i18next-node-fs-backend": "^2.1.3",
     "intl": "^1.2.5",
     "joi": "^17.5.0",
-    "@lavacord/discord.js": "github:PoluxTrail/lavacord-discord.js#master",
+    "@lavacord/discord.js": "^1.1.9",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^6.0.11",
