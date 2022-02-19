@@ -39,22 +39,22 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 		const { result } = await playerManager.loadTracks(identifier, member);
 		if (result) {
-			PlayInteractionCommand.loadSongs({ t: ctx.locale, ctx, voiceChannel: voiceState.channel }, result, playerManager);
+			PlayInteractionCommand.loadSongs(ctx, voiceState.channel, result, playerManager);
 		}
 		else {
 			ctx.makeMessage({ content: ctx.locale('music:songNotFound') });
 		}
 	}
 
-	static loadSongs({ t, ctx, voiceChannel }, res, playerManager) {
+	static loadSongs(ctx, voiceChannel, res, playerManager) {
 		if (res instanceof Song) {
-			PlayInteractionCommand.songFeedback({ t, ctx }, res, true, true);
+			PlayInteractionCommand.songFeedback(ctx, res, true, true);
 			return playerManager.play(res, voiceChannel);
 		}
 		else if (res instanceof Playlist) {
-			PlayInteractionCommand.playlistFeedback({ t, ctx }, res, t);
+			PlayInteractionCommand.playlistFeedback(ctx, res);
 			return Promise.all(res.songs.map(song => {
-				PlayInteractionCommand.songFeedback({ t, ctx }, song, false, true);
+				PlayInteractionCommand.songFeedback(ctx, song, false, true);
 				return playerManager.play(song, voiceChannel);
 			}));
 		}
@@ -63,19 +63,20 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
-	static playlistFeedback({ t, ctx }, playlist) {
+	static playlistFeedback(ctx, playlist) {
 		const duration = `\`(${playlist.formattedDuration})\``;
 		const count = playlist.songs.length;
 		const playlistName = `[${playlist.title}](${playlist.uri})`;
-		ctx.makeMessage({ embeds: [
-			new MitsyEmbed()
-				.setThumbnail(playlist.artwork)
-				.setDescription(`▶️ ${t('music:addedFromPlaylist', { count, playlistName, duration })}`),
-		] });
+
+		const embed = new MitsyEmbed()
+			.setThumbnail(playlist.artwork)
+			.setDescription(`▶️ ${ctx.locale('music:addedFromPlaylist', { count, playlistName, duration })}`);
+
+		ctx.makeMessage({ embeds: [embed] });
 	}
 
-	static songFeedback({ t, ctx }, song, queueFeedback = true, startFeedback = true) {
-		const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``;
+	static songFeedback(ctx, song, queueFeedback = true, startFeedback = true) {
+		const duration = song.isStream ? `(${ctx.locale('music:live')})` : `\`(${song.formattedDuration})\``;
 		const songName = `[${song.title}](${song.uri}) ${duration}`;
 		console.log(ctx);
 		song.on('end', () => ctx.makeMessage({ content: ctx.locale('commands:play.queueEnd', { songName }) }));
