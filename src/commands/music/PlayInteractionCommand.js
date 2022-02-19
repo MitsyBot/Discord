@@ -37,7 +37,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		identifier = `ytsearch:${identifier}`;
 		const playerManager = ctx.client.playerManager;
 
-		const { result } = await playerManager.loadTracks(identifier, user);
+		const { result } = await playerManager.loadTracks(identifier, member);
 		if (result) {
 			// PlayInteractionCommand.loadSongs({ t: ctx.locale, channel: ctx.interaction.channel, interaction: ctx, voiceChannel: voiceState.channel }, result, playerManager);
 			playerManager.play(result, voiceState.channel);
