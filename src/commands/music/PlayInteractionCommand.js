@@ -24,7 +24,6 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		const user = ctx.data.user ?? ctx.data.author;
 		const member = ctx.interaction.guild.members.cache.get(user.id);
 		const voiceState = member ? member.voice : null;
-		console.log(voiceState);
 
 		if (!voiceState.channelId) {
 			return ctx.makeMessage({ content: ctx.locale('errors:notInVoice') });
