@@ -1,5 +1,5 @@
 const { EventListener, HTTPrequests } = require('../');
-const { PlayerManager, Config } = require('../media/music');
+const { PlayerManager } = require('../media/music');
 
 module.exports = class MainListener extends EventListener {
 	constructor(client) {
@@ -18,11 +18,9 @@ module.exports = class MainListener extends EventListener {
 			updateActivity(shardId);
 		}, 1000 * 30);
 
-		if (Config) {
+		if (process.env.LAVALINK_NODES) {
 			try {
-				const nodes = [
-					{ id: '1', host: '198.12.96.170', port: 2333, password: 'mitsybot123' },
-				];
+				const nodes = JSON.parse(process.env.LAVALINK_NODES);
 				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
@@ -33,7 +31,7 @@ module.exports = class MainListener extends EventListener {
 					.catch(() => this.logger.error({ tag: 'Music' }, 'Falha ao conectar com o lavalink.'));
 			}
 			catch (e) {
-				this.logger.error({ tag: 'Musica' }, e);
+				this.logger.error({ tag: 'Musica' }, 'Ocorreu um erro ao conectar com o lavalink, LAVALINK_NODES não pode ser nulo');
 			}
 		}
 
