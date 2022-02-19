@@ -27,6 +27,10 @@ module.exports = class MainListener extends EventListener {
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
 					shards: 1,
+					send: (packet) => {
+						console.log(packet);
+						packet;
+					},
 				});
 				this.playerManager.connect()
 					.then(() => this.logger.info({ tag: 'Musica' }, 'Lavalink conectado!'))
