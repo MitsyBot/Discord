@@ -39,7 +39,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 		const { result } = await playerManager.loadTracks(identifier, member);
 		if (result) {
-			PlayInteractionCommand.loadSongs({ t: ctx.locale, interaction: ctx, voiceChannel: voiceState.channel }, result, playerManager);
+			PlayInteractionCommand.loadSongs({ t: ctx.locale, ctx, voiceChannel: voiceState.channel }, result, playerManager);
 		}
 		else {
 			ctx.makeMessage({ content: ctx.locale('music:songNotFound') });
