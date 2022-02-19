@@ -46,20 +46,8 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
-	static loadSongs({ t, channel, interaction, voiceChannel }, res, playerManager) {
-		console.log(res);
-		if (res instanceof Song) {
-			PlayInteractionCommand.songFeedback({ t, channel }, res, true, true);
-			return playerManager.play(res, voiceChannel);
-		}
-		else if (res instanceof Playlist) {
-			PlayInteractionCommand.playlistFeedback({ t, interaction }, res, t);
-			return Promise.all(res.songs.map(song => {
-				PlayInteractionCommand.songFeedback({ t, interaction }, song, false, true);
-				return playerManager.play(song, voiceChannel);
-			}));
-		}
-		return Promise.reject(new Error('Invalid song instance.'));
+	static loadSongs({ voiceChannel }, res, playerManager) {
+		return playerManager.play(res, voiceChannel);
 	}
 
 	static playlistFeedback({ t, interaction }, playlist) {
