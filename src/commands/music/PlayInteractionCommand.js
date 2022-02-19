@@ -76,8 +76,8 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 	static songFeedback({ t, ctx }, song, queueFeedback = true, startFeedback = true) {
 		const bEmbed = (d, u) => new MitsyEmbed(u).setDescription(d);
-		const send = (d, u) => ctx.makeMessage({ embeds: [bEmbed(d, u)] });
-		const sendWI = (d, i, u) => ctx.makeMessage({ embeds: [bEmbed(d, u).setThumbnail(i || song.artwork)] });
+		const send = (d, u) => ctx.interaction.channel.send(bEmbed(d, u));
+		const sendWI = (d, i, u) => ctx.interaction.channel.send(bEmbed(d, u).setThumbnail(i || song.artwork));
 
 		const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``;
 		const songName = `[${song.title}](${song.uri}) ${duration}`;
