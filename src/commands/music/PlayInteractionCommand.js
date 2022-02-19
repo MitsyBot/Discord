@@ -46,14 +46,15 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
-	static loadSongs({ t, interaction, voiceChannel }, res, playerManager) {
+	static loadSongs({ t, ctx, voiceChannel }, res, playerManager) {
+		console.log(Boolean(res instanceof Song));
 		if (res instanceof Song) {
-			PlayInteractionCommand.songFeedback({ t, interaction }, res, true, true);
+			PlayInteractionCommand.songFeedback({ t, interaction: ctx.interaction }, res, true, true);
 		}
 		else if (res instanceof Playlist) {
-			PlayInteractionCommand.playlistFeedback({ t, interaction }, res, t);
+			PlayInteractionCommand.playlistFeedback({ t, interaction: ctx.interaction }, res, t);
 			return Promise.all(res.songs.map(song => {
-				PlayInteractionCommand.songFeedback({ t, interaction }, song, false, true);
+				PlayInteractionCommand.songFeedback({ t, interaction: ctx.interaction }, song, false, true);
 				return playerManager.play(song, voiceChannel);
 			}));
 		}
