@@ -20,11 +20,18 @@ module.exports = class MainListener extends EventListener {
 
 		if (process.env.LAVALINK_NODES) {
 			try {
-				const nodes = [
-					{ host: '198.12.96.170', port: 2333, password: 'mitsybot123' },
-				];
-				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
-				this.playerManager = new PlayerManager(this, nodes, {
+				const nodes = {
+					'connect': [
+						{
+							'id': '1',
+							'host': '198.12.96.170',
+							'port': '2333',
+							'password': 'mitsybot123',
+						},
+					],
+				};
+				const connect = require(nodes).connect;
+				this.playerManager = new PlayerManager(this, connect, {
 					user: this.user.id,
 					shards: 1,
 				});
