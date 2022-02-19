@@ -49,6 +49,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 	static loadSongs({ t, ctx, voiceChannel }, res, playerManager) {
 		if (res instanceof Song) {
 			PlayInteractionCommand.songFeedback({ t, ctx }, res, true, true);
+			return playerManager.play(res, voiceChannel);
 		}
 		else if (res instanceof Playlist) {
 			PlayInteractionCommand.playlistFeedback({ t, ctx }, res, t);
