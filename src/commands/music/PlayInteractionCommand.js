@@ -59,7 +59,9 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 				return playerManager.play(song, voiceChannel);
 			}));
 		}
-		return Promise.reject(new Error('Invalid song instance.'));
+		else {
+			return Promise.reject(new Error('Invalid song instance.'));
+		}
 	}
 
 	static playlistFeedback({ t, interaction }, playlist) {
