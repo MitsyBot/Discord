@@ -1,5 +1,5 @@
 const { Collection } = require('discord.js');
-const { Player } = require('lavacord');
+const { Player } = require('@lavacord/discord.js');
 const moment = require('moment');
 
 module.exports = class GuildPlayer extends Player {

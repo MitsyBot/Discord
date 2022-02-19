@@ -27,12 +27,6 @@ module.exports = class MainListener extends EventListener {
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
 					shards: 1,
-					send: (packet) => {
-						if (this.guilds.cache) {
-							const guild = this.guilds.cache.get(packet.d.guild_id);
-							if (guild) return guild.shard.send(packet);
-						}
-					},
 				});
 				this.playerManager.connect()
 					.then(() => this.logger.info({ tag: 'Musica' }, 'Lavalink conectado!'))

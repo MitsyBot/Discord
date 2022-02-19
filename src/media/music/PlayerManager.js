@@ -8,7 +8,7 @@ const {
 
 const MusicUtils = require('./MusicUtils.js');
 
-const { Manager } = require('lavacord');
+const { Manager } = require('@lavacord/discord.js');
 const fetch = require('node-fetch');
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true };
