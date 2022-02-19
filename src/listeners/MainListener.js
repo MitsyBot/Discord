@@ -23,7 +23,7 @@ module.exports = class MainListener extends EventListener {
 				const nodes = [
 					{ host: '198.12.96.170', port: 2333, password: 'mitsybot123' },
 				];
-				console.log(Array.isArray(nodes));
+				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
 					shards: 1,
@@ -33,7 +33,7 @@ module.exports = class MainListener extends EventListener {
 					.catch(() => this.logger.error({ tag: 'Music' }, 'Falha ao conectar com o lavalink.'));
 			}
 			catch (e) {
-				this.logger.error({ tag: 'Musica' }, 'Ocorreu um erro ao conectar com o lavalink, LAVALINK_NODES não pode ser nulo');
+				this.logger.error({ tag: 'Musica' }, e);
 			}
 		}
 
