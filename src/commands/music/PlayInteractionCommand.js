@@ -1,5 +1,5 @@
 const { InteractionCommand, MitsyEmbed } = require('../../');
-// const { Song, Playlist } = require('../../media/music/structures');
+const { Song, Playlist } = require('../../media/music/structures');
 
 module.exports = class PlayInteractionCommand extends InteractionCommand {
 	constructor() {
@@ -39,19 +39,16 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 		const { result } = await playerManager.loadTracks(identifier, member);
 		if (result) {
-			// PlayInteractionCommand.loadSongs({ t: ctx.locale, channel: ctx.interaction.channel, interaction: ctx, voiceChannel: voiceState.channel }, result, playerManager);
-			playerManager.play(result, voiceState.channel);
-			ctx.makeMessage({ content: 'Tocando ' + result.title });
+			PlayInteractionCommand.loadSongs({ t: ctx.locale, interaction: ctx, voiceChannel: voiceState.channel }, result, playerManager);
 		}
 		else {
 			ctx.makeMessage({ content: ctx.locale('music:songNotFound') });
 		}
 	}
 
-	/* static loadSongs({ t, channel, interaction, voiceChannel }, res, playerManager) {
-		console.log(res);
+	static loadSongs({ t, interaction, voiceChannel }, res, playerManager) {
 		if (res instanceof Song) {
-			PlayInteractionCommand.songFeedback({ t, channel }, res, true, true);
+			PlayInteractionCommand.songFeedback({ t, interaction }, res, true, true);
 		}
 		else if (res instanceof Playlist) {
 			PlayInteractionCommand.playlistFeedback({ t, interaction }, res, t);
@@ -61,7 +58,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 			}));
 		}
 		return Promise.reject(new Error('Invalid song instance.'));
-	} */
+	}
 
 	static playlistFeedback({ t, interaction }, playlist) {
 		const duration = `\`(${playlist.formattedDuration})\``;
