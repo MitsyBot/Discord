@@ -79,16 +79,16 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		const duration = song.isStream ? `(${ctx.locale('music:live')})` : `\`(${song.formattedDuration})\``;
 		const songName = `[${song.title}](${song.uri}) ${duration}`;
 		ctx.makeMessage({ content: ctx.locale('commands:play.startedPlaying', { songName }) });
-		song.on('end', () => ctx.send({ content: ctx.locale('commands:play.queueEnd', { songName }) }));
-		song.once('stop', u => ctx.send({ content: ctx.locale('commands:play.queueEmpty', { u }) }));
-		song.once('abruptStop', () => ctx.send({ content: ctx.locale('commands:play.leaveInactivity') }));
+		song.on('end', () => ctx.makeMessage({ content: ctx.locale('commands:play.queueEnd', { songName }) }));
+		song.once('stop', u => ctx.makeMessage({ content: ctx.locale('commands:play.queueEmpty', { u }) }));
+		song.once('abruptStop', () => ctx.makeMessage({ content: ctx.locale('commands:play.leaveInactivity') }));
 
 		if (startFeedback) {
-			song.on('start', () => ctx.send({ content: ctx.locale('commands:play.startedPlaying', { songName }) }));
+			song.on('start', () => ctx.makeMessage({ content: ctx.locale('commands:play.startedPlaying', { songName }) }));
 		}
 
 		if (queueFeedback) {
-			song.once('queue', () => ctx.send({ content: ctx.locale('commands:play.addedtoqueue', { songName }) }));
+			song.once('queue', () => ctx.makeMessage({ content: ctx.locale('commands:play.addedtoqueue', { songName }) }));
 		}
 	}
 };
