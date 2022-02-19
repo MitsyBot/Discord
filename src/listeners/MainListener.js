@@ -1,6 +1,6 @@
 const { EventListener, HTTPrequests } = require('../');
 const { PlayerManager, Config } = require('../media/music');
-
+const { GuildPlayer } = require('../media/music/structures/');
 module.exports = class MainListener extends EventListener {
 	constructor(client) {
 		super({
@@ -27,6 +27,7 @@ module.exports = class MainListener extends EventListener {
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
 					shards: 1,
+					player: GuildPlayer,
 				});
 				this.playerManager.connect()
 					.then(() => this.logger.info({ tag: 'Musica' }, 'Lavalink conectado!'))

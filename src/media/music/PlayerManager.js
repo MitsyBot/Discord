@@ -1,4 +1,4 @@
-const { GuildPlayer, Song, SongSearchResult, SongSource, Playlist } = require('./structures');
+const { Song, SongSearchResult, SongSource, Playlist } = require('./structures');
 const {
 	Songs: {
 		SoundcloudSong, TwitchSong, YoutubeSong, YoutubePlaylist,
@@ -16,7 +16,6 @@ const DEFAULT_JOIN_OPTIONS = { selfdeaf: true };
 
 module.exports = class PlayerManager extends Manager {
 	constructor(client, nodes = [], options = {}) {
-		options.player = GuildPlayer;
 		super(client, nodes, options);
 
 		this.client = client;
