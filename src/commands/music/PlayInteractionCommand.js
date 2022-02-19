@@ -39,22 +39,22 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 		const { result } = await playerManager.loadTracks(identifier, member);
 		if (result) {
-			PlayInteractionCommand.loadSongs(ctx, voiceState.channel, result, playerManager);
+			this.loadSongs(ctx, voiceState.channel, result, playerManager);
 		}
 		else {
 			ctx.makeMessage({ content: ctx.locale('music:songNotFound') });
 		}
 	}
 
-	static loadSongs(ctx, voiceChannel, res, playerManager) {
+	loadSongs(ctx, voiceChannel, res, playerManager) {
 		if (res instanceof Song) {
-			PlayInteractionCommand.songFeedback(ctx, res, true, true);
+			this.songFeedback(ctx, res, true, true);
 			return playerManager.play(res, voiceChannel);
 		}
 		else if (res instanceof Playlist) {
-			PlayInteractionCommand.playlistFeedback(ctx, res);
+			this.playlistFeedback(ctx, res);
 			return Promise.all(res.songs.map(song => {
-				PlayInteractionCommand.songFeedback(ctx, song, false, true);
+				this.songFeedback(ctx, song, false, true);
 				return playerManager.play(song, voiceChannel);
 			}));
 		}
@@ -63,7 +63,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
-	static playlistFeedback(ctx, playlist) {
+	playlistFeedback(ctx, playlist) {
 		const duration = `\`(${playlist.formattedDuration})\``;
 		const count = playlist.songs.length;
 		const playlistName = `[${playlist.title}](${playlist.uri})`;
@@ -75,7 +75,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		ctx.makeMessage({ embeds: [embed] });
 	}
 
-	static songFeedback(ctx, song, queueFeedback = true, startFeedback = true) {
+	songFeedback(ctx, song, queueFeedback = true, startFeedback = true) {
 		const duration = song.isStream ? `(${ctx.locale('music:live')})` : `\`(${song.formattedDuration})\``;
 		const songName = `[${song.title}](${song.uri}) ${duration}`;
 		console.log(ctx);
