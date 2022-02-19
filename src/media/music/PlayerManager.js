@@ -23,7 +23,7 @@ module.exports = class PlayerManager extends Manager {
 		this.REST_ADDRESS = `${nodes[0].host}:${nodes[0].port}`;
 		this.REST_PASSWORD = nodes[0].password;
 	}
-
+	// Teste no manager
 	async fetchTracks(identifier) {
 		const specialSource = Object.values(Sources).find(source => source.test(identifier));
 		if (specialSource) return specialSource;
