@@ -17,6 +17,7 @@ const DEFAULT_JOIN_OPTIONS = { selfdeaf: true };
 module.exports = class PlayerManager extends Manager {
 	constructor(client, nodes = [], options = {}) {
 		options.player = GuildPlayer;
+		console.log(options);
 		super(client, nodes, options);
 
 		this.client = client;
