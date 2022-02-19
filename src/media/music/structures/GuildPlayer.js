@@ -18,8 +18,6 @@ module.exports = class GuildPlayer extends Player {
 			this.manager.leave(this.id);
 		});
 
-		this.on('error', this.manager.client.logError);
-
 		this.queue = [];
 		this._volume = 25;
 		this._loop = false;
