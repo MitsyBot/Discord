@@ -21,16 +21,17 @@ module.exports = class MainListener extends EventListener {
 		if (process.env.LAVALINK_NODES) {
 			try {
 				const nodes = {
-					'connect': [
+					connect: [
 						{
-							'id': 1,
-							'host': '198.12.96.170',
-							'port': '2333',
-							'password': 'mitsybot123',
+							id: '1',
+							host: '198.12.96.170',
+							port: '2333',
+							password: 'mitsybot123',
 						},
 					],
 				};
 				const connect = require(nodes).connect;
+				console.log(connect);
 				this.playerManager = new PlayerManager(this, connect, {
 					user: this.user.id,
 					shards: 1,
