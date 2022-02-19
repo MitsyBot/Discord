@@ -30,7 +30,7 @@ module.exports = class MainListener extends EventListener {
 						},
 					],
 				};
-				const connect = require(nodes).connect;
+				const connect = nodes.connect;
 				console.log(connect);
 				this.playerManager = new PlayerManager(this, connect, {
 					user: this.user.id,
