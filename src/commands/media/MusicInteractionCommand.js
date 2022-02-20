@@ -30,7 +30,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 			cooldown: 5,
 		});
 	}
-
+	// Run
 	async run(ctx) {
 		const type = ctx.options.getSubcommand();
 
