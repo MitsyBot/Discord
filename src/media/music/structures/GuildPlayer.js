@@ -19,7 +19,7 @@ module.exports = class GuildPlayer extends Player {
 		});
 
 		this.queue = [];
-		this._volume = 1;
+		this._volume = 100;
 		this._loop = false;
 
 		this._previousVolume = null;
@@ -111,7 +111,7 @@ module.exports = class GuildPlayer extends Player {
 
 	// Volume
 
-	volume(volume = 50) {
+	volume(volume = 100) {
 		this._volume = volume;
 		super.volume(volume);
 	}
