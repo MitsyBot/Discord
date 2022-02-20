@@ -1,5 +1,5 @@
 const { EventListener, HTTPrequests } = require('../');
-const { PlayerManager, Config } = require('../media/music');
+const { PlayerManager } = require('../media/music');
 
 module.exports = class MainListener extends EventListener {
 	constructor(client) {
