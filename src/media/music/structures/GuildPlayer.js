@@ -153,6 +153,7 @@ module.exports = class GuildPlayer extends Player {
 		return this.client.channels.get(this.channel);
 	}
 
+	// Voice Update
 
 	async updateVoiceState(oldMember, newMember) {
 		const switchId = newMember.guild.me.user.id;
