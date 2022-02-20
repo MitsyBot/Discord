@@ -21,6 +21,11 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 						},
 					],
 				},
+				{
+					name: 'stop',
+					description: 'Remova todas as musicas de uma fila',
+					type: 'SUB_COMMAND',
+				},
 			],
 			cooldown: 5,
 		});
@@ -29,13 +34,13 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 	async run(ctx) {
 		const type = ctx.options.getSubcommand();
 
-		if (!type) return this.play(ctx);
+		if (!type) return PlayInteractionCommand.play(ctx);
 
-		if (type === 'play') return this.play(ctx);
+		if (type === 'play') return PlayInteractionCommand.play(ctx);
+		if (type === 'stop') return PlayInteractionCommand.stop(ctx);
 	}
 
-	async play(ctx) {
-
+	static async play(ctx) {
 		const user = ctx.data.user ?? ctx.data.author;
 		const member = ctx.interaction.guild.members.cache.get(user.id);
 		const voiceState = member ? member.voice : null;
@@ -61,7 +66,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
-	stop(ctx) {
+	static async stop(ctx) {
 		const user = ctx.data.user ?? ctx.data.author;
 		const member = ctx.interaction.guild.members.cache.get(user.id);
 		const guildPlayer = this.client.playerManager.players.get(ctx.interaction.guild.id);
