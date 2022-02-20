@@ -1,5 +1,5 @@
 const { InteractionCommand } = require('../../');
-const { PlayCommand } = require('./Music/');
+const { PlayCommand } = require('../../media/commands/Music/');
 module.exports = class PlayInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
