@@ -12,6 +12,7 @@ module.exports = class GuildRepository extends MongoRepository {
 			language: 'pt-BR',
 			modules: new Map(),
 			blacklist: false,
+			blacklistedChannels: { channels:[] },
 			...(super.parse(entity) || {}),
 		};
 	}
