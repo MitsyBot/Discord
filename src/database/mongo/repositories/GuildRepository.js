@@ -11,6 +11,7 @@ module.exports = class GuildRepository extends MongoRepository {
 			prefix: process.env.PREFIX,
 			language: 'pt-BR',
 			modules: new Map(),
+			blacklist: false,
 			...(super.parse(entity) || {}),
 		};
 	}
