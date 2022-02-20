@@ -1,24 +1,7 @@
-const { InteractionCommand, MitsyEmbed } = require('../../');
-const { Song, Playlist } = require('../../media/music/structures');
+const { MitsyEmbed } = require('../../../');
+const { Song, Playlist } = require('../../../media/music/structures');
 
-module.exports = class PlayInteractionCommand extends InteractionCommand {
-	constructor() {
-		super({
-			name: 'play',
-			description: 'Toque uma musica em um canal de voz (Premium).',
-			category: 'music',
-			options: [
-				{
-					name: 'link',
-					description: 'Link ou nome da musica',
-					type: 'STRING',
-					required: true,
-				},
-			],
-			cooldown: 5,
-		});
-	}
-
+module.exports = class PlayInteractionCommand {
 	async run(ctx) {
 
 		const user = ctx.data.user ?? ctx.data.author;
@@ -39,7 +22,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 		const { result } = await playerManager.loadTracks(identifier, member);
 		if (result) {
-			this.loadSongs(ctx, voiceState.channel, result, playerManager);
+			PlayInteractionCommand.loadSongs(ctx, voiceState.channel, result, playerManager);
 		}
 		else {
 			ctx.makeMessage({ content: ctx.locale('music:songNotFound') });
@@ -48,13 +31,13 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 	loadSongs(ctx, voiceChannel, res, playerManager) {
 		if (res instanceof Song) {
-			this.songFeedback(ctx, res, true, true);
+			PlayInteractionCommand.songFeedback(ctx, res, true, true);
 			return playerManager.play(res, voiceChannel);
 		}
 		else if (res instanceof Playlist) {
-			this.playlistFeedback(ctx, res);
+			PlayInteractionCommand.playlistFeedback(ctx, res);
 			return Promise.all(res.songs.map(song => {
-				this.songFeedback(ctx, song, false, true);
+				PlayInteractionCommand.songFeedback(ctx, song, false, true);
 				return playerManager.play(song, voiceChannel);
 			}));
 		}
