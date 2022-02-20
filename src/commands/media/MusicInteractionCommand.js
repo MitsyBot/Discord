@@ -29,9 +29,9 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 	async run(ctx) {
 		const type = ctx.options.getSubcommand();
 
-		if (!type) return PlayInteractionCommand.play(ctx);
+		if (!type) return this.play(ctx);
 
-		if (type === 'play') return PlayInteractionCommand.play(ctx);
+		if (type === 'play') return this.play(ctx);
 	}
 
 	async play(ctx) {
@@ -61,6 +61,15 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
+	stop(ctx) {
+		const user = ctx.data.user ?? ctx.data.author;
+		const member = ctx.interaction.guild.members.cache.get(user.id);
+		const guildPlayer = this.client.playerManager.players.get(ctx.interaction.guild.id);
+		guildPlayer.stop(member);
+		return ctx.makeMessage({ content: ctx.locale('commands:stop.stopped') });
+	}
+
+	// Helpers
 	loadSongs(ctx, voiceChannel, res, playerManager) {
 		if (res instanceof Song) {
 			this.songFeedback(ctx, res, true, true);
@@ -96,7 +105,6 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 		song.on('end', () => ctx.interaction.channel.send(ctx.locale('commands:play.queueEnd', { songName })));
 		song.once('stop', u => ctx.interaction.channel.send(ctx.locale('commands:play.queueEmpty', { u })));
-		song.once('abruptStop', () => ctx.interaction.channel.send(ctx.locale('commands:play.leaveInactivity')));
 
 		if (startFeedback) {
 			song.on('start', () => ctx.makeMessage({ content: ctx.locale('commands:play.startedPlaying', { songName }) }));

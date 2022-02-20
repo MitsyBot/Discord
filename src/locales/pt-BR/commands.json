@@ -21,6 +21,9 @@
         "startedPlaying": "Começei a tocar {{- songName}}, Espero que gostem dessa musica!",
         "addedtoqueue": "{{- songName}} Foi adicionado a fila. A musica vai ser tocada em breve!"
       },
+      "stop": {
+        "stopped": "Todas as musicas foram removidas da fila e eu vou sair do canal de voz, espero que tenham gostado do show!"
+      },
       "osu": {
         "subcommands": {
           "player": {
