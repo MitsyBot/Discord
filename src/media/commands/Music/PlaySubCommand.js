@@ -1,5 +1,5 @@
 const { MitsyEmbed } = require('../../../');
-const { Song, Playlist } = require('../../../media/music/structures');
+const { Song, Playlist } = require('../../music/structures');
 
 module.exports = class PlayCommand {
 	static async run(ctx) {
