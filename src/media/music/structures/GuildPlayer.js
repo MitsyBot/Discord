@@ -154,7 +154,7 @@ module.exports = class GuildPlayer extends Player {
 	}
 
 	// Voice Update
-	// teste
+
 	async updateVoiceState(oldMember, newMember) {
 		const switchId = newMember.guild.me.user.id;
 		if (newMember.user.bot && newMember.user.id !== switchId) return;
