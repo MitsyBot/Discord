@@ -1,8 +1,8 @@
 const { MitsyEmbed } = require('../../../');
 const { Song, Playlist } = require('../../../media/music/structures');
 
-module.exports = class PlayInteractionCommand {
-	async run(ctx) {
+module.exports = class PlayCommand {
+	static async run(ctx) {
 
 		const user = ctx.data.user ?? ctx.data.author;
 		const member = ctx.interaction.guild.members.cache.get(user.id);
@@ -22,7 +22,7 @@ module.exports = class PlayInteractionCommand {
 
 		const { result } = await playerManager.loadTracks(identifier, member);
 		if (result) {
-			PlayInteractionCommand.loadSongs(ctx, voiceState.channel, result, playerManager);
+			PlayCommand.loadSongs(ctx, voiceState.channel, result, playerManager);
 		}
 		else {
 			ctx.makeMessage({ content: ctx.locale('music:songNotFound') });
@@ -31,13 +31,13 @@ module.exports = class PlayInteractionCommand {
 
 	loadSongs(ctx, voiceChannel, res, playerManager) {
 		if (res instanceof Song) {
-			PlayInteractionCommand.songFeedback(ctx, res, true, true);
+			PlayCommand.songFeedback(ctx, res, true, true);
 			return playerManager.play(res, voiceChannel);
 		}
 		else if (res instanceof Playlist) {
-			PlayInteractionCommand.playlistFeedback(ctx, res);
+			PlayCommand.playlistFeedback(ctx, res);
 			return Promise.all(res.songs.map(song => {
-				PlayInteractionCommand.songFeedback(ctx, song, false, true);
+				PlayCommand.songFeedback(ctx, song, false, true);
 				return playerManager.play(song, voiceChannel);
 			}));
 		}
