@@ -16,6 +16,7 @@ Esse é o repositorio de desenvolvimento da mitsy, seja bem vindo.
 Consulte a documentação do seu Sistema Operacional para instalar.
 * Para o serviço funcionar como deveria você tera que rodar outros serviços como por exemplo a [API](https://github.com/MitsyBot/API)
 
+
 - Baixe o source code utilizando ```git clone https://github.com/MitsyBot/Mitsy```
 - Instale as dependencias com o npm: ```npm i```
 - Configure o [.env](https://github.com/MitsyBot/Mitsy/blob/master/.env.template)
