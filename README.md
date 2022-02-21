@@ -19,4 +19,5 @@ Consulte a documentação do seu Sistema Operacional para instalar.
 - Baixe o source code utilizando ```git clone https://github.com/MitsyBot/Mitsy```
 - Instale as dependencias com o npm: ```npm i```
 - Configure o [.env](https://github.com/MitsyBot/Mitsy/blob/master/.env.template)
+- 
 - Execute a mitsy utilizando ```npm run start```
