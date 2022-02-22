@@ -32,21 +32,14 @@ pipeline {
         sh 'docker push ghcr.io/$IMAGE_NAME:$IMAGE_VERSION'
       }
     }
-  }
-  post {
-    always {
-      sh 'docker logout'
-    }
-  }
-  node {
-  def remote = [:]
-  remote.name = 'vps'
-  remote.host = '198.12.96.170'
-  remote.user = 'root'
-  remote.password = credentials('ssh-password')
-  remote.allowAnyHosts = true
   stage('Enviar para a maquina') {
           steps {
+    def remote = [:]
+    remote.name = 'vps'
+    remote.host = '198.12.96.170'
+    remote.user = 'root'
+    remote.password = credentials('ssh-password')
+    remote.allowAnyHosts = true
     sshCommand remote: remote, command: "docker stop discord-canary"
     sshCommand remote: remote, command: "docker rm discord-canary"
     sshCommand remote: remote, command: "docker image rm ghcr.io/mitsybot/discord-canary:latest"
@@ -54,5 +47,10 @@ pipeline {
     sshCommand remote: remote, command: "docker run -it -d -e SHARD_COUNT='1' -e BOT_TOKEN='NzkwNzYwMzYyMDYwMjgzOTc0.X-FS-Q.iGgQ9VOtnAD997JNJShl_ADFjEI' --name discord-canary ghcr.io/mitsybot/discord-canary:latest"
         }
       } 
+  }
+  post {
+    always {
+      sh 'docker logout'
     }
+  }
 }
