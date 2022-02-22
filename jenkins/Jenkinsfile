@@ -5,13 +5,13 @@ pipeline {
     IMAGE_NAME='mitsybot/discord-canary'
     IMAGE_VERSION='latest'
   }
-  stages {
   def remote = [:]
   remote.name = 'vps'
   remote.host = '198.12.96.170'
   remote.user = 'root'
   remote.password = credentials('ssh-password')
   remote.allowAnyHosts = true
+  stages {
 
     stage('cleanup') {
       steps {
