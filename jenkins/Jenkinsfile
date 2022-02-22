@@ -35,7 +35,7 @@ pipeline {
   stage('Enviar para a maquina') {
           steps {
             script {
-                  withCredentials([sshUserPrivateKey(credentialsId: 'ssh-password', keyFileVariable: 'identity', passphraseVariable: 'passWord', usernameVariable: 'userName')]) {
+                  withCredentials([sshUserPrivateKey(credentialsId: 'ssh-credentials-id', keyFileVariable: 'identity', passphraseVariable: 'passWord', usernameVariable: 'userName')]) {
                                def remote = [:]
 
             remote.name = 'vps'
