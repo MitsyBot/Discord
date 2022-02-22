@@ -6,6 +6,13 @@ pipeline {
     IMAGE_VERSION='latest'
   }
   stages {
+  def remote = [:]
+  remote.name = 'vps'
+  remote.host = '198.12.96.170'
+  remote.user = 'root'
+  remote.password = credentials('ssh-password')
+  remote.allowAnyHosts = true
+
     stage('cleanup') {
       steps {
         sh 'docker system prune -a --volumes --force'
@@ -31,19 +38,11 @@ pipeline {
         sh 'docker push ghcr.io/$IMAGE_NAME:$IMAGE_VERSION'
       }
     }
-    stage('send to remote server') {
-            steps {
-          sshagent(credentials: ['ssh-credentials-id']) {
-            sh '''
-            docker stop discord-canary
-            docker rm discord-canary
-            docker image rm ghcr.io/mitsybot/discord-canary:latest
-            docker pull ghcr.io/mitsybot/discord-canary:latest
-            docker run -it -d -e SHARD_COUNT='1' -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' --name discord-canary ghcr.io/mitsybot/discord-canary:latest
-            '''
-          }
-      }
-    } 
+    
+  stage('Enviar para a maquina') {
+    sshCommand remote: remote, command: "ls -lrt"
+    sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+  } 
   }
   post {
     always {
