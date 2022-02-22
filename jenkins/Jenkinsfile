@@ -4,7 +4,6 @@ pipeline {
     GITHUB_TOKEN=credentials('github-token')
     IMAGE_NAME='mitsybot/discord-canary'
     IMAGE_VERSION='latest'
-    SSH=credentials('ssh-password')
   }
   stages {
 
@@ -36,11 +35,13 @@ pipeline {
   stage('Enviar para a maquina') {
           steps {
             script {
-            def remote = [:]
+                  withCredentials([sshUserPrivateKey(credentialsId: 'ssh-password', keyFileVariable: 'identity', passphraseVariable: 'passWord', usernameVariable: 'userName')]) {
+                               def remote = [:]
+
             remote.name = 'vps'
             remote.host = '198.12.96.170'
-            remote.user = '$SSH_USR'
-            remote.password = '$SSH_PSW'
+            remote.user = userName
+            remote.password = passWord
             remote.allowAnyHosts = true
             sshCommand remote: remote, command: "docker stop discord-canary"
             sshCommand remote: remote, command: "docker rm discord-canary"
