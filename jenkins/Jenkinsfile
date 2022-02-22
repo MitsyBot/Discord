@@ -32,7 +32,13 @@ pipeline {
         sh 'docker push ghcr.io/$IMAGE_NAME:$IMAGE_VERSION'
       }
     }
-        node {
+  }
+  post {
+    always {
+      sh 'docker logout'
+    }
+  }
+  node {
   def remote = [:]
   remote.name = 'vps'
   remote.host = '198.12.96.170'
@@ -49,10 +55,4 @@ pipeline {
         }
       } 
     }
-  }
-  post {
-    always {
-      sh 'docker logout'
-    }
-  }
 }
