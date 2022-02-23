@@ -20,7 +20,6 @@ const KeySchema = new Schema({
 
 module.exports = new Schema({
 	_id: String,
-	id: String,
 	comets: Number,
 	xp: Number,
 	level: Number,

@@ -7,7 +7,6 @@ const ModuleSchema = new Schema({
 
 module.exports = new Schema({
 	_id: String,
-	id: String,
 	prefix: String,
 	lang: String,
 	modules: {
