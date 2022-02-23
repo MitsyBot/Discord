@@ -17,7 +17,6 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 							name: 'link',
 							description: 'Link ou nome da musica',
 							type: 'STRING',
-							required: true,
 						},
 					],
 				},
