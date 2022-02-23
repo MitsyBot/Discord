@@ -24,8 +24,6 @@ module.exports = new Schema({
 	xp: Number,
 	level: Number,
 	timeDaily: Number,
-	afk: Boolean,
-	afkReason:String,
 	blacklist: Boolean,
 	aboutme: String,
 	profileColor: String,
