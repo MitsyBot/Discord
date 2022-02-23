@@ -6,7 +6,7 @@ module.exports = class UserRepository extends MongoRepository {
 		super(mongoose, mongoose.model('User', UserSchema));
 	}
 
-	parse(entity) {
+	parse() {
 		return {
 			comets: 0,
 			xp: 0,
@@ -39,7 +39,6 @@ module.exports = class UserRepository extends MongoRepository {
 				tier: 0,
 				keys: [],
 			},
-			...(super.parse(entity) || {}),
 		};
 	}
 };
