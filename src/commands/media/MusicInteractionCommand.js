@@ -62,9 +62,9 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
-	async stop(ctx) {
+	stop(ctx) {
 		const member = ctx.interaction.guild.members.cache.get(ctx.interaction.user.id);
-		const guildPlayer = this.client.playerManager.players.get(ctx.interaction.guild.id);
+		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
 		guildPlayer.stop(member);
 		return ctx.makeMessage({ content: ctx.locale('commands:stop.stopped') });
 	}
