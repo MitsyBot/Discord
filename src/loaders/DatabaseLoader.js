@@ -12,7 +12,7 @@ module.exports = class DatabaseLoader extends Loader {
 
 	async load() {
 		try {
-			await this.initializeDatabase(MongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+			await this.initializeDatabase(MongoDB, { useNewUrlParser: true });
 			this.client.database = this.database;
 			return !!this.database;
 		}
