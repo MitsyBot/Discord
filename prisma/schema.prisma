@@ -9,8 +9,8 @@ datasource db {
 
 model Client {
   id             String   @id @default("790760362060283974") @db.VarChar(255)
-  userBlocklist  String[]
-  guildBlocklist String[]
+  user_blocklist  String[]
+  guild_blocklist String[]
 
   @@map("mitsy_client")
 }
