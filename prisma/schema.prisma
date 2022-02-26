@@ -12,7 +12,7 @@ model Client {
   userBlocklist  String[]
   guildBlocklist String[]
 
-  @@map("client")
+  @@map("mitsy_client")
 }
 
 model Background {
@@ -22,7 +22,7 @@ model Background {
   rarity Int @default(1)
   authorId String
   price Float @db.DoublePrecision
-  @@map("banner")
+  @@map("shop_backgrounds")
 }
 
 model DonationKeys {
@@ -73,10 +73,11 @@ model Fanarts {
   user String @id @db.VarChar(255)
   id Int @default(0)
   name String @db.Text
-  @@map("fanarts")
+  @@map("mitsy_fanarts")
 }
 
 model Colors {
   id String @id @db.Text
   cost Int @default(0)
+  @@map("shop_colors")
 }
