@@ -8,8 +8,7 @@ module.exports = class InteractionCommandExecutor {
 	}
 
 	async CommandExecuted(client, interaction) {
-		const authorData = await client.database.users.findOne(interaction.user.id);
-		const guildData = await client.database.guilds.findOne(interaction.guild.id);
+		const authorData = await client.database.getUser(interaction.user.id);
 
 		const data = {};
 		const user = interaction.options.getUser('usuário', false);
@@ -19,7 +18,6 @@ module.exports = class InteractionCommandExecutor {
 		}
 
 		data.author = authorData;
-		data.guild = guildData;
 
 		const command = client.slashCommands.find(c => c.config.name === interaction.commandName);
 
