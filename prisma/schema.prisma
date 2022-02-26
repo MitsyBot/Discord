@@ -14,3 +14,69 @@ model Client {
 
   @@map("client")
 }
+
+model Background {
+  id String @id
+  collection String
+  title String
+  rarity Int @default(1)
+  authorId String
+  price Float @db.DoublePrecision
+  @@map("banner")
+}
+
+model DonationKeys {
+  active_in  String
+  user String @id
+  value Float @db.DoublePrecision
+  tier Int @default(1)
+  expires_at String @db.VarChar(255)
+  metadata String @db.VarChar(255)
+  @@map("premium_keys")
+}
+
+model Dailies {
+  received_by String @db.VarChar(255) @id
+  received_at String @db.VarChar(255)
+  ip String @db.Text
+  email String @db.Text
+  user_agent String @db.VarChar(255)
+  @@map("dailies")
+}
+
+model Reminders { 
+  user_id String @id @db.VarChar(255)
+  channel_id String @db.VarChar(255)
+  remind_at String @db.VarChar(255)
+  content String @db.Text
+  @@map("reminders")
+}
+
+model Reputations {
+  given_by String @id @db.VarChar(255)
+  given_by_ip String @db.Text
+  given_by_email String @db.Text
+  received_by String @db.VarChar(255)
+  received_at String @db.VarChar(255)
+  content String @db.Text
+  @@map("reputations")
+}
+
+model UserAchievements {
+  user String @id @db.VarChar(255)
+  type String
+  achieved_at String
+  @@map("achievements")
+}
+
+model Fanarts {
+  user String @id @db.VarChar(255)
+  id Int @default(0)
+  name String @db.Text
+  @@map("fanarts")
+}
+
+model Colors {
+  id String @id @db.Text
+  cost Int @default(0)
+}
