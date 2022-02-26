@@ -1,6 +1,5 @@
 const { Loader } = require('../');
-const { MongoDB } = require('../database');
-
+const { DbSet } = require('../database');
 module.exports = class DatabaseLoader extends Loader {
 	constructor(client) {
 		super({
@@ -12,7 +11,7 @@ module.exports = class DatabaseLoader extends Loader {
 
 	async load() {
 		try {
-			await this.initializeDatabase(MongoDB, { useNewUrlParser: true });
+			await this.initializeDatabase();
 			this.client.database = this.database;
 			return !!this.database;
 		}
@@ -22,14 +21,9 @@ module.exports = class DatabaseLoader extends Loader {
 		return false;
 	}
 
-	initializeDatabase(DBWrapper = MongoDB, options = {}) {
-		if (DBWrapper.envVars && !DBWrapper.envVars.every(v => {
-			if (!process.env[v]) this.client.logger.warn({ tag: 'Database' }, `Você não definiu a variavel "${v}".`);
-			return !!process.env[v];
-		})) return false;
+	async initializeDatabase() {
 
-		this.database = new DBWrapper(options);
-		this.database.connect()
+		this.database = await DbSet.connect()
 			.then(() => this.client.logger.info({ tag: 'Database' }, 'Conectado com a database'))
 			.catch(e => {
 				this.client.logger.error('Database', e.message);

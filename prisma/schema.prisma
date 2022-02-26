@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id             String   @id @default("790760362060283974") @db.VarChar(255)
+  userBlocklist  String[]
+  guildBlocklist String[]
+
+  @@map("client")
+}
