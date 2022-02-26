@@ -182,6 +182,7 @@ model GuildProfile {
   level Float
   isInGuild Boolean @default(true)
   @@id([user])
+  @@map("guild_profiles")
 }
 
 model GuildConfig {
