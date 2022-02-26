@@ -9,13 +9,12 @@ datasource db {
 
 model Client {
   id             String   @id @default("790760362060283974") @db.VarChar(255)
-  user_blacklist  String[]
-  guild_blacklist String[]
+  maintenance  String[]
 
   @@map("mitsy_client")
 }
 
-model Background {
+model Background { 
   id String @id
   collection String
   title String
@@ -30,14 +29,14 @@ model DonationKeys {
   user String @id
   value Float @db.DoublePrecision
   tier Int @default(1)
-  expires_at String @db.VarChar(255)
-  metadata String @db.VarChar(255)
+  expires_at DateTime
+  metadata Json @db.Json
   @@map("premium_keys")
 }
 
 model Dailies {
   received_by String @db.VarChar(255) @id
-  received_at String @db.VarChar(255)
+  received_at DateTime @default(now())
   ip String @db.Text
   email String @db.Text
   user_agent String @db.VarChar(255)
@@ -45,11 +44,25 @@ model Dailies {
 }
 
 model Reminders { 
-  user_id String @id @db.VarChar(255)
+  user String @id @db.VarChar(255)
   channel_id String @db.VarChar(255)
-  remind_at String @db.VarChar(255)
+  remind_at DateTime 
   content String @db.Text
   @@map("reminders")
+}
+
+model Payments {
+  user String @db.VarChar(255)
+  gateway String
+  reason String @db.Text
+  money Float
+  created_at DateTime @default(now())
+  paid Boolean @default(false)
+  paid_at DateTime
+  expires_at DateTime
+  reference_id String @db.Uuid @id
+  metadata Json @db.Json
+  @@map("premium_payments")
 }
 
 model Reputations {
@@ -57,7 +70,7 @@ model Reputations {
   given_by_ip String @db.Text
   given_by_email String @db.Text
   received_by String @db.VarChar(255)
-  received_at String @db.VarChar(255)
+  received_at DateTime @default(now())
   content String @db.Text
   @@map("reputations")
 }
@@ -80,4 +93,106 @@ model Colors {
   id String @id @db.Text
   cost Int @default(0)
   @@map("shop_colors")
+}
+
+model BlacklistedGuilds {
+  guild String @id
+  bannedAt DateTime @default(now())
+  reason String @db.Text
+  @@map("blacklisted_guilds")
+}
+
+model BannedUsers {
+  user String @id
+  valid Boolean @default(true)
+  banned_at DateTime @default(now())
+  expires_at DateTime
+  reason String @db.Text
+  banned_by String @db.Text
+  @@map("banned_users")
+}
+
+// User config (website and bot)
+
+model UserConnections {
+  id String   @id @db.VarChar(255)
+  name String
+  tokens String[]
+  config String[]
+  @@map("user_connections")
+}
+
+model UserProfile {
+  id String
+  comets Float
+  global_xp Float
+  global_level Float @db.DoublePrecision
+  aboutme String @db.Text
+  total_reps Float @db.DoublePrecision
+  active_background String
+  backgrounds String[]
+  active_profile_design String
+  profiles String[]
+  active_badges String[]
+  badge_list String[]
+  active_colors String[]
+  color String
+  isAfk Boolean @default(false)
+  afkReason String @db.Text
+  married Boolean @default(false)
+  married_user String
+  married_since DateTime
+  gender String
+  @@id([id])
+
+  @@map("user_profile")
+}
+
+model UserDonations {
+    id String
+    expire_at DateTime
+    enabled_at DateTime
+    tier Int @default(1)
+    expired Boolean @default(false)
+    @@id([id])
+    @@map("user_donations")
+}
+
+model UserCooldowns {
+  id String
+  last_daily DateTime
+  last_rep DateTime
+  @@id([id])
+  @@map("user_cooldowns")
+}
+
+model UserGeneralConfig {
+  id String
+  locale String @default("pt-BR")
+  @@id([id])
+  @@map("user_config")
+}
+
+// Guild config (website and bot)
+
+model GuildProfile {
+  guild String
+  user String
+  xp Float
+  level Float
+  isInGuild Boolean @default(true)
+  @@id([user])
+}
+
+model GuildConfig {
+  id String
+  blacklisted_channels String[]
+  custom_commands String[]
+  disabled_commands String[]
+  lang String @default("pt-BR")
+  prefix String @default("-")
+  custom_warn_message Boolean @default(false)
+  blacklisted_warning String
+  @@id([id])
+  @@map("guild_general")
 }
