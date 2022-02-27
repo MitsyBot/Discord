@@ -1,4 +1,4 @@
-const { connect } = require('../database.config');
+const { PrismaClient } = require('@prisma/client');
 
 module.exports = class DbSet {
 
@@ -55,9 +55,8 @@ module.exports = class DbSet {
 	}
 
 	static async connect() {
-		return (DbSet.instance ??= await (DbSet.connectPromise ??= connect().then((connection) => {
-			DbSet.connectPromise = null;
-			return new DbSet(connection);
-		})));
+		const prisma = new PrismaClient();
+		await prisma.$connect();
+		return new DbSet(prisma);
 	}
 };
