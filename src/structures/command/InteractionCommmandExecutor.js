@@ -57,7 +57,7 @@ module.exports = class InteractionCommandExecutor {
 			return;
 		}
 
-		if (data.guild.blacklistedChannels.channels.includes(interaction.channelId) && data.author.staffLevel < 1) {
+		if (data.guild.blacklisted_channels.includes(interaction.channelId) && data.author.staffLevel < 1) {
 			if (!data.guild.blacklistedChannels.warn) return;
 
 			await interaction.reply({ content: t('errors:CHANNEL_BLACKLISTED'), ephemeral: true });

@@ -68,9 +68,9 @@ module.exports = class UserRepository {
 
 	async ensureUserInfos(id) {
 		const general = await this.ensure(id);
-		const cooldowns = await this.ensureCooldowns(id).cooldown;
-		const profile = await this.ensureProfile(id).profile;
+		const cooldowns = await this.ensureCooldowns(id);
+		const profile = await this.ensureProfile(id);
 
-		return { general, cooldowns, profile };
+		return { general, cooldowns: cooldowns.cooldowns, profile: profile.profile };
 	}
 };
