@@ -1,5 +1,3 @@
-const { PrismaClient } = require('@prisma/client');
-
 module.exports = class DbSet {
 
 	constructor(connection) {
@@ -52,11 +50,5 @@ module.exports = class DbSet {
 
 		return body;
 
-	}
-
-	static async connect() {
-		const prisma = new PrismaClient();
-		await prisma.$connect();
-		return new DbSet(prisma);
 	}
 };

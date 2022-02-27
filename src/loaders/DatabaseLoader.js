@@ -1,5 +1,7 @@
 const { Loader } = require('../');
 const { DbSet } = require('../database');
+const { PrismaClient } = require('@prisma/client');
+
 module.exports = class DatabaseLoader extends Loader {
 	constructor(client) {
 		super({
@@ -23,8 +25,9 @@ module.exports = class DatabaseLoader extends Loader {
 	}
 
 	async initializeDatabase() {
-
-		this.database = await DbSet.connect()
+		const prisma = new PrismaClient();
+		await prisma.$connect();
+		this.database = new DbSet(prisma)
 			.then(() => this.client.logger.info({ tag: 'Database' }, 'Conectado com a database'))
 			.catch(e => {
 				this.client.logger.error('Database', e.message);
