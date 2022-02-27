@@ -12,8 +12,9 @@ module.exports = class DatabaseLoader extends Loader {
 	async load() {
 		try {
 			await this.initializeDatabase();
+			console.log(this.database);
 			this.client.database = this.database;
-			return !!this.database;
+			return this.database;
 		}
 		catch (e) {
 			this.client.logger.error(e);
