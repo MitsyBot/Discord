@@ -67,8 +67,7 @@ module.exports = class UserRepository {
 		const general = await this.ensure(id);
 		const cooldowns = await this.ensureCooldowns(id);
 		const profile = await this.ensureProfile(id);
-		console.log(profile);
-		return { general, cooldowns: cooldowns.cooldowns, profile: profile.profile };
+		return { general, cooldowns: cooldowns.cooldowns, profile };
 	}
 
 	async addComets(id, amount) {
