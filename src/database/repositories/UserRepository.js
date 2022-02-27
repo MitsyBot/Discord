@@ -13,7 +13,8 @@ module.exports = class UserRepository {
 	}
 
 	async ensureProfile(id) {
-		const previous = await this.general.findUnique({
+
+		const previous = await this.profiles.findUnique({
 			where: {
 				id,
 			},
@@ -22,26 +23,23 @@ module.exports = class UserRepository {
 			},
 		});
 
-		if (!previous) {
-			const data = await this.user.profiles.create({
-				data: {
-					id: id,
-					backgrounds: {
-						set: ['mitsy_1'],
-					},
-					profiles: {
-						set: ['default'],
-					},
-					active_colors: {
-						set:['#f895fb'],
-					},
+		if (previous.profile) return previous;
+
+		const data = await this.profiles.create({
+			data: {
+				id,
+				backgrounds: {
+					set: ['mitsy_1'],
 				},
-			});
-
-			return data;
-		}
-
-		return previous;
+				profiles: {
+					set: ['default'],
+				},
+				active_colors: {
+					set:['#f895fb'],
+				},
+			},
+		});
+		return data;
 	}
 
 	async ensureCooldowns(id) {
