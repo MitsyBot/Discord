@@ -65,7 +65,6 @@ module.exports = class UserRepository {
 		return data;
 	}
 
-
 	async ensureUserInfos(id) {
 		const general = await this.ensure(id);
 		const cooldowns = await this.ensureCooldowns(id);

@@ -18,6 +18,10 @@ module.exports = class InteractionCommandExecutor {
 			const interactionUserData = await client.database.user.ensureUserInfos(user.id);
 			data.user = interactionUserData;
 		}
+		const userBlacklist = await client.controllers.developer.userBlacklisted(interaction.user.id);
+		console.log(userBlacklist);
+		const guildBlacklist = await client.controllers.developer.guildBlacklisted(interaction.guild.id);
+		console.log(guildBlacklist);
 
 		data.author = authorData;
 		data.guild = guildData;
@@ -32,7 +36,7 @@ module.exports = class InteractionCommandExecutor {
 			return;
 		}
 
-		if (data.guild.blacklist) {
+		if (guildBlacklist) {
 			await interaction
 				.reply({
 					content: `${t('errors:GUILD_BLACKLISTED', {
@@ -47,17 +51,16 @@ module.exports = class InteractionCommandExecutor {
 				});
 			return;
 		}
-
-		if (data.author.blacklist) {
+		if (userBlacklist.valid) {
 			await interaction
 				.reply({
-					content: t('errors:USER_BLACKLISTED', { reason: data.author.blacklisted.reason }),
+					content: t('errors:USER_BLACKLISTED', { reason: userBlacklist.reason }),
 					ephemeral: true,
 				});
 			return;
 		}
 
-		if (data.guild.blacklisted_channels.includes(interaction.channelId) && data.author.staffLevel < 1) {
+		if (data.guild.blacklisted_channels.includes(interaction.channelId) && data.st.staffLevel < 1) {
 			if (!data.guild.blacklistedChannels.warn) return;
 
 			await interaction.reply({ content: t('errors:CHANNEL_BLACKLISTED'), ephemeral: true });
