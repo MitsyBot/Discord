@@ -9,9 +9,9 @@ module.exports = class DbSet {
 
 	}
 	async getUser(_id) {
-		const general = this.user.ensure(_id);
-		const cooldowns = this.user.ensureCooldowns(_id);
-		const profile = this.user.ensureProfile(_id);
+		const general = await this.user.ensure(_id);
+		const cooldowns = await this.user.ensureCooldowns(_id);
+		const profile = await this.user.ensureProfile(_id);
 
 		return { general, cooldowns, profile };
 	}
