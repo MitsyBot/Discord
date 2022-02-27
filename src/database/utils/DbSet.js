@@ -2,6 +2,7 @@ module.exports = class DbSet {
 
 	constructor(connection) {
 		this.connection = connection;
+		this.user = {};
 		this.user.profiles = connection.UserProfile;
 		this.user.general = connection.UserGeneralConfig;
 		this.user.cooldowns = connection.UserCooldowns;
