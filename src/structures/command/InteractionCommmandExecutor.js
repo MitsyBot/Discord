@@ -19,10 +19,10 @@ module.exports = class InteractionCommandExecutor {
 			data.user = interactionUserData;
 		}
 		const userBlacklist = await client.controllers.developer.userBlacklisted(interaction.user.id);
-		console.log(userBlacklist);
 		const guildBlacklist = await client.controllers.developer.guildBlacklisted(interaction.guild.id);
-		console.log(guildBlacklist);
 
+		const DevLevel = await client.controllers.developer.getDeveloper(interaction.user.id);
+		console.log(DevLevel);
 		data.author = authorData;
 		data.guild = guildData;
 
@@ -51,7 +51,7 @@ module.exports = class InteractionCommandExecutor {
 				});
 			return;
 		}
-		if (userBlacklist.valid) {
+		if (userBlacklist) {
 			await interaction
 				.reply({
 					content: t('errors:USER_BLACKLISTED', { reason: userBlacklist.reason }),
@@ -60,7 +60,7 @@ module.exports = class InteractionCommandExecutor {
 			return;
 		}
 
-		if (data.guild.blacklisted_channels.includes(interaction.channelId) && data.st.staffLevel < 1) {
+		if (data.guild.blacklisted_channels.includes(interaction.channelId) && DevLevel < 1) {
 			if (!data.guild.blacklistedChannels.warn) return;
 
 			await interaction.reply({ content: t('errors:CHANNEL_BLACKLISTED'), ephemeral: true });
@@ -68,12 +68,12 @@ module.exports = class InteractionCommandExecutor {
 		}
 
 
-		if (command.config.devsOnly && data.author.staffLevel < 3) {
+		if (command.config.devsOnly && DevLevel < 3) {
 			await interaction.reply({ content: t('permissions:ONLY_DEVS'), ephemeral: true });
 			return;
 		}
 
-		if (command.config.staffOnly && data.author.staffLevel < 2) {
+		if (command.config.staffOnly && DevLevel < 2) {
 			await interaction.reply({ content: t('permissions:ONLY_STAFF'), ephemeral: true });
 			return;
 		}
