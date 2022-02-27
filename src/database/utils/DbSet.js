@@ -2,41 +2,41 @@ module.exports = class DbSet {
 
 	constructor(connection) {
 		this.connection = connection;
-		this.profiles = connection.userprofile;
-		this.general = connection.usergeneralconfig;
-		this.cooldowns = connection.usercooldowns;
+		this.user.profiles = connection.UserProfile;
+		this.user.general = connection.UserGeneralConfig;
+		this.user.cooldowns = connection.UserCooldowns;
 	}
 	async getUser(_id) {
-		let UserGeneral = await this.general.findUnique({
+		let UserGeneral = await this.user.general.findUnique({
 			where: {
 				id: _id,
 			},
 		});
 
-		let UserCooldowns = await this.cooldowns.findUnique({
+		let UserCooldowns = await this.user.cooldowns.findUnique({
 			where: {
 				id: _id,
 			},
 		});
 
-		let UserProfile = await this.profiles.findUnique({
+		let UserProfile = await this.user.profiles.findUnique({
 			where: {
 				id: _id,
 			},
 		});
 
 		if (!UserProfile && !UserCooldowns && !UserGeneral) {
-			UserGeneral = await this.general.create({
+			UserGeneral = await this.user.general.create({
 				data: {
 					id: _id,
 				},
 			});
-			UserCooldowns = await this.cooldowns.create({
+			UserCooldowns = await this.user.cooldowns.create({
 				data: {
 					id: _id,
 				},
 			});
-			UserProfile = await this.profiles.create({
+			UserProfile = await this.user.profiles.create({
 				data: {
 					id: _id,
 				},

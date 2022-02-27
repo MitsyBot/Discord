@@ -30,8 +30,6 @@ module.exports = class DatabaseLoader extends Loader {
 				this.client.logger.error('Database', e.message);
 				this.database = null;
 			});
-		console.log(prisma.guild_general);
-		console.log(prisma.GuildConfig);
 
 		this.database = new DbSet(prisma);
 
