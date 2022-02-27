@@ -9,9 +9,8 @@ module.exports = class InteractionCommandExecutor {
 
 	async CommandExecuted(client, interaction) {
 		const authorData = await client.database.user.ensureUserInfos(interaction.user.id);
-		console.log(authorData);
 		const guildData = await client.database.guild.ensure(interaction.guild.id);
-		console.log(guildData);
+
 		const data = {};
 		const user = interaction.options.getUser('usuário', false);
 		if (user) {
