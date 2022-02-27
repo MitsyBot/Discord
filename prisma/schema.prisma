@@ -106,7 +106,7 @@ model BannedUsers {
   user String @id
   valid Boolean @default(true)
   banned_at DateTime @default(now())
-  expires_at DateTime
+  expires_at Float
   reason String @db.Text
   banned_by String @db.Text
   @@map("banned_users")
@@ -160,8 +160,8 @@ model UserDonations {
 
 model UserCooldowns {
   id String
-  last_daily DateTime
-  last_rep DateTime
+  last_daily Float @default(0)
+  last_rep Float @default(0)
   @@id([id])
   @@map("user_cooldowns")
 }
