@@ -9,7 +9,9 @@ module.exports = class UserRepository {
 		if (previous) return previous;
 
 		const data = await this.general.create({ data: { id } });
-		return data;
+		const dados = {};
+		dados.profile = data;
+		return dados;
 	}
 
 	async ensureProfile(id) {
@@ -39,7 +41,10 @@ module.exports = class UserRepository {
 				},
 			},
 		});
-		return data;
+
+		const dados = {};
+		dados.profile = data;
+		return dados;
 	}
 
 	async ensureCooldowns(id) {
@@ -59,15 +64,16 @@ module.exports = class UserRepository {
 				id: id,
 			},
 		});
-
-		return data;
+		const dados = {};
+		dados.cooldowns = data;
+		return dados;
 	}
 
 	async ensureUserInfos(id) {
 		const general = await this.ensure(id);
 		const cooldowns = await this.ensureCooldowns(id);
 		const profile = await this.ensureProfile(id);
-		return { general, cooldowns: cooldowns.cooldowns, profile };
+		return { general, cooldowns: cooldowns.cooldowns, profile.profile };
 	}
 
 	async addComets(id, amount) {
