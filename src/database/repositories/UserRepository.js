@@ -1,0 +1,67 @@
+module.exports = class UserRepository {
+	constructor(connection) {
+		this.profiles = connection.UserProfile;
+		this.general = connection.UserGeneralConfig;
+		this.cooldowns = connection.UserCooldowns;
+	}
+	async ensure(id) {
+		const previous = await this.general.findUnique({ where: { id } });
+		if (previous) return previous;
+
+		const data = await this.general.create({ data: { id } });
+		return data;
+	}
+
+	async ensureProfile(id) {
+		const previous = await this.general.findUnique({
+			where: {
+				id,
+			},
+			include: {
+				profile: true,
+			},
+		});
+
+		if (!previous.profile) {
+			const data = await this.user.profiles.create({
+				data: {
+					id: id,
+					backgrounds: {
+						set: ['mitsy_1'],
+					},
+					profiles: {
+						set: ['default'],
+					},
+					active_colors: {
+						set:['#f895fb'],
+					},
+				},
+			});
+
+			return data;
+		}
+
+		return previous;
+	}
+
+	async ensureCooldowns(id) {
+		const previous = await this.general.findUnique({
+			where: {
+				id,
+			},
+			include: {
+				cooldowns: true,
+			},
+		});
+
+		if (previous.cooldowns) return previous;
+
+		const data = await this.cooldowns.create({
+			data: {
+				id: id,
+			},
+		});
+
+		return data;
+	}
+};

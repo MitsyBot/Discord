@@ -124,6 +124,7 @@ model UserConnections {
 
 model UserProfile {
   id String
+  user UserGeneralConfig @relation(fields: [id], references: [id])
   comets Float @default(0)
   global_xp Float @default(0)
   global_level Float @db.DoublePrecision @default(90)
@@ -162,12 +163,15 @@ model UserCooldowns {
   id String
   last_daily Float @default(0)
   last_rep Float @default(0)
+  user UserGeneralConfig @relation(fields: [id], references: [id])
   @@id([id])
   @@map("user_cooldowns")
 }
 
 model UserGeneralConfig {
   id String
+  profile UserProfile?
+  cooldowns UserCooldowns?
   locale String @default("pt-BR")
   @@id([id])
   @@map("user_config")

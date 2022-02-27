@@ -9,6 +9,7 @@ module.exports = class InteractionCommandExecutor {
 
 	async CommandExecuted(client, interaction) {
 		const authorData = await client.database.getUser(interaction.user.id);
+		console.log(authorData);
 		const guildData = await client.database.getGuild(interaction.guild.id);
 
 		const data = {};
