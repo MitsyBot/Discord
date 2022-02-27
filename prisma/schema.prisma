@@ -193,7 +193,7 @@ model GuildConfig {
   lang String @default("pt-BR")
   prefix String @default("-")
   custom_warn_message Boolean @default(false)
-  blacklisted_warning String
+  blacklisted_warning String @default("Este canal esta bloqueado de usar meus comandos!")
   @@id([id])
   @@map("guild_general")
 }

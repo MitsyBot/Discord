@@ -9,19 +9,21 @@ module.exports = class InteractionCommandExecutor {
 
 	async CommandExecuted(client, interaction) {
 		const authorData = await client.database.getUser(interaction.user.id);
+		const guildData = await client.database.getGuild(interaction.guild.id);
 
 		const data = {};
 		const user = interaction.options.getUser('usuário', false);
 		if (user) {
-			const interactionUserData = await client.database.users.findOne(user.id);
+			const interactionUserData = await client.database.getUser(user.id);
 			data.user = interactionUserData;
 		}
 
 		data.author = authorData;
+		data.guild = guildData;
 
 		const command = client.slashCommands.find(c => c.config.name === interaction.commandName);
 
-		const t = client.i18next.getFixedT(data.guild.lang || 'pt-BR');
+		const t = client.i18next.getFixedT(data.guild.general.lang || 'pt-BR');
 
 		if (!command) {
 			interaction
@@ -37,7 +39,7 @@ module.exports = class InteractionCommandExecutor {
 					})}`,
 					ephemeral: false,
 				}).then(() => {
-					client.guilds.cache.get(data.guild.id)
+					client.guilds.cache.get(data.guild.general.id)
 						.leave()
 						.then(g => client.logger.info({ tag: 'Discord' }, `Mitsy saiu de ${g} por ${data.guild.blacklistReason}`))
 						.catch(console.error);

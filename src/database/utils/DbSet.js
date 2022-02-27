@@ -6,6 +6,9 @@ module.exports = class DbSet {
 		this.user.profiles = connection.UserProfile;
 		this.user.general = connection.UserGeneralConfig;
 		this.user.cooldowns = connection.UserCooldowns;
+		this.guild = {};
+		this.guild.general = connection.GuildConfig;
+
 	}
 	async getUser(_id) {
 		let UserGeneral = await this.user.general.findUnique({
@@ -60,5 +63,27 @@ module.exports = class DbSet {
 
 		return body;
 
+	}
+
+	async getGuild(_id) {
+		let GuildGeneral = await this.guild.general.findUnique({
+			where: {
+				id: _id,
+			},
+		});
+
+		if (!GuildGeneral) {
+			GuildGeneral = await this.user.general.create({
+				data: {
+					id: _id,
+				},
+			});
+		}
+
+		const body = {
+			general: GuildGeneral,
+		};
+
+		return body;
 	}
 };
