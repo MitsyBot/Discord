@@ -23,15 +23,6 @@ module.exports = class DbSet {
 		let UserProfile = await this.user.profiles.findUnique({
 			where: {
 				id: _id,
-				backgrounds: {
-					set: ['mitsy_1'],
-				},
-				profiles: {
-					set: ['default'],
-				},
-				active_colors: {
-					set:['#f895fb'],
-				},
 			},
 		});
 
@@ -49,6 +40,15 @@ module.exports = class DbSet {
 			UserProfile = await this.user.profiles.create({
 				data: {
 					id: _id,
+					backgrounds: {
+						set: ['mitsy_1'],
+					},
+					profiles: {
+						set: ['default'],
+					},
+					active_colors: {
+						set:['#f895fb'],
+					},
 				},
 			});
 		}
