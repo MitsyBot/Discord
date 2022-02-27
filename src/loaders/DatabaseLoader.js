@@ -26,12 +26,12 @@ module.exports = class DatabaseLoader extends Loader {
 
 	async initializeDatabase() {
 		const prisma = new PrismaClient();
-		await prisma.$connect();
-		this.database = new DbSet(prisma)
-			.then(() => this.client.logger.info({ tag: 'Database' }, 'Conectado com a database'))
+		await prisma.$connect().then(() => this.client.logger.info({ tag: 'Database' }, 'Conectado com a database'))
 			.catch(e => {
 				this.client.logger.error('Database', e.message);
 				this.database = null;
 			});
+		this.database = new DbSet(prisma);
+
 	}
 };
