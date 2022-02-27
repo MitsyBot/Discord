@@ -14,7 +14,6 @@ module.exports = {
 	Controller: require('./structures/Controller.js'),
 	MitsyEmbed: require('./structures/MitsyEmbed.js'),
 	WebSocketController: require('./websocket/ApiWebsocket'),
-	Module: require('./structures/Module'),
 	MiscUtils: require('./utils/MiscUtils'),
 	Connection: require('./structures/Connetion'),
 };

@@ -72,4 +72,56 @@ module.exports = class UserRepository {
 
 		return { general, cooldowns: cooldowns.cooldowns, profile: profile.profile };
 	}
+
+	async addComets(id, amount) {
+		const previous = await this.general.findUnique({
+			where: {
+				id,
+			},
+			include: {
+				profile: true,
+			},
+		});
+		if (!previous.profile) {
+			return await this.user.profiles.create({
+				data: {
+					id,
+					comets: amount,
+					backgrounds: {
+						set: ['mitsy_1'],
+					},
+					profiles: {
+						set: ['default'],
+					},
+					active_colors: {
+						set:['#f895fb'],
+					},
+				},
+			});
+		}
+
+		return await this.user.profiles.update({
+			where: {
+				id,
+			},
+			data: {
+				comets: {
+					increment: amount,
+				},
+			},
+		});
+	}
+
+	async removeComets(id, amount) {
+		return await this.user.profiles.update({
+			where: {
+				id,
+			},
+			data: {
+				comets: {
+					decrement: amount,
+				},
+			},
+		});
+	}
 };

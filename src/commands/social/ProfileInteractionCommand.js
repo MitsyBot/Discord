@@ -24,28 +24,28 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		const user = ctx.data.user ?? ctx.data.author;
 		const member = ctx.options.getUser('usuário') ?? ctx.author;
 		const avatar = member.displayAvatarURL({ format: 'png', size: 512 });
-		const marry = user.isMarry && user.isMarry !== 'false' ? await ctx.client.users.fetch(user.marryWith) : null;
-		const previousLevel = Math.floor((user.level - 1) * 1000);
-		const nextLevel = Math.floor((user.level + 1) * 1000);
-		const progressBar = Math.max(Math.round(((user.xp - previousLevel) / (nextLevel - previousLevel)) * 800), 6);
+		const marry = user.profile.married && user.profile.married !== 'false' ? await ctx.client.users.fetch(user.profile.married_user) : null;
+		const previousLevel = Math.floor((user.profile.global_level - 1) * 1000);
+		const nextLevel = Math.floor((user.profile.global_level + 1) * 1000);
+		const progressBar = Math.max(Math.round(((user.profile.global_xp - previousLevel) / (nextLevel - previousLevel)) * 800), 6);
 
 
 		const data = {
 
 			type: 'default',
-			level: `${user.level}`,
+			level: `${user.profile.global_level}`,
 			name: `${member.username}#${member.discriminator}`,
-			xp: `${user.xp}`,
+			xp: `${user.profile.global_xp}`,
 			ranking: '4',
 			barlevel: progressBar,
-			money: `${user.comets}`,
-			aboutme: user.aboutme,
-			married: user.isMarry,
-			bgId: user.background,
-			rep: `${user.repCount}`,
-			favcolor: user.profileColor,
+			money: `${user.profile.comets}`,
+			aboutme: user.profile.aboutme,
+			married: user.profile.married,
+			bgId: user.profile.active_background,
+			rep: `${user.profile.total_reps}`,
+			favcolor: user.profile.color,
 			avatarurl: avatar,
-			badges: user.badgesEnabled,
+			badges: user.profile.active_badges,
 
 		};
 		if (marry) {

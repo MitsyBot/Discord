@@ -20,10 +20,6 @@ class DailyController extends Controller {
 		}, client);
 	}
 
-	get _users() {
-		return this.client.database.users;
-	}
-
 	checkClaim(lastClaim) {
 		return Date.now() - lastClaim < DAILY_INTERVAL;
 	}
@@ -33,11 +29,11 @@ class DailyController extends Controller {
 	}
 
 	async claimDaily(_user) {
-		const user = await this._users.findOne(_user, 'comets lastDaily');
-		const { lastDaily } = user;
+		const user = await this.client.database.user.ensureUserInfos(_user);
+		const { cooldowns } = user;
 
-		if (this.checkClaim(lastDaily)) {
-			throw new DailyCooldownError(lastDaily, this.formatClaimTime(lastDaily));
+		if (this.checkClaim(cooldowns.last_daily)) {
+			throw new DailyCooldownError(cooldowns.last_daily, this.formatClaimTime(cooldowns.last_daily));
 		}
 
 		return true;
@@ -57,22 +53,18 @@ module.exports = class EconomyController extends Controller {
 		return !!this.client.database;
 	}
 
-	get _users() {
-		return this.client.database.users;
-	}
-
 	async transfer(_from, _to, amount) {
-		const from = await this._users.findOne(_from, 'comets');
-		if (from.comets < amount) return { sucess: false };
+		const { profile } = await this.client.database.user.ensureProfile(_from);
+		if (profile.comets < amount) return { sucess: false };
 		await Promise.all([
-			this._users.update(_from, { $inc: { comets: -amount } }),
-			this._users.update(_to, { $inc: { comets: amount } }),
+			this.client.database.user.removeComets(_from, amount),
+			this.client.database.user.addComets(_to, amount),
 		]);
 		return { sucess: true };
 	}
 
 	async balance(_user) {
-		const { comets } = await this._users.findOne(_user, 'comets');
-		return comets;
+		const { profile } = await this.client.database.user.ensureProfile(_user);
+		return profile.comets;
 	}
 };
