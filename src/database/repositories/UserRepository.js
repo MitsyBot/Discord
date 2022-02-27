@@ -14,7 +14,7 @@ module.exports = class UserRepository {
 
 	async ensureProfile(id) {
 
-		const previous = await this.profiles.findUnique({
+		const previous = await this.general.findUnique({
 			where: {
 				id,
 			},
