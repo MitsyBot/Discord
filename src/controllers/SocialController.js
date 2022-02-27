@@ -13,23 +13,37 @@ module.exports = class SocialController extends Controller {
 		return !!this.client.database;
 	}
 
-	get _users() {
-		return this.client.database.users;
-	}
-
 	async addXp(_user) {
-		const { premiumLevel, xp, level } = await this._users.findOne(_user, 'premiumLevel xp level');
+		const { profile } = await this.client.database.user.ensureProfile(_user);
 
-		const xpBonus = 1 + premiumLevel;
-		const xpToLvlUp = level * 1000;
+		const xpBonus = 1;
+		const xpToLvlUp = profile.global_level * 1000;
 		const newxp = (Math.floor(Math.random() * 10) + 1) * xpBonus;
 		await Promise.all([
-			this._users.update(_user, { $inc: { xp: Number(newxp) } }),
+			this.client.database.user.profiles.update({
+				where: {
+					id: _user,
+				},
+				data: {
+					global_xp: {
+						increment: newxp,
+					},
+				},
+			}),
 		]);
 
-		if (xp > xpToLvlUp) {
+		if (profile.global_xp > xpToLvlUp) {
 			await Promise.all([
-				this._users.update(_user, { $inc: { level: 1 } }),
+				this.client.database.user.profiles.update({
+					where: {
+						id: _user,
+					},
+					data: {
+						global_level: {
+							increment: 1,
+						},
+					},
+				}),
 			]);
 		}
 	}
