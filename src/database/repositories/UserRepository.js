@@ -22,7 +22,7 @@ module.exports = class UserRepository {
 			},
 		});
 
-		if (!previous.profile) {
+		if (!previous) {
 			const data = await this.user.profiles.create({
 				data: {
 					id: id,
