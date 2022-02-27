@@ -21,7 +21,7 @@ module.exports = class InteractionCommandExecutor {
 		const guildBlacklist = await client.controllers.developer.guildBlacklisted(interaction.guild.id);
 
 		const DevLevel = await client.controllers.developer.getDeveloper(interaction.user.id);
-		console.log(DevLevel);
+
 		data.author = authorData;
 		data.guild = guildData;
 
