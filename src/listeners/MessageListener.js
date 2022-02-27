@@ -11,14 +11,8 @@ module.exports = class MessageListener extends EventListener {
 		if (message.interaction) return;
 		if (message.author.bot) return;
 
-		const guildData = await this.database.guilds.findOne(message.guild.id);
-		const customCommands = guildData.customCommands;
-		const blacklistedTerms = guildData.blacklistedTerms;
-		const msg = message.content.split(' ');
-
-		if (msg.some((v) => v.includes(blacklistedTerms))) {
-			return message.delete();
-		}
+		const guildData = await this.database.guild.ensure(message.guild.id);
+		const customCommands = guildData.custom_commands;
 
 		for (const cmd in customCommands) {
 			if (message.content === customCommands[cmd][0]) {
