@@ -124,25 +124,25 @@ model UserConnections {
 
 model UserProfile {
   id String
-  comets Float
-  global_xp Float
-  global_level Float @db.DoublePrecision
-  aboutme String @db.Text
-  total_reps Float @db.DoublePrecision
-  active_background String
+  comets Float @default(0)
+  global_xp Float @default(0)
+  global_level Float @db.DoublePrecision @default(90)
+  aboutme String @db.Text @default("Mitsy é a minha melhor amiga, você pode mudar isto no seu perfil do meu website!")
+  total_reps Float @db.DoublePrecision @default(0)
+  active_background String @default("mitsy_1")
   backgrounds String[]
-  active_profile_design String
+  active_profile_design String @default("default")
   profiles String[]
   active_badges String[]
   badge_list String[]
   active_colors String[]
-  color String
+  color String @default("#f895fb")
   isAfk Boolean @default(false)
-  afkReason String @db.Text
+  afkReason String @db.Text @default("")
   married Boolean @default(false)
-  married_user String
-  married_since DateTime
-  gender String
+  married_user String @default("")
+  married_since Float @default(0) 
+  gender String @default("UNKNOWN")
   @@id([id])
 
   @@map("user_profile")
