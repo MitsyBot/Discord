@@ -8,14 +8,14 @@ module.exports = class InteractionCommandExecutor {
 	}
 
 	async CommandExecuted(client, interaction) {
-		const authorData = await client.database.getUser(interaction.user.id);
+		const authorData = await client.database.user.ensureUserInfos(interaction.user.id);
 		console.log(authorData);
-		const guildData = await client.database.getGuild(interaction.guild.id);
-
+		const guildData = await client.database.guild.ensure(interaction.guild.id);
+		console.log(guildData);
 		const data = {};
 		const user = interaction.options.getUser('usuário', false);
 		if (user) {
-			const interactionUserData = await client.database.getUser(user.id);
+			const interactionUserData = await client.database.user.ensureUserInfos(user.id);
 			data.user = interactionUserData;
 		}
 
@@ -24,7 +24,7 @@ module.exports = class InteractionCommandExecutor {
 
 		const command = client.slashCommands.find(c => c.config.name === interaction.commandName);
 
-		const t = client.i18next.getFixedT(data.guild.general.lang || 'pt-BR');
+		const t = client.i18next.getFixedT(data.guild.lang || 'pt-BR');
 
 		if (!command) {
 			interaction

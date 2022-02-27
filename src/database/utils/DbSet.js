@@ -1,40 +1,9 @@
-const { UserRepository } = require('../repositories/');
+const { UserRepository, GuildRepository } = require('../repositories/');
 module.exports = class DbSet {
 
 	constructor(connection) {
 		this.connection = connection;
 		this.user = new UserRepository(connection);
-		this.guild = {};
-		this.guild.general = connection.GuildConfig;
-
-	}
-	async getUser(_id) {
-		const general = await this.user.ensure(_id);
-		const cooldowns = await this.user.ensureCooldowns(_id);
-		const profile = await this.user.ensureProfile(_id);
-
-		return { general, cooldowns, profile };
-	}
-
-	async getGuild(_id) {
-		let GuildGeneral = await this.guild.general.findUnique({
-			where: {
-				id: _id,
-			},
-		});
-
-		if (!GuildGeneral) {
-			GuildGeneral = await this.user.general.create({
-				data: {
-					id: _id,
-				},
-			});
-		}
-
-		const body = {
-			general: GuildGeneral,
-		};
-
-		return body;
+		this.guild = new GuildRepository(connection);
 	}
 };
