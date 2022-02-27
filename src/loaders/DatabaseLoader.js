@@ -14,7 +14,6 @@ module.exports = class DatabaseLoader extends Loader {
 	async load() {
 		try {
 			await this.initializeDatabase();
-			console.log(this.database);
 			this.client.database = this.database;
 			return this.database;
 		}
@@ -31,6 +30,7 @@ module.exports = class DatabaseLoader extends Loader {
 				this.client.logger.error('Database', e.message);
 				this.database = null;
 			});
+		console.log(prisma);
 		this.database = new DbSet(prisma);
 
 	}
