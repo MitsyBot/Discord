@@ -6,7 +6,11 @@ pipeline {
     IMAGE_VERSION='latest'
   }
   stages {
-
+    stage('pull submodules') {
+      steps {
+        sh 'cd prisma && ls && git pull'
+      }
+    }
     stage('cleanup') {
       steps {
         sh 'docker system prune -a --volumes --force'
