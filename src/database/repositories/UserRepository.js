@@ -3,6 +3,7 @@ module.exports = class UserRepository {
 		this.profiles = connection.UserProfile;
 		this.general = connection.UserGeneralConfig;
 		this.cooldowns = connection.UserCooldowns;
+		this.connections = connection.UserConnections;
 	}
 	async ensure(id) {
 		const previous = await this.general.findUnique({ where: { id } });

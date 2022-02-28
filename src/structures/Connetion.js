@@ -18,10 +18,6 @@ module.exports = class Connection {
 		return this;
 	}
 
-	get _users() {
-		return this.client.database.users;
-	}
-
 	get configPattern() {
 		return {};
 	}

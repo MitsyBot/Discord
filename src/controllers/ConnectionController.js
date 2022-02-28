@@ -8,24 +8,42 @@ module.exports = class ConnectionController extends Controller {
 	}
 
 	get _users() {
-		return this.client.database.users;
+		return this.client.database.user;
 	}
 
 	async connect(_user, _connection, _tokens) {
 		if (typeof _tokens === 'string') _tokens = { token: _tokens };
 		if (typeof _tokens !== 'object') throw new TypeError(`ConnectionController.connect deve conter pelo menos um argumento do tipo string ou objeto, ${typeof _tokens} enviados`);
-		const user = await this._users.findOne(_user, 'connections');
+		const user = await this._users.general.findMany({
+			where: {
+				id: user,
+			},
+			include: {
+				connections: true,
+			},
+		});
 		if (user.connections.some(c => c.name === _connection.name)) return 'alreadyConnected';
 		const connection = {
+			id: _user,
 			name: _connection.name,
 			tokens: _tokens,
 			config: _connection.defaultConfig,
 		};
-		await this._users.update(_user, { $push: { connections: connection } });
+		await this._users.profiles.create({
+			data: connection,
+		});
 	}
 
 	async editConfig(_user, _connection, _config) {
-		const user = await this._users.findOne(_user, 'connections');
+		const user = await this._users.general.findMany({
+			where: {
+				id: user,
+			},
+			include: {
+				connections: true,
+			},
+		});
+		console.log(user);
 		const connection = user.connections.find(c => c.name === _connection);
 		const connectionChecker = (k, v) => this.client.connections[_connection].checkConfig(k, v);
 		let newConfig = Object.entries(_config).filter(c => (connection.config[c[0]] !== undefined && connectionChecker(c)));
@@ -37,20 +55,36 @@ module.exports = class ConnectionController extends Controller {
 			...connection.config,
 			...config,
 		};
-		await this._users.update(_user,
-			{ $set: { 'connections.$[conn].config': newConfig } },
-			{ arrayFilters: [{ 'conn.name': _connection }] });
+		await this._users.profiles.update({
+			where: {
+				id: user,
+			},
+			data: {
+				config: newConfig,
+			},
+		});
 		return newConfig;
 	}
 
 	async disconnectUser(_user, _connection) {
-		const user = await this._users.findOne(_user, 'connections');
+		const user = await this._users.general.findMany({
+			where: {
+				id: user,
+			},
+			include: {
+				connections: true,
+			},
+		});
 		const connection = user.connections.find(c => c.name === _connection);
 		if (!connection) {
 			throw Error('Conexões não encontradas');
 		}
 		try {
-			await this._users.update(_user, { $pull: { connections: { name: _connection } } });
+			await this._users.profiles.delete({
+				where: {
+					id: user,
+				},
+			});
 			return true;
 		}
 		catch (e) {
