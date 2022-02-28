@@ -26,7 +26,7 @@ module.exports = class UserRepository {
 			},
 		});
 
-		if (previous.profile) return previous;
+		if (previous && previous.profile) return previous;
 
 		const data = await this.profiles.create({
 			data: {
@@ -58,7 +58,7 @@ module.exports = class UserRepository {
 			},
 		});
 
-		if (previous.cooldowns) return previous;
+		if (previous && previous.cooldowns) return previous;
 
 		const data = await this.cooldowns.create({
 			data: {
