@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('pull submodules') {
       steps {
-        sh 'cd prisma && ls && git pull'
+        sh 'cd prisma && ls && git pull origin development'
       }
     }
     stage('cleanup') {
