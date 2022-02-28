@@ -6,7 +6,11 @@ pipeline {
     IMAGE_VERSION='latest'
   }
   stages {
-
+    stage('get prisma') {
+      steps {
+        sh 'rm -rf prisma && git clone https://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@github.com/Poluxtrail/mitsy-prisma prisma'
+      }
+    }
     stage('cleanup') {
       steps {
         sh 'docker system prune -a --volumes --force'
