@@ -54,7 +54,7 @@ module.exports = class EconomyController extends Controller {
 	}
 
 	async transfer(_from, _to, amount) {
-		const { profile } = await this.client.database.user.ensureProfile(_from);
+		const { profile } = await this.client.database.user.ensureUserInfos(_from);
 		if (profile.comets < amount) return { sucess: false };
 		await Promise.all([
 			this.client.database.user.removeComets(_from, amount),
@@ -64,7 +64,7 @@ module.exports = class EconomyController extends Controller {
 	}
 
 	async balance(_user) {
-		const { profile } = await this.client.database.user.ensureProfile(_user);
+		const { profile } = await this.client.database.user.ensureUserInfos(_user);
 		return profile.comets;
 	}
 };
