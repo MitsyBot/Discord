@@ -51,7 +51,7 @@ pipeline {
             sshCommand remote: remote, command: "docker rm discord-canary"
             sshCommand remote: remote, command: "docker image rm ghcr.io/mitsybot/discord-canary:latest"
             sshCommand remote: remote, command: "docker pull ghcr.io/mitsybot/discord-canary:latest"
-            sshCommand remote: remote, command: "docker run -it -d -e SHARD_COUNT='1' -e BOT_TOKEN='NzkwNzYwMzYyMDYwMjgzOTc0.X-FS-Q.iGgQ9VOtnAD997JNJShl_ADFjEI' --name discord-canary ghcr.io/mitsybot/discord-canary:latest"
+            sshCommand remote: remote, command: "docker run -it -d -e SHARD_COUNT='1' -e BOT_TOKEN='NzkwNzYwMzYyMDYwMjgzOTc0.X-FS-Q.-_Ls0ia32OLAHFA2_3M4Nzmg6R4' --name discord-canary ghcr.io/mitsybot/discord-canary:latest"
             }
         }
       } 
