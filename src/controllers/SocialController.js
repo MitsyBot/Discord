@@ -14,7 +14,7 @@ module.exports = class SocialController extends Controller {
 	}
 
 	async addXp(_user) {
-		const { profile } = await this.client.database.user.ensureProfile(_user);
+		const { profile } = this.client.database.user.ensureUserInfos(_user);
 
 		const xpBonus = 1;
 		const xpToLvlUp = profile.global_level * 1000;
