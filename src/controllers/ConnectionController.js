@@ -43,7 +43,6 @@ module.exports = class ConnectionController extends Controller {
 				connections: true,
 			},
 		});
-		console.log(user);
 		const connection = user.connections.find(c => c.name === _connection);
 		const connectionChecker = (k, v) => this.client.connections[_connection].checkConfig(k, v);
 		let newConfig = Object.entries(_config).filter(c => (connection.config[c[0]] !== undefined && connectionChecker(c)));
@@ -93,7 +92,7 @@ module.exports = class ConnectionController extends Controller {
 	}
 
 	async getConnections(_user) {
-		const { connections } = this._users.connections.findMany({
+		const connections = this._users.connections.findMany({
 			where: {
 				id: _user,
 			},
