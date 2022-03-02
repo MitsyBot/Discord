@@ -16,7 +16,7 @@ module.exports = class ConnectionController extends Controller {
 		if (typeof _tokens !== 'object') throw new TypeError(`ConnectionController.connect deve conter pelo menos um argumento do tipo string ou objeto, ${typeof _tokens} enviados`);
 		const user = await this._users.connections.findMany({
 			where: {
-				id: user,
+				id: _user,
 			},
 		});
 		if (user.connections.some(c => c.name === _connection.name)) return 'alreadyConnected';
@@ -34,7 +34,7 @@ module.exports = class ConnectionController extends Controller {
 	async editConfig(_user, _connection, _config) {
 		const user = await this._users.connections.findMany({
 			where: {
-				id: user,
+				id: _user,
 			},
 		});
 		const connection = user.connections.find(c => c.name === _connection);
@@ -50,7 +50,7 @@ module.exports = class ConnectionController extends Controller {
 		};
 		await this._users.connections.update({
 			where: {
-				id: user,
+				id: _user,
 			},
 			data: {
 				config: newConfig,
@@ -62,7 +62,7 @@ module.exports = class ConnectionController extends Controller {
 	async disconnectUser(_user, _connection) {
 		const user = await this._users.connections.findMany({
 			where: {
-				id: user,
+				id: _user,
 			},
 		});
 		const connection = user.connections.find(c => c.name === _connection);
@@ -72,7 +72,7 @@ module.exports = class ConnectionController extends Controller {
 		try {
 			await this._users.profiles.delete({
 				where: {
-					id: user,
+					id: _user,
 				},
 			});
 			return true;
