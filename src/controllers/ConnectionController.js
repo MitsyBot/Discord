@@ -14,12 +14,12 @@ module.exports = class ConnectionController extends Controller {
 	async connect(_user, _connection, _tokens) {
 		if (typeof _tokens === 'string') _tokens = { token: _tokens };
 		if (typeof _tokens !== 'object') throw new TypeError(`ConnectionController.connect deve conter pelo menos um argumento do tipo string ou objeto, ${typeof _tokens} enviados`);
-		const user = await this._users.connections.findMany({
+		const connections = await this._users.connections.findMany({
 			where: {
 				id: _user,
 			},
 		});
-		if (user.connections.some(c => c.name === _connection.name)) return 'alreadyConnected';
+		if (connections.some(c => c.name === _connection.name)) return 'alreadyConnected';
 		const connection = {
 			id: _user,
 			name: _connection.name,
@@ -32,12 +32,12 @@ module.exports = class ConnectionController extends Controller {
 	}
 
 	async editConfig(_user, _connection, _config) {
-		const user = await this._users.connections.findMany({
+		const connections = await this._users.connections.findMany({
 			where: {
 				id: _user,
 			},
 		});
-		const connection = user.connections.find(c => c.name === _connection);
+		const connection = connections.find(c => c.name === _connection);
 		const connectionChecker = (k, v) => this.client.connections[_connection].checkConfig(k, v);
 		let newConfig = Object.entries(_config).filter(c => (connection.config[c[0]] !== undefined && connectionChecker(c)));
 		const config = {};
@@ -60,12 +60,12 @@ module.exports = class ConnectionController extends Controller {
 	}
 
 	async disconnectUser(_user, _connection) {
-		const user = await this._users.connections.findMany({
+		const connections = await this._users.connections.findMany({
 			where: {
 				id: _user,
 			},
 		});
-		const connection = user.connections.find(c => c.name === _connection);
+		const connection = connections.find(c => c.name === _connection);
 		if (!connection) {
 			throw Error('Conexões não encontradas');
 		}
