@@ -18,9 +18,6 @@ module.exports = class ConnectionController extends Controller {
 			where: {
 				id: user,
 			},
-			include: {
-				connections: true,
-			},
 		});
 		if (user.connections.some(c => c.name === _connection.name)) return 'alreadyConnected';
 		const connection = {
@@ -29,7 +26,7 @@ module.exports = class ConnectionController extends Controller {
 			tokens: _tokens,
 			config: _connection.defaultConfig,
 		};
-		await this._users.profiles.create({
+		await this._users.connections.create({
 			data: connection,
 		});
 	}
@@ -38,9 +35,6 @@ module.exports = class ConnectionController extends Controller {
 		const user = await this._users.connections.findMany({
 			where: {
 				id: user,
-			},
-			include: {
-				connections: true,
 			},
 		});
 		const connection = user.connections.find(c => c.name === _connection);
@@ -54,7 +48,7 @@ module.exports = class ConnectionController extends Controller {
 			...connection.config,
 			...config,
 		};
-		await this._users.profiles.update({
+		await this._users.connections.update({
 			where: {
 				id: user,
 			},
@@ -69,9 +63,6 @@ module.exports = class ConnectionController extends Controller {
 		const user = await this._users.connections.findMany({
 			where: {
 				id: user,
-			},
-			include: {
-				connections: true,
 			},
 		});
 		const connection = user.connections.find(c => c.name === _connection);
@@ -95,9 +86,6 @@ module.exports = class ConnectionController extends Controller {
 		const connections = this._users.connections.findMany({
 			where: {
 				id: _user,
-			},
-			include: {
-				connections: true,
 			},
 		});
 		return connections;
