@@ -70,7 +70,7 @@ module.exports = class ConnectionController extends Controller {
 			throw Error('Conexões não encontradas');
 		}
 		try {
-			await this._users.profiles.delete({
+			await this._users.connections.delete({
 				where: {
 					id: _user,
 				},
