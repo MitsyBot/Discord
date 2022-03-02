@@ -14,7 +14,7 @@ module.exports = class ConnectionController extends Controller {
 	async connect(_user, _connection, _tokens) {
 		if (typeof _tokens === 'string') _tokens = { token: _tokens };
 		if (typeof _tokens !== 'object') throw new TypeError(`ConnectionController.connect deve conter pelo menos um argumento do tipo string ou objeto, ${typeof _tokens} enviados`);
-		const user = await this._users.general.findMany({
+		const user = await this._users.general.findUnique({
 			where: {
 				id: user,
 			},
@@ -35,7 +35,7 @@ module.exports = class ConnectionController extends Controller {
 	}
 
 	async editConfig(_user, _connection, _config) {
-		const user = await this._users.general.findMany({
+		const user = await this._users.general.findUnique({
 			where: {
 				id: user,
 			},
@@ -93,7 +93,14 @@ module.exports = class ConnectionController extends Controller {
 	}
 
 	async getConnections(_user) {
-		const { connections } = await this._users.findOne(_user, 'connections');
+		const { connections } = this._users.general.findUnique({
+			where: {
+				id: _user,
+			},
+			include: {
+				connections: true,
+			},
+		});
 		return connections;
 	}
 
