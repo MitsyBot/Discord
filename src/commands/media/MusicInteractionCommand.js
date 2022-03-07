@@ -21,6 +21,18 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 					],
 				},
 				{
+					name: 'volume',
+					description: 'Altere o volume da musica',
+					type: 'SUB_COMMAND',
+					options: [
+						{
+							name: 'volume',
+							description: 'Volume em que eu devo tocar a musica!',
+							type: 'INTEGER',
+						},
+					],
+				},
+				{
 					name: 'stop',
 					description: 'Remova todas as musicas de uma fila',
 					type: 'SUB_COMMAND',
@@ -34,7 +46,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		const type = ctx.options.getSubcommand();
 
 		if (!type) return this.play(ctx);
-
+		if (type === 'volume') return this.play(ctx);
 		if (type === 'play') return this.play(ctx);
 		if (type === 'stop') return this.stop(ctx);
 	}
@@ -57,8 +69,22 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 			this.loadSongs(ctx, voiceState.channel, result, playerManager);
 		}
 		else {
-			ctx.makeMessage({ content: ctx.locale('music:songNotFound') });
+			ctx.makeMessage({ content: ctx.locale('commands:music.songNotFound') });
 		}
+	}
+
+	volume(ctx) {
+		const MAX_VOLUME = 500;
+		const volume = ctx.options.getInteger('volume', true);
+
+		const guildPlayer = this.client.playerManager.players.get(ctx.interaction.guild.id);
+
+		if (volume === MAX_VOLUME) return ctx.makeMessage({ content: ctx.locale('commands:music.volumeInvalid', { volume }) });
+
+		else if (guildPlayer.bassboosted) guildPlayer.bassboost(false);
+
+		guildPlayer.volume(volume);
+		ctx.makeMessage({ content: ctx.locale('commands:music.volumeSet', { volume }) });
 	}
 
 	stop(ctx) {
