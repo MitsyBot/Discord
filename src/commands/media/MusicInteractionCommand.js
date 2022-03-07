@@ -37,6 +37,11 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 					description: 'Remova todas as musicas de uma fila',
 					type: 'SUB_COMMAND',
 				},
+				{
+					name: 'np',
+					description: 'Veja o que esta tocando agora',
+					type: 'SUB_COMMAND',
+				},
 			],
 			cooldown: 5,
 		});
@@ -47,6 +52,8 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 		if (!type) return this.play(ctx);
 		if (type === 'volume') return this.volume(ctx);
+		if (type === 'np') return this.nowplaying(ctx);
+
 		if (type === 'play') return this.play(ctx);
 		if (type === 'stop') return this.stop(ctx);
 	}
