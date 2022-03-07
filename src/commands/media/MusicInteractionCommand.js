@@ -46,7 +46,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		const type = ctx.options.getSubcommand();
 
 		if (!type) return this.play(ctx);
-		if (type === 'volume') return this.play(ctx);
+		if (type === 'volume') return this.volume(ctx);
 		if (type === 'play') return this.play(ctx);
 		if (type === 'stop') return this.stop(ctx);
 	}
@@ -77,7 +77,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		const MAX_VOLUME = 500;
 		const volume = ctx.options.getInteger('volume', true);
 
-		const guildPlayer = this.client.playerManager.players.get(ctx.interaction.guild.id);
+		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
 
 		if (volume === MAX_VOLUME) return ctx.makeMessage({ content: ctx.locale('commands:music.volumeInvalid', { volume }) });
 
