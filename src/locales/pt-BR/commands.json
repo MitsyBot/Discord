@@ -27,7 +27,15 @@
       "music": {
         "songNotFound": "Não consegui encontrar nenhuma musica com este nome, talvez minha lupa tenha quebrado!",
         "volumeInvalid": "Eu até colocaria a musica mais alto, mas o jeremias está dormindo e eu não quero acordar ele! `Volume maximo é 500`",
-        "volumeSet": "Prontinho, agora a musica esta tocando com o volume {{volume}}, espero que se divirta!"
+        "volumeSet": "Prontinho, agora a musica esta tocando com o volume {{volume}}, espero que se divirta!",
+        "live": "AO VIVO",
+        "views": "VIsualizações",
+        "viewers": "Viewers",
+        "likes": "Likes",
+        "dislikes" : "Dislikes",
+        "played": "Tocado",
+        "nowPlaying": "Tocando agora",
+        "addedBy": "adicionada por {{- user}}"
       },
       "osu": {
         "subcommands": {

@@ -73,6 +73,45 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		}
 	}
 
+	nowplaying(ctx) {
+		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		const song = guildPlayer.playingSong;
+		const embed = new MitsyEmbed(ctx.interaction.author);
+		const nf = new Intl.NumberFormat('en-US').format;
+
+		switch (song.source) {
+		case 'youtube':
+			embed.setImage(song.artwork)
+				.addField(ctx.locale('music.views'), nf(song.richInfo.viewCount), true)
+				.addField(ctx.locale('music.likes'), nf(song.richInfo.likeCount), true)
+				.addField(ctx.locale('commands:music.dislikes'), nf(song.richInfo.dislikeCount), true);
+			break;
+		case 'twitch':
+			embed.setImage(song.richInfo.thumbnailUrl || song.artwork)
+				.addField(ctx.locale('commands:music.viewers'), nf(song.richInfo.viewerCount), true)
+				.addField(ctx.locale('commands:music.views'), nf(song.richInfo.viewCount), true);
+			break;
+		case 'soundcloud':
+			embed.setImage(song.artwork)
+				.addField(ctx.locale('commands:music.played'), nf(song.richInfo.playbackCount) + 'x', true);
+			break;
+		default:
+			embed.setImage(song.artwork);
+		}
+
+		let durationText = `\`(${ctx.locale('commands:music.live')})\``;
+		if (!song.isStream) {
+			durationText = `\`(${guildPlayer.formattedElapsed}/${song.formattedDuration})\``;
+		}
+
+		const description = [
+			`**${ctx.locale('commands:music.nowPlaying')}:** [${song.title}](${song.uri}) ${durationText}`,
+			`*[${ctx.locale('commands:music.addedBy', { user: '<@' + song.requestedBy + '>' })}]*`,
+		];
+
+		ctx.makeMessage({ embeds: [embed.setDescription(description.join('\n'))] });
+	}
+
 	volume(ctx) {
 		const MAX_VOLUME = 500;
 		const volume = ctx.options.getInteger('volume', true);
@@ -119,13 +158,13 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 		const embed = new MitsyEmbed()
 			.setThumbnail(playlist.artwork)
-			.setDescription(`▶️ ${ctx.locale('music:addedFromPlaylist', { count, playlistName, duration })}`);
+			.setDescription(`▶️ ${ctx.locale('commands:music.addedFromPlaylist', { count, playlistName, duration })}`);
 
 		ctx.send({ embeds: [embed] });
 	}
 
 	songFeedback(ctx, song, queueFeedback = true, startFeedback = true) {
-		const duration = song.isStream ? `(${ctx.locale('music:live')})` : `\`(${song.formattedDuration})\``;
+		const duration = song.isStream ? `(${ctx.locale('commands:music.live')})` : `\`(${song.formattedDuration})\``;
 		const songName = `[${song.title}](${song.uri}) ${duration}`;
 
 		song.on('end', () => ctx.interaction.channel.send(ctx.locale('commands:play.queueEnd', { songName })));
