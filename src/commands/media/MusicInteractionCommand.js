@@ -105,7 +105,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 	nowplaying(ctx) {
 		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
-		if (!guildPlayer.playingSong) return ctx.makeMessage({ content: ctx.locale('commands:music.notplay') });
+		if (!guildPlayer) return ctx.makeMessage({ content: ctx.locale('commands:music.notplay') });
 		const song = guildPlayer.playingSong;
 		const embed = new MitsyEmbed(ctx.interaction.author);
 		const nf = new Intl.NumberFormat('en-US').format;
@@ -148,6 +148,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		const volume = ctx.options.getInteger('volume', true);
 
 		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		if (!guildPlayer) return ctx.makeMessage({ content: ctx.locale('commands:music.notplay') });
 
 		if (volume === MAX_VOLUME) return ctx.makeMessage({ content: ctx.locale('commands:music.volumeInvalid', { volume }) });
 
@@ -159,6 +160,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 	skip(ctx) {
 		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		if (!guildPlayer) return ctx.makeMessage({ content: ctx.locale('commands:music.notplay') });
 		const song = guildPlayer.playingSong;
 		const songName = `[${song.title}](${song.uri})`;
 		ctx.makeMessage({ content: ctx.locale('commands:music.skipped', { songName }) }).then(() => guildPlayer.next());
@@ -166,6 +168,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 	loop(ctx) {
 		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		if (!guildPlayer) return ctx.makeMessage({ content: ctx.locale('commands:music.notplay') });
 		const loop = !guildPlayer.looping;
 		ctx.makeMessage({ content: ctx.locale('commands:music.stateChanged_loop', { context: loop ? 'on' : 'off' }),
 		});
@@ -173,12 +176,14 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 	bassboost(ctx) {
 		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		if (!guildPlayer) return ctx.makeMessage({ content: ctx.locale('commands:music.notplay') });
 		guildPlayer.bassboost(!guildPlayer.bassboosted);
 		ctx.makeMessage({ content: ctx.locale(`commands:music.bassboost_${guildPlayer.bassboosted}`) });
 	}
 
 	pause(ctx) {
 		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		if (!guildPlayer) return ctx.makeMessage({ content: ctx.locale('commands:music.notplay') });
 		const pause = !guildPlayer.paused;
 		ctx.makeMessage({ content: ctx.locale('commands:music.stateChanged', { context: pause ? 'pause' : 'resume' }) }).then(() => guildPlayer.pause(pause));
 	}
@@ -186,6 +191,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 	stop(ctx) {
 		const member = ctx.interaction.guild.members.cache.get(ctx.interaction.user.id);
 		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		if (!guildPlayer) return ctx.makeMessage({ content: ctx.locale('commands:music.notplay') });
 		guildPlayer.stop(member);
 		return ctx.makeMessage({ content: ctx.locale('commands:stop.stopped') });
 	}
