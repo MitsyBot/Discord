@@ -164,7 +164,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 	}
 
 	loop(ctx) {
-		const guildPlayer = ctx.client.playerManager.players.get(ctx.intearction.guild.id);
+		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
 		const loop = !guildPlayer.looping;
 		ctx.makeMessage({ content: ctx.locale('commands:music.stateChanged_loop', { context: loop ? 'on' : 'off' }),
 		});
