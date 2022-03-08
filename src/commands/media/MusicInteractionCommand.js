@@ -42,6 +42,26 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 					description: 'Veja o que esta tocando agora',
 					type: 'SUB_COMMAND',
 				},
+				{
+					name: 'skip',
+					description: 'Pular a musica atual',
+					type: 'SUB_COMMAND',
+				},
+				{
+					name: 'pause',
+					description: 'Pausar a musica atual',
+					type: 'SUB_COMMAND',
+				},
+				{
+					name: 'bassboost',
+					description: 'Ativar o filtro de bass',
+					type: 'SUB_COMMAND',
+				},
+				{
+					name: 'loop',
+					description: 'Ative o loop na musica atual',
+					type: 'SUB_COMMAND',
+				},
 			],
 			cooldown: 5,
 		});
@@ -53,8 +73,11 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 		if (!type) return this.play(ctx);
 		if (type === 'volume') return this.volume(ctx);
 		if (type === 'np') return this.nowplaying(ctx);
-
+		if (type === 'skip') return this.skip(ctx);
 		if (type === 'play') return this.play(ctx);
+		if (type === 'loop') return this.loop(ctx);
+		if (type === 'bassboost') return this.bassboost(ctx);
+		if (type === 'pause') return this.pause(ctx);
 		if (type === 'stop') return this.stop(ctx);
 	}
 
@@ -131,6 +154,32 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 		guildPlayer.volume(volume);
 		ctx.makeMessage({ content: ctx.locale('commands:music.volumeSet', { volume }) });
+	}
+
+	skip(ctx) {
+		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		const song = guildPlayer.playingSong;
+		const songName = `[${song.title}](${song.uri})`;
+		ctx.makeMessage({ content: ctx.locale('commands:music.skipped', { songName }) }).then(() => guildPlayer.next());
+	}
+
+	loop(ctx) {
+		const guildPlayer = ctx.client.playerManager.players.get(ctx.intearction.guild.id);
+		const loop = !guildPlayer.looping;
+		ctx.makeMessage({ content: ctx.locale('commands:music.stateChanged_loop', { context: loop ? 'on' : 'off' }),
+		});
+	}
+
+	bassboost(ctx) {
+		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		guildPlayer.bassboost(!guildPlayer.bassboosted);
+		ctx.makeMessage({ content: ctx.locale(`commands:music.bassboost_${guildPlayer.bassboosted}`) });
+	}
+
+	pause(ctx) {
+		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		const pause = !guildPlayer.paused;
+		ctx.makeMessage({ content: ctx.locale('commands:music.stateChanged', { context: pause ? 'pause' : 'resume' }) }).then(() => guildPlayer.pause(pause));
 	}
 
 	stop(ctx) {

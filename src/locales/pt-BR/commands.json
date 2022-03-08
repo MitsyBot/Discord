@@ -35,7 +35,14 @@
         "dislikes" : "Dislikes",
         "played": "Tocado",
         "nowPlaying": "Tocando agora",
-        "addedBy": "adicionada por {{- user}}"
+        "addedBy": "adicionada por {{- user}}",
+        "skipped": "OK, eu pulei a musica {{songName}}, espero que goste da proxima musica!",
+        "stateChanged_loop_on": "OK, eu posso fazer isso o dia todo.",
+        "stateChanged_loop_off": "Tá, vou confessar que nem tava tão bom assim!",
+        "bassboost_true": "E VAMOS DE FRITAR! bassboost ativado.",
+        "bassboost_false": "UFA QUASE FIQUEI SURDA... bassboost desativado",
+        "stateChanged_pause": "A musica atual foi pausada.",
+        "stateChanged_resume": "A musica atual foi resumida."
       },
       "osu": {
         "subcommands": {
