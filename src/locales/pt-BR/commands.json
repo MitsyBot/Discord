@@ -42,7 +42,8 @@
         "bassboost_true": "E VAMOS DE FRITAR! bassboost ativado.",
         "bassboost_false": "UFA QUASE FIQUEI SURDA... bassboost desativado",
         "stateChanged_pause": "A musica atual foi pausada.",
-        "stateChanged_resume": "A musica atual foi resumida."
+        "stateChanged_resume": "A musica atual foi resumida.",
+        "notplay": "Nada esta sendo tocado no momento, que tal adicionar uma musica na fila?"
       },
       "osu": {
         "subcommands": {

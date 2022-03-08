@@ -105,6 +105,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 
 	nowplaying(ctx) {
 		const guildPlayer = ctx.client.playerManager.players.get(ctx.interaction.guild.id);
+		if (!guildPlayer.playingSong) return ctx.makeMessage({ content: ctx.locale('commands:music.notplay') });
 		const song = guildPlayer.playingSong;
 		const embed = new MitsyEmbed(ctx.interaction.author);
 		const nf = new Intl.NumberFormat('en-US').format;
