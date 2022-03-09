@@ -164,13 +164,14 @@ module.exports = class InteractionCommandExecutor {
 			},
 		}));
 
-		const user_has_premium = !!(await client.database.keys.count({
+		const user_has_premium = !!(await client.database.donations.count({
 			where: {
-				active_in: interaction.guild.id,
+				id: interaction.user.id,
 			},
 		}));
 
-		console.log(command.config.name);
+		console.log(user_has_premium);
+		console.log(guild_has_premium);
 		if (command.config.name === 'music') {
 			if ((!guild_has_premium) && (!user_has_premium)) {
 				// o servidor ou o usuario nao tem premium
