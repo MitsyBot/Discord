@@ -169,31 +169,19 @@ module.exports = class InteractionCommandExecutor {
 				id: interaction.user.id,
 			},
 		}));
-
-		music: {
+		console.log(data.guild);
+		{
 			if (command.config.name === 'music') {
-				if ((!guild_has_premium) && (!user_has_premium)) {
-				// o servidor ou o usuario nao tem premium
-					if (interaction.deferred) {
-						return interaction.webhook
-							.send({ content: t('errors:MUSIC_NO_PREMIUM') });
-					}
-					else {
-						return interaction
-							.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
-					}
+
+				if (!(user_has_premium || guild_has_premium)) {
+					if (interaction.deferred) return interaction.webhook.send({ content: t('errors:MUSIC_NO_PREMIUM') });
+
+					return interaction.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
 				}
 
-				if ((data.author.premium.tier === 4) || (data.guild.key.tier === 4)) {
-					break music;
-				}
-				else if (interaction.deferred) {
-					return interaction.webhook
-						.send({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
-				}
-				else {
-					return interaction
-						.reply({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+				if (!(data.author.premium.tier === 4 || data.guild.keymtier === 4)) {
+					if (interaction.deferred) return interaction.webhook.send({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+					return interaction.reply({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 				}
 			}
 		}
