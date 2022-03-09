@@ -170,19 +170,17 @@ module.exports = class InteractionCommandExecutor {
 			},
 		}));
 		console.log(data.guild);
-		{
-			if (command.config.name === 'music') {
+		if (command.config.name === 'music') {
 
-				if (!(user_has_premium || guild_has_premium)) {
-					(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_NO_PREMIUM') });
+			if (!(user_has_premium || guild_has_premium)) {
+				(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_NO_PREMIUM') });
+			}
 
-				}
-
-				if (!(data.author.premium.tier === 4 || data.guild.key.tier === 4)) {
-					(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
-				}
+			if (!(data.author.premium.tier === 3 || data.guild.key.tier === 4)) {
+				(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 			}
 		}
+
 
 		if (command.config.category === 'economy') {client.commandExecutions.add(ctx.author.id);}
 
@@ -219,7 +217,7 @@ module.exports = class InteractionCommandExecutor {
 			await interaction.webhook.send({ content: t('common:MAINTENANCE', { hour: client.maintenance.time }), ephemeral: true });
 		}
 
-		if (!data.author.isPremium && Math.random() < 0.2) {
+		if (!user_has_premium && Math.random() < 0.2) {
 			interaction.webhook.send({ content: t('common:NOT_PREMIUM'), ephemeral: true });
 		}
 	}
