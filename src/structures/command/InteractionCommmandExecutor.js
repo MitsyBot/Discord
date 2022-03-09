@@ -170,6 +170,7 @@ module.exports = class InteractionCommandExecutor {
 			},
 		}));
 
+		console.log(command.config.name);
 		if (command.config.name === 'music') {
 			if ((!guild_has_premium) && (!user_has_premium)) {
 				// o servidor ou o usuario nao tem premium
