@@ -4,6 +4,7 @@ module.exports = class UserRepository {
 		this.general = connection.UserGeneralConfig;
 		this.cooldowns = connection.UserCooldowns;
 		this.connections = connection.UserConnections;
+		this.donations = connection.UserDonations;
 	}
 	async ensure(id) {
 		const previous = await this.general.findUnique({ where: { id } });
@@ -70,11 +71,21 @@ module.exports = class UserRepository {
 		return dados;
 	}
 
+	async ensurePremium(id) {
+		const previous = await this.donations.findUnique({
+			where: {
+				id,
+			},
+		});
+		return previous;
+	}
+
 	async ensureUserInfos(id) {
 		const general = await this.ensure(id);
 		const cooldowns = await this.ensureCooldowns(id);
 		const profile = await this.ensureProfile(id);
-		return { general, cooldowns: cooldowns.cooldowns, profile: profile.profile };
+		const premium = await this.ensurePremium(id);
+		return { general, cooldowns: cooldowns.cooldowns, profile: profile.profile, premium };
 	}
 
 	async addComets(id, amount) {

@@ -9,5 +9,7 @@
     "http-imager": "Ocorreu um erro ao comunicar com o servidor de geração de imagem ```502: The server is unavailable at this moment!```",
     "economy_usage": "Ops, acho que este usuario esta executando outro comando de economia. Aguarde ele terminar e tente novamente! :)",
     "voiceChannelJoin": "Ops, Talvez eu não tenha permissão para acessar o canal em que você quer tocar musicas.",
-    "notInVoice": "Ops, Você deve entrar em um canal de voz antes de usar isto"
+    "notInVoice": "Ops, Você deve entrar em um canal de voz antes de usar isto",
+    "MUSIC_PREMIUM_WITHOUT_TIER": "Poxa que pena! Voce ou o servidor não tem o tier suficiente para usar este comando\nO servidor precisa de uma key nivel 4, porem voce pode usar os comandos se tiver premium nivel 3",
+    "MUSIC_NO_PREMIUM": "Voce nao tem premium na mitsy, e o servidor nao possui uma key nivel 4 ativada!"
 }
