@@ -185,7 +185,7 @@ module.exports = class InteractionCommandExecutor {
 				}
 			}
 
-			if ((data.author.premium.tier === 4) || (data.guild.premium.tier === 4)) {
+			if ((data.author.premium.tier === 4) || (data.guild.key.tier === 4)) {
 				return await command.run(ctx).catch(async (error) => {
 					const errorWebHook = await client.fetchWebhook(
 						process.env.BUG_HOOK_ID,
