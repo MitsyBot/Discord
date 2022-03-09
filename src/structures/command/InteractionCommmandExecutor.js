@@ -160,24 +160,24 @@ module.exports = class InteractionCommandExecutor {
 
 		const guild_has_premium = !!(await client.database.keys.count({
 			where: {
-			  active_in: interaction.guild.id
+				active_in: interaction.guild.id,
 			},
-		  }));
+		}));
 
-		  const user_has_premium = !!(await client.database.keys.count({
+		const user_has_premium = !!(await client.database.keys.count({
 			where: {
-			  active_in: interaction.guild.id
+				active_in: interaction.guild.id,
 			},
-		  }));
+		}));
 
 		if (command.config.name === 'music') {
-			if((guild_has_premium && data.guild.key.tier < 4) || (user_has_premium && data.user.premium.tier < 3)) {
+			if ((guild_has_premium && data.guild.key.tier < 4) || (user_has_premium && data.user.premium.tier < 3)) {
 				// o servidor ou o usuario nao tem premium tier suficiente para usar este comando
-				return t('errors:MUSIC_PREMIUM_WITHOUT_TIER')
+				return t('errors:MUSIC_PREMIUM_WITHOUT_TIER');
 			}
-			if((!guild_has_premium) || (!user_has_premium)) {
+			if ((!guild_has_premium) || (!user_has_premium)) {
 				// o servidor ou o usuario nao tem premium
-				return t('errors:MUSIC_NO_PREMIUM')
+				return t('errors:MUSIC_NO_PREMIUM');
 			}
 		}
 
