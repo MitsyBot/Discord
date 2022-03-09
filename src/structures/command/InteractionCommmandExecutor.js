@@ -185,8 +185,33 @@ module.exports = class InteractionCommandExecutor {
 				}
 			}
 
-			if ((data.user.premium.tier === 4) || (data.guild.premium.tier === 4)) {
-				return true;
+			if ((data.author.premium.tier === 4) || (data.guild.premium.tier === 4)) {
+				return await command.run(ctx).catch(async (error) => {
+					const errorWebHook = await client.fetchWebhook(
+						process.env.BUG_HOOK_ID,
+						process.env.BUG_HOOK_TOKEN,
+					);
+
+					if (interaction.deferred) {
+						interaction.webhook
+							.send({ content: t('errors:COMMAND', { error: error }), ephemeral: true });
+					}
+					else {
+						interaction
+							.reply({ content: t('errors:COMMAND', { error: error }), ephemeral: true });
+					}
+
+					if (error instanceof Error && error.stack) {
+						const errorMessage = error.stack.length > 1800 ? `${error.stack.slice(0, 1800)}...` : error.stack;
+						const embed = new MitsyEmbed();
+						embed.setColor('#fd0000');
+						embed.setTitle('Ocorreu um erro');
+						embed.setDescription(`\`\`\`js\n${errorMessage}\`\`\``);
+						embed.addField('Quem fez isso?', `ID de usuario: \`${interaction.user.id}\` \nServidor: \`${interaction.guild.id}\``, true);
+						embed.setTimestamp();
+						errorWebHook.send({ embeds: [embed] });
+					}
+				});
 			}
 			else if (interaction.deferred) {
 				return interaction.webhook
