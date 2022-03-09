@@ -175,19 +175,25 @@ module.exports = class InteractionCommandExecutor {
 		if (command.config.name === 'music') {
 			if ((!guild_has_premium) && (!user_has_premium)) {
 				// o servidor ou o usuario nao tem premium
-				return t('errors:MUSIC_NO_PREMIUM');
+				if (interaction.deferred) {
+					return interaction.webhook
+						.send({ content: t('errors:MUSIC_NO_PREMIUM') });
+				}
+				else {
+					return interaction
+						.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
+				}
 			}
 			if ((guild_has_premium && data.guild.key.tier < 4) && (user_has_premium && data.user.premium.tier < 3)) {
 				// o servidor ou o usuario nao tem premium tier suficiente para usar este comando
 				if (interaction.deferred) {
-					interaction.webhook
+					return interaction.webhook
 						.send({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 				}
 				else {
-					interaction
+					return interaction
 						.reply({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 				}
-				return;
 			}
 		}
 
