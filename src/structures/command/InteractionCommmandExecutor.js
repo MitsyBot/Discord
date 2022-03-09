@@ -171,13 +171,13 @@ module.exports = class InteractionCommandExecutor {
 		}));
 
 		if (command.config.name === 'music') {
-			if ((guild_has_premium && data.guild.key.tier < 4) || (user_has_premium && data.user.premium.tier < 3)) {
-				// o servidor ou o usuario nao tem premium tier suficiente para usar este comando
-				return t('errors:MUSIC_PREMIUM_WITHOUT_TIER');
-			}
-			if ((!guild_has_premium) || (!user_has_premium)) {
+			if ((!guild_has_premium) && (!user_has_premium)) {
 				// o servidor ou o usuario nao tem premium
 				return t('errors:MUSIC_NO_PREMIUM');
+			}
+			if ((guild_has_premium && data.guild.key.tier < 4) && (user_has_premium && data.user.premium.tier < 3)) {
+				// o servidor ou o usuario nao tem premium tier suficiente para usar este comando
+				return t('errors:MUSIC_PREMIUM_WITHOUT_TIER');
 			}
 		}
 
