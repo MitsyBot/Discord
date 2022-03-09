@@ -11,5 +11,6 @@
     "voiceChannelJoin": "Ops, Talvez eu não tenha permissão para acessar o canal em que você quer tocar musicas.",
     "notInVoice": "Ops, Você deve entrar em um canal de voz antes de usar isto",
     "MUSIC_PREMIUM_WITHOUT_TIER": "Poxa que pena! Voce ou o servidor não tem o tier suficiente para usar este comando\nO servidor precisa de uma key nivel 4, porem voce pode usar os comandos se tiver premium nivel 3",
-    "MUSIC_NO_PREMIUM": "Voce nao tem premium na mitsy, e o servidor nao possui uma key nivel 4 ativada!"
+    "MUSIC_NO_PREMIUM": "Voce nao tem premium na mitsy, e o servidor nao possui uma key nivel 4 ativada!",
+    "BOT_LOADING": "Ops, aparentemente eu ainda nao me conectei aos meus microserviços, aguarde alguns instantes"
 }
