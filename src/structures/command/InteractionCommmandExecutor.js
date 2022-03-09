@@ -174,14 +174,12 @@ module.exports = class InteractionCommandExecutor {
 			if (command.config.name === 'music') {
 
 				if (!(user_has_premium || guild_has_premium)) {
-					if (interaction.deferred) return interaction.webhook.send({ content: t('errors:MUSIC_NO_PREMIUM') });
+					(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_NO_PREMIUM') });
 
-					return interaction.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
 				}
 
-				if (!(data.author.premium.tier === 4 || data.guild.keymtier === 4)) {
-					if (interaction.deferred) return interaction.webhook.send({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
-					return interaction.reply({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+				if (!(data.author.premium.tier === 4 || data.guild.key.tier === 4)) {
+					(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 				}
 			}
 		}
