@@ -170,56 +170,31 @@ module.exports = class InteractionCommandExecutor {
 			},
 		}));
 
-		console.log(user_has_premium);
-		console.log(guild_has_premium);
-		if (command.config.name === 'music') {
-			if ((!guild_has_premium) && (!user_has_premium)) {
+		music: {
+			if (command.config.name === 'music') {
+				if ((!guild_has_premium) && (!user_has_premium)) {
 				// o servidor ou o usuario nao tem premium
-				if (interaction.deferred) {
+					if (interaction.deferred) {
+						return interaction.webhook
+							.send({ content: t('errors:MUSIC_NO_PREMIUM') });
+					}
+					else {
+						return interaction
+							.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
+					}
+				}
+
+				if ((data.author.premium.tier === 4) || (data.guild.key.tier === 4)) {
+					break music;
+				}
+				else if (interaction.deferred) {
 					return interaction.webhook
-						.send({ content: t('errors:MUSIC_NO_PREMIUM') });
+						.send({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 				}
 				else {
 					return interaction
-						.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
+						.reply({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 				}
-			}
-
-			if ((data.author.premium.tier === 4) || (data.guild.key.tier === 4)) {
-				return await command.run(ctx).catch(async (error) => {
-					const errorWebHook = await client.fetchWebhook(
-						process.env.BUG_HOOK_ID,
-						process.env.BUG_HOOK_TOKEN,
-					);
-
-					if (interaction.deferred) {
-						interaction.webhook
-							.send({ content: t('errors:COMMAND', { error: error }), ephemeral: true });
-					}
-					else {
-						interaction
-							.reply({ content: t('errors:COMMAND', { error: error }), ephemeral: true });
-					}
-
-					if (error instanceof Error && error.stack) {
-						const errorMessage = error.stack.length > 1800 ? `${error.stack.slice(0, 1800)}...` : error.stack;
-						const embed = new MitsyEmbed();
-						embed.setColor('#fd0000');
-						embed.setTitle('Ocorreu um erro');
-						embed.setDescription(`\`\`\`js\n${errorMessage}\`\`\``);
-						embed.addField('Quem fez isso?', `ID de usuario: \`${interaction.user.id}\` \nServidor: \`${interaction.guild.id}\``, true);
-						embed.setTimestamp();
-						errorWebHook.send({ embeds: [embed] });
-					}
-				});
-			}
-			else if (interaction.deferred) {
-				return interaction.webhook
-					.send({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
-			}
-			else {
-				return interaction
-					.reply({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 			}
 		}
 
