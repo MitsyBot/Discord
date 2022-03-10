@@ -169,7 +169,6 @@ module.exports = class InteractionCommandExecutor {
 				id: interaction.user.id,
 			},
 		}));
-		console.log(data.guild);
 		if (command.config.name === 'music') {
 
 			if (!(user_has_premium || guild_has_premium)) {
