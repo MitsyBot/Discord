@@ -4,5 +4,7 @@ module.exports = {
 	CommandsLoader: require('./CommandsLoader'),
 	DatabaseLoader: require('./DatabaseLoader'),
 	WebsocketLoader: require('./WebsocketLoader'),
-	ModuleLoader: require('./ModuleLoader'),
+	ApiLoader: require('./ApiLoader'),
+	ControllerLoader: require('./ControllerLoader'),
+	ConnectionLoader: require('./ConnectionLoader'),
 };

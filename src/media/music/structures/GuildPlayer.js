@@ -1,10 +1,10 @@
 const { Collection } = require('discord.js');
-const { Player } = require('lavacord');
+const { Player } = require('@lavacord/discord.js');
 const moment = require('moment');
 
 module.exports = class GuildPlayer extends Player {
-	constructor(options, id) {
-		super(options, id);
+	constructor(node, id) {
+		super(node, id);
 
 		this.on('end', ({ reason }) => {
 			this.scrobbleSong(this.playingSong);
@@ -18,10 +18,11 @@ module.exports = class GuildPlayer extends Player {
 			this.manager.leave(this.id);
 		});
 
-		this.on('error', this.manager.client.logError);
+		this.on('error', (e) => this.manager.client.logger.error(e));
+
 
 		this.queue = [];
-		this._volume = 25;
+		this._volume = 100;
 		this._loop = false;
 
 		this._previousVolume = null;
@@ -30,13 +31,13 @@ module.exports = class GuildPlayer extends Player {
 		this._listening = new Collection();
 	}
 
-	async play(song, forcePlay = false, options = {}) {
+	async play(song, forcePlay = false) {
 		if (this.playing && !forcePlay) {
 			this.queueTrack(song);
 			return false;
 		}
 
-		await super.play(song.track, options);
+		await super.play(song.track);
 		this.playingSong = song;
 		this.volume(this._volume);
 		song.emit('start');
@@ -113,7 +114,7 @@ module.exports = class GuildPlayer extends Player {
 
 	// Volume
 
-	volume(volume = 50) {
+	volume(volume = 100) {
 		this._volume = volume;
 		super.volume(volume);
 	}

@@ -14,6 +14,32 @@ module.exports = class MiscUtils {
 		return formatter.format(value);
 	}
 
+	static async collectComponentInteractionWithStartingId(
+		channel,
+		authorID,
+		customId,
+		time = 20000,
+	) {
+		return channel
+			.awaitMessageComponent({
+				filter: (m) => {
+					m.deferUpdate().catch(() => null);
+					return m.user.id === authorID && m.customId.startsWith(customId);
+				},
+				time,
+			})
+			.then((interaction) => interaction)
+			.catch(() => null);
+	}
+
+
+	static resolveCustomId(customId) {
+		return customId
+			.replace(/^[\s\d]+/, '')
+			.replace('|', '')
+			.trim();
+	}
+
 	static formatDuration(duration) {
 		return moment.duration(duration).format('hh:mm:ss', { stopTrim: 'm' });
 	}

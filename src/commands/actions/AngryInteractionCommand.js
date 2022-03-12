@@ -10,6 +10,7 @@ module.exports = class AngryInteractionCommand extends InteractionCommand {
 					name: 'usuário',
 					type: 'USER',
 					description: 'Mencione um usuário',
+					usage: '/angry @Duuuuardo',
 					required: true,
 				},
 			],

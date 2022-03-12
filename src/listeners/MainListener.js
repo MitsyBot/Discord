@@ -10,27 +10,19 @@ module.exports = class MainListener extends EventListener {
 
 	onReady() {
 
-		if (process.env.DESATIVANDO_TEMPORARIAMENTE) {
-			const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
+		const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
 
-			const shardId = this.shard.ids.toString();
+		const shardId = this.shard.ids.toString();
 
-			setInterval(() => {
-				updateActivity(shardId);
-			}, 1000 * 30);
-		}
-		else {
-			const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
-			const shardId = this.shard.ids.toString();
-
-			this.logger.info({ tag: 'Atividade' }, 'Status rotativo desativado');
+		setInterval(() => {
 			updateActivity(shardId);
-		}
+		}, 1000 * 30);
 
 		if (process.env.LAVALINK_NODES) {
 			try {
-				const nodes = JSON.parse(process.env.LAVALINK_NODES);
-				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
+				const nodes = [
+					{ id: '1', host: '198.12.96.170', port: 2333, password: 'mitsybot123' },
+				];				if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR');
 				this.playerManager = new PlayerManager(this, nodes, {
 					user: this.user.id,
 					shards: 1,
@@ -42,6 +34,41 @@ module.exports = class MainListener extends EventListener {
 			catch (e) {
 				this.logger.error({ tag: 'Musica' }, e);
 			}
+		}
+
+		if (this.shard.ids.includes(0)) {
+			setInterval(() => {
+				postShardStatus(this);
+			}, 15 * 1000);
+		}
+
+		async function postShardStatus(client) {
+			const ShardingEnded = await client.ShardingEnded();
+			if (!ShardingEnded) return;
+
+			const getShardsInfo = (c) => {
+				const memoryUsed = process.memoryUsage().heapUsed;
+				const { uptime } = c;
+				const guilds = c.guilds.cache.size;
+				const unavailable = c.guilds.cache.reduce((p, b) => (b.available ? p : p + 1), 0);
+				const { ping } = c.ws;
+				const members = c.guilds.cache.reduce((p, b) => (b.available ? p + b.memberCount : p), 0);
+				const id = c.shard?.ids[0] ?? 0;
+
+				return { memoryUsed, uptime, guilds, unavailable, ping, members, id };
+			};
+
+			const results = await client.shard?.broadcastEval(getShardsInfo);
+			if (!results) return;
+
+			const toSendData = Array(client.shard?.count)
+				.fill('a')
+				.map((_, i) => ({
+					...results[i],
+					lastPingAt: Date.now(),
+				}));
+
+			await HTTPrequests.postShardStatus(toSendData);
 		}
 	}
 };

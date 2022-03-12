@@ -8,17 +8,11 @@ module.exports = class MessageListener extends EventListener {
 	}
 
 	async onMessageCreate(message) {
+		if (message.author.bot || !this.loaded) return;
 		if (message.interaction) return;
-		if (message.author.bot) return;
 
-		const guildData = await this.database.fetchGuild(message.guild.id);
-		const customCommands = guildData.customCommands;
-		const blacklistedTerms = guildData.blacklistedTerms;
-		const msg = message.content.split(' ');
-
-		if (msg.some((v) => v.includes(blacklistedTerms))) {
-			return message.delete();
-		}
+		const guildData = await this.database.guild.ensure(message.guild.id);
+		const customCommands = guildData.custom_commands;
 
 		for (const cmd in customCommands) {
 			if (message.content === customCommands[cmd][0]) {
@@ -26,17 +20,6 @@ module.exports = class MessageListener extends EventListener {
 			}
 		}
 
-		const userData = await this.database.fetchUser(message.author.id);
-		const xpBonus = 1 + userData.premiumLevel;
-		const xpToLvlUp = userData.globalLevel * 1000;
-		const xp = (Math.floor(Math.random() * 10) + 1) * xpBonus;
-
-		userData.xp += xp;
-		await userData.save();
-
-		if (userData.xp >= xpToLvlUp) {
-			userData.globalLevel += 1;
-			await userData.save();
-		}
+		this.controllers.social.addXp(message.author.id);
 	}
 };

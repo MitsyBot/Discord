@@ -1,16 +1,5 @@
 const axios = require('axios');
 
-
-const request = axios.create({
-	baseURL: `${process.env.API_URL}/imageserver`,
-	timeout: 5000,
-	headers: {
-		'Content-Type': 'application/json',
-		'User-Agent': process.env.MITSY_AGENT,
-		Authorization: process.env.API_TOKEN,
-	},
-});
-
 const apiRequest = axios.create({
 	baseURL: `${process.env.API_URL}`,
 	timeout: 5000,
@@ -26,7 +15,21 @@ module.exports = class HttpRequests {
 	static async getAssetImageUrl(type) {
 		try {
 			const data = await apiRequest.get(`/assets/${type}`);
-			return data.data.url;
+			return data.url;
+		}
+		catch {
+			return 'https://http.cat/404';
+		}
+	}
+
+	static async postShardStatus(shards) {
+		await apiRequest.put('/shards', { data: { shards } });
+	}
+
+	static async getMitsyApiPing() {
+		try {
+			const data = await apiRequest.get('/ping');
+			return data.data;
 		}
 		catch {
 			return 'https://http.cat/404';
@@ -38,15 +41,16 @@ module.exports = class HttpRequests {
 		await apiRequest.post('/commands', { data: { commands } });
 	}
 
-	static async profileRequest(user, marry) {
+	static async profileRequest(_data) {
 		try {
-			const data = await request.get('/profile', {
-				data: {
-					user,
-					marry,
-				},
+			const data = await axios({
+				url: `${process.env.GENERATOR_URL}/render/profile?w=600&h=400&type=thumb`,
+				method: 'post',
+				data: _data,
+				responseType: 'arraybuffer',
 			});
-			return { err: false, data: Buffer.from(data.data) };
+
+			return { err: false, data: data.data };
 		}
 		catch {
 			return { err: true };

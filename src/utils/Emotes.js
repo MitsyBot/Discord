@@ -1,4 +1,4 @@
-module.exports = {
+const emotes = {
 	MITSY_BLUSH: '<:Mitsy_Blush:873019423827587132>',
 	MITSY_PAT: '<:Mitsy_Pat:872870327028437062>',
 	MITSY_RICA: '<:Mitsy_Rica:872870327049396274>',
@@ -48,3 +48,17 @@ module.exports = {
 	MITSY_YAY: '<:mitsy_yay:825404965626839110>',
 	MITSY_YES: '<:mitsy_yes:853638770107482163>',
 };
+
+
+function getOsuEmoji(type) {
+	if (type === 'xh') return '<:xh:943943260496351252>';
+	if (type === 'x') return '<:x_:943943260420849674>';
+	if (type === 'sh') return '<:sh:943943260336980009>';
+	if (type === 'd_') return '<:d_:943943260357947433>';
+	if (type === 'b_') return '<:b_:943943260060135496>';
+	if (type === 's_') return '<:s_:943943260706066482>';
+	if (type === 'a_') return '<:a_:943943921212465174>';
+	if (type === 'c_') return '<:c_:943943260404072488>';
+}
+
+module.exports = { getOsuEmoji, emotes };

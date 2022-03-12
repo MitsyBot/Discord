@@ -1,0 +1,16 @@
+{
+    "GUILD_BLACKLISTED": "<:mitsy_ban:894277577731084308> Whoops\nEste servidor esta proibido de me usar! Por que? pelo seguinte motivo: ```{{reason}}```\nCaso ache que o motivo foi injusto abra um ticket [No meu website](https://mitsy.xyz/faq)",
+    "UNKNOWN_SLASH": "Whoops, este comando não existe ou foi desativado nas novas versões da mitsy.",
+    "sharding_in_progress": "Ops, eu ainda não inicializei completamente, agurade alguns segundos.",
+    "USER_BLACKLISTED": "<:mitsy_ban:894277577731084308> Que feio (eu acho <:mitsy_sob:834129966328709193>)\nVocê esta proibido de usar minhas funcionalidades pelo motivo: ```{{reason}}```\nCaso ache que o motivo do seu ban foi injusto abra um ticket [No meu website](https://mitsy.xyz/faq)",
+    "COMMAND": "Poxa que pena... ocorreu um erro ``{{error}}``",
+    "GENERIC": "Ops, alguma coisa aconteceu comigo. talvez eu só precise de um tempo para colocar as ideias no lugar!",
+    "CHANNEL_BLACKLISTED": "Ops, aparentemente você não pode usar comandos neste canal.",
+    "http-imager": "Ocorreu um erro ao comunicar com o servidor de geração de imagem ```502: The server is unavailable at this moment!```",
+    "economy_usage": "Ops, acho que este usuario esta executando outro comando de economia. Aguarde ele terminar e tente novamente! :)",
+    "voiceChannelJoin": "Ops, Talvez eu não tenha permissão para acessar o canal em que você quer tocar musicas.",
+    "notInVoice": "Ops, Você deve entrar em um canal de voz antes de usar isto",
+    "MUSIC_PREMIUM_WITHOUT_TIER": "Poxa que pena! Voce ou o servidor não tem o tier suficiente para usar este comando\nO servidor precisa de uma key nivel 4, porem voce pode usar os comandos se tiver premium nivel 3",
+    "MUSIC_NO_PREMIUM": "Voce nao tem premium na mitsy, e o servidor nao possui uma key nivel 4 ativada!",
+    "BOT_LOADING": "Ops, aparentemente eu ainda nao me conectei aos meus microserviços, aguarde alguns instantes"
+}

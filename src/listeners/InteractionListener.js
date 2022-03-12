@@ -8,8 +8,10 @@ module.exports = class InteractionListener extends EventListener {
 
 	async onInteractionCreate(interaction) {
 		if (!interaction.isCommand() || !interaction.inGuild()) return;
+		const t = this.i18next.getFixedT('pt-BR');
 
 		if (!interaction.channel?.isText()) return;
+		if (!this.loaded) return interaction.reply({ content: t('errors:BOT_LOADING') });
 
 		if (!interaction.client.channels.cache.has(interaction.channelId)) {
 			const channel = await interaction.client.channels

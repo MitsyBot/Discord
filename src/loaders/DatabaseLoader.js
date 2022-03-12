@@ -1,5 +1,6 @@
 const { Loader } = require('../');
-const { MongoDB } = require('../database');
+const { DbSet } = require('../database');
+const { PrismaClient } = require('@prisma/client');
 
 module.exports = class DatabaseLoader extends Loader {
 	constructor(client) {
@@ -12,9 +13,9 @@ module.exports = class DatabaseLoader extends Loader {
 
 	async load() {
 		try {
-			await this.initializeDatabase(MongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+			await this.initializeDatabase();
 			this.client.database = this.database;
-			return !!this.database;
+			return this.database;
 		}
 		catch (e) {
 			this.client.logger.error(e);
@@ -22,18 +23,15 @@ module.exports = class DatabaseLoader extends Loader {
 		return false;
 	}
 
-	initializeDatabase(DBWrapper = MongoDB, options = {}) {
-		if (DBWrapper.envVars && !DBWrapper.envVars.every(v => {
-			if (!process.env[v]) this.client.logger.warn({ tag: 'Database' }, `Você não definiu a variavel "${v}".`);
-			return !!process.env[v];
-		})) return false;
-
-		this.database = new DBWrapper(options);
-		this.database.connect()
-			.then(() => this.client.logger.info({ tag: 'Database' }, 'Conectado com a database'))
+	async initializeDatabase() {
+		const prisma = new PrismaClient();
+		await prisma.$connect().then(() => this.client.logger.info({ tag: 'Database' }, 'Conectado com a database'))
 			.catch(e => {
 				this.client.logger.error('Database', e.message);
 				this.database = null;
 			});
+
+		this.database = new DbSet(prisma);
+
 	}
 };

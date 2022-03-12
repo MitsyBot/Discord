@@ -8,7 +8,7 @@ const {
 
 const MusicUtils = require('./MusicUtils.js');
 
-const { Manager } = require('lavacord');
+const { Manager } = require('@lavacord/discord.js');
 const fetch = require('node-fetch');
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true };
@@ -16,9 +16,11 @@ const DEFAULT_JOIN_OPTIONS = { selfdeaf: true };
 
 module.exports = class PlayerManager extends Manager {
 	constructor(client, nodes = [], options = {}) {
-		options.player = GuildPlayer;
 		super(client, nodes, options);
 
+		super.Player = GuildPlayer;
+
+		this.client = client;
 		this.REST_ADDRESS = `${nodes[0].host}:${nodes[0].port}`;
 		this.REST_PASSWORD = nodes[0].password;
 	}

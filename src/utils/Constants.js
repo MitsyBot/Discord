@@ -1,3 +1,5 @@
 module.exports = {
 	MITSY_COLOR: '#F895FB',
+	GUILD_LOST_COLOR: '#BD4351',
+	GUILD_ADDED_COLOR: '#41A57A',
 };
