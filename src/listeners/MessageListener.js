@@ -8,8 +8,8 @@ module.exports = class MessageListener extends EventListener {
 	}
 
 	async onMessageCreate(message) {
+		if (message.author.bot || !this.loaded) return;
 		if (message.interaction) return;
-		if (message.author.bot) return;
 
 		const guildData = await this.database.guild.ensure(message.guild.id);
 		const customCommands = guildData.custom_commands;

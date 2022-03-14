@@ -16,4 +16,5 @@ module.exports = {
 	WebSocketController: require('./websocket/ApiWebsocket'),
 	MiscUtils: require('./utils/MiscUtils'),
 	Connection: require('./structures/Connetion'),
+	YoutubeTogether: require('./media/interactions/Youtube'),
 };

@@ -121,8 +121,8 @@ module.exports = class InteractionCommandExecutor {
 
 		const now = Date.now();
 		const timestamps = client.cooldowns.get(command.config.name);
-		const cooldownAmount = (command.config.cooldown || 3) * 1000;
-
+		let cooldownAmount = (command.config.cooldown || 3) * 1000;
+		if (user_has_premium) cooldownAmount = cooldownAmount + (5000 * data.user.premium.tier);
 		if (now - interaction.createdTimestamp >= 3000) return;
 
 		if (timestamps.has(interaction.user.id)) {
@@ -169,7 +169,6 @@ module.exports = class InteractionCommandExecutor {
 				id: interaction.user.id,
 			},
 		}));
-		console.log(data.guild);
 		if (command.config.name === 'music') {
 
 			if (!(user_has_premium || guild_has_premium)) {
