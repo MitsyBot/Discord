@@ -8,6 +8,7 @@ RUN apk add git python3 make g++
 
 COPY . /usr/src/mitsy/
 RUN npm install
+RUN npx prisma generate
 
 FROM node:16-alpine as runner
 
