@@ -61,4 +61,4 @@ jobs:
             -e LAVALINK_NODES='${{ secrets.LAVALINK_NODES }}' \
             -e CLIENT_ID='${{ secrets.CLIENT_ID }}' \
             -e DATABASE_URL='${{ secrets.DATABASE_URL }}' \
-            --name discord_canary ghcr.io/mitsybot/discord-canary:latest
+            --name discord-canary ghcr.io/mitsybot/discord-canary:latest
