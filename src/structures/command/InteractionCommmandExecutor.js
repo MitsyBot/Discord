@@ -25,6 +25,18 @@ module.exports = class InteractionCommandExecutor {
 		data.author = authorData;
 		data.guild = guildData;
 
+		const guild_has_premium = !!(await client.database.keys.count({
+			where: {
+				active_in: interaction.guild.id,
+			},
+		}));
+
+		const user_has_premium = !!(await client.database.donations.count({
+			where: {
+				id: interaction.user.id,
+			},
+		}));
+
 		const command = client.slashCommands.find(c => c.config.name === interaction.commandName);
 
 		const t = client.i18next.getFixedT(data.guild.lang || 'pt-BR');
@@ -158,17 +170,6 @@ module.exports = class InteractionCommandExecutor {
 
 		if (!command.run) return;
 
-		const guild_has_premium = !!(await client.database.keys.count({
-			where: {
-				active_in: interaction.guild.id,
-			},
-		}));
-
-		const user_has_premium = !!(await client.database.donations.count({
-			where: {
-				id: interaction.user.id,
-			},
-		}));
 		if (command.config.name === 'music') {
 
 			if (!(user_has_premium || guild_has_premium)) {
