@@ -134,7 +134,7 @@ module.exports = class InteractionCommandExecutor {
 		const now = Date.now();
 		const timestamps = client.cooldowns.get(command.config.name);
 		let cooldownAmount = (command.config.cooldown || 3) * 1000;
-		if (user_has_premium) cooldownAmount = cooldownAmount + (5000 * data.author.donation.tier);
+		if (user_has_premium) cooldownAmount = cooldownAmount + (5000 * data.author.premium.tier);
 		if (now - interaction.createdTimestamp >= 3000) return;
 
 		if (timestamps.has(interaction.user.id)) {
