@@ -44,21 +44,4 @@ jobs:
             docker rm discord-canary
             docker image rm ghcr.io/mitsybot/discord-canary:latest
             docker pull ghcr.io/mitsybot/discord-canary:latest
-            docker run -it -d -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' \
-            -e API_URL='${{ secrets.API_URL }}' \
-            -e API_WEBSOCKET='${{ secrets.API_WS }}' \
-            -e GENERATOR_URL='${{ secrets.GENERATOR_URL }}' \
-            -e API_TOKEN='${{ secrets.API_TOKEN }}' \
-            -e LOGGING_CHANNEL_ID='${{ secrets.LOGGING_CHANNEL_ID }}' \
-            -e MITSY_AGENT='${{ secrets.MITSY_AGENT }}' \
-            -e BUG_HOOK_ID='${{ secrets.BUG_HOOK_ID }}' \
-            -e BUG_HOOK_TOKEN='${{ secrets.BUG_HOOK_TOKEN }}' \
-            -e OSU_API_KEY='${{ secrets.OSU_API_KEY }}' \
-            -e OSU_CLIENT_ID='${{ secrets.OSU_CLIENT_ID }}' \
-            -e OSU_CLIENT_SECRET='${{ secrets.OSU_CLIENT_SECRET }}' \
-            -e WEBSITE_URL='${{ secrets.WEBSITE_URL }}' \
-            -e YOUTUBE_API_KEY='${{ secrets.YOUTUBE_API_KEY }}' \
-            -e LAVALINK_NODES=${{ secrets.LAVALINK_NODES }} \
-            -e CLIENT_ID='${{ secrets.CLIENT_ID }}' \
-            -e DATABASE_URL='${{ secrets.DATABASE_URL }}' \
-            --name discord_canary ghcr.io/mitsybot/discord-canary:latest
+            docker run -it -d -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' -e API_URL='${{ secrets.API_URL }}' -e API_WEBSOCKET='${{ secrets.API_WS }}' -e GENERATOR_URL='${{ secrets.GENERATOR_URL }}' -e API_TOKEN='${{ secrets.API_TOKEN }}' -e LOGGING_CHANNEL_ID='${{ secrets.LOGGING_CHANNEL_ID }}' -e MITSY_AGENT='${{ secrets.MITSY_AGENT }}' -e BUG_HOOK_ID='${{ secrets.BUG_HOOK_ID }}' -e BUG_HOOK_TOKEN='${{ secrets.BUG_HOOK_TOKEN }}' -e OSU_API_KEY='${{ secrets.OSU_API_KEY }}' -e OSU_CLIENT_ID='${{ secrets.OSU_CLIENT_ID }}' -e OSU_CLIENT_SECRET='${{ secrets.OSU_CLIENT_SECRET }}' -e WEBSITE_URL='${{ secrets.WEBSITE_URL }}' -e YOUTUBE_API_KEY='${{ secrets.YOUTUBE_API_KEY }}' -e LAVALINK_NODES=${{ secrets.LAVALINK_NODES }} -e CLIENT_ID='${{ secrets.CLIENT_ID }}' -e DATABASE_URL='${{ secrets.DATABASE_URL }}' --name discord_canary ghcr.io/mitsybot/discord-canary:latest
