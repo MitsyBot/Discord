@@ -2,7 +2,7 @@
   "name": "mitsy",
   "description": "um simples bot para discord",
   "authors": "Duuuuardo, homelessAlec",
-  "version": "2.0.3",
+  "version": "2.06",
   "scripts": {
     "prod": "node -r dotenv/config sharder.js",
     "dev": "nodemon --exec node -r dotenv/config sharder.js",
