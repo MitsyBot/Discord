@@ -1,5 +1,4 @@
 const { Controller, MitsyEmbed } = require('../');
-const { WebhookClient } = require('discord.js');
 const moment = require('moment');
 
 // Daily
@@ -71,7 +70,10 @@ module.exports = class EconomyController extends Controller {
 			},
 		});
 
-		const starTrackerHook = new WebhookClient({ id: process.env.STARTRACKER_ID, token: process.env.STARTRACKER_TOKEN });
+		const starTrackerHook = await this.client.fetchWebhook(
+			process.env.STARTRACKER_ID,
+			process.env.STARTRACKER_TOKEN,
+		);
 		const embed = new MitsyEmbed()
 			.setTitle('<:Mitsy_Rica:872870327049396274> **${amount} for PAYMENT**')
 			.addFields(
@@ -80,10 +82,7 @@ module.exports = class EconomyController extends Controller {
 			)
 			.setFooter({ text: `Transação ${transaction.id}`, iconURL: 'https://cdn.discordapp.com/emojis/873019423827587132.webp' });
 
-		starTrackerHook.send({
-			username: 'StarTracker',
-			embeds: [embed],
-		});
+		starTrackerHook.send({ embeds: [embed] });
 
 		return { sucess: true };
 	}
