@@ -75,10 +75,10 @@ module.exports = class EconomyController extends Controller {
 			process.env.STARTRACKER_TOKEN,
 		);
 		const embed = new MitsyEmbed()
-			.setTitle('<:Mitsy_Rica:872870327049396274> **${amount} for PAYMENT**')
+			.setTitle(`<:Mitsy_Rica:872870327049396274> **${amount} for PAYMENT**`)
 			.addFields(
-				{ name: '**💸 Quem pagou**', value: `${_from.id}\n \`\`${_from.username}\`\`` },
-				{ name: '**💵 Quem recebeu**', value: `${_to.id}\n \`\`${_to.username}\`\`` },
+				{ name: '**💸 Quem pagou**', value: `$<@${_from.id}>\n \`\`${_from.username}\`\`` },
+				{ name: '**💵 Quem recebeu**', value: `<@${_to.id}>\n \`\`${_to.username}\`\`` },
 			)
 			.setFooter({ text: `Transação ${transaction.id}`, iconURL: 'https://cdn.discordapp.com/emojis/873019423827587132.webp' });
 
