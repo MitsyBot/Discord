@@ -98,7 +98,7 @@ module.exports = class UserRepository {
 			},
 		});
 		if (!previous.profile) {
-			return await this.user.profiles.create({
+			return await this.profiles.create({
 				data: {
 					id,
 					comets: amount,
@@ -115,7 +115,7 @@ module.exports = class UserRepository {
 			});
 		}
 
-		return await this.user.profiles.update({
+		return await this.profiles.update({
 			where: {
 				id,
 			},
