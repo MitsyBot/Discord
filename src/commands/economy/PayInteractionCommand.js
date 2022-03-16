@@ -122,7 +122,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 		}
 
 
-		await ctx.client.controllers.economy.transfer(ctx.author.id, toSendUser.id, input);
+		await ctx.client.controllers.economy.transfer(ctx.author, toSendUser, input);
 
 
 		ctx.makeMessage({
