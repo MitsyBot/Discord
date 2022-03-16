@@ -58,6 +58,8 @@ jobs:
             -e BUG_HOOK_TOKEN='${{ secrets.BUG_HOOK_TOKEN }}' \
             -e OSU_API_KEY='${{ secrets.OSU_API_KEY }}' \
             -e OSU_CLIENT_ID='${{ secrets.OSU_CLIENT_ID }}' \
+            -e STARTRACKER_ID='${{ secrets.STARTRACKER_ID }}' \
+            -e STARTRACKER_TOKEN='${{ secrets.STARTRACKER_TOKEN }}' \
             -e OSU_CLIENT_SECRET='${{ secrets.OSU_CLIENT_SECRET }}' \
             -e WEBSITE_URL='${{ secrets.WEBSITE_URL }}' \
             -e YOUTUBE_API_KEY='${{ secrets.YOUTUBE_API_KEY }}' \
