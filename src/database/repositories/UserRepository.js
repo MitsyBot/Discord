@@ -128,7 +128,7 @@ module.exports = class UserRepository {
 	}
 
 	async removeComets(id, amount) {
-		return await this.user.profiles.update({
+		return await this.profiles.update({
 			where: {
 				id,
 			},
