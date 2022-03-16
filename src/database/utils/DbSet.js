@@ -8,6 +8,6 @@ module.exports = class DbSet {
 		this.user = new UserRepository(connection);
 		this.guild = new GuildRepository(connection);
 		this.blacklist = new BlacklistRepository(connection);
-		this.transactions = new connection.CometTransaction;
+		this.transactions = connection.CometTransaction;
 	}
 };
