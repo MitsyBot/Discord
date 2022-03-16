@@ -64,8 +64,8 @@ module.exports = class EconomyController extends Controller {
 		const transaction = await this.client.database.transactions.create({
 			data: {
 				reason: 'PAYMENT',
-				given_by: _from,
-				received_by: _to,
+				given_by: _from.id,
+				received_by: _to.id,
 				quantity: amount,
 				given_at: Date.now(),
 			},
