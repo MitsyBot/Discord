@@ -16,7 +16,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 			return ctx.makeMessage({ content: ctx.locale('errors:notInVoice') });
 		}
 
-		const youtube = await ctx.client.media.interactions.youtube.createTogetherCode(voiceState.channelId, 'youtube');
+		const youtube = await ctx.client.youtubetogether.createTogetherCode(voiceState.channelId, 'youtube');
 		ctx.makeMessage({ content: youtube.code });
 	}
 };
