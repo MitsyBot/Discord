@@ -19,7 +19,10 @@ const WebSocketController = async (mitsy, rawRequest) => {
 	}
 
 	case 'getUser': {
-		mitsy.api.send(JSON.stringify({ id, res: mitsy.client.users.fetch(data.user) }));
+
+		const user = mitsy.client.users.fetch(data.user);
+		console.log(user);
+		mitsy.api.send(JSON.stringify({ id, res: user }));
 		break;
 	}
 
