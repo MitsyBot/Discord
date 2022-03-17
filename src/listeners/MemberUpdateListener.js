@@ -8,7 +8,7 @@ module.exports = class MessageListener extends EventListener {
 	}
 
 	async onGuildMemberUpdate(_oldMember, newMember) {
-		if (newMember.id === this.client.user.id) {
+		if (newMember.id === this.user.id) {
 			const botName = newMember.displayName;
 			const HasBadNickname = MiscUtils.hasInappropriateWords(botName);
 			if (HasBadNickname) {
