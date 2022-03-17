@@ -21,7 +21,6 @@ const WebSocketController = async (mitsy, rawRequest) => {
 	case 'getUser': {
 
 		const user = await mitsy.client.users.fetch(data.user);
-		console.log(user);
 		mitsy.api.send(JSON.stringify({ id, res: user }));
 		break;
 	}
