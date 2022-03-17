@@ -18,6 +18,11 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		break;
 	}
 
+	case 'getUser': {
+		mitsy.api.send(JSON.stringify({ id, res: mitsy.client.users.fetch(data.user) }));
+		break;
+	}
+
 	case 'message': {
 		const user = await mitsy.client.users.fetch(data.userid);
 		user.send(data.message);
