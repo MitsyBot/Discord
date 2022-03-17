@@ -14,6 +14,9 @@
         "api": "(Discord) Latência da API:",
         "mitsy_api": "(Mitsy) Latencia da API:"
       },
+      "youtube": {
+        "join": "Uma party foi criada, entre [clicando aqui]({{code}})."
+      },
       "play": {
         "queueEnd": "A musica {{- songName}} acabou!",
         "queueEmpty": "A fila esta vazia, vou sair do canal de voz por que memoria ram não cresce em arvores!",

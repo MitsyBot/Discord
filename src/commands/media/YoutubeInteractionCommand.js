@@ -17,6 +17,6 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		}
 
 		const youtube = await ctx.client.youtubetogether.createTogetherCode(voiceState.channelId, 'youtube');
-		ctx.makeMessage({ content: youtube.code });
+		ctx.makeMessage({ content: ctx.locale('commands:youtube.join', { code: youtube.code }) });
 	}
 };
