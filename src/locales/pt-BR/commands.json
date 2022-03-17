@@ -15,7 +15,7 @@
         "mitsy_api": "(Mitsy) Latencia da API:"
       },
       "youtube": {
-        "join": "Uma party foi criada, entre [clicando aqui]({{code}})."
+        "join": "Uma party foi criada, entre [clicando aqui](<{{code}}>)."
       },
       "play": {
         "queueEnd": "A musica {{- songName}} acabou!",
