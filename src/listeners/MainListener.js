@@ -32,17 +32,20 @@ module.exports = class MainListener extends EventListener {
 		const shardId = this.shard.ids.toString();
 
 		updateActivity(shardId);
+		this.logger.info({ tag: 'FANART' }, isFanartDay);
 
 		if (!isFanartDay) {
+			this.logger.info({ tag: 'FANART' }, 'FanartDay não ativado');
+
 			setInterval(() => {
 				updateActivity(shardId);
 			}, 1000 * 30);
 		}
 		else {
-			this.logger.debug('isFanartDay');
+			this.logger.info({ tag: 'FANART' }, 'FanartDay ativado');
 			setInterval(() => {
 				const fanart = fanartDay(shardId);
-				this.logger.debug(fanart);
+				this.logger.info({ tag: 'FANART' }, fanart);
 				this.user.setActivity(fanart.activity);
 				this.user.setAvatar(fanart.avatar);
 			}, 1000 * 600);
