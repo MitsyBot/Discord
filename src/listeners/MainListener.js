@@ -35,15 +35,9 @@ module.exports = class MainListener extends EventListener {
 			}, 1000 * 30);
 		}
 		else {
-			console.log('IsFanartDay');
-			setInterval(() => {
-				const fanart = fanartDay(shardId);
-				console.log(fanart);
-				console.log('IsFanartDay make request');
-
-				this.user.setActivity(fanart.activity);
-				this.user.setAvatar(fanart.avatar);
-			}, 1000 * 600);
+			const fanart = fanartDay(shardId);
+			this.user.setActivity(fanart.activity);
+			this.user.setAvatar(fanart.avatar);
 		}
 		if (process.env.LAVALINK_NODES) {
 			try {
