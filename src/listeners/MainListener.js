@@ -39,11 +39,13 @@ module.exports = class MainListener extends EventListener {
 			}, 1000 * 30);
 		}
 		else {
+			this.logger.log('isFanartDay');
 			setInterval(() => {
 				const fanart = fanartDay(shardId);
+				this.logger.log(fanart);
 				this.user.setActivity(fanart.activity);
 				this.user.setAvatar(fanart.avatar);
-			}, 1000 * 30);
+			}, 1000 * 600);
 		}
 		if (process.env.LAVALINK_NODES) {
 			try {
