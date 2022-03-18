@@ -27,7 +27,6 @@ module.exports = class MainListener extends EventListener {
 
 
 		const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
-		const fanartDay = async (shard) => { return await HTTPrequests.getFanarts(shard); };
 
 		const shardId = this.shard.ids.toString();
 
@@ -41,9 +40,10 @@ module.exports = class MainListener extends EventListener {
 			}
 		}, 1000 * 30);
 
-		setInterval(() => {
+		setInterval(async () => {
 			if (isFanartDay) {
-				const fanart = fanartDay(shardId);
+				const fanart = await HTTPrequests.getFanarts(shardId);
+				this.logger.info({ tag: 'FANART' }, fanart);
 				this.logger.info({ tag: 'RPC' }, 'Status alterado');
 				this.user.setActivity(fanart.activity);
 				this.logger.info({ tag: 'RPC' }, 'Avatar alterado');
