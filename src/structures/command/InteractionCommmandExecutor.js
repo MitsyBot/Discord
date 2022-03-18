@@ -1,6 +1,6 @@
 const InteractionCommandContext = require('./InteractionCommandContext');
 const { Collection } = require('discord.js');
-const { MitsyEmbed, MiscUtils } = require('../');
+const { MitsyEmbed } = require('../');
 module.exports = class InteractionCommandExecutor {
 	constructor(client, interaction) {
 		client;
