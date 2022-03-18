@@ -66,4 +66,14 @@ module.exports = class HttpRequests {
 			return { name: `❤️ | Howdy | Shard ${shard}`, type: 'PLAYING' };
 		}
 	}
+
+	static async getFanarts(shard) {
+		try {
+			const data = await apiRequest.get('/fanarts/activity', { data: { shard: shard || 0 } });
+			return data.data;
+		}
+		catch {
+			return { avatar: 'https://imgur.com/yZVrWCl.png', activity: { name: `❤️ | Howdy | Shard ${shard}`, type: 'PLAYING' } };
+		}
+	}
 };

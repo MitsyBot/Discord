@@ -1,5 +1,7 @@
 const { EventListener, HTTPrequests } = require('../');
 const { PlayerManager } = require('../media/music');
+const moment = require('moment');
+const CronJob = require('cron').CronJob;
 
 module.exports = class MainListener extends EventListener {
 	constructor(client) {
@@ -9,15 +11,36 @@ module.exports = class MainListener extends EventListener {
 	}
 
 	onReady() {
+		let isFanartDay = false;
+		const checkFanartDay = () => { if (moment().format('dddd') === 'Friday') return true; };
+
+		if (checkFanartDay()) return isFanartDay = true;
+
+		const job = new CronJob('0 */24 * * *', async () => {
+			if (checkFanartDay()) return isFanartDay = true;
+			isFanartDay = false;
+			this.user.setAvatar('https://imgur.com/yZVrWCl.png');
+		}, null, true, 'America/Sao_Paulo');
+		job.start();
+
 
 		const updateActivity = async (shard) => this.user.setActivity(await HTTPrequests.getActivity(shard));
+		const fanartDay = async (shard) => { return await HTTPrequests.getFanarts(shard); };
 
 		const shardId = this.shard.ids.toString();
 
-		setInterval(() => {
-			updateActivity(shardId);
-		}, 1000 * 30);
-
+		if (!isFanartDay) {
+			setInterval(() => {
+				updateActivity(shardId);
+			}, 1000 * 30);
+		}
+		else {
+			setInterval(() => {
+				const fanart = fanartDay(shardId);
+				this.user.setActivity(fanart.activity);
+				this.user.setAvatar(fanart.avatar);
+			}, 1000 * 600);
+		}
 		if (process.env.LAVALINK_NODES) {
 			try {
 				const nodes = [
