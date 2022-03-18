@@ -32,24 +32,25 @@ module.exports = class MainListener extends EventListener {
 		const shardId = this.shard.ids.toString();
 
 		updateActivity(shardId);
-		this.logger.info({ tag: 'FANART' }, isFanartDay);
 
-		if (!isFanartDay) {
-			this.logger.info({ tag: 'FANART' }, 'FanartDay não ativado');
 
-			setInterval(() => {
+		setInterval(() => {
+			if (!isFanartDay) {
+				this.logger.info({ tag: 'RPC' }, 'Status alterado');
 				updateActivity(shardId);
-			}, 1000 * 30);
-		}
-		else {
-			this.logger.info({ tag: 'FANART' }, 'FanartDay ativado');
-			setInterval(() => {
+			}
+		}, 1000 * 30);
+
+		setInterval(() => {
+			if (isFanartDay) {
 				const fanart = fanartDay(shardId);
-				this.logger.info({ tag: 'FANART' }, fanart);
+				this.logger.info({ tag: 'RPC' }, 'Status alterado');
 				this.user.setActivity(fanart.activity);
+				this.logger.info({ tag: 'RPC' }, 'Avatar alterado');
 				this.user.setAvatar(fanart.avatar);
-			}, 1000 * 600);
-		}
+			}
+		}, 1000 * 600);
+
 		if (process.env.LAVALINK_NODES) {
 			try {
 				const nodes = [
