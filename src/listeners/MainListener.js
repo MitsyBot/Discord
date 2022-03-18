@@ -37,6 +37,7 @@ module.exports = class MainListener extends EventListener {
 		else {
 			setInterval(() => {
 				const fanart = fanartDay(shardId);
+				console.log(fanart);
 				this.user.setActivity(fanart.activity);
 				this.user.setAvatar(fanart.avatar);
 			}, 1000 * 600);
