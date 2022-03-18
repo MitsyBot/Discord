@@ -20,7 +20,7 @@ class DailyController extends Controller {
 	}
 
 	checkClaim(lastClaim) {
-		return Date.now() - lastClaim < DAILY_INTERVAL;
+		return Date.now() - lastClaim > DAILY_INTERVAL;
 	}
 
 	formatClaimTime(lastClaim) {

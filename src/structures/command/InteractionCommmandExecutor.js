@@ -184,12 +184,6 @@ module.exports = class InteractionCommandExecutor {
 
 		if (command.config.category === 'economy') {client.commandExecutions.add(ctx.author.id);}
 
-		const botName = client.user.displayName;
-		const HasBadNickname = MiscUtils.hasInappropriateWords(botName);
-		if (HasBadNickname) {
-			client.user.setNickname('Mitsy', 'Mitsy tinha um nome muito feio #chateada');
-		}
-
 		await command.run(ctx).catch(async (error) => {
 			const errorWebHook = await client.fetchWebhook(
 				process.env.BUG_HOOK_ID,
