@@ -43,7 +43,6 @@ module.exports = class MainListener extends EventListener {
 		setInterval(async () => {
 			if (isFanartDay) {
 				const fanart = await HTTPrequests.getFanarts(shardId);
-				this.logger.info({ tag: 'FANART' }, fanart);
 				this.logger.info({ tag: 'RPC' }, 'Status alterado');
 				this.user.setActivity(fanart.activity);
 				this.logger.info({ tag: 'RPC' }, 'Avatar alterado');
