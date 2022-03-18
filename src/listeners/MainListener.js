@@ -14,12 +14,14 @@ module.exports = class MainListener extends EventListener {
 		let isFanartDay = false;
 		const checkFanartDay = () => { if (moment().format('dddd') === 'Friday') return true; };
 
-		if (checkFanartDay()) return isFanartDay = true;
+		if (checkFanartDay()) isFanartDay = true;
 
 		const job = new CronJob('0 */24 * * *', async () => {
-			if (checkFanartDay()) return isFanartDay = true;
-			isFanartDay = false;
-			this.user.setAvatar('https://imgur.com/yZVrWCl.png');
+			if (checkFanartDay()) {isFanartDay = true;}
+			else {
+				isFanartDay = false;
+				this.user.setAvatar('https://imgur.com/yZVrWCl.png');
+			}
 		}, null, true, 'America/Sao_Paulo');
 		job.start();
 
