@@ -20,7 +20,6 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 	async run(ctx) {
 		const user = ctx.data.user ?? ctx.data.author;
-		console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 23 ~ TransactionsInteractionCommand ~ run ~ user', user);
 
 		const userTransactions = await ctx.client.database.transactions.findMany({
 			where: {
@@ -34,7 +33,6 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 				],
 			},
 		});
-		console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 36 ~ TransactionsInteractionCommand ~ run ~ userTransactions', userTransactions);
 
 		let description = '';
 
@@ -43,7 +41,6 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			.setDescription(description);
 
 		userTransactions.forEach(async (transaction) => {
-			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 44 ~ TransactionsInteractionCommand ~ run ~ transaction', transaction);
 			let substring = '';
 
 			substring = substring + `${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')} `;
@@ -88,7 +85,6 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			}
 
 			substring = substring + '\n';
-			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 89 ~ TransactionsInteractionCommand ~ run ~ substring', substring);
 			description = description + substring;
 		},
 		);
