@@ -1,5 +1,4 @@
 const { InteractionCommand, MitsyEmbed } = require('../../');
-const moment = require('moment');
 module.exports = class TransactionsInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
@@ -13,6 +12,13 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 					description: 'Usuário que deseja ver as transações (opcional)',
 					required: false,
 				},
+				{
+					name: 'pagina',
+					description: 'A pagina das suas transação (opcional)',
+					type: 'INTEGER',
+					required: false,
+					minValue: 1,
+				},
 			],
 			cooldown: 5,
 		});
@@ -21,7 +27,17 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 	async run(ctx) {
 		const user = ctx.data.user ?? ctx.data.author;
 
+		const page = ctx.options.getInteger('valor', true);
+
+		let skipNumber = page - 1 * 10;
+		let takeNumber = page * 10;
+		if (page === 0) {
+			skipNumber = 0;
+			takeNumber = 10;
+		}
 		const userTransactions = await ctx.client.database.transactions.findMany({
+			skip: skipNumber,
+			take: takeNumber,
 			where: {
 				OR: [
 					{
@@ -39,10 +55,8 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 		await userTransactions.forEach(async (transaction) => {
 			let substring = '';
 			// eslint-disable-next-line no-undef
-			const large = BigInt(transaction.given_at);
-			const int = parseInt(large);
-			const number = Number(int);
-			substring = substring + `\`\`[${moment.duration(number).format('DD-MM-YYYY hh:mm')}]\`\` `;
+
+			substring = substring + `\`\`[${transaction.given_at}]\`\` `;
 
 			const received = Boolean(transaction.received_by === user.general.id);
 
@@ -66,7 +80,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 				const receivedByUser = await ctx.client.users.fetch(receivedByUserId);
 
-				const name = (`${receivedByUser.username}#${receivedByUser?.discriminator}`);
+				const name = (`${receivedByUser.username}#${receivedByUser?.discriminator} (${receivedByUser?.id})`);
 
 				if (received) {
 					substring = substring + ctx.locale('commands:transactions.received', { name, quantity: transaction.quantity });

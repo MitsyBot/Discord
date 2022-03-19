@@ -66,7 +66,7 @@ module.exports = class EconomyController extends Controller {
 				given_by: _from.id,
 				received_by: _to.id,
 				quantity: amount,
-				given_at: Date.now(),
+				given_at: moment().format('DD-MM-YYYY hh:mm'),
 			},
 		});
 

@@ -100,8 +100,8 @@
       },
       "transactions": {
         "title": "Suas transações",
-        "received": "Recebeu {{quantity}} cometinhas de {{name}}",
-        "sent": "Enviou {{quantity}} cometinhas para {{name}}",
+        "received": "Recebeu {{quantity}} cometinhas de ``{{name}}``",
+        "sent": "Enviou {{quantity}} cometinhas para ``{{name}}``",
         "genericSent": "Enviou {{quantity}} {{type}}",
         "genericReceive": "Recebeu {{quantity}} {{type}}"
       },
