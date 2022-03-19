@@ -38,8 +38,11 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 		await userTransactions.forEach(async (transaction) => {
 			let substring = '';
-
-			substring = substring + `\`\`[${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')}]\`\` `;
+			// eslint-disable-next-line no-undef
+			const large = BigInt(transaction.given_at);
+			const int = parseInt(large);
+			const number = Number(int);
+			substring = substring + `\`\`[${moment.duration(number).format('DD-MM-YYYY hh:mm')}]\`\` `;
 
 			const received = Boolean(transaction.received_by === user.general.id);
 
