@@ -34,7 +34,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			},
 		});
 
-		let description;
+		const description = '';
 
 		const embed = new MitsyEmbed()
 			.setTitle(ctx.locale('commands:transactions.title'))
@@ -87,6 +87,8 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			substring.append('\n');
 			description.append(substring);
 		}
+
+		console.log(description);
 
 		ctx.makeMessage({ embeds: [embed] });
 	}
