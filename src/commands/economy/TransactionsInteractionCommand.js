@@ -39,7 +39,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 		userTransactions.forEach(async (transaction) => {
 			let substring = '';
 
-			substring = substring + `${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')} `;
+			substring = substring + `\`\`[${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')}]\`\` `;
 
 			const received = Boolean(transaction.received_by === user.general.id);
 
@@ -51,6 +51,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			substring = substring + emoji;
 			substring = substring + ' ';
 
+			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 55 ~ TransactionsInteractionCommand ~ userTransactions.forEach ~ transaction.reason', transaction.reason);
 			if (transaction.reason === 'PAYMENT') {
 				let receivedByUserId;
 
