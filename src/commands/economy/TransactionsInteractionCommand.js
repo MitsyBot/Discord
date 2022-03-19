@@ -68,7 +68,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 					receivedByUserId = transaction.received_by;
 				}
 
-				const receivedByUser = await Promise.all(ctx.client.shard.broadcastEval(() => ctx.client.users.fetch(receivedByUserId)));
+				const receivedByUser = await ctx.client.shard.broadcastEval(() => ctx.client.users.fetch(receivedByUserId));
 
 				const name = (`${receivedByUser.username}#${receivedByUser?.discriminator}`);
 
