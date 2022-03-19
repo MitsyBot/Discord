@@ -26,10 +26,10 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			where: {
 				OR: [
 					{
-						given_by: user.id,
+						given_by: user.general.id,
 					},
 					{
-						received_by: user.id,
+						received_by: user.general.id,
 					},
 				],
 			},
@@ -48,7 +48,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 			substring.concat(`${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')} `);
 
-			const received = Boolean(transaction.received_by === user.id);
+			const received = Boolean(transaction.received_by === user.general.id);
 
 			let emoji;
 
