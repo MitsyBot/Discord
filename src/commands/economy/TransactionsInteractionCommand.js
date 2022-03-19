@@ -36,7 +36,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 		let description = '';
 
-		userTransactions.forEach(async (transaction) => {
+		await userTransactions.forEach(async (transaction) => {
 			let substring = '';
 
 			substring = substring + `\`\`[${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')}]\`\` `;
