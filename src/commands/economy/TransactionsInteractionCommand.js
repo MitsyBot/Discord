@@ -43,7 +43,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 		for (const transaction in userTransactions) {
 			const substring = '';
 
-			substring.append(`${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')} `);
+			substring.concat(`${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')} `);
 
 			const received = Boolean(transaction.received_by === user.id);
 
@@ -52,8 +52,8 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			if (received) emoji = '\uD83D\uDCB5';
 			else emoji = '\uD83D\uDCB8';
 
-			substring.append(emoji);
-			substring.append(' ');
+			substring.concat(emoji);
+			substring.concat(' ');
 
 			if (transaction.reason === 'PAYMENT') {
 				let receivedByUserId;
@@ -70,23 +70,23 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 				const name = (`${receivedByUser.username}#${receivedByUser?.discriminator}`);
 
 				if (received) {
-					substring.append(ctx.locale('commands:transactions.received', { name, quantity: transaction.quantity }));
+					substring.concat(ctx.locale('commands:transactions.received', { name, quantity: transaction.quantity }));
 				}
 				else {
-					substring.append(ctx.locale('commands:transactions.sent', { name, quantity: transaction.quantity }));
+					substring.concat(ctx.locale('commands:transactions.sent', { name, quantity: transaction.quantity }));
 				}
 			}
 			else {
 				const type = ctx.locale(`types:${transaction.reason}`);
 
 
-				if (received) {substring.append(ctx.locale('commands:transactions.genericReceive', { type, quantity: transaction.quantity }));}
-				else { substring.append(ctx.locale('commands:transactions.genericSent', { type, quantity: transaction.quantity })); }
+				if (received) {substring.concat(ctx.locale('commands:transactions.genericReceive', { type, quantity: transaction.quantity }));}
+				else { substring.concat(ctx.locale('commands:transactions.genericSent', { type, quantity: transaction.quantity })); }
 			}
 
-			substring.append('\n');
+			substring.concat('\n');
 			console.log(substring);
-			description.push(substring);
+			description.concat(substring);
 		}
 
 		console.log(description);
