@@ -42,7 +42,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			.setTitle(ctx.locale('commands:transactions.title'))
 			.setDescription(description);
 
-		for (const transaction in userTransactions) {
+		userTransactions.forEach(async (transaction) => {
 			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 44 ~ TransactionsInteractionCommand ~ run ~ transaction', transaction);
 			const substring = '';
 
@@ -90,7 +90,8 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			substring.concat('\n');
 			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 89 ~ TransactionsInteractionCommand ~ run ~ substring', substring);
 			description = description + substring;
-		}
+		},
+		);
 
 		console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 94 ~ TransactionsInteractionCommand ~ run ~ description', description);
 
