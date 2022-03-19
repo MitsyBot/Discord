@@ -98,6 +98,13 @@
         "embed_description": "{{mitsy_confetti}} Card de {{username}}\nNivel ``{{level}}``\nXp ``{{xp}}``",
         "embed_footer": "Continue tentando subir de nivel."      
       },
+      "transactions": {
+        "title": "Suas transações",
+        "received": "Recebeu {{quantity}} cometinhas de {{name}}",
+        "sent": "Enviou {{quantity}} cometinhas para {{name}}",
+        "genericSent": "Enviou {{quantity}} {{type}}",
+        "genericReceive": "Recebeu {{quantity}} {{type}}"
+      },
       "checkpremium": {
         "ispremium": "{{mitsy_rica}} {{user}} é um usuario premium da mitsy tier {{tier}}",
         "notpremium": "{{user}} Não é um usuario premium da mitsy\n\nps: caso queira se tornar um basta [clicar aqui](https://mitsy.xyz/premium)"
