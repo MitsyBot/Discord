@@ -53,7 +53,6 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 			if (transaction.reason === 'PAYMENT') {
 				let receivedByUserId;
-				console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 55 ~ TransactionsInteractionCommand ~ userTransactions.forEach ~ transaction.reason', transaction.reason);
 
 				if (received) {
 					receivedByUserId = transaction.given_by;
@@ -61,10 +60,8 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 				else {
 					receivedByUserId = transaction.received_by;
 				}
-				console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 63 ~ TransactionsInteractionCommand ~ userTransactions.forEach ~ receivedByUserId', receivedByUserId);
 
 				const receivedByUser = await ctx.client.users.fetch(receivedByUserId);
-				console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 66 ~ TransactionsInteractionCommand ~ userTransactions.forEach ~ receivedByUser', receivedByUser);
 
 				const name = (`${receivedByUser.username}#${receivedByUser?.discriminator}`);
 
@@ -74,8 +71,6 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 				else {
 					substring = substring + ctx.locale('commands:transactions.sent', { name, quantity: transaction.quantity });
 				}
-				console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 76 ~ TransactionsInteractionCommand ~ userTransactions.forEach ~ substring', substring);
-
 			}
 			else {
 				const type = ctx.locale(`types:${transaction.reason}`);
@@ -87,6 +82,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 			substring = substring + '\n';
 			description = description + substring;
+			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 88 ~ TransactionsInteractionCommand ~ userTransactions.forEach ~ substring', substring);
 		},
 		);
 
