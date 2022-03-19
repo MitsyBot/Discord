@@ -34,13 +34,14 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			},
 		});
 
-		const description = '';
+		let description = '';
 
 		const embed = new MitsyEmbed()
 			.setTitle(ctx.locale('commands:transactions.title'))
 			.setDescription(description);
 
 		for (const transaction in userTransactions) {
+			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 44 ~ TransactionsInteractionCommand ~ run ~ transaction', transaction);
 			const substring = '';
 
 			substring.concat(`${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')} `);
@@ -85,11 +86,11 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			}
 
 			substring.concat('\n');
-			console.log(substring);
-			description.concat(substring);
+			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 89 ~ TransactionsInteractionCommand ~ run ~ substring', substring);
+			description = description + substring;
 		}
 
-		console.log(description);
+		console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 94 ~ TransactionsInteractionCommand ~ run ~ description', description);
 
 		ctx.makeMessage({ embeds: [embed] });
 	}
