@@ -38,7 +38,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 		const embed = new MitsyEmbed()
 			.setTitle(ctx.locale('commands:transactions.title'))
-			.setDescription(description);
+			.setDescription(`${description}`);
 
 		userTransactions.forEach(async (transaction) => {
 			let substring = '';
