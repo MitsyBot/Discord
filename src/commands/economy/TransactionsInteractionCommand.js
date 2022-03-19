@@ -85,7 +85,8 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			}
 
 			substring.append('\n');
-			description.append(substring);
+			console.log(substring);
+			description.push(substring);
 		}
 
 		console.log(description);
