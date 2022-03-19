@@ -20,6 +20,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 	async run(ctx) {
 		const user = ctx.data.user ?? ctx.data.author;
+		console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 23 ~ TransactionsInteractionCommand ~ run ~ user', user);
 
 		const userTransactions = await ctx.client.database.transactions.findMany({
 			where: {
@@ -33,6 +34,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 				],
 			},
 		});
+		console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 36 ~ TransactionsInteractionCommand ~ run ~ userTransactions', userTransactions);
 
 		let description = '';
 
