@@ -44,9 +44,9 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 		userTransactions.forEach(async (transaction) => {
 			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 44 ~ TransactionsInteractionCommand ~ run ~ transaction', transaction);
-			const substring = '';
+			let substring = '';
 
-			substring.concat(`${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')} `);
+			substring = substring + `${moment.duration(transaction.given_at).format('DD-MM-YYYY hh:mm')} `;
 
 			const received = Boolean(transaction.received_by === user.general.id);
 
@@ -55,8 +55,8 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 			if (received) emoji = '\uD83D\uDCB5';
 			else emoji = '\uD83D\uDCB8';
 
-			substring.concat(emoji);
-			substring.concat(' ');
+			substring = substring + emoji;
+			substring = substring + ' ';
 
 			if (transaction.reason === 'PAYMENT') {
 				let receivedByUserId;
@@ -73,21 +73,21 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 				const name = (`${receivedByUser.username}#${receivedByUser?.discriminator}`);
 
 				if (received) {
-					substring.concat(ctx.locale('commands:transactions.received', { name, quantity: transaction.quantity }));
+					substring = substring + ctx.locale('commands:transactions.received', { name, quantity: transaction.quantity });
 				}
 				else {
-					substring.concat(ctx.locale('commands:transactions.sent', { name, quantity: transaction.quantity }));
+					substring = substring + ctx.locale('commands:transactions.sent', { name, quantity: transaction.quantity });
 				}
 			}
 			else {
 				const type = ctx.locale(`types:${transaction.reason}`);
 
 
-				if (received) {substring.concat(ctx.locale('commands:transactions.genericReceive', { type, quantity: transaction.quantity }));}
-				else { substring.concat(ctx.locale('commands:transactions.genericSent', { type, quantity: transaction.quantity })); }
+				if (received) {substring = substring + ctx.locale('commands:transactions.genericReceive', { type, quantity: transaction.quantity });}
+				else { substring = substring + ctx.locale('commands:transactions.genericSent', { type, quantity: transaction.quantity }); }
 			}
 
-			substring.concat('\n');
+			substring = substring + '\n';
 			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 89 ~ TransactionsInteractionCommand ~ run ~ substring', substring);
 			description = description + substring;
 		},
