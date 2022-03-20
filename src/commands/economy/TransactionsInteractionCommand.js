@@ -27,11 +27,11 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 	async run(ctx) {
 		const user = ctx.data.user ?? ctx.data.author;
 
-		const page = ctx.options.getInteger('pagina', true);
+		const page = ctx.options.getInteger('pagina', false);
 
 		let skipNumber = page - 1 * 10;
 		let takeNumber = page * 10;
-		if (page === 0) {
+		if (!page) {
 			skipNumber = 0;
 			takeNumber = 10;
 		}
