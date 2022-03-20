@@ -59,14 +59,14 @@ module.exports = class EconomyController extends Controller {
 			this.client.database.user.removeComets(_from.id, amount),
 			this.client.database.user.addComets(_to.id, amount),
 		]);
-
+		const date = `${moment().format('DD/MM/YYYY HH:mm')}`;
 		const transaction = await this.client.database.transactions.create({
 			data: {
 				reason: 'PAYMENT',
 				given_by: _from.id,
 				received_by: _to.id,
 				quantity: amount,
-				given_at: moment().format('MM DD YYYY, h:mm:ss'),
+				given_at: date,
 			},
 		});
 
