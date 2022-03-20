@@ -13,6 +13,7 @@ module.exports = class PingInteractionCommand extends InteractionCommand {
 					name: 'opções',
 					type: 'STRING',
 					description: 'Escolha uma dessas opções',
+					usage: '/ping shards',
 					required: false,
 					choices: [
 						{

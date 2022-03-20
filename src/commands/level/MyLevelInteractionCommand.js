@@ -9,6 +9,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 				{
 					name: 'usuário',
 					type: 'USER',
+					usage: '/level Alex',
 					description: 'Mencione um usuário',
 					required: false,
 				},

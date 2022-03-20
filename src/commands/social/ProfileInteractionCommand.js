@@ -11,6 +11,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 				{
 					name: 'usuário',
 					type: 'USER',
+					usage: '/profile Gio',
 					description: 'Mencione um usuário',
 					required: false,
 				},

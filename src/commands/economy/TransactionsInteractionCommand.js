@@ -9,6 +9,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 				{
 					type: 'USER',
 					name: 'usuário',
+					usage: '/transactions @Sonbane',
 					description: 'Usuário que deseja ver as transações (opcional)',
 					required: false,
 				},
@@ -16,6 +17,7 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 					name: 'pagina',
 					description: 'A pagina das suas transação (opcional)',
 					type: 'INTEGER',
+					usage: '/transactions 4',
 					required: false,
 					minValue: 1,
 				},

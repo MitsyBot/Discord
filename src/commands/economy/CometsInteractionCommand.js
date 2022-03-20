@@ -10,6 +10,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 					type: 'USER',
 					name: 'usuário',
 					description: 'Usuario que deseja ver os cometinhas (opcional)',
+					usage: '/comets @Jeremias',
 					required: false,
 				},
 			],

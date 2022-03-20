@@ -12,6 +12,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 					type: 'USER',
 					name: 'usuário',
 					description: 'Usuario que deseja transferir os cometinhas',
+					usage: '/pay @Sans 12',
 					required: true,
 				},
 				{
@@ -19,6 +20,7 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 					description: 'A quantidade para transferir',
 					type: 'INTEGER',
 					required: true,
+					usage: '/pay @Sans 1200',
 					minValue: 1,
 				},
 			],

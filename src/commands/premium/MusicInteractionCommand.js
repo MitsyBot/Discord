@@ -12,6 +12,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 					name: 'play',
 					description: 'Toque musica ou adicione a fila',
 					type: 'SUB_COMMAND',
+					usage: '/play Megalovania',
 					options: [
 						{
 							name: 'link',
@@ -22,6 +23,7 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 				},
 				{
 					name: 'volume',
+					usage: '/volume 200',
 					description: 'Altere o volume da musica',
 					type: 'SUB_COMMAND',
 					options: [
@@ -34,31 +36,37 @@ module.exports = class PlayInteractionCommand extends InteractionCommand {
 				},
 				{
 					name: 'stop',
+					usage: '/stop',
 					description: 'Remova todas as musicas de uma fila',
 					type: 'SUB_COMMAND',
 				},
 				{
 					name: 'np',
+					usage: '/np',
 					description: 'Veja o que esta tocando agora',
 					type: 'SUB_COMMAND',
 				},
 				{
 					name: 'skip',
+					usage: '/skip',
 					description: 'Pular a musica atual',
 					type: 'SUB_COMMAND',
 				},
 				{
 					name: 'pause',
+					usage: '/pause',
 					description: 'Pausar a musica atual',
 					type: 'SUB_COMMAND',
 				},
 				{
 					name: 'bassboost',
+					usage: '/bassboost',
 					description: 'Ativar o filtro de bass',
 					type: 'SUB_COMMAND',
 				},
 				{
 					name: 'loop',
+					usage: '/loop',
 					description: 'Ative o loop na musica atual',
 					type: 'SUB_COMMAND',
 				},
