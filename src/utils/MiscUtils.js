@@ -79,6 +79,36 @@ module.exports = class MiscUtils {
 			.trim();
 	}
 
+	static replacePlaceholders(template, ctx) {
+		const values = [
+			{
+				User: ctx.author.username,
+				'@User':  `<@${ctx.author.id}>`,
+			},
+		];
+		if (!values.length) {return template;}
+
+		for (const [ index, value ] of values.entries()) {
+
+			switch (typeof value) {
+			case 'object':
+				for (const [ i, v ] of Object.entries(value)) {
+					const regex = new RegExp(`(?<!\\\\)\\{${i}\\}`, 'gi');
+					template = template.replace(regex, v);
+				}
+
+				break;
+			case 'string':
+				// eslint-disable-next-line no-case-declarations
+				const regex = new RegExp(`(?<!\\\\)\\{${index}\\}`, 'gi');
+				template = template.replace(regex, value);
+			}
+
+		}
+
+		return template;
+	}
+
 	static formatDuration(duration) {
 		return moment.duration(duration).format('hh:mm:ss', { stopTrim: 'm' });
 	}
