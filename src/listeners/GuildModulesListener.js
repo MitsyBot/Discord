@@ -7,14 +7,14 @@ module.exports = class EventLogger extends EventListener {
 		}, client);
 	}
 
-	onGuildBanAdd(ban) {
-		const guild = this.database.guild.ensure(ban.guild.id);
+	async onGuildBanAdd(ban) {
+		const guild = await this.database.guild.ensure(ban.guild.id);
 		console.log(ban);
 		console.log(guild);
 	}
 
-	onGuildBanRemove(ban) {
-		const guild = this.database.guild.ensure(ban.guild.id);
+	async onGuildBanRemove(ban) {
+		const guild = await this.database.guild.ensure(ban.guild.id);
 		console.log(ban);
 		console.log(guild);
 	}
