@@ -5,7 +5,7 @@
   "version": "2.0.6",
   "scripts": {
     "prod": "node -r dotenv/config sharder.js",
-    "dev": "nodemon --exec node -r dotenv/config sharder.js",
+    "dev": "nodemon --exec NODE_ENV=development node -r dotenv/config sharder.js",
     "commit": "cz"
   },
   "main": "sharder.js",

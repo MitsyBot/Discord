@@ -19,8 +19,14 @@ module.exports = class InteractionCommandExecutor {
 		}
 		const userBlacklist = await client.controllers.developer.userBlacklisted(interaction.user.id);
 		const guildBlacklist = await client.controllers.developer.guildBlacklisted(interaction.guild.id);
-
-		const DevLevel = await client.controllers.developer.getDeveloper(interaction.user.id);
+		
+		let DevLevel;
+		
+		if(process.env.NODE_ENV === 'development') {
+			DevLevel = 4
+		} else {
+			DevLevel = await client.controllers.developer.getDeveloper(interaction.user.id);
+		}
 
 		data.author = authorData;
 		data.guild = guildData;
