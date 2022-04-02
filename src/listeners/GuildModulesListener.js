@@ -58,7 +58,6 @@ module.exports = class EventLogger extends EventListener {
 					.setDescription(`📝 **O avatar de ${newMember.user.username} foi alterado**`)
 					.setFooter({ text: `ID do usuario: ${newMember.user.id}` });
 				await EventLog.send(channel, embed, this);
-
 			}
 		}
 	}
