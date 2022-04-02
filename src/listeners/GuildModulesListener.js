@@ -67,7 +67,7 @@ module.exports = class EventLogger extends EventListener {
 		const channel = await newMessage.guild.channels.cache.get(guild.event_log.event_log_channel);
 
 		if (guild.event_log.enabled) {
-			if (newMessage.channel.isText() && newMessage.deleted && guild.event_log.message_deleted) {
+			if (newMessage.channel.isText() && oldMessage.deleted && guild.event_log.message_deleted) {
 				const embed = new MitsyEmbed()
 					.setAuthor({ name: newMessage.author.username + '#' + newMessage.author.discriminator })
 					.setDescription(`📝 **Mensagem de texto deletada**\n\n**Canal de texto:** <#${newMessage.channel.id}>\n\n**Mensagem:**\n\n\`\`\`${oldMessage.content}\`\`\``)
@@ -81,7 +81,7 @@ module.exports = class EventLogger extends EventListener {
 			if (newMessage.channel.isText() && newMessage.content !== oldMessage.content && guild.event_log.message_edited) {
 				const embed = new MitsyEmbed()
 					.setAuthor({ name: newMessage.author.username + '#' + newMessage.author.discriminator })
-					.setDescription(`📝 **<@${newMessage.author.id}> Editou uma mensagem de texto**\n\n**Canal de texto:** <#${newMessage.channel.id}>\n\n**Mensagem antiga:**\n\n\`\`\`${oldMessage.content}\`\`\`n\n**Mensagem nova:**\n\n\`\`\`${newMessage.content}\`\`\``)
+					.setDescription(`📝 **<@${newMessage.author.id}> Editou uma mensagem de texto**\n\n**Canal de texto:** <#${newMessage.channel.id}>\n\n**Mensagem antiga:**\n\n\`\`\`${oldMessage.content}\`\`\`\n\n**Nova mensagem:**\n\n\`\`\`${newMessage.content}\`\`\``)
 					.setFooter({ text: `ID do usuario: ${newMessage.author.id}` });
 				await EventLog.send(channel, embed, this);
 			}
