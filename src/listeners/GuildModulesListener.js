@@ -78,6 +78,7 @@ module.exports = class EventLogger extends EventListener {
 	}
 
 	async onMessageDelete(message) {
+		console.log(message);
 		const guild = await this.database.guild.ensure(message.guild.id);
 		const channel = await message.guild.channels.cache.get(guild.event_log.event_log_channel);
 
