@@ -94,7 +94,29 @@ module.exports = class EventLogger extends EventListener {
 	}
 
 	async onVoiceStateUpdate(oldVoice, newVoice) {
-		console.log(oldVoice.member.user);
-		console.log(newVoice.member.user);
+		const guild = await this.database.guild.ensure(newVoice.guild.id);
+		const channel = await newVoice.guild.channels.cache.get(guild.event_log.event_log_channel);
+		const oldUser = oldVoice.member;
+		const newUser = newVoice.member;
+
+		if (guild.event_log.enabled && guild.event_log.voice_channel_joins && oldUser.voice.channelId !== newUser.voice.channelId && newUser.voice.channelId !== null || undefined) {
+			console.log(newVoice.member);
+			const embed = new MitsyEmbed()
+				.setAuthor({ name: newUser.user.username + '#' + newUser.user.discriminator })
+				.setDescription(`${newUser} Entrou no canal de voz <#${newUser.voice.channelId}>`)
+				.setFooter({ text: `ID do usuario: ${newUser}` });
+
+			await EventLog.send(channel, embed, this);
+		}
+
+		if (guild.event_log.enabled && guild.event_log.voice_channel_leaves && oldUser.voice.channelId !== newUser.voice.channelId && newUser.voice.channelId === null || undefined) {
+
+			const embed = new MitsyEmbed()
+				.setAuthor({ name: newUser.user.username + '#' + newUser.user.discriminator })
+				.setDescription(`${newUser} Saiu do canal de voz <#${oldUser.voice.channelId}>`)
+				.setFooter({ text: `ID do usuario: ${newUser}` });
+
+			await EventLog.send(channel, embed, this);
+		}
 	}
 };
