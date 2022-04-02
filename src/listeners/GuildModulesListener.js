@@ -1,4 +1,4 @@
-const { EventListener } = require('../');
+const { EventListener, MitsyEmbed } = require('../');
 
 module.exports = class EventLogger extends EventListener {
 	constructor(client) {
@@ -9,18 +9,29 @@ module.exports = class EventLogger extends EventListener {
 
 	async onGuildBanAdd(ban) {
 		const guild = await this.database.guild.ensure(ban.guild.id);
-		if (guild.event_log.enabled) {
-			console.log(ban);
-			console.log(guild);
+		if (guild.event_log.enabled && guild.event_log.member_banned) {
+			const channel = ban.guild.channel.cache.get(guild.event_log.event_log_channel);
+
+			const embed = new MitsyEmbed
+				.setTitle(`🤝 ${ban.user.username} foi desbanido(a)`)
+				.setAuthor({ name: ban.user.username })
+				.setFooter({ text: `ID do usuario: ${ban.user.id}` });
+
+			channel.send({ embeds: [embed] });
 		}
 	}
 
 	async onGuildBanRemove(ban) {
 		const guild = await this.database.guild.ensure(ban.guild.id);
-		console.log(guild);
-		if (guild.event_log.enabled) {
-			console.log(ban);
-			console.log(guild);
+		if (guild.event_log.enabled && guild.event_log.member_unbanned) {
+			const channel = ban.guild.channel.cache.get(guild.event_log.event_log_channel);
+
+			const embed = new MitsyEmbed
+				.setTitle(`🤝 ${ban.user.username} foi desbanido(a)`)
+				.setAuthor({ name: ban.user.username })
+				.setFooter({ text: `ID do usuario: ${ban.user.id}` });
+
+			channel.send({ embeds: [embed] });
 		}
 	}
 };
