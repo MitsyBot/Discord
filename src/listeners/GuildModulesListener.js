@@ -17,6 +17,7 @@ module.exports = class EventLogger extends EventListener {
 
 	async onGuildBanRemove(ban) {
 		const guild = await this.database.guild.ensure(ban.guild.id);
+		console.log(guild);
 		if (guild.event_log.enabled) {
 			console.log(ban);
 			console.log(guild);
