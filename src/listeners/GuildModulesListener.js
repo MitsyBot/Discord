@@ -67,7 +67,7 @@ module.exports = class EventLogger extends EventListener {
 		const channel = await newMessage.guild.channels.cache.get(guild.event_log.event_log_channel);
 
 		if (guild.event_log.enabled) {
-			if (newMessage.channel.isText() && oldMessage.deleted && guild.event_log.message_deleted) {
+			if (newMessage.channel.isText() && !newMessage.channel.messages.fetch(oldMessage.id) && guild.event_log.message_deleted) {
 				const embed = new MitsyEmbed()
 					.setAuthor({ name: newMessage.author.username + '#' + newMessage.author.discriminator })
 					.setDescription(`📝 **Mensagem de texto deletada**\n\n**Canal de texto:** <#${newMessage.channel.id}>\n\n**Mensagem:**\n\n\`\`\`${oldMessage.content}\`\`\``)
