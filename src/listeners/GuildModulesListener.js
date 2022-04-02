@@ -14,7 +14,7 @@ module.exports = class EventLogger extends EventListener {
 
 			const embed = new MitsyEmbed()
 				.setTitle(`🤝 ${ban.user.username} foi desbanido(a)`)
-				.setAuthor({ name: ban.user.username })
+				.setAuthor({ name: ban.user.username + '#' + ban.user.discriminator })
 				.setFooter({ text: `ID do usuario: ${ban.user.id}` });
 
 			channel.send({ embeds: [embed] });
@@ -28,7 +28,7 @@ module.exports = class EventLogger extends EventListener {
 			console.log(channel);
 			const embed = new MitsyEmbed()
 				.setTitle(`🤝 ${ban.user.username} foi desbanido(a)`)
-				.setAuthor({ name: ban.user.username })
+				.setAuthor({ name: ban.user.username + '#' + ban.user.discriminator })
 				.setFooter({ text: `ID do usuario: ${ban.user.id}` });
 
 			channel.send({ embeds: [embed] });
