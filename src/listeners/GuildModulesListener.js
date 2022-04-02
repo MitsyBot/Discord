@@ -93,16 +93,15 @@ module.exports = class EventLogger extends EventListener {
 		}
 	}
 
-	async onVoiceStateUpdate(oldVoice, newVoice) {
-		const guild = await this.database.guild.ensure(newVoice.guild.id);
-		const channel = await newVoice.guild.channels.cache.get(guild.event_log.event_log_channel);
-		const oldUser = oldVoice.member;
-		const newUser = newVoice.member;
+	async onVoiceStateUpdate(oldState, newState) {
+		const guild = await this.database.guild.ensure(newState.guild.id);
+		const channel = await newState.guild.channels.cache.get(guild.event_log.event_log_channel);
+		const oldUser = oldState.member;
+		const newUser = newState.member;
 
-		console.log(oldUser.voice);
-		console.log(newUser.voice);
+		console.log(newState);
+
 		if (guild.event_log.enabled && guild.event_log.voice_channel_joins && oldUser.voice.channelId !== newUser.voice.channelId && newUser.voice.channelId !== null || undefined) {
-			console.log(newVoice.member);
 			const embed = new MitsyEmbed()
 				.setAuthor({ name: newUser.user.username + '#' + newUser.user.discriminator })
 				.setDescription(`${newUser} Entrou no canal de voz <#${newUser.voice.channelId}>`)
