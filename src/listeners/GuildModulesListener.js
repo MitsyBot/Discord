@@ -92,4 +92,9 @@ module.exports = class EventLogger extends EventListener {
 			}
 		}
 	}
+
+	async onVoiceStateUpdate(oldVoice, newVoice) {
+		console.log(oldVoice.member.user);
+		console.log(newVoice.member.user);
+	}
 };
