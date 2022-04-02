@@ -15,6 +15,7 @@ module.exports = {
 	MitsyEmbed: require('./structures/MitsyEmbed.js'),
 	WebSocketController: require('./websocket/ApiWebsocket'),
 	MiscUtils: require('./utils/MiscUtils'),
+	EventLog: require('./utils/EventLog'),
 	Connection: require('./structures/Connetion'),
 	YoutubeTogether: require('./media/interactions/Youtube'),
 };
