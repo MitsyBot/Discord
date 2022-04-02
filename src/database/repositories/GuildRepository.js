@@ -6,9 +6,9 @@ module.exports = class GuildRepository {
 	}
 	async ensure(id) {
 
-		const general = this.ensureGeneral(id);
-		const key = this.getGuildKeys(id);
-		const event_log = this.ensureLogConfigs(id);
+		const general = await this.ensureGeneral(id);
+		const key = await this.getGuildKeys(id);
+		const event_log = await this.ensureLogConfigs(id);
 
 		return { general, key, event_log };
 	}
