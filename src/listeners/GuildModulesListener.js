@@ -13,7 +13,7 @@ module.exports = class EventLogger extends EventListener {
 			const channel = ban.guild.channels.cache.get(guild.event_log.event_log_channel);
 
 			const embed = new MitsyEmbed()
-				.setTitle(`🤝 ${ban.user.username} foi desbanido(a)`)
+				.setTitle(`🤝 **${ban.user.username} foi banido(a)**`)
 				.setAuthor({ name: ban.user.username + '#' + ban.user.discriminator })
 				.setFooter({ text: `ID do usuario: ${ban.user.id}` });
 
@@ -27,7 +27,7 @@ module.exports = class EventLogger extends EventListener {
 			const channel = await ban.guild.channels.cache.get(guild.event_log.event_log_channel);
 			console.log(channel);
 			const embed = new MitsyEmbed()
-				.setTitle(`🤝 ${ban.user.username} foi desbanido(a)`)
+				.setDescription(`🤝 **${ban.user.username} foi desbanido(a)**`)
 				.setAuthor({ name: ban.user.username + '#' + ban.user.discriminator })
 				.setFooter({ text: `ID do usuario: ${ban.user.id}` });
 
