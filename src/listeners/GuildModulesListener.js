@@ -67,22 +67,26 @@ module.exports = class EventLogger extends EventListener {
 		const channel = await newMessage.guild.channels.cache.get(guild.event_log.event_log_channel);
 
 		if (guild.event_log.enabled) {
-			if (newMessage.channel.isText() && !newMessage.channel.messages.fetch(oldMessage.id) && guild.event_log.message_deleted) {
-				const embed = new MitsyEmbed()
-					.setAuthor({ name: newMessage.author.username + '#' + newMessage.author.discriminator })
-					.setDescription(`📝 **Mensagem de texto deletada**\n\n**Canal de texto:** <#${newMessage.channel.id}>\n\n**Mensagem:**\n\n\`\`\`${oldMessage.content}\`\`\``)
-					.setFooter({ text: `ID do usuario: ${newMessage.author.id}` });
-				await EventLog.send(channel, embed, this);
-			}
-		}
-
-
-		if (guild.event_log.enabled) {
 			if (newMessage.channel.isText() && newMessage.content !== oldMessage.content && guild.event_log.message_edited) {
 				const embed = new MitsyEmbed()
 					.setAuthor({ name: newMessage.author.username + '#' + newMessage.author.discriminator })
 					.setDescription(`📝 **<@${newMessage.author.id}> Editou uma mensagem de texto**\n\n**Canal de texto:** <#${newMessage.channel.id}>\n\n**Mensagem antiga:**\n\n\`\`\`${oldMessage.content}\`\`\`\n\n**Nova mensagem:**\n\n\`\`\`${newMessage.content}\`\`\``)
 					.setFooter({ text: `ID do usuario: ${newMessage.author.id}` });
+				await EventLog.send(channel, embed, this);
+			}
+		}
+	}
+
+	async onMessageDelete(message) {
+		const guild = await this.database.guild.ensure(message.guild.id);
+		const channel = await message.guild.channels.cache.get(guild.event_log.event_log_channel);
+
+		if (guild.event_log.enabled) {
+			if (message.channel.isText() && guild.event_log.message_deleted) {
+				const embed = new MitsyEmbed()
+					.setAuthor({ name: message.author.username + '#' + message.author.discriminator })
+					.setDescription(`📝 **Mensagem de texto deletada**\n\n**Canal de texto:** <#${message.channel.id}>\n\n**Mensagem:**\n\n\`\`\`${message.content}\`\`\``)
+					.setFooter({ text: `ID do usuario: ${message.author.id}` });
 				await EventLog.send(channel, embed, this);
 			}
 		}
