@@ -12,7 +12,7 @@ module.exports = class MessageListener extends EventListener {
 		if (message.interaction) return;
 
 		const guildData = await this.database.guild.ensure(message.guild.id);
-		const customCommands = guildData.custom_commands;
+		const customCommands = guildData.general.custom_commands;
 
 		for (const cmd in customCommands) {
 			if (message.content === customCommands[cmd][0]) {

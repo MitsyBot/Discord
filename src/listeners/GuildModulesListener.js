@@ -9,13 +9,17 @@ module.exports = class EventLogger extends EventListener {
 
 	async onGuildBanAdd(ban) {
 		const guild = await this.database.guild.ensure(ban.guild.id);
-		console.log(ban);
-		console.log(guild);
+		if (guild.event_log.enabled) {
+			console.log(ban);
+			console.log(guild);
+		}
 	}
 
 	async onGuildBanRemove(ban) {
 		const guild = await this.database.guild.ensure(ban.guild.id);
-		console.log(ban);
-		console.log(guild);
+		if (guild.event_log.enabled) {
+			console.log(ban);
+			console.log(guild);
+		}
 	}
 };

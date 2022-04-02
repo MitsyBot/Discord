@@ -19,12 +19,13 @@ module.exports = class InteractionCommandExecutor {
 		}
 		const userBlacklist = await client.controllers.developer.userBlacklisted(interaction.user.id);
 		const guildBlacklist = await client.controllers.developer.guildBlacklisted(interaction.guild.id);
-		
+
 		let DevLevel;
-		
-		if(process.env.NODE_ENV === 'development') {
-			DevLevel = 4
-		} else {
+
+		if (process.env.NODE_ENV === 'development') {
+			DevLevel = 4;
+		}
+		else {
 			DevLevel = await client.controllers.developer.getDeveloper(interaction.user.id);
 		}
 
@@ -45,7 +46,7 @@ module.exports = class InteractionCommandExecutor {
 
 		const command = client.slashCommands.find(c => c.config.name === interaction.commandName);
 
-		const t = client.i18next.getFixedT(data.guild.lang || 'pt-BR');
+		const t = client.i18next.getFixedT(data.guild.general.lang || 'pt-BR');
 
 		if (!command) {
 			interaction
@@ -63,7 +64,7 @@ module.exports = class InteractionCommandExecutor {
 				}).then(() => {
 					client.guilds.cache.get(data.guild.general.id)
 						.leave()
-						.then(g => client.logger.info({ tag: 'Discord' }, `Mitsy saiu de ${g} por ${data.guild.blacklistReason}`))
+						.then(g => client.logger.info({ tag: 'Discord' }, `Mitsy saiu de ${g} por ${data.guildBlacklist.reason}`))
 						.catch(console.error);
 				});
 			return;
@@ -77,8 +78,8 @@ module.exports = class InteractionCommandExecutor {
 			return;
 		}
 
-		if (data.guild.blacklisted_channels.includes(interaction.channelId) && DevLevel < 1) {
-			if (!data.guild.blacklistedChannels.warn) return;
+		if (data.guild.general.blacklisted_channels.includes(interaction.channelId) && DevLevel < 1) {
+			if (!data.guild.general.blacklistedChannels.warn) return;
 
 			await interaction.reply({ content: t('errors:CHANNEL_BLACKLISTED'), ephemeral: true });
 			return;

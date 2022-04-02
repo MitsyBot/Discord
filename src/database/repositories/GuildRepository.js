@@ -1,17 +1,44 @@
 module.exports = class GuildRepository {
 	constructor(connection) {
 		this.general = connection.GuildConfig;
+		this.event_log = connection.EventLogConfigs;
 		this.keys = connection.DonationKeys;
 	}
 	async ensure(id) {
-		const previous = await this.general.findUnique({ where: { id },
-			include: {
-				key: true,
-			},
-		});
+
+		const general = this.ensureGeneral(id);
+		const key = this.getGuildKeys(id);
+		const event_log = this.ensureLogConfigs(id);
+
+		return { general, key, event_log };
+	}
+
+
+	async ensureGeneral(id) {
+		const previous = await this.general.findUnique({ where: { id } });
 		if (previous) return previous;
 
-		const data = await this.general.create({ data: { id } });
+		const data = await this.general.create({ data: {
+			id,
+		},
+		});
+
+		return data;
+	}
+
+	async getGuildKeys(id) {
+		const previous = await this.keys.findUnique({ where: { active_in: id } });
+		return previous;
+	}
+	async ensureLogConfigs(id) {
+		const previous = await this.event_log.findUnique({ where: { id } });
+		if (previous) return previous;
+
+		const data = await this.event_log.create({ data: {
+			id,
+		},
+		});
+
 		return data;
 	}
 };
