@@ -3,7 +3,7 @@ const { EventListener, MitsyEmbed, EventLog } = require('../');
 module.exports = class EventLogger extends EventListener {
 	constructor(client) {
 		super({
-			events: ['guildBanAdd', 'guildBanRemove', 'guildMemberUpdate', 'messageUpdate', 'voiceStateUpdate'],
+			events: ['guildBanAdd', 'guildBanRemove', 'messageDelete', 'guildMemberUpdate', 'messageUpdate', 'voiceStateUpdate'],
 		}, client);
 	}
 
