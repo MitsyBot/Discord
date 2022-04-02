@@ -99,8 +99,8 @@ module.exports = class EventLogger extends EventListener {
 		const oldUser = oldVoice.member;
 		const newUser = newVoice.member;
 
-		console.log(oldUser);
-		console.log(newUser);
+		console.log(oldUser.voice);
+		console.log(newUser.voice);
 		if (guild.event_log.enabled && guild.event_log.voice_channel_joins && oldUser.voice.channelId !== newUser.voice.channelId && newUser.voice.channelId !== null || undefined) {
 			console.log(newVoice.member);
 			const embed = new MitsyEmbed()
