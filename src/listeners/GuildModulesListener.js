@@ -78,7 +78,6 @@ module.exports = class EventLogger extends EventListener {
 	}
 
 	async onMessageDelete(message) {
-		console.log(message);
 		const guild = await this.database.guild.ensure(message.guild.id);
 		const channel = await message.guild.channels.cache.get(guild.event_log.event_log_channel);
 
@@ -96,26 +95,22 @@ module.exports = class EventLogger extends EventListener {
 	async onVoiceStateUpdate(oldState, newState) {
 		const guild = await this.database.guild.ensure(newState.guild.id);
 		const channel = await newState.guild.channels.cache.get(guild.event_log.event_log_channel);
-		const oldUser = oldState.member;
-		const newUser = newState.member;
 
-		console.log(newState);
-
-		if (guild.event_log.enabled && guild.event_log.voice_channel_joins && oldUser.voice.channelId !== newUser.voice.channelId && newUser.voice.channelId !== null || undefined) {
+		if (guild.event_log.enabled && guild.event_log.voice_channel_joins && oldState.channelId !== newState.channelId && newState.channelId !== null || undefined) {
 			const embed = new MitsyEmbed()
-				.setAuthor({ name: newUser.user.username + '#' + newUser.user.discriminator })
-				.setDescription(`${newUser} Entrou no canal de voz <#${newUser.voice.channelId}>`)
-				.setFooter({ text: `ID do usuario: ${newUser}` });
+				.setAuthor({ name: newState.member.user.username + '#' + newState.member.user.discriminator })
+				.setDescription(`${newState.member} Entrou no canal de voz <#${newState.channelId}>`)
+				.setFooter({ text: `ID do usuario: ${newState.member}` });
 
 			await EventLog.send(channel, embed, this);
 		}
 
-		if (guild.event_log.enabled && guild.event_log.voice_channel_leaves && oldUser.voice.channelId !== newUser.voice.channelId && newUser.voice.channelId === null || undefined) {
+		if (guild.event_log.enabled && guild.event_log.voice_channel_leaves && oldState.voice.channelId !== newState.channelId && newState.channelId === null || undefined) {
 
 			const embed = new MitsyEmbed()
-				.setAuthor({ name: newUser.user.username + '#' + newUser.user.discriminator })
-				.setDescription(`${newUser} Saiu do canal de voz <#${oldUser.voice.channelId}>`)
-				.setFooter({ text: `ID do usuario: ${newUser}` });
+				.setAuthor({ name: newState.member.user.username + '#' + newState.member.user.discriminator })
+				.setDescription(`${newState.member} Saiu do canal de voz <#${oldState.channelId}>`)
+				.setFooter({ text: `ID do usuario: ${newState.member}` });
 
 			await EventLog.send(channel, embed, this);
 		}
