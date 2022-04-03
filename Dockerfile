@@ -4,19 +4,7 @@ RUN mkdir -p /usr/src/mitsy
 WORKDIR /usr/src/mitsy
 
 RUN apk update && apk upgrade
-RUN apk add sudo \
-        curl \
-        build-base \
-        g++ \
-        libpng \
-        libpng-dev \
-        jpeg-dev \
-        pango-dev \
-        cairo-dev \
-        giflib-dev \
-        python \
-        make \
-        git
+RUN apk add sudo curl build-base g++ libpng libpng-dev jpeg-dev pango-dev cairo-dev giflib-dev python3 make git
 
 RUN apk --no-cache add ca-certificates wget  && \
         wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
