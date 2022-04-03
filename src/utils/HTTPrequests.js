@@ -57,6 +57,22 @@ module.exports = class HttpRequests {
 		}
 	}
 
+	static async avatarsLogRequest(_data) {
+		try {
+			const data = await axios({
+				url: `${process.env.GENERATOR_URL}/render/avatars`,
+				method: 'post',
+				data: _data,
+				responseType: 'arraybuffer',
+			});
+
+			return { err: false, data: data.data };
+		}
+		catch {
+			return { err: true };
+		}
+	}
+
 	static async getActivity(shard) {
 		try {
 			const data = await apiRequest.get('/activity', { data: { shard: shard || 0 } });
