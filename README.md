@@ -22,4 +22,4 @@ Consulte a documentação do seu Sistema Operacional para instalar.
 - Execute a mitsy utilizando ```npm run start```
 
 
-- Observação: **Em algumas instancias a mitsy pode ter problemas ao executar slashcommands isso não é um problema do bot (ou talvez seja mas eu não encontrei o que causa isso, para desenvolvimento usar a instancia canary do servidor de desenvolvimento e comunidade)
+- Observação: **Em algumas instancias a mitsy pode ter problemas ao executar slashcommands isso não é um problema do bot (ou talvez seja mas eu não encontrei o que causa isso, para desenvolvimento usar a instancia canary do servidor de desenvolvimento e comunidade)**
