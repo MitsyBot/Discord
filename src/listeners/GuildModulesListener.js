@@ -1,5 +1,6 @@
 const { EventListener, MitsyEmbed, EventLog } = require('../');
-
+const { createCanvas, loadImage } = require('canvas');
+const { MessageAttachment } = require('discord.js');
 module.exports = class EventLogger extends EventListener {
 	constructor(client) {
 		super({
@@ -62,12 +63,23 @@ module.exports = class EventLogger extends EventListener {
 
 			if (guild.event_log.avatar_changes && oldMember.avatar !== newMember.avatar) {
 				this.logger.info('MITSY BACKEND', 'Enviando imagens de avatar para o servidor de imagens');
+				const canvas = createCanvas(256, 128);
+				const ctx = canvas.getContext('2d');
+
+				const oldAvatar = loadImage(oldMember.user.displayAvatarURL({ format: 'png', size: 512 })).catch(er => console.log(er));
+				const newAvatar = loadImage(newMember.user.displayAvatarURL({ format: 'png', size: 512 })).catch(er => console.log(er));
+
+				ctx.drawImage(oldAvatar, 0, 0, null);
+				ctx.drawImage(newAvatar, 128, 0, null);
+				const finalImage = new MessageAttachment(canvas.toBuffer(), 'avatar.png');
 
 				const embed = new MitsyEmbed()
 					.setAuthor({ name: newMember.user.username + '#' + newMember.user.discriminator })
 					.setDescription(`📝 **O avatar de ${newMember.user.username} foi alterado**`)
+					.setImage('attachment://avatar.png')
 					.setFooter({ text: `ID do usuario: ${newMember.user.id}` });
-				await EventLog.send(channel, embed, this);
+
+				await EventLog.send(channel, embed, this, finalImage);
 			}
 		}
 	}

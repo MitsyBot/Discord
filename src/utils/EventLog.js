@@ -1,5 +1,5 @@
 module.exports = class EventLog {
-	static async send(channel, embed, client) {
+	static async send(channel, embed, client, file) {
 		client.logger.info('MITSY BACKEND', `Procurando um webhook da mitsy em ${channel.id}`);
 
 		if (!channel.permissionsFor(client.user).has('MANAGE_WEBHOOKS')) {
@@ -22,6 +22,7 @@ module.exports = class EventLog {
 			username: 'Mitsy - Logs',
 			avatarURL: `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png`,
 			embeds: [embed],
+			files: [file],
 		});
 	}
 
