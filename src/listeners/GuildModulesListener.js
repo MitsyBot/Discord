@@ -99,7 +99,7 @@ module.exports = class EventLogger extends EventListener {
 		if (guild.event_log.enabled && guild.event_log.voice_channel_joins && oldState.channelId !== newState.channelId && newState.channelId !== null || undefined) {
 			const embed = new MitsyEmbed()
 				.setAuthor({ name: newState.member.user.username + '#' + newState.member.user.discriminator })
-				.setDescription(`${newState.member} Entrou no canal de voz <#${newState.channelId}>`)
+				.setDescription(`<:mitsy_dj:853638799741419531> ${newState.member} Entrou no canal de voz <#${newState.channelId}>`)
 				.setFooter({ text: `ID do usuario: ${newState.member.id}` });
 
 			await EventLog.send(channel, embed, this);
@@ -109,7 +109,7 @@ module.exports = class EventLogger extends EventListener {
 
 			const embed = new MitsyEmbed()
 				.setAuthor({ name: newState.member.user.username + '#' + newState.member.user.discriminator })
-				.setDescription(`${newState.member} Saiu do canal de voz <#${oldState.channelId}>`)
+				.setDescription(`<:mitsy_dj:853638799741419531> ${newState.member} Saiu do canal de voz <#${oldState.channelId}>`)
 				.setFooter({ text: `ID do usuario: ${newState.member.id}` });
 
 			await EventLog.send(channel, embed, this);
