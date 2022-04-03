@@ -100,7 +100,7 @@ module.exports = class EventLogger extends EventListener {
 			const embed = new MitsyEmbed()
 				.setAuthor({ name: newState.member.user.username + '#' + newState.member.user.discriminator })
 				.setDescription(`${newState.member} Entrou no canal de voz <#${newState.channelId}>`)
-				.setFooter({ text: `ID do usuario: ${newState.member}` });
+				.setFooter({ text: `ID do usuario: ${newState.member.id}` });
 
 			await EventLog.send(channel, embed, this);
 		}
@@ -110,7 +110,7 @@ module.exports = class EventLogger extends EventListener {
 			const embed = new MitsyEmbed()
 				.setAuthor({ name: newState.member.user.username + '#' + newState.member.user.discriminator })
 				.setDescription(`${newState.member} Saiu do canal de voz <#${oldState.channelId}>`)
-				.setFooter({ text: `ID do usuario: ${newState.member}` });
+				.setFooter({ text: `ID do usuario: ${newState.member.id}` });
 
 			await EventLog.send(channel, embed, this);
 		}
