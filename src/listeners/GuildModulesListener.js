@@ -105,7 +105,7 @@ module.exports = class EventLogger extends EventListener {
 			await EventLog.send(channel, embed, this);
 		}
 
-		if (guild.event_log.enabled && guild.event_log.voice_channel_leaves && oldState.voice.channelId !== newState.channelId && newState.channelId === null || undefined) {
+		if (guild.event_log.enabled && guild.event_log.voice_channel_leaves && oldState.channelId !== newState.channelId && newState.channelId === null || undefined) {
 
 			const embed = new MitsyEmbed()
 				.setAuthor({ name: newState.member.user.username + '#' + newState.member.user.discriminator })
