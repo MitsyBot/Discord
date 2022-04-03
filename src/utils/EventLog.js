@@ -17,13 +17,21 @@ module.exports = class EventLog {
 				avatar: `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png`,
 			});
 		}
-
-		await webhook.send({
-			username: 'Mitsy - Logs',
-			avatarURL: `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png`,
-			embeds: [embed],
-			files: [file],
-		});
+		if (file) {
+			await webhook.send({
+				username: 'Mitsy - Logs',
+				avatarURL: `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png`,
+				embeds: [embed],
+				files: [file],
+			});
+		}
+		else {
+			await webhook.send({
+				username: 'Mitsy - Logs',
+				avatarURL: `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png`,
+				embeds: [embed],
+			});
+		}
 	}
 
 };
