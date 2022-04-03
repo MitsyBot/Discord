@@ -10,6 +10,11 @@ module.exports = class EventLogger extends EventListener {
 	async onGuildBanAdd(ban) {
 		const guild = await this.database.guild.ensure(ban.guild.id);
 		if (guild.event_log.enabled && guild.event_log.member_banned) {
+
+			if (guild.event_log.ignore_bots && ban.user.bot) {
+				return;
+			}
+
 			const channel = ban.guild.channels.cache.get(guild.event_log.event_log_channel);
 
 			const embed = new MitsyEmbed()
@@ -23,6 +28,9 @@ module.exports = class EventLogger extends EventListener {
 
 	async onGuildBanRemove(ban) {
 		const guild = await this.database.guild.ensure(ban.guild.id);
+		if (guild.event_log.ignore_bots && ban.user.bot) {
+			return;
+		}
 		if (guild.event_log.enabled && guild.event_log.member_unbanned) {
 			const channel = await ban.guild.channels.cache.get(guild.event_log.event_log_channel);
 
@@ -38,7 +46,9 @@ module.exports = class EventLogger extends EventListener {
 	async onGuildMemberUpdate(oldMember, newMember) {
 		const guild = await this.database.guild.ensure(newMember.guild.id);
 		const channel = await newMember.guild.channels.cache.get(guild.event_log.event_log_channel);
-
+		if (guild.event_log.ignore_bots && newMember.user.bot) {
+			return;
+		}
 		if (guild.event_log.enabled) {
 
 			if (guild.event_log.nickname_changes && oldMember.nickname !== newMember.nickname) {
@@ -65,7 +75,9 @@ module.exports = class EventLogger extends EventListener {
 	async onMessageUpdate(oldMessage, newMessage) {
 		const guild = await this.database.guild.ensure(newMessage.guild.id);
 		const channel = await newMessage.guild.channels.cache.get(guild.event_log.event_log_channel);
-
+		if (guild.event_log.ignore_bots && newMessage.author.bot) {
+			return;
+		}
 		if (guild.event_log.enabled) {
 			if (newMessage.channel.isText() && newMessage.content !== oldMessage.content && guild.event_log.message_edited) {
 				const embed = new MitsyEmbed()
@@ -80,7 +92,9 @@ module.exports = class EventLogger extends EventListener {
 	async onMessageDelete(message) {
 		const guild = await this.database.guild.ensure(message.guild.id);
 		const channel = await message.guild.channels.cache.get(guild.event_log.event_log_channel);
-
+		if (guild.event_log.ignore_bots && message.author.bot) {
+			return;
+		}
 		if (guild.event_log.enabled) {
 			if (message.channel.isText() && guild.event_log.message_deleted) {
 				const embed = new MitsyEmbed()
@@ -95,7 +109,9 @@ module.exports = class EventLogger extends EventListener {
 	async onVoiceStateUpdate(oldState, newState) {
 		const guild = await this.database.guild.ensure(newState.guild.id);
 		const channel = await newState.guild.channels.cache.get(guild.event_log.event_log_channel);
-
+		if (guild.event_log.ignore_bots && newState.member.user.bot) {
+			return;
+		}
 		if (guild.event_log.enabled && guild.event_log.voice_channel_joins && oldState.channelId !== newState.channelId && newState.channelId !== null || undefined) {
 			const embed = new MitsyEmbed()
 				.setAuthor({ name: newState.member.user.username + '#' + newState.member.user.discriminator })
