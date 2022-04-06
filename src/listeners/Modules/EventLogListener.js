@@ -1,4 +1,4 @@
-const { EventListener, MitsyEmbed, EventLog, HTTPrequests } = require('../');
+const { EventListener, MitsyEmbed, EventLog, HTTPrequests } = require('../../');
 const { MessageAttachment } = require('discord.js');
 module.exports = class EventLogger extends EventListener {
 	constructor(client) {
