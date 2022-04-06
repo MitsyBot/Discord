@@ -13,7 +13,7 @@ module.exports = class MessageListener extends EventListener {
 		const guild = await this.database.guild.ensure(message.guild.id);
 		if (guild.invite_blocker.enabled && isInvite) {
 			const channels = guild.invite_blocker.whitelisted_channels;
-			const invite = await message.client.invites.fetch(message.content);
+			const invite = await message.guild.invites.fetch(message.content);
 			console.log(invite);
 			if (!channels.includes(message.channel.id)) {
 				if (guild.invite_blocker.delete_message) {
