@@ -1,4 +1,4 @@
-const { EventListener } = require('../');
+const { EventListener } = require('../../');
 
 module.exports = class MessageListener extends EventListener {
 	constructor(client) {
