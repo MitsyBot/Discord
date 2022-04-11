@@ -16,6 +16,21 @@ module.exports = class UserRepository {
 		return dados;
 	}
 
+	async getTodayBirthdays(date) {
+
+		const birthdays = this.profiles.findMany({
+			where: {
+				birthday: date,
+			},
+		});
+		// Exclamação faz o if considerar se o valor for negativo
+		// No caso se não tiver nada no banco ele retorna um array vazio
+
+		if (!birthdays) return [];
+		return birthdays;
+	}
+
+
 	async ensureProfile(id) {
 
 		const previous = await this.general.findUnique({
