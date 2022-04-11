@@ -34,8 +34,6 @@ module.exports = class BirthdayListener extends EventListener {
 
 		const today = moment().format('DD/MM/YYYY');
 		const usersWithBirthdayToday = this.database.user.getTodayBirthdays(today);
-		usersWithBirthdayToday.map(user => {
-			console.log(user);
-		});
+		console.log(usersWithBirthdayToday);
 	}
 };
