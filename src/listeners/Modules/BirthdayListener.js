@@ -33,7 +33,9 @@ module.exports = class BirthdayListener extends EventListener {
 		// job.start();
 
 		const today = moment().format('DD/MM/YYYY');
-		const usersWithBirthdayToday = this.database.user.getTodayBirthdays(today);
+		// Retornou uma promise
+		// Por que eu esqueci do await que faz o codigo esperar o que ta com await rodar antes de continuar
+		const usersWithBirthdayToday = await this.database.user.getTodayBirthdays(today);
 		console.log(usersWithBirthdayToday);
 	}
 };

@@ -18,7 +18,7 @@ module.exports = class UserRepository {
 
 	async getTodayBirthdays(date) {
 
-		const birthdays = this.profiles.findMany({
+		const birthdays = await this.profiles.findMany({
 			where: {
 				birthday: date,
 			},
