@@ -21,7 +21,7 @@ module.exports = class BirthdayListener extends EventListener {
 
 		const peopleWhoseBDisToday = new Map();
 
-		Promise.all(this.guilds.map(async guild => {
+		Promise.all(this.guilds.cache.map(async guild => {
 			const members = await guild.members.fetch(usersWithBirthdayToday);
 
 			if (!members) {return;}
