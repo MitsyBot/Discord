@@ -79,13 +79,7 @@ module.exports = class MiscUtils {
 			.trim();
 	}
 
-	static replacePlaceholders(template, ctx) {
-		const values = [
-			{
-				User: ctx.author.username,
-				'@User':  `<@${ctx.author.id}>`,
-			},
-		];
+	static replacePlaceholders(template, values) {
 		if (!values.length) {return template;}
 
 		for (const [ index, value ] of values.entries()) {

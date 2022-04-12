@@ -1,5 +1,6 @@
-const { EventListener, MitsyEmbed } = require('../../');
+const { EventListener, MiscUtils } = require('../../');
 const moment = require('moment');
+const { Message } = require('discord.js');
 const CronJob = require('cron').CronJob;
 
 module.exports = class BirthdayListener extends EventListener {
@@ -34,9 +35,27 @@ module.exports = class BirthdayListener extends EventListener {
 					peopleWhoseBDisToday.get(member).add(guild);
 				}
 			}));
+
 			for (const [user, guilds] of peopleWhoseBDisToday.entries()) {
-				console.log(user);
-				console.log(guilds);
+				for (const guild of guilds) {
+					const database = await this.database.guild.ensure(guild.id);
+
+					if (database.birthday.enabled) {
+						const channel = guild.channels.cache.get(database.birthday.channel);
+
+						const values = [
+							{
+								User: user.username,
+								'@User':  `<@${user.id}>`,
+							},
+						];
+
+						const message = MiscUtils.replacePlaceholders(database.birthday.message, values);
+
+						channel.send(message);
+
+					}
+				}
 			}
 		}, 1000 * 30);
 
