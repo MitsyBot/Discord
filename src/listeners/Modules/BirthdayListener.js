@@ -15,22 +15,22 @@ module.exports = class BirthdayListener extends EventListener {
 		}, null, true, 'America/Sao_Paulo');
 		job.start(); */
 
-		setInterval(() => {
+		setInterval(async () => {
 			moment.locale('pt-br');
 			const today = moment().format('DD/MM/YYYY');
 			const usersWithBirthdayToday = await this.database.user.getTodayBirthdays(today);
-	
+
 			const peopleWhoseBDisToday = new Map();
-	
+
 			Promise.all(this.guilds.cache.map(async guild => {
 				const members = await guild.members.fetch(usersWithBirthdayToday);
-	
+
 				if (!members) {return;}
-	
+
 				// eslint-disable-next-line no-unused-vars
 				for (const member of Array.isArray(members) ? members : [members]) {
 					if (!peopleWhoseBDisToday.has(members)) {peopleWhoseBDisToday.set(members, new Set());}
-	
+
 					peopleWhoseBDisToday.get(members).add(guild);
 				}
 			}));
