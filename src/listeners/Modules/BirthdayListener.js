@@ -33,13 +33,14 @@ module.exports = class BirthdayListener extends EventListener {
 		// job.start();
 
 		const today = moment().format('DD/MM/YYYY');
+		console.log(today);
 		// Retornou uma promise
 		// Por que eu esqueci do await que faz o codigo esperar o que ta com await rodar antes de continuar rodando o resto do codigo
 		const usersWithBirthdayToday = await this.database.user.getTodayBirthdays(today);
 		console.log(usersWithBirthdayToday);
 		usersWithBirthdayToday.map(async (user) => {
 			// Verificar quais servidores tem o usuario
-			const guildsThatHaveThisUser = this.guilds.cache.filter((guild) => guild.members.cache.has(user.id));
+			const guildsThatHaveThisUser = await this.guilds.cache.filter((guild) => guild.members.cache.has(user.id));
 			console.log(guildsThatHaveThisUser);
 			console.log(user);
 		});

@@ -17,7 +17,6 @@ module.exports = class UserRepository {
 	}
 
 	async getTodayBirthdays(date) {
-
 		const birthdays = await this.profiles.findMany({
 			where: {
 				birthday: date,
@@ -25,8 +24,6 @@ module.exports = class UserRepository {
 		});
 		// Exclamação faz o if considerar se o valor for negativo
 		// No caso se não tiver nada no banco ele retorna um array vazio
-
-		if (!birthdays) return [];
 		return birthdays;
 	}
 
