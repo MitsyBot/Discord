@@ -32,6 +32,7 @@ module.exports = class BirthdayListener extends EventListener {
 		// esqueci nada só tinha um bgl que fecha o coment la
 		// job.start();
 
+		moment.locale('pt-br');
 		const today = moment().format('DD/MM/YYYY');
 		console.log(today);
 		// Retornou uma promise
