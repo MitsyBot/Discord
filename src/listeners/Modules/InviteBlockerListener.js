@@ -31,7 +31,7 @@ module.exports = class MessageListener extends EventListener {
 							'@User':  `<@${message.member.user.id}>`,
 						},
 					];
-					const jsonmess = JSON.stringify(MiscUtils.replacePlaceholders(replyMessage, values));
+					const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(replyMessage), values);
 					message.channel.send(JSON.parse(jsonmess));
 				}
 
