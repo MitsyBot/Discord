@@ -30,6 +30,7 @@ module.exports = class BirthdayListener extends EventListener {
 				// eslint-disable-next-line no-unused-vars
 				for (const member of Array.isArray(members) ? members : [members]) {
 					if (!peopleWhoseBDisToday.has(members)) {peopleWhoseBDisToday.set(member, new Set());}
+					peopleWhoseBDisToday.clear();
 					peopleWhoseBDisToday.get(member).add(guild);
 				}
 			}));
