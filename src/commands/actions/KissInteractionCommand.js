@@ -3,7 +3,7 @@ module.exports = class BiteInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'beijar',
-			description: 'Beije alguem especial para você <3',
+			description: 'Beije alguém especial para você <3',
 			category: 'actions',
 			options: [
 				{
