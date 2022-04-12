@@ -22,7 +22,6 @@ module.exports = class AngryInteractionCommand extends InteractionCommand {
 		const user = ctx.options.getUser('usuário', false);
 
 		const selectedImage = await HTTPrequests.getAssetImageUrl('angry');
-
 		if (user.id === ctx.client.user.id) {
 			await ctx.makeMessage({
 				content: ctx.locale('commands:angry.mitsy'),
