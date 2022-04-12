@@ -39,14 +39,14 @@ module.exports = class BirthdayListener extends EventListener {
 			for (const [user, guilds] of peopleWhoseBDisToday.entries()) {
 				for (const guild of guilds) {
 					const database = await this.database.guild.ensure(guild.id);
-
+					const member = Array.from(user)[0]
 					if (database.birthday.enabled) {
 						const channel = guild.channels.cache.get(database.birthday.channel);
-						console.log(user[0].user);
+						console.log(member.user);
 						const values = [
 							{
-								User: user.displayName,
-								'@User':  `<@${user.id}>`,
+								User: member.user.username,
+								'@User':  `<@${member.id}>`,
 							},
 						];
 
