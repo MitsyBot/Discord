@@ -31,7 +31,7 @@ module.exports = class BirthdayListener extends EventListener {
 				for (const member of Array.isArray(members) ? members : [members]) {
 					if (!peopleWhoseBDisToday.has(members)) {peopleWhoseBDisToday.set(members, new Set());}
 
-					peopleWhoseBDisToday.get(members).add(guild);
+					peopleWhoseBDisToday.get(member).add(guild);
 				}
 			}));
 			console.log(peopleWhoseBDisToday);
