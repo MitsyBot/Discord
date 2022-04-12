@@ -1,6 +1,5 @@
 const { EventListener, MiscUtils } = require('../../');
 const moment = require('moment');
-const { Message } = require('discord.js');
 const CronJob = require('cron').CronJob;
 
 module.exports = class BirthdayListener extends EventListener {
@@ -12,18 +11,13 @@ module.exports = class BirthdayListener extends EventListener {
 
 
 	async onReady() {
-		/* const job = new CronJob('0 24 * * *', async () => {
-		}, null, true, 'America/Sao_Paulo');
-		job.start(); */
+		const job = new CronJob('0 */24 * * *', async () => {
+			moment.locale('pt-br');
+			const today = moment().format('DD/MM/YYYY');
+			let usersWithBirthdayToday = await this.database.user.getTodayBirthdays(today);
+			usersWithBirthdayToday = await usersWithBirthdayToday.map((user) => { return user.id; });
 
-		moment.locale('pt-br');
-		const today = moment().format('DD/MM/YYYY');
-		let usersWithBirthdayToday = await this.database.user.getTodayBirthdays(today);
-		usersWithBirthdayToday = await usersWithBirthdayToday.map((user) => { return user.id; });
-
-		const peopleWhoseBDisToday = new Map();
-
-		setInterval(async () => {
+			const peopleWhoseBDisToday = new Map();
 			peopleWhoseBDisToday.clear();
 			await Promise.all(this.guilds.cache.map(async guild => {
 				const members = await guild.members.fetch({ user: usersWithBirthdayToday });
@@ -57,7 +51,8 @@ module.exports = class BirthdayListener extends EventListener {
 					}
 				}
 			}
-		}, 1000 * 30);
+		}, null, true, 'America/Sao_Paulo');
+		job.start();
 
 	}
 };
