@@ -24,13 +24,12 @@ module.exports = class BirthdayListener extends EventListener {
 
 			Promise.all(this.guilds.cache.map(async guild => {
 				const members = await guild.members.fetch(usersWithBirthdayToday);
-				console.log(members);
 				if (!members) {return;}
 				console.log('members');
 				// eslint-disable-next-line no-unused-vars
 				for (const member of Array.isArray(members) ? members : [members]) {
 					if (!peopleWhoseBDisToday.has(members)) {peopleWhoseBDisToday.set(members, new Set());}
-
+					console.log(member);
 					peopleWhoseBDisToday.get(member).add(guild);
 				}
 			}));
