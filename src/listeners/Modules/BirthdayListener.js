@@ -42,11 +42,11 @@ module.exports = class BirthdayListener extends EventListener {
 
 					if (database.birthday.enabled) {
 						const channel = guild.channels.cache.get(database.birthday.channel);
-
+						console.log(user);
 						const values = [
 							{
-								User: user.user.username,
-								'@User':  `<@${user.user.id}>`,
+								User: user.displayName,
+								'@User':  `<@${user.id}>`,
 							},
 						];
 
