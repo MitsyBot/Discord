@@ -34,7 +34,10 @@ module.exports = class BirthdayListener extends EventListener {
 					peopleWhoseBDisToday.get(member).add(guild);
 				}
 			}));
-			console.log(peopleWhoseBDisToday);
+			for (const [user, guilds] of peopleWhoseBDisToday.entries()) {
+				console.log(user);
+				console.log(guilds);
+			}
 		}, 1000 * 30);
 
 	}
