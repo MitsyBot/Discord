@@ -52,6 +52,7 @@ jobs:
             -e API_WEBSOCKET='${{ secrets.API_WS }}' \
             -e GENERATOR_URL='${{ secrets.GENERATOR_URL }}' \
             -e API_TOKEN='${{ secrets.API_TOKEN }}' \
+            -e OWNER='${{ secrets.OWNER_ID }}' \
             -e LOGGING_CHANNEL_ID='${{ secrets.LOGGING_CHANNEL_ID }}' \
             -e MITSY_AGENT='${{ secrets.MITSY_AGENT }}' \
             -e BUG_HOOK_ID='${{ secrets.BUG_HOOK_ID }}' \
