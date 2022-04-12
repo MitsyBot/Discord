@@ -52,7 +52,7 @@ module.exports = class BirthdayListener extends EventListener {
 
 						const message = MiscUtils.replacePlaceholders(JSON.stringify(database.birthday.message), values);
 
-						channel.send(message);
+						channel.send(JSON.parse(message));
 
 					}
 				}
