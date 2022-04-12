@@ -15,13 +15,13 @@ module.exports = class BirthdayListener extends EventListener {
 		}, null, true, 'America/Sao_Paulo');
 		job.start(); */
 
-		setInterval(async () => {
-			moment.locale('pt-br');
-			const today = moment().format('DD/MM/YYYY');
-			const usersWithBirthdayToday = await this.database.user.getTodayBirthdays(today);
-			console.log(usersWithBirthdayToday);
-			const peopleWhoseBDisToday = new Map();
+		moment.locale('pt-br');
+		const today = moment().format('DD/MM/YYYY');
+		const usersWithBirthdayToday = await this.database.user.getTodayBirthdays(today);
+		console.log(usersWithBirthdayToday);
+		const peopleWhoseBDisToday = new Map();
 
+		setInterval(async () => {
 			Promise.all(this.guilds.cache.map(async guild => {
 				const members = await guild.members.fetch(usersWithBirthdayToday);
 				if (!members) {return;}
