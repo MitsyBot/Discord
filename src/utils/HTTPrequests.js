@@ -13,9 +13,13 @@ const apiRequest = axios.create({
 module.exports = class HttpRequests {
 
 	static async getAssetImageUrl(type) {
-		const data = await apiRequest.get(`/assets/${type}`);
-		console.log(data);
-		return data.url;
+		try {
+			const data = await apiRequest.get(`/assets/${type}`);
+			return data.data.url;
+		}
+		catch {
+			return 'https://http.cat/404';
+		}
 	}
 
 	static async postShardStatus(shards) {
