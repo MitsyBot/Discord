@@ -25,7 +25,14 @@ module.exports = class MessageListener extends EventListener {
 
 				if (guild.invite_blocker.tell_user) {
 					const replyMessage = guild.invite_blocker.warn_message;
-					message.channel.send(MiscUtils.replacePlaceholders(replyMessage, message));
+					const values = [
+						{
+							User: message.user.username,
+							'@User':  `<@${message.user.id}>`,
+						},
+					];
+					const jsonmess = JSON.stringify(MiscUtils.replacePlaceholders(replyMessage, values));
+					message.channel.send(JSON.parse(jsonmess));
 				}
 
 			}
