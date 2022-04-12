@@ -4,6 +4,7 @@ module.exports = class GuildRepository {
 		this.event_log = connection.EventLogConfigs;
 		this.invite_blocker = connection.InviteBlockerConfigs;
 		this.keys = connection.DonationKeys;
+		this.birthday = connection.BirthdayConfigs;
 	}
 	async ensure(id) {
 
@@ -11,8 +12,8 @@ module.exports = class GuildRepository {
 		const key = await this.getGuildKeys(id);
 		const event_log = await this.ensureLogConfigs(id);
 		const invite_blocker = await this.ensureInviteConfigs(id);
-
-		return { general, key, event_log, invite_blocker };
+		const birthday = await this.ensureBirthday(id);
+		return { general, birthday, key, event_log, invite_blocker };
 	}
 
 
@@ -21,6 +22,18 @@ module.exports = class GuildRepository {
 		if (previous) return previous;
 
 		const data = await this.general.create({ data: {
+			id,
+		},
+		});
+
+		return data;
+	}
+
+	async ensureBirthday(id) {
+		const previous = await this.birthday.findUnique({ where: { id } });
+		if (previous) return previous;
+
+		const data = await this.birthday.create({ data: {
 			id,
 		},
 		});
