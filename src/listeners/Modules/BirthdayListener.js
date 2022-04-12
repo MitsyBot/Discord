@@ -23,6 +23,7 @@ module.exports = class BirthdayListener extends EventListener {
 		const peopleWhoseBDisToday = new Map();
 
 		setInterval(async () => {
+			peopleWhoseBDisToday.clear();
 			await Promise.all(this.guilds.cache.map(async guild => {
 				const members = await guild.members.fetch({ user: usersWithBirthdayToday });
 				if (!members) {return;}
@@ -30,7 +31,6 @@ module.exports = class BirthdayListener extends EventListener {
 				// eslint-disable-next-line no-unused-vars
 				for (const member of Array.isArray(members) ? members : [members]) {
 					if (!peopleWhoseBDisToday.has(members)) {peopleWhoseBDisToday.set(member, new Set());}
-					peopleWhoseBDisToday.clear();
 					peopleWhoseBDisToday.get(member).add(guild);
 				}
 			}));
