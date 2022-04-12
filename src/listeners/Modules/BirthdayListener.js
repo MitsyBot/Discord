@@ -12,7 +12,7 @@ module.exports = class BirthdayListener extends EventListener {
 
 	async onReady() {
 		/* const job = new CronJob('0 24 * * *', async () => {
-		}, null, true, 'America/Sao_Paulo'); 
+		}, null, true, 'America/Sao_Paulo');
 		job.start(); */
 
 		moment.locale('pt-br');
@@ -26,7 +26,8 @@ module.exports = class BirthdayListener extends EventListener {
 
 			if (!members) {return;}
 
-			for (const member of Array.isArray(members) ? member : [member]) {
+			// eslint-disable-next-line no-unused-vars
+			for (const member of Array.isArray(members) ? members : [members]) {
 				if (!peopleWhoseBDisToday.has(members)) {peopleWhoseBDisToday.set(members, new Set());}
 
 				peopleWhoseBDisToday.get(members).add(guild);
