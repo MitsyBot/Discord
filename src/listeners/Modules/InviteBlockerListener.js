@@ -27,8 +27,8 @@ module.exports = class MessageListener extends EventListener {
 					const replyMessage = guild.invite_blocker.warn_message;
 					const values = [
 						{
-							User: message.user.username,
-							'@User':  `<@${message.user.id}>`,
+							User: message.member.user.username,
+							'@User':  `<@${message.member.user.id}>`,
 						},
 					];
 					const jsonmess = JSON.stringify(MiscUtils.replacePlaceholders(replyMessage, values));
