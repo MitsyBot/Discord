@@ -1,4 +1,4 @@
-const { HTTPrequests } = require('../');
+// const { HTTPrequests } = require('../');
 const { BICHO_BET_MULTIPLIER, JOGO_DO_BICHO } = require('../utils/Constants');
 
 const betType = (option) => {
@@ -114,7 +114,7 @@ module.exports = class JogoDoBichoManager {
 				.filter((a) => a.didWin)
 				.forEach((a) => {
 					this.clientInstance.repositories.starRepository.add(a.id, a.value);
-					if (a.gameId) HTTPrequests.userWinBicho(a.gameId);
+					// if (a.gameId) HTTPrequests.userWinBicho(a.gameId);
 					if (this.lastGame && a.value > this.lastGame?.biggestProfit) {this.lastGame.biggestProfit = a.value;}
 				});
 		}
@@ -138,7 +138,7 @@ module.exports = class JogoDoBichoManager {
 		);
 	}
 
-	async apiRegisterGame(
+	/* async apiRegisterGame(
 		userId,
 		value,
 		gameBetType,
@@ -151,12 +151,12 @@ module.exports = class JogoDoBichoManager {
 		const bet = this.ongoingGame.bets.find((a) => a.id === userId);
 
 		if (bet) bet.gameId = gameId.gameId;
-	}
+	} */
 
 	addBet(userId, betValue, optionSelected) {
 		if (this.clientInstance.shard.ids.includes(0)) {
 			this.ongoingGame.bets.push({ id: userId, bet: betValue, option: optionSelected });
-			this.apiRegisterGame(userId, betValue, betType(optionSelected), optionSelected);
+			// this.apiRegisterGame(userId, betValue, betType(optionSelected), optionSelected);
 		}
 		else {
 			this.clientInstance.shard.broadcastEval(
