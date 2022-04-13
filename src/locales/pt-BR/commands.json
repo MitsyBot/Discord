@@ -19,11 +19,11 @@
       },
       "bicho": {
         "sorted-title": "Números Sorteados",
-        "sorted-description": "**Último Sorteio:** `{{lastDate}}`\nNúmeros Sorteados:\n1º - `{{first}}`\n2º - `{{second}}`\n3º - `{{third}}`\n4º - `{{fourth}}`\n5º - `{{fifth}}`\nMaior Lucro: **{{biggestProfit}}** :star:\n\nPróximo Sorteio Em `{{nextDate}}`\n**Valor Acumulado:** {{value}} :star:",
+        "sorted-description": "**Último Sorteio:** `{{lastDate}}`\nNúmeros Sorteados:\n1º - `{{first}}`\n2º - `{{second}}`\n3º - `{{third}}`\n4º - `{{fourth}}`\n5º - `{{fifth}}`\nMaior Lucro: **{{biggestProfit}}**\n\nPróximo Sorteio Em `{{nextDate}}`\n**Valor Acumulado:** {{value}}",
         "no-register": "Sem Registro",
         "poor": "você não tem cometinhas suficientes para apostar no jogo do bicho!",
         "bet-title": "Jogo do bicho",
-        "bet-description": "Como você quer apostar? Você pode apostar uma unidade, uma dezena, uma centena, um milhar, um animal, uma sequência ou quina de animais. Escolha como quer apostar, e apos isso selecione a aposta\n\n**MULTIPLICADOR:**\n**Unidade:** {{unity}}x :star:\n**Dezena:** {{ten}}x :star:\n**Centena:** {{hundred}}x :star:\n**Milhar:** {{thousand}}x :star:\n**Animal:** {{animal}}x :star:\n**Sequência:** {{sequence}}x :star:\n**Quina:** {{corner}}x :star:",
+        "bet-description": "Como você quer apostar? Você pode apostar uma unidade, uma dezena, uma centena, um milhar, um animal, uma sequência ou quina de animais. Escolha como quer apostar, e apos isso selecione a aposta\n\n**MULTIPLICADOR:**\n**Unidade:** {{unity}}x\n**Dezena:** {{ten}}x\n**Centena:** {{hundred}}x\n**Milhar:** {{thousand}}x\n**Animal:** {{animal}}x\n**Sequência:** {{sequence}}x\n**Quina:** {{corner}}x",
         "close": "Whoops, você chegou tarde, as apostas foram fechadas",
         "unity": "Unidade",
         "ten": "Dezena",
