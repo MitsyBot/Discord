@@ -29,7 +29,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 
 	async run(ctx) {
 		if (!ctx.client.shardProcessEnded) {
-			ctx.makeMessage({ content: ctx.prettyResponse('error', 'commands:bicho.close') });
+			ctx.makeMessage({ content: ctx.locale('error', 'commands:bicho.close') });
 			return;
 		}
 
@@ -86,19 +86,19 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 		}
 
 		if (bet > ctx.data.user.estrelinhas) {
-			ctx.makeMessage({ content: ctx.prettyResponse('error', 'commands:bicho.poor') });
+			ctx.makeMessage({ content: ctx.locale('error', 'commands:bicho.poor') });
 			return;
 		}
 
 		const nextRaffle = await ctx.client.jogoDoBichoManager.currentGameStatus();
 
 		if (!nextRaffle || nextRaffle.dueDate <= Date.now()) {
-			ctx.makeMessage({ content: ctx.prettyResponse('error', 'commands:bicho.close') });
+			ctx.makeMessage({ content: ctx.locale('error', 'commands:bicho.close') });
 			return;
 		}
 
 		if (!(await ctx.client.jogoDoBichoManager.canRegister(ctx.author.id))) {
-			ctx.makeMessage({ content: ctx.prettyResponse('error', 'commands:bicho.already') });
+			ctx.makeMessage({ content: ctx.locale('error', 'commands:bicho.already') });
 			return;
 		}
 
@@ -247,7 +247,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 				ctx.makeMessage({
 					embeds: [],
 					components: [],
-					content: ctx.prettyResponse('success', 'commands:bicho.success'),
+					content: ctx.locale('success', 'commands:bicho.success'),
 				});
 
 				await ctx.client.database.user.removeComets(ctx.author.id, bet);
