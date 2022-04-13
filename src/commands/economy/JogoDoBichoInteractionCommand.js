@@ -85,7 +85,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 			return;
 		}
 
-		if (bet > ctx.data.user.profile.comets) {
+		if (bet > ctx.data.author.profile.comets) {
 			ctx.makeMessage({ content: ctx.locale('error', 'commands:bicho.poor') });
 			return;
 		}
