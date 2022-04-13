@@ -38,7 +38,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 			const lastRaffle = await ctx.client.jogoDoBichoManager.lastGameStatus();
 			const nextRaffle = await ctx.client.jogoDoBichoManager.currentGameStatus();
 
-			moment.locale(ctx.data.server.lang);
+			moment.locale(ctx.data.guild.general.lang);
 
 			const embed = new MessageEmbed()
 				.setColor(ctx.data.author.profile.color)
