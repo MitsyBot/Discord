@@ -118,7 +118,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 				{ label: ctx.locale('commands:bicho.corner'), value: 'corner' },
 			]);
 
-		ctx.makeMessage({ embeds: [embed], components: [Util.Util.actionRow([firstmenu])] });
+		ctx.makeMessage({ embeds: [embed], components: [Util.actionRow([firstmenu])] });
 
 		const selection = await Util.collectComponentInteractionWithStartingId(
 			ctx.channel,
@@ -128,7 +128,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 
 		if (!selection) {
 			ctx.makeMessage({
-				components: [Util.Util.actionRow(Util.disableComponents(ctx.locale('common:timesup'), [firstmenu]))],
+				components: [Util.actionRow(Util.disableComponents(ctx.locale('common:timesup'), [firstmenu]))],
 			});
 			return;
 		}
