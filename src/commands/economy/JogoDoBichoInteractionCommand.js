@@ -48,7 +48,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 						nextDate: nextRaffle.dueDate
 							? moment.utc(nextRaffle.dueDate - Date.now()).format('HH:mm:ss')
 							: ctx.locale('commands:bicho.no-register'),
-						lastDate: lastRaffle?.dueDate
+						lastDate: lastRaffle.dueDate
 							? moment(lastRaffle.dueDate).fromNow()
 							: ctx.locale('commands:bicho.no-register'),
 						value:
@@ -73,7 +73,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 					}),
 				);
 
-			if (nextRaffle?.bets.some((a) => a.id === ctx.author.id)) {
+			if (nextRaffle.bets.some((a) => a.id === ctx.author.id)) {
 				embed.addField(
 					ctx.locale('commands:bicho.in'),
 					ctx.locale('commands:bicho.in-description'),
