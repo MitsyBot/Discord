@@ -1,5 +1,5 @@
 const {	Message } = require('discord.js');
-const { Emotes, Constants } = require('../../');
+const { emotes } = require('../../utils/Emotes')
 module.exports = class InteractionCommandContext {
 
 	constructor(options = {}) {
@@ -33,10 +33,6 @@ module.exports = class InteractionCommandContext {
 		await this.interaction.deferReply({ ephemeral });
 	}
 
-	emoteResponse(emoji, text, translateOptions = {}) {
-		return `${Emotes[emoji] || '🐛'} **|** ${this.locale(text, translateOptions)}`;
-	}
-
 	setFixedT(translate) {
 		this.i18n = translate;
 	}
@@ -68,7 +64,7 @@ module.exports = class InteractionCommandContext {
 	}
 
 	prettyResponse(emoji, text, translateOptions = {}) {
-		return `${Constants.emojis[emoji] || '🐛'} **|** ${this.locale(text, translateOptions)}`;
+		return `${emotes[emoji] || '🐛'} **|** ${this.locale(text, translateOptions)}`;
 	}
 
 	locale(text, translateVars = {}) {
