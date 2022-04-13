@@ -28,7 +28,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 	}
 
 	async run(ctx) {
-		if (!ctx.client.shardProcessEnded) {
+		if (!ctx.client.ShardingEnded) {
 			ctx.makeMessage({ content: ctx.locale('error', 'commands:bicho.close') });
 			return;
 		}
