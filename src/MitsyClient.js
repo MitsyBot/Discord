@@ -1,7 +1,7 @@
 const { Client, Collection } = require('discord.js');
 const Loaders = require('./loaders');
 const Logger = require('./utils/Logger/Logger');
-
+const JogoDoBichoManager = require('./structures/JogoDoBichoManager');
 module.exports = class MitsyClient extends Client {
 	constructor(options = {}) {
 		super(options);
@@ -30,6 +30,8 @@ module.exports = class MitsyClient extends Client {
 		for (const l of normal) {
 			await this.initializeLoader(l);
 		}
+
+		this.jogoDoBichoManager = new JogoDoBichoManager(this);
 
 		this.loaded = true;
 	}
