@@ -13,7 +13,7 @@ module.exports = class BirthdayListener extends EventListener {
 	async onReady() {
 		const job = new CronJob('0 */24 * * *', async () => {
 			moment.locale('pt-br');
-			const today = moment().format('DD/MM/YYYY');
+			const today = moment().format('DD/MM');
 			let usersWithBirthdayToday = await this.database.user.getTodayBirthdays(today);
 			usersWithBirthdayToday = await usersWithBirthdayToday.map((user) => { return user.id; });
 
