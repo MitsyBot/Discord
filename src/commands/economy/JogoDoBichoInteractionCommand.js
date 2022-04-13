@@ -23,7 +23,6 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 			],
 			category: 'economy',
 			cooldown: 8,
-			authorDataFields: ['cometinhas', 'selectedColor'],
 		});
 	}
 
@@ -42,7 +41,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 			moment.locale(ctx.data.server.lang);
 
 			const embed = new MessageEmbed()
-				.setColor(ctx.data.user.selectedColor)
+				.setColor(ctx.data.author.profile.color)
 				.setTitle(ctx.locale('commands:bicho.sorted-title'))
 				.setDescription(
 					ctx.locale('commands:bicho.sorted-description', {
@@ -104,7 +103,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 
 		const embed = new MessageEmbed()
 			.setTitle(ctx.locale('commands:bicho.bet-title'))
-			.setColor(ctx.data.user.selectedColor)
+			.setColor(ctx.data.author.profile.color)
 			.setDescription(ctx.locale('commands:bicho.bet-description', BICHO_BET_MULTIPLIER));
 
 		const firstmenu = new MessageSelectMenu()
