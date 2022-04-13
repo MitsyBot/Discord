@@ -1,5 +1,5 @@
 const {	Message } = require('discord.js');
-const { Emotes } = require('../../');
+const { Emotes, Constants } = require('../../');
 module.exports = class InteractionCommandContext {
 
 	constructor(options = {}) {
@@ -65,6 +65,10 @@ module.exports = class InteractionCommandContext {
 
 	async deleteReply() {
 		return this.interaction.deleteReply().catch;
+	}
+
+	prettyResponse(emoji, text, translateOptions = {}) {
+		return `${Constants.emojis[emoji] || '🐛'} **|** ${this.locale(text, translateOptions)}`;
 	}
 
 	locale(text, translateVars = {}) {
