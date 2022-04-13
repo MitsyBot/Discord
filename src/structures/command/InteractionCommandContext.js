@@ -1,5 +1,5 @@
 const {	Message } = require('discord.js');
-const { emotes } = require('../../utils/Emotes')
+const { emotes } = require('../../utils/Emotes');
 module.exports = class InteractionCommandContext {
 
 	constructor(options = {}) {
