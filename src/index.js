@@ -18,4 +18,5 @@ module.exports = {
 	EventLog: require('./utils/EventLog'),
 	Connection: require('./structures/Connetion'),
 	YoutubeTogether: require('./media/interactions/Youtube'),
+	Util: require('./utils/Util'),
 };

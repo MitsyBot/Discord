@@ -1,5 +1,5 @@
 const { HTTPrequests } = require('../');
-const { BICHO_BET_MULTIPLIER, JOGO_DO_BICHO } = require('./util/Constants');
+const { BICHO_BET_MULTIPLIER, JOGO_DO_BICHO } = require('../util/Constants');
 
 const betType = (option) => {
 	if (/^(?=.*\d)[\d ]+$/.test(option)) {
