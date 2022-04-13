@@ -1,6 +1,6 @@
 const { InteractionCommand } = require('../../');
 const { BICHO_BET_MULTIPLIER, JOGO_DO_BICHO } = require('../../utils/Constants');
-const { Util } = require('../');
+const { Util } = require('../../');
 const {
 	MessageEmbed,
 	MessageSelectMenu,
