@@ -2,7 +2,7 @@
 const {
 	MessageSelectMenu,
 	MessageActionRow,
-} = require('discord.js-light');
+} = require('discord.js');
 
 module.exports = class Util {
 	static capitalize(str) {
