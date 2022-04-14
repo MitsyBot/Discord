@@ -44,9 +44,9 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 			if (!lastRaffle) {
 				const embed = new MessageEmbed()
 					.setColor(ctx.data.author.profile.color)
-					.setTitle(ctx.locale('commands:bicho.sorted-title'))
+					.setTitle(ctx.locale('commands:bicho.not-previous-title'))
 					.setDescription(
-						ctx.locale('commands:bicho.sorted-description', {
+						ctx.locale('commands:bicho.not-previous-description', {
 							nextDate: nextRaffle.dueDate
 								? moment.utc(nextRaffle.dueDate - Date.now()).format('HH:mm:ss')
 								: ctx.locale('commands:bicho.no-register'),

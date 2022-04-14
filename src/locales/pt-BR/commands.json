@@ -19,6 +19,8 @@
       },
       "bicho": {
         "sorted-title": "Números Sorteados",
+        "not-previous-title": "Nenhum sorteio anteriormente",
+        "not-previous-description": "**Nenhum sorteio aconteceu até agora**\n\nPróximo Sorteio Em `{{nextDate}}`\n**Valor Acumulado:** {{value}}",
         "sorted-description": "**Último Sorteio:** `{{lastDate}}`\nNúmeros Sorteados:\n1º - `{{first}}`\n2º - `{{second}}`\n3º - `{{third}}`\n4º - `{{fourth}}`\n5º - `{{fifth}}`\nMaior Lucro: **{{biggestProfit}}**\n\nPróximo Sorteio Em `{{nextDate}}`\n**Valor Acumulado:** {{value}}",
         "no-register": "Sem Registro",
         "poor": "você não tem cometinhas suficientes para apostar no jogo do bicho!",
