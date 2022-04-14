@@ -17,11 +17,11 @@ module.exports = class GuildRepository {
 	}
 
 
-	async ensureGeneral(id) {
-		const previous = await this.general.findUnique({ where: { id } });
+	ensureGeneral(id) {
+		const previous = this.general.findUnique({ where: { id } });
 		if (previous) return previous;
 
-		const data = await this.general.create({ data: {
+		const data = this.general.create({ data: {
 			id,
 		},
 		});
@@ -29,11 +29,11 @@ module.exports = class GuildRepository {
 		return data;
 	}
 
-	async ensureBirthday(guild_id) {
-		const previous = await this.birthday.findUnique({ where: { guild_id } });
+	ensureBirthday(guild_id) {
+		const previous = this.birthday.findUnique({ where: { guild_id } });
 		if (previous) return previous;
 
-		const data = await this.birthday.create({ data: {
+		const data = this.birthday.create({ data: {
 			guild_id,
 		},
 		});
@@ -41,15 +41,15 @@ module.exports = class GuildRepository {
 		return data;
 	}
 
-	async getGuildKeys(id) {
-		const previous = await this.keys.findUnique({ where: { active_in: id } });
+	getGuildKeys(id) {
+		const previous = this.keys.findUnique({ where: { active_in: id } });
 		return previous;
 	}
-	async ensureLogConfigs(guild_id) {
-		const previous = await this.event_log.findUnique({ where: { guild_id } });
+	ensureLogConfigs(guild_id) {
+		const previous = this.event_log.findUnique({ where: { guild_id } });
 		if (previous) return previous;
 
-		const data = await this.event_log.create({ data: {
+		const data = this.event_log.create({ data: {
 			guild_id,
 		},
 		});
@@ -57,11 +57,11 @@ module.exports = class GuildRepository {
 		return data;
 	}
 
-	async ensureInviteConfigs(guild_id) {
-		const previous = await this.invite_blocker.findUnique({ where: { guild_id } });
+	ensureInviteConfigs(guild_id) {
+		const previous = this.invite_blocker.findUnique({ where: { guild_id } });
 		if (previous) return previous;
 
-		const data = await this.invite_blocker.create({ data: {
+		const data = this.invite_blocker.create({ data: {
 			guild_id,
 		},
 		});
