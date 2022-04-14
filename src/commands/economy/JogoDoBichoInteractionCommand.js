@@ -1,8 +1,7 @@
-const { InteractionCommand } = require('../../');
+const { InteractionCommand, MitsyEmbed } = require('../../');
 const { BICHO_BET_MULTIPLIER, JOGO_DO_BICHO } = require('../../utils/Constants');
 const { Util } = require('../../');
 const {
-	MessageEmbed,
 	MessageSelectMenu,
 } = require('discord.js');
 const moment = require('moment');
@@ -42,7 +41,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 			moment.locale(ctx.data.guild.general.lang);
 
 			if (!lastRaffle) {
-				const embed = new MessageEmbed()
+				const embed = new MitsyEmbed()
 					.setColor(ctx.data.author.profile.color)
 					.setTitle(ctx.locale('commands:bicho.not-previous-title'))
 					.setDescription(
@@ -68,7 +67,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 				return;
 			}
 
-			const embed = new MessageEmbed()
+			const embed = new MitsyEmbed()
 				.setColor(ctx.data.author.profile.color)
 				.setTitle(ctx.locale('commands:bicho.sorted-title'))
 				.setDescription(
@@ -129,7 +128,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 			return;
 		}
 
-		const embed = new MessageEmbed()
+		const embed = new MitsyEmbed()
 			.setTitle(ctx.locale('commands:bicho.bet-title'))
 			.setColor(ctx.data.author.profile.color)
 			.setDescription(ctx.locale('commands:bicho.bet-description', BICHO_BET_MULTIPLIER));
@@ -279,6 +278,31 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 
 				await ctx.client.database.user.removeComets(ctx.author.id, bet);
 				ctx.client.jogoDoBichoManager.addBet(ctx.author.id, bet, int.values[0]);
+
+				const date = `${moment().format('DD/MM/YYYY HH:mm')}`;
+
+				const transaction = await this.client.database.transactions.create({
+					data: {
+						reason: 'BICHO',
+						given_by: ctx.author.id,
+						received_by: 'BICHO HOUSE OF FUN',
+						quantity: bet,
+						given_at: date,
+					},
+				});
+
+				const starTrackerHook = await this.client.fetchWebhook(
+					process.env.STARTRACKER_ID,
+					process.env.STARTRACKER_TOKEN,
+				);
+				const starEmbed = new MitsyEmbed()
+					.setTitle(`<:Mitsy_Rica:872870327049396274> **${bet} for BICHO**`)
+					.addFields(
+						{ name: '**💸 Quem pagou**', value: `<@${ctx.author.id}>\n \`\`${ctx.author.username}#${ctx.author.discriminator}\`\``, inline: true },
+					)
+					.setFooter({ text: `Transação ${transaction.id}`, iconURL: 'https://cdn.discordapp.com/emojis/873019423827587132.webp' });
+
+				starTrackerHook.send({ embeds: [starEmbed] });
 				break;
 			}
 			case 'SEQUENCE': {
