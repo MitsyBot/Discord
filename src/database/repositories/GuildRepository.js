@@ -27,7 +27,7 @@ module.exports = class GuildRepository {
 		if (previous) return previous;
 
 		const data = this.general.create({ data: {
-			id,
+			id: guild,
 		},
 		});
 
