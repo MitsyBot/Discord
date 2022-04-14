@@ -13,6 +13,7 @@ module.exports = class GuildRepository {
 		const event_log = await this.ensureLogConfigs(id);
 		const invite_blocker = await this.ensureInviteConfigs(id);
 		const birthday = await this.ensureBirthday(id);
+		console.log({ general, birthday, key, event_log, invite_blocker })
 		return { general, birthday, key, event_log, invite_blocker };
 	}
 
