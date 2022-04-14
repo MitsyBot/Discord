@@ -281,7 +281,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 
 				const date = `${moment().format('DD/MM/YYYY HH:mm')}`;
 
-				const transaction = await this.client.database.transactions.create({
+				const transaction = await ctx.client.database.transactions.create({
 					data: {
 						reason: 'BICHO',
 						given_by: ctx.author.id,
@@ -291,7 +291,7 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 					},
 				});
 
-				const starTrackerHook = await this.client.fetchWebhook(
+				const starTrackerHook = await ctx.client.fetchWebhook(
 					process.env.STARTRACKER_ID,
 					process.env.STARTRACKER_TOKEN,
 				);
