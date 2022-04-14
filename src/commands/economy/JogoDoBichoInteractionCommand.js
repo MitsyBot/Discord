@@ -35,15 +35,38 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 		const bet = ctx.options.getInteger('aposta');
 
 		if (!bet) {
-			let lastRaffle = await ctx.client.jogoDoBichoManager.lastGameStatus();
+			const lastRaffle = await ctx.client.jogoDoBichoManager.lastGameStatus();
 			const nextRaffle = await ctx.client.jogoDoBichoManager.currentGameStatus();
 			console.log(lastRaffle);
-			if (!lastRaffle) {
-				lastRaffle = {
-					dueDate: null,
-				};
-			}
+
 			moment.locale(ctx.data.guild.general.lang);
+
+			if (!lastRaffle) {
+				const embed = new MessageEmbed()
+					.setColor(ctx.data.author.profile.color)
+					.setTitle(ctx.locale('commands:bicho.sorted-title'))
+					.setDescription(
+						ctx.locale('commands:bicho.sorted-description', {
+							nextDate: nextRaffle.dueDate
+								? moment.utc(nextRaffle.dueDate - Date.now()).format('HH:mm:ss')
+								: ctx.locale('commands:bicho.no-register'),
+							value:
+  nextRaffle.bets.reduce((p, c) => p + c.bet, 0) ??
+  ctx.locale('commands:bicho.no-register'),
+						}),
+					);
+
+				if (nextRaffle.bets.some((a) => a.id === ctx.author.id)) {
+					embed.addField(
+						ctx.locale('commands:bicho.in'),
+						ctx.locale('commands:bicho.in-description'),
+					);
+				}
+
+
+				ctx.makeMessage({ embeds: [embed] });
+				return;
+			}
 
 			const embed = new MessageEmbed()
 				.setColor(ctx.data.author.profile.color)
