@@ -35,9 +35,14 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 		const bet = ctx.options.getInteger('aposta');
 
 		if (!bet) {
-			const lastRaffle = await ctx.client.jogoDoBichoManager.lastGameStatus();
+			let lastRaffle = await ctx.client.jogoDoBichoManager.lastGameStatus();
 			const nextRaffle = await ctx.client.jogoDoBichoManager.currentGameStatus();
-
+			console.log(lastRaffle);
+			if (!lastRaffle) {
+				lastRaffle = {
+					dueDate: null,
+				};
+			}
 			moment.locale(ctx.data.guild.general.lang);
 
 			const embed = new MessageEmbed()
