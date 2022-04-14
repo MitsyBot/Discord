@@ -18,8 +18,12 @@ module.exports = class GuildRepository {
 	}
 
 
-	async ensureGeneral(id) {
-		const previous = await this.general.findUnique({ where: { id } });
+	async ensureGeneral(guild) {
+		const previous = await this.general.findUnique({
+			where: {
+				id: guild,
+			},
+		});
 		if (previous) return previous;
 
 		const data = this.general.create({ data: {
