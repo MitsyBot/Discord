@@ -21,13 +21,13 @@ module.exports = class GuildRepository {
 	async ensureGeneral(guild) {
 		const previous = await this.general.findUnique({
 			where: {
-				id: guild,
+				guildId: guild,
 			},
 		});
 		if (previous) return previous;
 
 		const data = this.general.create({ data: {
-			id: guild,
+			guildId: guild,
 		},
 		});
 
