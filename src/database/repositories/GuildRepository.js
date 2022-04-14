@@ -1,6 +1,10 @@
 module.exports = class GuildRepository {
 	constructor(connection) {
 		this.general = connection.GuildConfig;
+		this.event_log = connection.EventLogConfigs;
+		this.invite_blocker = connection.InviteBlockerConfigs;
+		this.keys = connection.DonationKeys;
+		this.birthday = connection.BirthdayConfigs;
 	}
 	async ensure(id) {
 
