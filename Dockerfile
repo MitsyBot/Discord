@@ -3,6 +3,9 @@ FROM node:16-alpine as builder
 RUN mkdir -p /usr/src/mitsy
 WORKDIR /usr/src/mitsy
 
+RUN echo "America/Sao_Paulo" > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
 RUN apk update && apk upgrade
 RUN apk add git python3 make g++
 
