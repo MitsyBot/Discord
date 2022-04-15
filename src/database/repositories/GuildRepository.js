@@ -1,3 +1,4 @@
+// VAI TOMAR NO CU
 module.exports = class GuildRepository {
 	constructor(connection) {
 		this.general = connection.GuildConfig;
