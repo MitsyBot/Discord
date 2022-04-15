@@ -3,7 +3,12 @@ FROM node:16-alpine as builder
 RUN mkdir -p /usr/src/mitsy
 WORKDIR /usr/src/mitsy
 
-RUN apk add --no-cache tzdata && cp -r -f /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+RUN apt-get update && \
+    apt-get install -yq tzdata && \
+    ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
+
+ENV TZ="America/Sao_Paulo"
 
 RUN apk update && apk upgrade
 RUN apk add git python3 make g++
