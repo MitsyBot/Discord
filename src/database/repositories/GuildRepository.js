@@ -26,7 +26,7 @@ module.exports = class GuildRepository {
 		});
 		if (previous) return previous;
 
-		const data = this.general.create({ data: {
+		const data = await this.general.create({ data: {
 			guildId: guild,
 		},
 		});
