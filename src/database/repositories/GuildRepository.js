@@ -6,6 +6,7 @@ module.exports = class GuildRepository {
 		this.invite_blocker = connection.InviteBlockerConfigs;
 		this.keys = connection.DonationKeys;
 		this.birthday = connection.BirthdayConfigs;
+		this.welcomer = connection.WelcomerConfig;
 	}
 	async ensure(id) {
 
@@ -14,8 +15,8 @@ module.exports = class GuildRepository {
 		const event_log = await this.ensureLogConfigs(id);
 		const invite_blocker = await this.ensureInviteConfigs(id);
 		const birthday = await this.ensureBirthday(id);
-		console.log({ general, birthday, key, event_log, invite_blocker });
-		return { general, birthday, key, event_log, invite_blocker };
+		const welcomer = await this.ensureWelcomer(id);
+		return { general, welcomer, birthday, key, event_log, invite_blocker };
 	}
 
 
@@ -32,6 +33,17 @@ module.exports = class GuildRepository {
 		},
 		});
 
+		return data;
+	}
+
+	async ensureWelcomer(id) {
+		const previous = await this.welcomer.findUnique({ where: { guild_id: id } });
+		if (previous) return previous;
+
+		const data = await this.welcomer.create({ data: {
+			guild_id: id,
+		},
+		});
 		return data;
 	}
 
