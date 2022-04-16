@@ -47,7 +47,7 @@ jobs:
             docker rm discord-canary
             docker image rm ghcr.io/mitsybot/discord-canary:latest
             docker pull ghcr.io/mitsybot/discord-canary:latest
-            docker run -it -d -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' \
+            docker run -it -d -p 50051:50051 -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' \
             -e API_URL='${{ secrets.API_URL }}' \
             -e API_WEBSOCKET='${{ secrets.API_WS }}' \
             -e GENERATOR_URL='${{ secrets.GENERATOR_URL }}' \
