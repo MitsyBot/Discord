@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+service GuildService {
+    rpc checkCommon (CommonGuild) returns (CommonGuild) {}
+    rpc getGuild (Guild) returns (Guild) {}
+}
+
+service UserService {
+    rpc getUser (User) returns (User) {}
+}
+
+message User {
+    required string id = 1;
+}
+
+message Guild {
+    required string id = 1;
+}
+
+message CommonGuild {
+    required string common = 1;
+}
