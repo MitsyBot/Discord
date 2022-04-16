@@ -1,6 +1,6 @@
 const { Loader, YoutubeTogether } = require('../');
 
-module.exports = class APILoader extends Loader {
+module.exports = class InteractionsLoader extends Loader {
 	constructor(client) {
 		super({
 			preLoad: true,

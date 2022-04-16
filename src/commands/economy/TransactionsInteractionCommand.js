@@ -101,11 +101,8 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 			substring = substring + '\n';
 			description = description + substring;
-			console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 88 ~ TransactionsInteractionCommand ~ userTransactions.forEach ~ substring', substring);
 		},
 		);
-
-		console.log('🚀 ~ file: TransactionsInteractionCommand.js ~ line 94 ~ TransactionsInteractionCommand ~ run ~ description', description);
 
 		const embed = new MitsyEmbed()
 			.setTitle(ctx.locale('commands:transactions.title'))

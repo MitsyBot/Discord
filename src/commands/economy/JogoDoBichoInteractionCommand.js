@@ -36,7 +36,6 @@ module.exports = class JogoDoBichoInteractionCommand extends InteractionCommand 
 		if (!bet) {
 			const lastRaffle = await ctx.client.jogoDoBichoManager.lastGameStatus();
 			const nextRaffle = await ctx.client.jogoDoBichoManager.currentGameStatus();
-			console.log(lastRaffle);
 
 			moment.locale(ctx.data.guild.general.lang);
 

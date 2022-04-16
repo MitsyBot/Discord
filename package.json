@@ -10,6 +10,8 @@
   },
   "main": "sharder.js",
   "dependencies": {
+    "@grpc/grpc-js": "^1.6.5",
+    "@grpc/proto-loader": "^0.6.9",
     "@lavacord/discord.js": "github:PoluxTrail/lavacord-discord.js#master",
     "@prisma/client": "^3.10.0",
     "axios": "^0.23.0",
@@ -19,6 +21,7 @@
     "discord.js": "^13.5.1",
     "dotenv": "^10.0.0",
     "googleapis": "^68.0.0",
+    "grpc": "^1.24.11",
     "i18next": "^21.6.0",
     "i18next-fs-backend": "^1.1.4",
     "i18next-node-fs-backend": "^2.1.3",
