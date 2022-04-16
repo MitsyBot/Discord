@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 service GuildService {
-    rpc checkCommon (CommonGuild) returns (CommonGuild) {}
+    rpc checkCommon (CommonGuildRequest) returns (CommonGuildResponse) {}
     rpc getGuild (Guild) returns (Guild) {}
 }
 
@@ -17,6 +17,10 @@ message Guild {
     required string id = 1;
 }
 
-message CommonGuild {
-    required string common = 1;
+message CommonGuildRequest {
+    required bool guild = 1;
+}
+
+message CommonGuildResponse {
+    required bool common = 1;
 }
