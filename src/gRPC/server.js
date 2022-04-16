@@ -16,7 +16,7 @@ const options = {
 
 
 module.exports = class GrpcServer {
-	startGRPCServer(client) {
+	static async startGRPCServer(client) {
 		const packageDefinition = protoLoader.loadSync(PROTO_PATH, options);
 		const discordProto = loadPackageDefinition(packageDefinition);
 
