@@ -6,10 +6,10 @@ module.exports = class GuildService {
 		const { guild } = call.request;
 		console.log(call);
 		const common = this.client.guilds.cache.has(guild);
-		console.log(common);
 		const response = {
-			common: common,
+			common,
 		};
+		console.log(response);
 		callback(null, response);
 	}
 };
