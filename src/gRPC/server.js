@@ -25,7 +25,7 @@ module.exports = class GrpcServer {
 				throw err;
 			}
 
-			client.logger.info(`gRPC:Server:${bindPort}`, new Date().toLocaleString());
+			client.logger.info({ tag: 'gRPC' }, `Servidor iniciado na porta ${bindPort}`);
 			server.start();
 		});
 	}
