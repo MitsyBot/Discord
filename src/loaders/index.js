@@ -7,5 +7,6 @@ module.exports = {
 	ApiLoader: require('./ApiLoader'),
 	InteractionsLoader: require('./InteractionsLoader'),
 	ControllerLoader: require('./ControllerLoader'),
+	gRPCLoader: require('./gRPCLoader'),
 	ConnectionLoader: require('./ConnectionLoader'),
 };
