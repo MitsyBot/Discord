@@ -4,6 +4,7 @@ module.exports = class GuildService {
 	}
 	checkCommon(call, callback) {
 		const { guild } = call.request;
+		console.log(call);
 		const common = this.client.guilds.cache.has(guild);
 
 		callback(null, common);
