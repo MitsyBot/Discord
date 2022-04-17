@@ -8,10 +8,7 @@ module.exports = class MessageListener extends EventListener {
 	}
 
 	async onGuildMemberAdd(member) {
-		console.log('alo?');
 		const guild = await this.database.guild.ensure(member.guild.id);
-		console.log(guild.welcomer.enabled);
-		console.log(guild.welcomer.tell_on_join);
 		if (guild.welcomer.enabled) {
 
 			if (guild.welcomer.tell_on_join) {
@@ -54,8 +51,6 @@ module.exports = class MessageListener extends EventListener {
 
 	async onGuildMemberRemove(member) {
 		const guild = await this.database.guild.ensure(member.guild.id);
-		console.log(guild);
-
 		if (guild.welcomer.enabled && guild.welcomer.tell_on_remove) {
 			const channel = await member.guild.channels.cache.get(guild.welcomer.channel_remove);
 
@@ -65,7 +60,6 @@ module.exports = class MessageListener extends EventListener {
 					'@User':  `<@${member.user.id}>`,
 				},
 			];
-			console.log(JSON.stringify(messageToSend));
 			const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(messageToSend), values);
 			const message = channel.send(JSON.parse(jsonmess));
 
