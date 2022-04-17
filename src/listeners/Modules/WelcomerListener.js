@@ -8,6 +8,7 @@ module.exports = class MessageListener extends EventListener {
 	}
 
 	async onGuildMemberAdd(member) {
+		console.log('alo?');
 		const guild = await this.database.guild.ensure(member.guild.id);
 		if (guild.welcomer.enabled) {
 
