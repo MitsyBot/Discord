@@ -15,10 +15,9 @@ module.exports = class MessageListener extends EventListener {
 		if (guild.welcomer.enabled) {
 
 			if (guild.welcomer.tell_on_join) {
-				const channel = await member.guild.channels.cache.get(guild.welcomer.channzel_join);
+				const channel = await member.guild.channels.cache.get(guild.welcomer.channel_join);
 
 				const messageToSend = guild.welcomer.join_message;
-				console.log(JSON.stringify(messageToSend));
 				const values = [
 					{
 						User: member.user.username,
