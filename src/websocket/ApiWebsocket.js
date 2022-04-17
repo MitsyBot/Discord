@@ -51,11 +51,6 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		mitsy.api.send(JSON.stringify({ id, res: { sucess: true } }));
 		break;
 	}
-
-	case 'common': {
-		mitsy.api.send(JSON.stringify({ id, res: { common: mitsy.client.guilds.cache.has(data.guild) } }));
-		break;
-	}
 	}
 };
 
