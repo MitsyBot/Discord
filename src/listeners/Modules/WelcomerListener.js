@@ -22,17 +22,14 @@ module.exports = class MessageListener extends EventListener {
 					},
 				];
 				const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(messageToSend), values);
-				const message = channel.send(JSON.parse(jsonmess));
 
-				if (guild.welcomer.delete_join_messages_after > 0) {
-					message;
-					setTimeout(() => {
-						message.delete();
-					}, guild.welcomer.delete_join_messages_after * 1000);
-				}
-				else {
-					message;
-				}
+				channel.send(JSON.parse(jsonmess)).then(message => {
+					if (guild.welcomer.delete_join_messages_after > 0) {
+						setTimeout(() => {
+							message.delete();
+						}, guild.welcomer.delete_join_messages_after * 1000);
+					}
+				});
 			}
 
 			if (guild.welcomer.tell_on_private_join) {
@@ -61,17 +58,13 @@ module.exports = class MessageListener extends EventListener {
 				},
 			];
 			const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(messageToSend), values);
-			const message = channel.send(JSON.parse(jsonmess));
-
-			if (guild.welcomer.delete_remove_messages_after > 0) {
-				message;
-				setTimeout(() => {
-					message.delete();
-				}, guild.welcomer.delete_remove_messages_after * 1000);
-			}
-			else {
-				message;
-			}
+			channel.send(JSON.parse(jsonmess)).then(message => {
+				if (guild.welcomer.delete_remove_messages_after > 0) {
+					setTimeout(() => {
+						message.delete();
+					}, guild.welcomer.delete_remove_messages_after * 1000);
+				}
+			});
 		}
 	}
 };
