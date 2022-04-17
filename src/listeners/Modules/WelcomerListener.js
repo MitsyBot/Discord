@@ -60,8 +60,8 @@ module.exports = class MessageListener extends EventListener {
 					'@User':  `<@${member.user.id}>`,
 				},
 			];
-			const jsonmess =
-MiscUtils.replacePlaceholders(JSON.stringify(messageToSend), values);
+			console.log(JSON.stringify(messageToSend));
+			const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(messageToSend), values);
 			const message = channel.send(JSON.parse(jsonmess));
 
 			if (guild.welcomer.delete_remove_messages_after > 0) {
