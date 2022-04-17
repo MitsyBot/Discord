@@ -10,11 +10,12 @@ module.exports = class MessageListener extends EventListener {
 	async onGuildMemberAdd(member) {
 		console.log('alo?');
 		const guild = await this.database.guild.ensure(member.guild.id);
-		console.log(guild);
+		console.log(guild.welcomer.enabled);
+		console.log(guild.welcomer.tell_on_join);
 		if (guild.welcomer.enabled) {
 
 			if (guild.welcomer.tell_on_join) {
-				const channel = await member.guild.channels.cache.get(guild.welcomer.channel_join);
+				const channel = await member.guild.channels.cache.get(guild.welcomer.channzel_join);
 
 				const messageToSend = guild.welcomer.join_message;
 				console.log(JSON.stringify(messageToSend));
