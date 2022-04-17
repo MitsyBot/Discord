@@ -10,6 +10,7 @@ module.exports = class MessageListener extends EventListener {
 	async onMessageCreate(message) {
 		const isInvite = (/((?:discord\.gg|discordapp\.com\/invite|discord\.com\/invite))/g).test(message.content);
 		if (message.content.length === 0) return null;
+		if (!message.guild) return;
 		const guild = await this.database.guild.ensure(message.guild.id);
 		if (guild.invite_blocker.enabled && isInvite) {
 			const channels = guild.invite_blocker.whitelisted_channels;
