@@ -68,7 +68,7 @@ module.exports = class GuildRepository {
 		if (previous) return previous;
 
 		const data = await this.event_log.create({ data: {
-			guild_id: id,
+			id,
 		},
 		});
 
