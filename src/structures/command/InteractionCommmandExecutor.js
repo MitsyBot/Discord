@@ -62,7 +62,7 @@ module.exports = class InteractionCommandExecutor {
 					})}`,
 					ephemeral: false,
 				}).then(() => {
-					client.guilds.cache.get(data.guild.general.guildId)
+					client.guilds.cache.get(data.guild.general.id)
 						.leave()
 						.then(g => client.logger.info({ tag: 'Discord' }, `Mitsy saiu de ${g} por ${data.guildBlacklist.reason}`))
 						.catch(console.error);
