@@ -9,7 +9,8 @@ module.exports = class MessageListener extends EventListener {
 
 	async onMessageReactionAdd(messageReaction, user) {
 		console.log(user);
-		const emoji = messageReaction.emoji.id;
+		console.log(messageReaction.emoji);
+		const emoji = messageReaction.emoji.id || messageReaction.emoji.name;
 		if (!messageReaction.message.guild) return;
 
 		const guild = await this.database.guild.ensure(messageReaction.message.guild.id);
