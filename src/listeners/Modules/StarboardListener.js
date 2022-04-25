@@ -17,14 +17,9 @@ module.exports = class MessageListener extends EventListener {
 		if (guild.starboard.enabled) {
 			if (messageReaction.message.channel.nsfw) return;
 
-			console.log(Boolean(!guild.starboard.starboard_channel));
-			console.log(Boolean(!messageReaction.message.channel.id === guild.starboard.starboard_channel));
-			console.log(Boolean(!emoji === guild.starboard.emoji));
+			console.log(Boolean(emoji));
 
 			if (!(guild.starboard.starboard_channel || messageReaction.message.channel.id === guild.starboard.starboard_channel || emoji === guild.starboard.emoji)) return;
-
-			console.log(emoji);
-			console.log(messageReaction.message.content);
 		}
 	}
 };
