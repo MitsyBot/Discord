@@ -54,7 +54,7 @@ module.exports = class GuildRepository {
 		if (previous) return previous;
 
 
-		const data = await this.welcomer.create({ data: { id } });
+		const data = await this.starboard.create({ data: { id } });
 		return data;
 	}
 
