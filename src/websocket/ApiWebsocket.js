@@ -27,7 +27,7 @@ const WebSocketController = async (mitsy, rawRequest) => {
 
 	case 'message': {
 		const user = await mitsy.client.users.fetch(data.userid);
-		user.send(data.message);
+		user.send(data.message).catch(() => { mitsy.logger.error(`Could not send message to ${user.tag}`); });
 		mitsy.api.send(JSON.stringify({ id, res: { message: 'Enviado com sucesso' } }));
 		break;
 	}
