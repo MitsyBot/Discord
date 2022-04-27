@@ -123,13 +123,15 @@ module.exports = class MessageListener extends EventListener {
 					},
 				});
 
-				if (update.stars < guild.starboard.required_stars) {
+				if (update.stars < 0) {
 					await this.database.starboards.delete({
 						where: {
 							id: message.id,
 						},
 					});
+				}
 
+				if (update.stars < guild.starboard.required_stars) {
 					return await channel.messages.fetch(previous.in_star_message).then(async (msg) => {
 						await msg.delete();
 					});
