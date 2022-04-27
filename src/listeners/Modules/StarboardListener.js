@@ -132,7 +132,7 @@ module.exports = class MessageListener extends EventListener {
 						},
 					});
 				}
-
+				console.log(update);
 				if (update.stars < guild.starboard.required_stars) {
 					return await channel.messages.fetch(previous.in_star_message).then(async (msg) => {
 						await msg.delete();
