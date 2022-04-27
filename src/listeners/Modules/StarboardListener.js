@@ -144,9 +144,12 @@ module.exports = class MessageListener extends EventListener {
 				}
 				if (update.stars < guild.starboard.required_stars) {
 					const msg = await channel.messages.fetch(update.in_star_message);
-					await this.database.starboards.delete({
+					await this.database.starboards.update({
 						where: {
 							id: message.id,
+						},
+						data: {
+							in_star_message: null,
 						},
 					});
 					await msg.delete();
