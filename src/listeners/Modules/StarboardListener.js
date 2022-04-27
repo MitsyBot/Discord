@@ -135,8 +135,9 @@ module.exports = class MessageListener extends EventListener {
 				console.log(update);
 				if (update.stars < guild.starboard.required_stars) {
 					const msg = await channel.messages.fetch(previous.in_star_message);
+					console.log(msg);
 					await msg.delete();
-
+					return;
 				}
 
 				if (!previous.id) return null;
