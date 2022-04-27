@@ -46,6 +46,13 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		break;
 	}
 
+	case 'getresolvedguildname': {
+		const guild = mitsy.client.guilds.cache.get(data.guildId);
+		if (!guild) return mitsy.api.send(JSON.stringify({ id, res: 'Servidor não encontrado' }));
+		mitsy.api.send(JSON.stringify({ id, res: { name: guild.displayName } }));
+		break;
+	}
+
 	case 'removeconn': {
 		await mitsy.client.controllers.connection.disconnectUser(data.userID, data.connection);
 		mitsy.api.send(JSON.stringify({ id, res: { sucess: true } }));
