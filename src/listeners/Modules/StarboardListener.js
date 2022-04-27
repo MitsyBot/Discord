@@ -142,11 +142,13 @@ module.exports = class MessageListener extends EventListener {
 						},
 					});
 				}
-				console.log(previous);
-				console.log(update);
 				if (update.stars < guild.starboard.required_stars) {
 					const msg = await channel.messages.fetch(update.in_star_message);
-					console.log(msg);
+					await this.database.starboards.delete({
+						where: {
+							id: message.id,
+						},
+					});
 					await msg.delete();
 					return;
 				}
