@@ -21,7 +21,8 @@ module.exports = class MessageListener extends EventListener {
 			if (!(guild.starboard.starboard_channel || messageReaction.message.channel.id === guild.starboard.starboard_channel || emoji === guild.starboard.emoji)) return;
 
 			const starboard = Starboard.getProperty('starboard', this);
-			await starboard.fetch(messageReaction.message.channel, messageReaction.message.id);
+			console.log(starboard)
+			// await starboard.fetch(messageReaction.message.channel, messageReaction.message.id);
 		}
 	}
 };
