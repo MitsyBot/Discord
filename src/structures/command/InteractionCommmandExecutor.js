@@ -175,17 +175,30 @@ module.exports = class InteractionCommandExecutor {
 		});
 
 		console.log(interaction.deferred);
-		console.log(interaction);
 		if (!command.run) return;
 
 		if (command.config.name === 'music') {
 
 			if (!(user_has_premium || guild_has_premium)) {
-				return (ctx.interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_NO_PREMIUM') });
+				if (interaction.deferred) {
+					interaction.webhook
+						.send({ content: t('errors:MUSIC_NO_PREMIUM') });
+				}
+				else {
+					interaction
+						.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
+				}
 			}
 
 			if (!(data.author.premium.tier === 3 || data.guild.key.tier === 4)) {
-				return (ctx.interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+				if (interaction.deferred) {
+					interaction.webhook
+						.send({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+				}
+				else {
+					interaction
+						.reply({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+				}
 			}
 		}
 
