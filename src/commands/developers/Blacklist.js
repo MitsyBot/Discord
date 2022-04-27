@@ -10,13 +10,13 @@ module.exports = class BlacklistCommand extends DevCommand {
 
 	async run(ctx) {
 		if (!ctx.args.length < 2) return ctx.channel.send('Você precisa informar um usuário para adicionar a blacklist. Exemplo: `m!blacklist @user, motivo `');
-		if (!ctx.args[0]) return ctx.channel.send('Você precisa informar um tipo para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) (@user | id do user | id da guild), motivo `');
-		if (!ctx.args[1]) return ctx.channel.send('Você precisa informar um usuario para adicionar a blacklist. Exemplo: `m!blacklist @user, motivo `');
-		if (!ctx.args[2]) return ctx.channel.send('Você precisa informar um motivo para adicionar a blacklist. Exemplo: `m!blacklist @user, motivo `');
+		if (!ctx.args[1]) return ctx.channel.send('Você precisa informar um tipo para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) (@user | id do user | id da guild), motivo `');
+		if (!ctx.args[2]) return ctx.channel.send('Você precisa informar um usuario para adicionar a blacklist. Exemplo: `m!blacklist @user, motivo `');
+		if (!ctx.args[3]) return ctx.channel.send('Você precisa informar um motivo para adicionar a blacklist. Exemplo: `m!blacklist @user, motivo `');
 
-		const type = ctx.args[0];
-		const id = ctx.args[1];
-		const reason = ctx.args.slice(2).join(', ');
+		const type = ctx.args[1];
+		const id = ctx.args[2];
+		const reason = ctx.args.slice(3).join(', ');
 		console.log(id);
 		console.log(reason);
 		switch (type) {
