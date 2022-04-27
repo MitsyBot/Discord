@@ -65,7 +65,6 @@ module.exports = class MessageListener extends EventListener {
 			else {
 				const stardata = await this.database.starboards.create({
 					data: {
-						in_star_message: null,
 						stars: 1,
 						message: message.content,
 						id: message.id,
