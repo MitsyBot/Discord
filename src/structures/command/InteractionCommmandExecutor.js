@@ -180,11 +180,11 @@ module.exports = class InteractionCommandExecutor {
 		if (command.config.name === 'music') {
 
 			if (!(user_has_premium || guild_has_premium)) {
-				(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_NO_PREMIUM') });
+				return (ctx.interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_NO_PREMIUM') });
 			}
 
 			if (!(data.author.premium.tier === 3 || data.guild.key.tier === 4)) {
-				(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+				return (ctx.interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 			}
 		}
 
