@@ -50,9 +50,9 @@ module.exports = class MessageListener extends EventListener {
 				const embed = new MitsyEmbed()
 					.setAuthor({ name: messageReaction.message.member.user.username + '#' + messageReaction.message.member.user.discriminator })
 					.setDescription(messageReaction.message.content || 'Sem conteudo');
-
+				console.log(messageReaction.attachments);
 				if (messageReaction.attachments.size > 0) {
-					embed.setImage(messageReaction.attachments.first().proxyURL);
+					embed.setImage(messageReaction.attachments[0].proxyURL);
 				}
 
 				const dmessage = await channel.messages.fetch(previous.in_star_message);
