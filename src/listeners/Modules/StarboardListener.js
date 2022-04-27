@@ -48,7 +48,7 @@ module.exports = class MessageListener extends EventListener {
 					if (guild.starboard.required_stars > previous.stars) {
 						const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 
-						await this.database.starboards.edit({
+						await this.database.starboards.update({
 							where: {
 								id: message.id,
 							},
@@ -80,7 +80,7 @@ module.exports = class MessageListener extends EventListener {
 
 					const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 
-					await this.database.starboards.edit({
+					await this.database.starboards.update({
 						where: {
 							id: message.id,
 						},
@@ -147,7 +147,7 @@ module.exports = class MessageListener extends EventListener {
 
 					const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 
-					await this.database.starboards.edit({
+					await this.database.starboards.update({
 						where: {
 							id: message.id,
 						},
