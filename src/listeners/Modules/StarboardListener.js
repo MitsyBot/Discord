@@ -57,7 +57,7 @@ module.exports = class MessageListener extends EventListener {
 							},
 						});
 					}
-					await channel.send({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+					return await channel.send({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 				}
 
 				await dmessage.edit({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
