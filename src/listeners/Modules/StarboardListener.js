@@ -26,7 +26,7 @@ module.exports = class MessageListener extends EventListener {
 			const previous = await this.database.starboards.findUnique({ where: { id: messageReaction.message.id } });
 
 			if (previous) {
-				await this.database.starboard.update({
+				await this.database.starboards.update({
 					where: {
 						id: message.id,
 					},
@@ -37,7 +37,7 @@ module.exports = class MessageListener extends EventListener {
 				if (!previous.id) return null;
 			}
 			else {
-				previous ?? await this.database.starboard.create({
+				await this.database.starboards.create({
 					data: {
 						stars: 1,
 						message: message.content,
