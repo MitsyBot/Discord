@@ -9,5 +9,5 @@ module.exports = {
 	ControllerLoader: require('./ControllerLoader'),
 	gRPCLoader: require('./gRPCLoader'),
 	ConnectionLoader: require('./ConnectionLoader'),
-	DeveloperCommandsLoder: require('./DeveloperCommandsLoder'),
+	DeveloperCommandsLoader: require('./DeveloperCommandsLoader'),
 };
