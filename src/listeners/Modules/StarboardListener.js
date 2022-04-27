@@ -20,7 +20,7 @@ module.exports = class MessageListener extends EventListener {
 
 			if (!(guild.starboard.starboard_channel || messageReaction.message.channel.id === guild.starboard.starboard_channel || emoji === guild.starboard.emoji)) return;
 
-			const message = (await messageReaction.channel.messages.fetch(messageReaction.message.id).catch(() => null));
+			const message = (await messageReaction.message.channel.messages.fetch(messageReaction.message.id).catch(() => null));
 			if (!message) return null;
 
 			const previous = await this.database.starboards.stars.findOne({ where: { id: messageReaction.message.id } });
@@ -43,7 +43,7 @@ module.exports = class MessageListener extends EventListener {
 						message: message.content,
 						id: message.id,
 						channel: message.channel.id,
-						guild: this.guild.id,
+						guild: message.guild.id,
 						user: message.author.id,
 					},
 				});
