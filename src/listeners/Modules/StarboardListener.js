@@ -23,7 +23,7 @@ module.exports = class MessageListener extends EventListener {
 			const message = (await messageReaction.message.channel.messages.fetch(messageReaction.message.id).catch(() => null));
 			if (!message) return null;
 
-			const previous = await this.database.starboards.findOne({ where: { id: messageReaction.message.id } });
+			const previous = await this.database.starboards.findUnique({ where: { id: messageReaction.message.id } });
 
 			if (previous) {
 				await this.database.starboard.update({
