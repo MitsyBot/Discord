@@ -174,7 +174,6 @@ module.exports = class InteractionCommandExecutor {
 			data,
 		});
 
-		console.log(interaction.deferred);
 		if (!command.run) return;
 
 		if (command.config.name === 'music') {
