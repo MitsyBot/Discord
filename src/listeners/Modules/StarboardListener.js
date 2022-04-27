@@ -44,7 +44,7 @@ module.exports = class MessageListener extends EventListener {
 
 				const dmessage = await channel.messages.fetch(previous.in_star_message);
 
-				if (dmessage.id !== previous.in_star_message) {
+				if (!dmessage.id === previous.in_star_message) {
 					if (guild.starboard.required_stars < previous.stars) {
 						const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 
@@ -125,7 +125,7 @@ module.exports = class MessageListener extends EventListener {
 					},
 				});
 
-				if (update.stars < 0) {
+				if (update.stars < 1) {
 					await this.database.starboards.delete({
 						where: {
 							id: message.id,
@@ -147,7 +147,7 @@ module.exports = class MessageListener extends EventListener {
 
 				const dmessage = await channel.messages.fetch(previous.in_star_message);
 
-				if (dmessage.id !== previous.in_star_message) {
+				if (!dmessage.id === previous.in_star_message) {
 
 					const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 
@@ -163,7 +163,6 @@ module.exports = class MessageListener extends EventListener {
 					return await channel.send({ content: `🌠 **${previous.stars - 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 				}
 				else {
-
 					await dmessage.edit({ content: `🌠 **${previous.stars - 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 				}
 				return;
