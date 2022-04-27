@@ -43,8 +43,7 @@ module.exports = class MessageListener extends EventListener {
 					.setDescription(messageReaction.message.content);
 
 				const dmessage = await channel.messages.fetch(previous.in_star_message);
-				console.log(dmessage);
-				if (!dmessage) {
+				if (!dmessage.id !== previous.in_star_message) {
 					if (guild.starboard.required_stars < previous.stars) {
 						const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 
@@ -56,7 +55,7 @@ module.exports = class MessageListener extends EventListener {
 								in_star_message: star_message.id,
 							},
 						});
-						return;
+						return await channel.send({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 					}
 				}
 
