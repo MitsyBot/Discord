@@ -12,6 +12,15 @@ module.exports = class MessageListener extends EventListener {
 		const emoji = messageReaction.emoji.id || messageReaction.emoji.name;
 		if (!messageReaction.message.guild) return;
 
+		const components = [{
+			type: 1,
+			components: [{
+				type: 2,
+				style: 5,
+				label: 'Ir para a mensagem!',
+				url: `https://discordapp.com/channels/${messageReaction.message.guild.id}/${messageReaction.message.channel.id}/${messageReaction.message.id}`,
+			}],
+		}];
 
 		const guild = await this.database.guild.ensure(messageReaction.message.guild.id);
 		const channel = await messageReaction.message.guild.channels.cache.get(guild.starboard.starboard_channel);
@@ -50,7 +59,7 @@ module.exports = class MessageListener extends EventListener {
 
 				if (dmessage.id !== previous.in_star_message) {
 					if (guild.starboard.required_stars < previous.stars) {
-						const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+						const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed], components: components });
 
 						await this.database.starboards.update({
 							where: {
@@ -61,7 +70,7 @@ module.exports = class MessageListener extends EventListener {
 							},
 						});
 					}
-					const newmsg = await channel.send({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+					const newmsg = await channel.send({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed], components: components });
 					await this.database.starboards.update({
 						where: {
 							id: message.id,
@@ -74,7 +83,7 @@ module.exports = class MessageListener extends EventListener {
 					return;
 				}
 				else {
-					await dmessage.edit({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+					await dmessage.edit({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed], components: components });
 				}
 				return;
 			}
@@ -94,7 +103,7 @@ module.exports = class MessageListener extends EventListener {
 						.setAuthor({ name: messageReaction.message.member.user.username + '#' + messageReaction.message.member.user.discriminator })
 						.setDescription(messageReaction.message.content);
 
-					const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+					const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed], components: components });
 
 					await this.database.starboards.update({
 						where: {
@@ -114,6 +123,15 @@ module.exports = class MessageListener extends EventListener {
 		const emoji = messageReaction.emoji.id || messageReaction.emoji.name;
 		if (!messageReaction.message.guild) return;
 
+		const components = [{
+			type: 1,
+			components: [{
+				type: 2,
+				style: 5,
+				label: 'Ir para a mensagem!',
+				url: `https://discordapp.com/channels/${messageReaction.message.guild.id}/${messageReaction.message.channel.id}/${messageReaction.message.id}`,
+			}],
+		}];
 
 		const guild = await this.database.guild.ensure(messageReaction.message.guild.id);
 		const channel = await messageReaction.message.guild.channels.cache.get(guild.starboard.starboard_channel);
@@ -174,7 +192,7 @@ module.exports = class MessageListener extends EventListener {
 
 				if (dmessage.id !== previous.in_star_message) {
 
-					const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+					const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed], components: components });
 
 					await this.database.starboards.update({
 						where: {
@@ -185,10 +203,10 @@ module.exports = class MessageListener extends EventListener {
 						},
 					});
 
-					return await channel.send({ content: `🌠 **${previous.stars - 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+					return await channel.send({ content: `🌠 **${previous.stars - 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed], components: components });
 				}
 				else {
-					await dmessage.edit({ content: `🌠 **${previous.stars - 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+					await dmessage.edit({ content: `🌠 **${previous.stars - 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed], components: components });
 				}
 				return;
 			}
