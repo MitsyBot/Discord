@@ -19,5 +19,4 @@ module.exports = {
 	Connection: require('./structures/Connetion'),
 	YoutubeTogether: require('./media/interactions/Youtube'),
 	Util: require('./utils/Util'),
-	Starboard: require('./utils/Starboard'),
 };
