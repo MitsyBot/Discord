@@ -10,6 +10,18 @@ module.exports = class DevCommands extends Loader {
 		this.posLoadDevCommands = [];
 	}
 
+	async load() {
+		try {
+			await this.initializeCommands();
+			this.client.devCommands = this.devCommands;
+			return true;
+		}
+		catch (e) {
+			this.client.logger.error(e);
+		}
+		return false;
+	}
+
 	initializeCommands(dirPath = 'src/commands/developers') {
 		let success = 0;
 		let failed = 0;
