@@ -1,4 +1,4 @@
-const { EventListener } = require('../../');
+const { EventListener, Starboard } = require('../../');
 
 module.exports = class MessageListener extends EventListener {
 	constructor(client) {
@@ -18,9 +18,10 @@ module.exports = class MessageListener extends EventListener {
 		if (guild.starboard.enabled) {
 			if (messageReaction.message.channel.nsfw) return;
 
-			console.log(emoji);
-
 			if (!(guild.starboard.starboard_channel || messageReaction.message.channel.id === guild.starboard.starboard_channel || emoji === guild.starboard.emoji)) return;
+
+			const starboard = Starboard.getProperty('starboard', this);
+			await starboard.fetch(messageReaction.message.channel, messageReaction.message.id);
 		}
 	}
 };
