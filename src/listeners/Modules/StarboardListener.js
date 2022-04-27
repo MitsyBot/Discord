@@ -147,7 +147,7 @@ module.exports = class MessageListener extends EventListener {
 
 				const dmessage = await channel.messages.fetch(previous.in_star_message);
 
-				if (!dmessage.id !== previous.in_star_message) {
+				if (dmessage.id !== previous.in_star_message) {
 
 					const star_message = await channel.send({ content: `🌠 **1** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
 
