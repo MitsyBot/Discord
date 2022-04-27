@@ -57,7 +57,17 @@ module.exports = class MessageListener extends EventListener {
 							},
 						});
 					}
-					return await channel.send({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+					const newmsg = await channel.send({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
+					await this.database.starboards.update({
+						where: {
+							id: message.id,
+						},
+						data: {
+							in_star_message: newmsg.id,
+						},
+					});
+
+					return;
 				}
 				else {
 					await dmessage.edit({ content: `🌠 **${previous.stars + 1}** - <#${messageReaction.message.channel.id}>`, embeds: [embed] });
