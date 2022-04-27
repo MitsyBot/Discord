@@ -1,4 +1,4 @@
-const { InteractionCommand, MiscUtils } = require('../../');
+const { InteractionCommand, MiscUtils } = require('../../../');
 const { MessageButton } = require('discord.js');
 
 module.exports = class CometsInteractionCommand extends InteractionCommand {

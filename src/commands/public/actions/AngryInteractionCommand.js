@@ -1,4 +1,4 @@
-const { InteractionCommand, MitsyEmbed, HTTPrequests } = require('../../');
+const { InteractionCommand, MitsyEmbed, HTTPrequests } = require('../../../');
 module.exports = class AngryInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({

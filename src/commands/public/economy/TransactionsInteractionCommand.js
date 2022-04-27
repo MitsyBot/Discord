@@ -1,4 +1,4 @@
-const { InteractionCommand, MitsyEmbed } = require('../../');
+const { InteractionCommand, MitsyEmbed } = require('../../../');
 module.exports = class TransactionsInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({

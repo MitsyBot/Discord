@@ -1,5 +1,5 @@
 const moment = require('moment');
-const { InteractionCommand, MitsyEmbed } = require('../../');
+const { InteractionCommand, MitsyEmbed } = require('../../../');
 module.exports = class BotInfoInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({

@@ -1,4 +1,4 @@
-const { InteractionCommand, MitsyEmbed, MiscUtils, Emotes } = require('../../');
+const { InteractionCommand, MitsyEmbed, MiscUtils, Emotes } = require('../../../');
 const moment = require('moment');
 
 module.exports = class OsuInteractionCommand extends InteractionCommand {

@@ -1,4 +1,4 @@
-const { InteractionCommand, MitsyEmbed, Emotes } = require('../../');
+const { InteractionCommand, MitsyEmbed, Emotes } = require('../../../');
 module.exports = class HelpInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({

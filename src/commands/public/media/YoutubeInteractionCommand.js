@@ -1,4 +1,4 @@
-const { InteractionCommand } = require('../../');
+const { InteractionCommand } = require('../../../');
 module.exports = class LevelInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({

@@ -2,7 +2,7 @@ const moment = require('moment');
 
 const { Console } = require('node:console');
 const { Transform } = require('node:stream');
-const { InteractionCommand, Emotes, MitsyEmbed, HTTPrequests } = require('../../');
+const { InteractionCommand, Emotes, MitsyEmbed, HTTPrequests } = require('../../../');
 module.exports = class PingInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({

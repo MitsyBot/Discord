@@ -1,4 +1,4 @@
-const { InteractionCommand, HTTPrequests } = require('../../');
+const { InteractionCommand, HTTPrequests } = require('../../../');
 const { MessageAttachment } = require('discord.js');
 
 module.exports = class LevelInteractionCommand extends InteractionCommand {

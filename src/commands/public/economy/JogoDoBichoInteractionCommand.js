@@ -1,6 +1,6 @@
-const { InteractionCommand, MitsyEmbed } = require('../../');
-const { BICHO_BET_MULTIPLIER, JOGO_DO_BICHO } = require('../../utils/Constants');
-const { Util } = require('../../');
+const { InteractionCommand, MitsyEmbed } = require('../../../');
+const { BICHO_BET_MULTIPLIER, JOGO_DO_BICHO } = require('../../../utils/Constants');
+const { Util } = require('../../../');
 const {
 	MessageSelectMenu,
 } = require('discord.js');
