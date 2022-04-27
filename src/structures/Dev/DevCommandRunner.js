@@ -14,7 +14,7 @@ module.exports = class InteractionCommandExecutor {
 		const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a);
 		const args = fullCmd.slice(1);
 		const cmd = fullCmd[0].toLowerCase().trim();
-		const command = this.devCommands.find(c => c.name.toLowerCase() === cmd);
+		const command = client.devCommands.find(c => c.name.toLowerCase() === cmd);
 		console.log(args);
 		console.log(cmd);
 		const ctx = new DevCommandContext({
