@@ -6,7 +6,7 @@ module.exports = class Command {
 		const options = Utils.createOptionHandler('Command', opts);
 
 		this.name = options.required('name');
-		this.permLevel = options.required('permission');
+		this.permLevel = options.required('permLevel');
 		this.client = client;
 
 	}
