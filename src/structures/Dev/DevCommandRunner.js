@@ -12,7 +12,7 @@ module.exports = class InteractionCommandExecutor {
 		const usedPrefix = sw(prefix) ? prefix : null;
 		const guildId = message.guild && message.guild.id;
 		const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a);
-		const args = fullCmd.slice(1);
+		const args = message.content.trim().split(/ +/g);
 		const cmd = fullCmd[0].toLowerCase().trim();
 		const command = client.devCommands.find(c => c.name.toLowerCase() === cmd);
 		console.log(args);
