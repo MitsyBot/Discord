@@ -7,7 +7,6 @@ module.exports = class InteractionCommandExecutor {
 	}
 
 	async CommandExecuted(client, message) {
-		console.log(message.author.id);
 		const DevLevel = await client.controllers.developer.getDeveloper(message.author.id);
 		const prefix = 'm!';
 		const sw = (...s) => s.some(st => message.content.startsWith(st));
@@ -24,10 +23,28 @@ module.exports = class InteractionCommandExecutor {
 			args,
 			guildId,
 		});
-		console.log(DevLevel);
+
 		if (DevLevel < 1) return ctx.channel.send('Você não tem permissão para usar este comando!');
 
-		console.log(command);
+
+		switch (command.permLevel) {
+		case 'bodyguard': {
+			if (DevLevel < 2) return ctx.channel.send('Você não tem permissão para usar este comando!');
+			break;
+		}
+		case 'developer': {
+			if (DevLevel < 3) return ctx.channel.send('Você não tem permissão para usar este comando!');
+			break;
+		}
+		case 'owner': {
+			if (DevLevel < 4) return ctx.channel.send('Você não tem permissão para usar este comando!');
+			break;
+		}
+		case 'support': {
+			if (DevLevel < 1) return ctx.channel.send('Você não tem permissão para usar este comando!');
+			break;
+		}
+		}
 
 		if (!command.run) return;
 
