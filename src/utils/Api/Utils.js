@@ -15,6 +15,7 @@ module.exports = class ApiUtils {
 			approximatePresenceCount: guild.approximatePresenceCount,
 			available: guild.available,
 			banner: guild.banner,
+			emojis: guild.emojis.fetch(),
 			channels: guild.channels.cache.map(flattenChannel),
 			defaultMessageNotifications: guild.defaultMessageNotifications,
 			description: guild.description,
