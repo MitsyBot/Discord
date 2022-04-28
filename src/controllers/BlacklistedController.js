@@ -18,6 +18,7 @@ module.exports = class DeveloperController extends Controller {
 				user,
 				reason,
 				banned_by: blacklister,
+				expires_at: 0,
 			},
 		});
 	}
