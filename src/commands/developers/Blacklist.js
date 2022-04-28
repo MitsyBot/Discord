@@ -10,9 +10,9 @@ module.exports = class BlacklistCommand extends DevCommand {
 
 	async run(ctx) {
 
-		if (!ctx.args[0]) return ctx.channel.send('Você precisa informar um usuário para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) (@user | id do user | id da guild), motivo (Use `,`para separar os argumentos)`');
-		if (!ctx.args[1]) return ctx.channel.send('Você precisa informar um motivo para adicionar a blacklist. Exemplo: `m!blacklist @user, motivo (Use `,`para separar os argumentos)`');
-		if (!ctx.args[2]) return ctx.channel.send('Você precisa informar um motivo para adicionar a blacklist. Exemplo: `m!blacklist @user, motivo (Use `,`para separar os argumentos)`');
+		if (!ctx.args[1]) return ctx.channel.send('Você precisa informar um tipo para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) (@user | id do user | id da guild), motivo`');
+		if (!ctx.args[2]) return ctx.channel.send('Você precisa informar um usuario para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) @user, motivo`');
+		if (!ctx.args[3]) return ctx.channel.send('Você precisa informar um motivo para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) @user, motivo`');
 
 		const type = ctx.args[0];
 
@@ -28,7 +28,7 @@ module.exports = class BlacklistCommand extends DevCommand {
 			break;
 		}
 		default: {
-			return ctx.channel.send('Você precisa informar um tipo para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) (@user | id do user | id da guild), motivo (Use `,`para separar os argumentos)`');
+			return ctx.channel.send('Você precisa informar um tipo para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) (@user | id do user | id da guild), motivo`');
 		}
 		}
 
