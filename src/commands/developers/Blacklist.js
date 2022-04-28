@@ -9,10 +9,8 @@ module.exports = class BlacklistCommand extends DevCommand {
 	}
 
 	async run(ctx) {
-		if (!ctx.args[1]) return ctx.channel.send('Você precisa informar um tipo para adicionar a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) (@user | id do user | id da guild), motivo`');
-		if (!ctx.args[2]) return ctx.channel.send('Você precisa informar um tipo para adicionar a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) (@user | id do user | id da guild), motivo`');
-		if (!ctx.args[3]) return ctx.channel.send('Você precisa informar um usuario para adicionar a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) @user, motivo`');
-		if (!ctx.args[4]) return ctx.channel.send('Você precisa informar um motivo para adicionar a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) @user, motivo`');
+		if (!ctx.args[1]) return ctx.channel.send('Você precisa informar uma opção para a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) (@user | id do user | id da guild), motivo`');
+		if (!ctx.args[2]) return ctx.channel.send('Você precisa informar um tipo para a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) (@user | id do user | id da guild), motivo`');
 
 		const option = ctx.args[1].toLowerCase();
 		const type = ctx.args[2].toLowerCase();
@@ -21,6 +19,8 @@ module.exports = class BlacklistCommand extends DevCommand {
 
 		switch (option) {
 		case 'add': {
+			if (!ctx.args[3]) return ctx.channel.send('Você precisa informar um usuario para adicionar a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) @user, motivo`');
+			if (!ctx.args[4]) return ctx.channel.send('Você precisa informar um motivo para adicionar a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) @user, motivo`');
 			switch (type) {
 			case 'guild': {
 				const guild = ctx.args[3];
@@ -41,6 +41,7 @@ module.exports = class BlacklistCommand extends DevCommand {
 			break;
 		}
 		case 'remove': {
+			if (!ctx.args[3]) return ctx.channel.send('Você precisa informar um usuario para remover da blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) @user`');
 			switch (type) {
 			case 'guild': {
 				const guild = ctx.args[3];
@@ -55,7 +56,7 @@ module.exports = class BlacklistCommand extends DevCommand {
 				break;
 			}
 			default: {
-				return ctx.channel.send('Você precisa informar um tipo para remover a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) (@user | id do user | id da guild), motivo`');
+				return ctx.channel.send('Você precisa informar um tipo para remover a blacklist. Exemplo: `m!blacklist (remove ou add) (guild ou user) (@user | id do user | id da guild)`');
 			}
 			}
 		}

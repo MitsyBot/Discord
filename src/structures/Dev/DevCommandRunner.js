@@ -7,6 +7,7 @@ module.exports = class InteractionCommandExecutor {
 	}
 
 	async CommandExecuted(client, message) {
+		const DevLevel = await client.controllers.developer.getDeveloper(message.author.id);
 		const prefix = 'm!';
 		const sw = (...s) => s.some(st => message.content.startsWith(st));
 		const usedPrefix = sw(prefix) ? prefix : null;
@@ -23,6 +24,10 @@ module.exports = class InteractionCommandExecutor {
 			args,
 			guildId,
 		});
+
+		if (DevLevel === 0) return ctx.channel.send('Você não tem permissão para usar este comando!');
+
+		console.log(command);
 
 		if (!command.run) return;
 
