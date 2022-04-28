@@ -16,16 +16,15 @@ module.exports = class InteractionCommandExecutor {
 		const args = message.content.slice(prefix.length).trim().split(' ');
 		const cmd = fullCmd[0].toLowerCase().trim();
 		const command = client.devCommands.find(c => c.name.toLowerCase() === cmd);
-		console.log(args);
-		console.log(cmd);
+
 		const ctx = new DevCommandContext({
 			message,
 			client,
 			args,
 			guildId,
 		});
-
-		if (DevLevel === 0) return ctx.channel.send('Você não tem permissão para usar este comando!');
+		console.log(DevLevel);
+		if (DevLevel < 1) return ctx.channel.send('Você não tem permissão para usar este comando!');
 
 		console.log(command);
 
