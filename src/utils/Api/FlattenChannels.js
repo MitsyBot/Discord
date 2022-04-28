@@ -122,4 +122,14 @@ function flattenRole(role) {
 	};
 }
 
-module.exports = { flattenChannel, flattenRole };
+function flattenEmoji(emoji) {
+	return {
+		id: emoji.id,
+		animated: emoji.animated,
+		name: emoji.name,
+		url: emoji.url,
+		identifier: emoji.identifier,
+	};
+}
+
+module.exports = { flattenChannel, flattenRole, flattenEmoji };
