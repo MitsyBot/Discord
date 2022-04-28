@@ -54,6 +54,7 @@ module.exports = class DeveloperController extends Controller {
 	}
 
 	async getDeveloper(_user) {
+		console.log(this.client.guilds.cache.get('775328200044838922').members.cache.has(_user));
 		if (this.client.guilds.cache.get('775328200044838922').members.cache.has(_user)) {
 			const user = await this.client.guilds.cache.get('775328200044838922').members.fetch(_user);
 			console.log(user);
