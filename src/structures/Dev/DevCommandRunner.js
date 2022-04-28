@@ -28,7 +28,7 @@ module.exports = class InteractionCommandExecutor {
 
 		await command.run(ctx).catch(async (error) => {
 			if (error instanceof Error) {
-				await ctx.send(`${error.message}`);
+				await ctx.message.send(`${error.message}`);
 			}
 			else {
 				await ctx.send(`${error}`);
