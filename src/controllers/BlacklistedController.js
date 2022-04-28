@@ -14,16 +14,20 @@ module.exports = class DeveloperController extends Controller {
 
 	async blacklistUser(user, reason, blacklister) {
 		await this.client.database.blacklist.user.blacklisted.create({
-			user,
-			reason,
-			banned_by: blacklister,
+			data:{
+				user,
+				reason,
+				banned_by: blacklister,
+			},
 		});
 	}
 
 	async blacklistGuild(guild, reason) {
 		await this.client.database.blacklist.guild.blacklisted.create({
-			guild,
-			reason,
+			data: {
+				guild,
+				reason,
+			},
 		});
 	}
 
