@@ -8,6 +8,7 @@ module.exports = class GuildRepository {
 		this.birthday = connection.BirthdayConfigs;
 		this.starboard = connection.StarboardConfigs;
 		this.welcomer = connection.WelcomerConfig;
+		this.autorole = connection.AutoroleConfig;
 	}
 	async ensure(id) {
 		const general = await this.ensureGeneral(id);
@@ -17,8 +18,9 @@ module.exports = class GuildRepository {
 		const birthday = await this.ensureBirthday(id);
 		const welcomer = await this.ensureWelcomer(id);
 		const starboard = await this.ensureStarboard(id);
+		const autorole = await this.ensureAutoRole(id);
 
-		return { general, welcomer, birthday, key, starboard, event_log, invite_blocker };
+		return { general, autorole, welcomer, birthday, key, starboard, event_log, invite_blocker };
 	}
 
 
@@ -35,6 +37,20 @@ module.exports = class GuildRepository {
 		},
 		});
 
+		return data;
+	}
+
+	async ensureAutoRole(id) {
+		const previous = await this.autorole.findUnique({
+			where: {
+				id,
+			},
+		});
+		if (previous) return previous;
+		const data = await this.autorole.create({ data: {
+			id,
+		},
+		});
 		return data;
 	}
 

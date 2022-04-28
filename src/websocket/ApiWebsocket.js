@@ -5,7 +5,7 @@ const WebSocketController = async (mitsy, rawRequest) => {
 	switch (type) {
 	case 'guild': {
 
-		const guild = mitsy.client.guilds.fetch(data.guildId);
+		const guild = mitsy.client.guilds.cache.get(data.guildId);
 		if (!guild) return mitsy.api.send(JSON.stringify({ id, res: 'Servidor não encontrado' }));
 		const user = data.userId.toString();
 		const member = await guild.members.fetch(user);
