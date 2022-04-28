@@ -12,12 +12,19 @@ module.exports = class DeveloperController extends Controller {
 		return !!this.client.database;
 	}
 
-	async blacklist(_user, reason, blacklister) {
-		await this._users.update(_user, { blacklisted: { reason, blacklister } });
+	async blacklistUser(user, reason, blacklister) {
+		await this.client.database.blacklist.user.blacklisted.create({
+			user,
+			reason,
+			banned_by: blacklister,
+		});
 	}
 
-	async unblacklist(_user) {
-		await this._users.update(_user, { blacklisted: null });
+	async blacklistGuild(guild, reason) {
+		await this.client.database.blacklist.guild.blacklisted.create({
+			guild,
+			reason,
+		});
 	}
 
 	async userBlacklisted(_user) {

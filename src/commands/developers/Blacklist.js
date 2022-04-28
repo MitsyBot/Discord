@@ -20,12 +20,15 @@ module.exports = class BlacklistCommand extends DevCommand {
 
 		switch (type) {
 		case 'guild': {
-			console.log('guild');
+			const guild = ctx.args[2];
+			ctx.client.controllers.developer.blacklistGuild(guild, reason);
+			ctx.channel.send(`O servidor \`${guild}\` foi adicionado a blacklist por \`${blacklister}\`\nMotivo: ${reason}`);
 			break;
 		}
 		case 'user': {
-			const user = ctx.message.mentions.users.first() || ctx.args[2];
-			ctx.channel.send(`${user} foi adicionado a blacklist por ${blacklister}\nMotivo: ${reason}`);
+			const user = ctx.message.mentions.users.first().id || ctx.args[2];
+			ctx.client.controllers.developer.blacklistUser(user, reason, ctx.message.author.id);
+			ctx.channel.send(`<@${user}> foi adicionado a blacklist por \`${blacklister}\`\nMotivo: ${reason}`);
 			break;
 		}
 		default: {
