@@ -66,10 +66,9 @@ module.exports = class DeveloperController extends Controller {
 	}
 
 	async getDeveloper(_user) {
-		const guild = this.client.guilds.fetch('775328200044838922');
-		console.log(guild.members);
-		if (guild.members.cache.has(_user)) {
-			const user = await guild.members.fetch(_user);
+		this.client.guilds.fetch('775328200044838922');
+		if (this.client.guilds.cache.get('775328200044838922').members.cache.has(_user)) {
+			const user = await this.client.guilds.cache.get('775328200044838922').members.fetch(_user);
 			if (user.roles.cache.some(role => role.id === '775328405361131561')) return 4;
 			if (user.roles.cache.some(role => role.id === '775335296757006356')) return 3;
 			if (user.roles.cache.some(role => role.id === '775328685640646710')) return 2;
