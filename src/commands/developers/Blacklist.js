@@ -49,7 +49,7 @@ module.exports = class BlacklistCommand extends DevCommand {
 				break;
 			}
 			case 'user': {
-				const user =  ctx.message.mentions.users.size ? ctx.message.mentions.users.first().id : ctx.args[3];
+				const user = ctx.message.mentions.users.size ? ctx.message.mentions.users.first().id : ctx.args[3];
 				ctx.client.controllers.developer.unblacklistUser(user);
 				ctx.channel.send(`<@${user}> foi removido da blacklist por \`${blacklister}\``);
 				break;
