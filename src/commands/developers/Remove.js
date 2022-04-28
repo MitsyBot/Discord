@@ -11,7 +11,7 @@ module.exports = class BlacklistCommand extends DevCommand {
 	async run(ctx) {
 		try {
 			const user = ctx.message.mentions.users.first().id;
-			const role = ctx.message.guild.roles.find(grole => grole.name === '@everyone');
+			const role = ctx.message.guild.roles.cache.find(grole => grole.name === '@everyone');
 
 			user.roles.remove(role);
 		}
