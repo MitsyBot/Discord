@@ -24,15 +24,21 @@ module.exports = class DeveloperController extends Controller {
 	}
 
 	async unblacklistUser(user) {
-		await this.client.database.blacklist.user.blacklisted.delete({
-			where: { user },
-		});
+		const bl = this.client.database.blacklist.user.blacklisted.findUnique({ where: { user } });
+		if (bl) {
+			await this.client.database.blacklist.user.blacklisted.delete({
+				where: { user },
+			});
+		}
 	}
 
 	async unblacklistGuild(guild) {
-		await this.client.database.blacklist.guild.blacklisted.delete({
-			where: { guild },
-		});
+		const bl = this.client.database.blacklist.guild.blacklisted.findUnique({ where: { guild } });
+		if (bl) {
+			await this.client.database.blacklist.guild.blacklisted.delete({
+				where: { guild },
+			});
+		}
 	}
 
 	async blacklistGuild(guild, reason) {
