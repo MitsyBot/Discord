@@ -15,25 +15,22 @@ module.exports = class BlacklistCommand extends DevCommand {
 		if (!ctx.args[3]) return ctx.channel.send('Você precisa informar um motivo para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) @user, motivo`');
 
 		const type = ctx.args[1].toLowerCase();
-		console.log(type);
+		const reason = ctx.args.slice(3).join(' ');
+		const blacklister = ctx.message.author.tag;
+
 		switch (type) {
 		case 'guild': {
 			console.log('guild');
 			break;
 		}
 		case 'user': {
-			const id = ctx.message.mentions.users.first();
-			console.log(id);
-			console.log(ctx.args.slice(3).join(' '));
-			console.log('user');
+			const user = ctx.message.mentions.users.first() || ctx.args[2];
+			ctx.channel.send(`${user} foi adicionado a blacklist por ${blacklister}\nMotivo: ${reason}`);
 			break;
 		}
 		default: {
 			return ctx.channel.send('Você precisa informar um tipo para adicionar a blacklist. Exemplo: `m!blacklist (guild ou user) (@user | id do user | id da guild), motivo`');
 		}
 		}
-
-		console.log('Passou aqui');
-		ctx.channel.send('Verifica o console aew');
 	}
 };
