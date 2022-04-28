@@ -114,6 +114,7 @@ function flattenRole(role) {
 		guildId: role.guild.id,
 		name: role.name,
 		color: role.color,
+		editable: role.editable,
 		hoist: role.hoist,
 		rawPosition: role.rawPosition,
 		permissions: role.permissions.bitfield.toString(),
