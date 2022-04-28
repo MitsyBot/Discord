@@ -13,14 +13,17 @@ module.exports = class DeveloperController extends Controller {
 	}
 
 	async blacklistUser(user, reason, blacklister) {
-		await this.client.database.blacklist.user.blacklisted.create({
-			data:{
-				user,
-				reason,
-				banned_by: blacklister,
-				expires_at: 0,
-			},
-		});
+		const bl = this.client.database.blacklist.user.blacklisted.findUnique({ where: { user } });
+		if (!bl) {
+			await this.client.database.blacklist.user.blacklisted.create({
+				data:{
+					user,
+					reason,
+					banned_by: blacklister,
+					expires_at: 0,
+				},
+			});
+		}
 	}
 
 	async unblacklistUser(user) {
@@ -42,12 +45,15 @@ module.exports = class DeveloperController extends Controller {
 	}
 
 	async blacklistGuild(guild, reason) {
-		await this.client.database.blacklist.guild.blacklisted.create({
-			data: {
-				guild,
-				reason,
-			},
-		});
+		const bl = this.client.database.blacklist.guild.blacklisted.findUnique({ where: { guild } });
+		if (!bl) {
+			await this.client.database.blacklist.guild.blacklisted.create({
+				data: {
+					guild,
+					reason,
+				},
+			});
+		}
 	}
 
 	async userBlacklisted(_user) {
