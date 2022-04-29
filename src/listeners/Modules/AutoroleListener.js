@@ -12,7 +12,7 @@ module.exports = class AutoroleListener extends EventListener {
 
 		if (guild.autorole.enabled) {
 			for (const role of guild.autorole.roles) {
-				if (guild.autorole.give_after > 0) {
+				if (guild.autorole.give_after > 1) {
 					const guild_role = member.guild.roles.cache.get(role);
 					setTimeout(() => {
 						member.roles.add(guild_role);

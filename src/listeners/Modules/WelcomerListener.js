@@ -24,7 +24,7 @@ module.exports = class MessageListener extends EventListener {
 				const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(messageToSend), values);
 
 				channel.send(JSON.parse(jsonmess)).then(message => {
-					if (guild.welcomer.delete_join_messages_after > 0) {
+					if (guild.welcomer.delete_join_messages_after > 1) {
 						setTimeout(() => {
 							message.delete();
 						}, guild.welcomer.delete_join_messages_after * 1000);
@@ -59,7 +59,7 @@ module.exports = class MessageListener extends EventListener {
 			];
 			const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(messageToSend), values);
 			channel.send(JSON.parse(jsonmess)).then(message => {
-				if (guild.welcomer.delete_remove_messages_after > 0) {
+				if (guild.welcomer.delete_remove_messages_after > 1) {
 					setTimeout(() => {
 						message.delete();
 					}, guild.welcomer.delete_remove_messages_after * 1000);
