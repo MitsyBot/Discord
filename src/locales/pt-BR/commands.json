@@ -12,7 +12,7 @@
         "getted": "Você já deu uma reputação hoje, tente novamente em {{repagain}}"
       },
       "daily": {
-        "get": "<:Mitsy_Rica:872870327049396274> **|** <@{{user}}> Você pode conseguir seus cometinhas diarios [Clicando aqui](https://mitsy.xyz/dashboard/daily)\nCaso você não fique satisfeito com a quantia de cometinhas que ganhar você pode comprar mais cometinhas [Clicando aqui](https://mitsy.xyz/dashboard/shop/comets)",
+        "get": "<:Mitsy_Rica:872870327049396274> **|** <@{{user}}> Você pode conseguir seus cometinhas diarios [Clicando aqui](https://mitsy.xyz/dashboard/user/@me/daily)\nCaso você não fique satisfeito com a quantia de cometinhas que ganhar você pode comprar mais cometinhas [Clicando aqui](https://mitsy.xyz/dashboard/shop/comets)",
         "getted": "<:Mitsy_Rica:872870327049396274> Você ja pegou seu premio diario hoje, mas você ira poder pegar novamente em {{getagain}}"
       },
       "ping": {
