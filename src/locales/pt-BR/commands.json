@@ -5,6 +5,12 @@
           "other": "{{user}} tem atualmente {{current}} cometinhas"
         }
       },
+      "rep": {
+        "noUser": "Não foi possível encontrar o usuário (ISSO É PRA SER REQUERIDO COMO VOCE FEZ ISSO????)",
+        "self": "Você não pode dar uma reputação para si mesmo",
+        "link": "<@{{author}} Quase pronto! Para dar a reputação, confirme ela em \nhttps://mitsy.xyz/rep/user/{{user}}?guild={{guild}}?channel={{channel}}",
+        "getted": "Você já deu uma reputação hoje, tente novamente em {{repagain}}"
+      },
       "daily": {
         "get": "<:Mitsy_Rica:872870327049396274> **|** <@{{user}}> Você pode conseguir seus cometinhas diarios [Clicando aqui](https://mitsy.xyz/dashboard/daily)\nCaso você não fique satisfeito com a quantia de cometinhas que ganhar você pode comprar mais cometinhas [Clicando aqui](https://mitsy.xyz/dashboard/shop/comets)",
         "getted": "<:Mitsy_Rica:872870327049396274> Você ja pegou seu premio diario hoje, mas você ira poder pegar novamente em {{getagain}}"

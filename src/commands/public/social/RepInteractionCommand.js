@@ -1,4 +1,5 @@
 const { InteractionCommand } = require('../../../');
+const moment = require('moment');
 
 module.exports = class LevelInteractionCommand extends InteractionCommand {
 	constructor() {
@@ -12,7 +13,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 					type: 'USER',
 					usage: '/rep Duuuuardo',
 					description: 'Mencione um usuário',
-					required: false,
+					required: true,
 				},
 			],
 			cooldown: 5,
@@ -20,7 +21,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 	}
 
 	async run(ctx) {
-
+		const author_db = ctx.data.author;
 		const member = ctx.options.getUser('usuário');
 		const author = ctx.author;
 		if (!member) {
@@ -32,7 +33,13 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 			await ctx.makeMessage({ content: ctx.prettyResponse('error', 'commands:rep.self') });
 			return;
 		}
+		const REP_INTERVAL = 12 * 60 * 60 * 1000;
 
-		ctx.makeMessage({ content: ctx.prettyResponse('info', 'commands:rep.link', { user: member.id, author: author.id, channel: ctx.interaction.channel.id, guild: ctx.interaction.guild.id }) });
+		if (Date.now() - author_db.cooldowns.last_rep < REP_INTERVAL) {
+			return ctx.makeMessage({
+				content: ctx.locale('commands:daily.getted', { repagain: moment.duration(REP_INTERVAL - (Date.now() - author_db.cooldowns.last_rep)).format('h[h] m[m] s[s]') }), ephemeral: true });
+		}
+
+		ctx.makeMessage({ content: ctx.prettyResponse('MITSY_OK', 'commands:rep.link', { user: member.id, author: author.id, channel: ctx.interaction.channel.id, guild: ctx.interaction.guild.id }) });
 	}
 };
