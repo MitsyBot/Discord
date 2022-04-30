@@ -19,6 +19,12 @@ module.exports = class MessageListener extends EventListener {
 					{
 						User: member.user.username,
 						'@User':  `<@${member.user.id}>`,
+						'user.name': member.displayName,
+						'user.discriminator': member.user.discriminator,
+						'user.tag': member.user.tag,
+						'user.id': member.user.id,
+						'user.avatar': member.user.avatarURL(),
+						'user.nickname': member.nickname,
 					},
 				];
 				const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(messageToSend), values);
@@ -37,6 +43,12 @@ module.exports = class MessageListener extends EventListener {
 					{
 						User: member.user.username,
 						'@User':  `<@${member.user.id}>`,
+						'user.name': member.displayName,
+						'user.discriminator': member.user.discriminator,
+						'user.tag': member.user.tag,
+						'user.id': member.user.id,
+						'user.avatar': member.user.avatarURL(),
+						'user.nickname': member.nickname,
 					},
 				];
 				const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(guild.welcomer.join_private_message), values);
@@ -53,8 +65,15 @@ module.exports = class MessageListener extends EventListener {
 
 			const messageToSend = guild.welcomer.remove_message;
 			const values = [
-				{					User: member.user.username,
+				{
+					User: member.user.username,
 					'@User':  `<@${member.user.id}>`,
+					'user.name': member.displayName,
+					'user.discriminator': member.user.discriminator,
+					'user.tag': member.user.tag,
+					'user.id': member.user.id,
+					'user.avatar': member.user.avatarURL(),
+					'user.nickname': member.nickname,
 				},
 			];
 			const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(messageToSend), values);

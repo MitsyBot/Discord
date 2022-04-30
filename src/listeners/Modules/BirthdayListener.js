@@ -38,7 +38,13 @@ module.exports = class BirthdayListener extends EventListener {
 						const values = [
 							{
 								User: member.user.username,
-								'@User':  `<@${member.id}>`,
+								'@User':  `<@${member.user.id}>`,
+								'user.name': member.displayName,
+								'user.discriminator': member.user.discriminator,
+								'user.tag': member.user.tag,
+								'user.id': member.user.id,
+								'user.avatar': member.user.avatarURL(),
+								'user.nickname': member.nickname,
 							},
 						];
 

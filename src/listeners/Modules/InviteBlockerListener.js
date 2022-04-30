@@ -30,6 +30,12 @@ module.exports = class MessageListener extends EventListener {
 						{
 							User: message.member.user.username,
 							'@User':  `<@${message.member.user.id}>`,
+							'user.name': message.member.displayName,
+							'user.discriminator': message.member.user.discriminator,
+							'user.tag': message.member.user.tag,
+							'user.id': message.member.user.id,
+							'user.avatar': message.member.user.avatarURL(),
+							'user.nickname': message.member.nickname,
 						},
 					];
 					const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(replyMessage), values);
