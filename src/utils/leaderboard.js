@@ -60,7 +60,7 @@ module.exports = class Leaderboard {
 				global_xp: true,
 			},
 			where: {
-				views: {
+				global_xp: {
 					gt: 25,
 				},
 			},
