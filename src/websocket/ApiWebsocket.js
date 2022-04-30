@@ -19,22 +19,21 @@ const WebSocketController = async (mitsy, rawRequest) => {
 	}
 
 	case 'giveRep': {
+		console.log(data);
+		// send an message to guild channel telling that a user has received a rep
+		const guild = mitsy.client.guilds.cache.get(data.guild);
+		if (!guild) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'Servidor não encontrado' } }));
+		const receiver = await guild.members.fetch(data.receiver);
+		if (!receiver) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'O usuario que recebeu a rep não foi encontrado no servidor' } }));
+		const channel = guild.channels.cache.get(data.channel);
+		if (!channel) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'Canal não encontrado' } }));
+		const giver = await guild.members.fetch(data.giver);
+		if (!giver) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'O usuario que fez a rep não foi encontrado no servidor' } }));
 
-		if (data.guild && data.channel && data.receiver) {
-			// send an message to guild channel telling that a user has received a rep
-			const guild = mitsy.client.guilds.cache.get(data.guild);
-			if (!guild) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'Servidor não encontrado' } }));
-			const receiver = await guild.members.fetch(data.receiver);
-			if (!receiver) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'O usuario que recebeu a rep não foi encontrado no servidor' } }));
-			const channel = guild.channels.cache.get(data.channel);
-			if (!channel) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'Canal não encontrado' } }));
-			const giver = await guild.members.fetch(data.giver);
-			if (!giver) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'O usuario que fez a rep não foi encontrado no servidor' } }));
+		channel.send(`<@${giver} deu uma reputação para <@${receiver}>, <@${receiver} Agora possui **${data.amount}** reptações\nQuer dar uma reputação para <@${giver}>? https://mitsy.xyz/rep/user/${giver.id}?guild=${guild.id}?channel=${channel.id}`);
 
-			channel.send(`<@${giver} deu uma reputação para <@${receiver}>, <@${receiver} Agora possui **${data.amount}** reptações\nQuer dar uma reputação para <@${giver}>? https://mitsy.xyz/rep/user/${giver.id}?guild=${guild.id}?channel=${channel.id}`);
+		mitsy.api.send(JSON.stringify({ id, res: 'Rep adicionada com sucesso' }));
 
-			mitsy.api.send(JSON.stringify({ id, res: 'Rep adicionada com sucesso' }));
-		}
 
 		break;
 	}
