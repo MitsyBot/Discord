@@ -1,5 +1,5 @@
 const { Collection } = require('discord.js');
-const { PreciseTimeout } = require('./PreciseTimeout');
+const PreciseTimeout = require('./PreciseTimeout');
 module.exports = class Leaderboard {
 	constructor(client) {
 		this.client = client;
