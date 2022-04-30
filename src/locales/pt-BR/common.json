@@ -1,8 +1,8 @@
 {
     "tax": "Eu taxo todas transações em 20% de cometinhas como forma de incentivo para as pessoas me ajudarem a me manter online. Gostou da ideia? [Ajude a me manter online](https://mitsy.xyz/premium)",
-    "NOT_PREMIUM": "Opa, parece que você não tem premium na mitsy. caso tenha interesse em doar para me ajudar a me manter online e ainda ganhar vantagens incriveis [clique aqui](https://mitsy.xyz/premium)\nÉ claro que doar é opcional. caso não queira ou não possa doar ignore esta mensagem!",
-    "MAINTENANCE": "Manutenção programada\nHoje as {{hour}} eu irei reiniciar para aplicar updates.",
+    "NOT_PREMIUM": "<:mitsy_plead:906132360209268776> **|** Opa, parece que você não tem premium na mitsy. caso tenha interesse em doar para me ajudar a me manter online e ainda ganhar vantagens incriveis [clique aqui](https://mitsy.xyz/premium)\nÉ claro que doar é opcional. caso não queira ou não possa doar ignore esta mensagem!",
+    "MAINTENANCE": "<:Mitsy_knife:914596410752647230> **|** Manutenção programada\nHoje as {{hour}} eu irei reiniciar para aplicar updates.",
     "negate": "Negar",
     "accept": "Aceitar",
-    "timeout": "Que pena, O tempo maximo para concluir o pagamento acabou!"
+    "timeout": "<:mitsy_Sleeping:842775933508386816> **|** Que pena, O tempo maximo para concluir o pagamento acabou!"
 }
