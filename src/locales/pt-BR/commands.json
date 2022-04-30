@@ -122,7 +122,7 @@
       },
       "level": {
         "embed_title": "{{mitsy_heart}} Nivel",
-        "embed_description": "{{mitsy_confetti}} Card de {{username}}\nNivel ``{{level}}``\nXp ``{{xp}}``",
+        "embed_description": "{{mitsy_confetti}} Card de {{username}}\nNivel ``{{level}}``\nXp ``{{xp}}``\nRanking ``#{{ranking}}``",
         "embed_footer": "Continue tentando subir de nivel."      
       },
       "transactions": {
