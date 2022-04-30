@@ -1,4 +1,4 @@
-const { InteractionCommand, HTTPrequests } = require('../../../');
+const { InteractionCommand, HTTPrequests, Ranking } = require('../../../');
 const { MessageAttachment } = require('discord.js');
 
 module.exports = class LevelInteractionCommand extends InteractionCommand {
@@ -29,7 +29,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		const previousLevel = Math.floor((user.profile.global_level - 1) * 1000);
 		const nextLevel = Math.floor((user.profile.global_level + 1) * 1000);
 		const progressBar = Math.max(Math.round(((user.profile.global_xp - previousLevel) / (nextLevel - previousLevel)) * 800), 6);
-
+		const ranking = Ranking.fetchGlobalRanking(user.id, ctx.client);
 
 		const data = {
 
@@ -37,7 +37,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 			level: `${user.profile.global_level}`,
 			name: `${member.username}#${member.discriminator}`,
 			xp: `${user.profile.global_xp}`,
-			ranking: '4',
+			ranking: ranking,
 			barlevel: progressBar,
 			money: `${user.profile.comets}`,
 			aboutme: user.profile.aboutme,

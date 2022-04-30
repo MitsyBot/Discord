@@ -22,4 +22,6 @@ module.exports = {
 	Connection: require('./structures/Connetion'),
 	YoutubeTogether: require('./media/interactions/Youtube'),
 	Util: require('./utils/Util'),
+	Leaderboard: require('./utils/leaderboard'),
+	Ranking: require('./utils/ranking'),
 };

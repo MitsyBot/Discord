@@ -2,6 +2,7 @@ const { Client, Collection } = require('discord.js');
 const Loaders = require('./loaders');
 const Logger = require('./utils/Logger/Logger');
 const JogoDoBichoManager = require('./structures/JogoDoBichoManager');
+const { Leaderboard } = require('./');
 module.exports = class MitsyClient extends Client {
 	constructor(options = {}) {
 		super(options);
@@ -10,7 +11,6 @@ module.exports = class MitsyClient extends Client {
 		this.maintenance = {};
 		this.cooldowns = new Collection();
 		this.commandExecutions = new Set();
-
 		this.loaded = false;
 	}
 
@@ -32,6 +32,7 @@ module.exports = class MitsyClient extends Client {
 		}
 
 		this.jogoDoBichoManager = new JogoDoBichoManager(this);
+		this.leaderboard = new Leaderboard(this);
 
 		this.loaded = true;
 	}
