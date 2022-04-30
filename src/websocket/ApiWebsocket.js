@@ -19,12 +19,13 @@ const WebSocketController = async (mitsy, rawRequest) => {
 	}
 
 	case 'giveRep': {
+		console.log(data);
 		// send an message to guild channel telling that a user has received a rep
 		const guild = mitsy.client.guilds.cache.get(data.guild);
 		if (!guild) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'Servidor não encontrado' } }));
 		const channel = guild.channels.cache.get(data.channel);
 		if (!channel) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'Canal não encontrado' } }));
-		channel.send(`<@${data.giver} deu uma reputação para <@${data.receiver}>, <@${data.receiver} Agora possui **${data.amount}** reptações\nQuer dar uma reputação para <@${data.giver}>? https://mitsy.xyz/rep/user/${data.giver}?guild=${guild.id}&channel=${channel.id}`);
+		channel.send(`<@${data.giver}> deu uma reputação para <@${data.user}>, <@${data.user} Agora possui **${data.amount}** reptações\nQuer dar uma reputação para <@${data.giver}>? https://mitsy.xyz/rep/user/${data.giver}?guild=${guild.id}&channel=${channel.id}`);
 
 		mitsy.api.send(JSON.stringify({ id, res: 'Rep adicionada com sucesso' }));
 
