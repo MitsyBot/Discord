@@ -37,7 +37,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 
 		if (Date.now() - author_db.cooldowns.last_rep < REP_INTERVAL) {
 			return ctx.makeMessage({
-				content: ctx.locale('commands:daily.getted', { repagain: moment.duration(REP_INTERVAL - (Date.now() - author_db.cooldowns.last_rep)).format('h[h] m[m] s[s]') }), ephemeral: true });
+				content: ctx.locale('commands:rep.getted', { repagain: moment.duration(REP_INTERVAL - (Date.now() - author_db.cooldowns.last_rep)).format('h[h] m[m] s[s]') }), ephemeral: true });
 		}
 
 		ctx.makeMessage({ content: ctx.prettyResponse('MITSY_OK', 'commands:rep.link', { user: member.id, author: author.id, channel: ctx.interaction.channel.id, guild: ctx.interaction.guild.id }) });
