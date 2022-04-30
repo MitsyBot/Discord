@@ -21,7 +21,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 	async run(ctx) {
 
 		const user = ctx.data.user ?? ctx.data.author;
-		const member = ctx.interaction.guild.members.cache.get(user.global.id);
+		const member = ctx.interaction.guild.members.cache.get(user.general.id);
 		console.log(user);
 		console.log(member);
 		const embed = new MitsyEmbed()
