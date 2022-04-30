@@ -37,7 +37,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 			level: `${user.profile.global_level}`,
 			name: `${member.username}#${member.discriminator}`,
 			xp: `${user.profile.global_xp}`,
-			ranking: ranking,
+			ranking: ranking.toString(),
 			barlevel: progressBar,
 			money: `${user.profile.comets}`,
 			aboutme: user.profile.aboutme,
