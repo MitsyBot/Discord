@@ -54,7 +54,7 @@ module.exports = class Leaderboard {
 	}
 
 	async createUserSyncHandle() {
-		const data = await this.client.database.users.profiles.findMany({
+		const data = await this.client.database.user.profiles.findMany({
 			select: {
 				id: true,
 				global_xp: true,
