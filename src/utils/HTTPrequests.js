@@ -15,7 +15,7 @@ module.exports = class HttpRequests {
 	static async getAssetImageUrl(type) {
 		try {
 			const data = await apiRequest.get(`/assets/${type}`);
-			return data.url;
+			return data.data.url;
 		}
 		catch {
 			return 'https://http.cat/404';
@@ -57,6 +57,22 @@ module.exports = class HttpRequests {
 		}
 	}
 
+	static async avatarsLogRequest(_data) {
+		try {
+			const data = await axios({
+				url: `${process.env.GENERATOR_URL}/render/avatars`,
+				method: 'post',
+				data: _data,
+				responseType: 'arraybuffer',
+			});
+
+			return { err: false, data: data.data };
+		}
+		catch {
+			return { err: true };
+		}
+	}
+
 	static async getActivity(shard) {
 		try {
 			const data = await apiRequest.get('/activity', { data: { shard: shard || 0 } });
@@ -64,6 +80,16 @@ module.exports = class HttpRequests {
 		}
 		catch {
 			return { name: `❤️ | Howdy | Shard ${shard}`, type: 'PLAYING' };
+		}
+	}
+
+	static async getFanarts(shard) {
+		try {
+			const data = await apiRequest.get('/fanarts/activity', { data: { shard: shard || 0 } });
+			return data.data;
+		}
+		catch {
+			return { avatar: 'https://imgur.com/yZVrWCl.png', activity: { name: `❤️ | Howdy | Shard ${shard}`, type: 'PLAYING' } };
 		}
 	}
 };

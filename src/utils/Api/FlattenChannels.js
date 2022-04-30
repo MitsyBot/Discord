@@ -114,6 +114,7 @@ function flattenRole(role) {
 		guildId: role.guild.id,
 		name: role.name,
 		color: role.color,
+		editable: role.editable,
 		hoist: role.hoist,
 		rawPosition: role.rawPosition,
 		permissions: role.permissions.bitfield.toString(),
@@ -122,4 +123,14 @@ function flattenRole(role) {
 	};
 }
 
-module.exports = { flattenChannel, flattenRole };
+function flattenEmoji(emoji) {
+	return {
+		id: emoji.id,
+		animated: emoji.animated,
+		name: emoji.name,
+		url: emoji.url,
+		identifier: emoji.identifier,
+	};
+}
+
+module.exports = { flattenChannel, flattenRole, flattenEmoji };

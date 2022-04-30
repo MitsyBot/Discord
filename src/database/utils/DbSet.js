@@ -8,5 +8,7 @@ module.exports = class DbSet {
 		this.user = new UserRepository(connection);
 		this.guild = new GuildRepository(connection);
 		this.blacklist = new BlacklistRepository(connection);
+		this.starboards = connection.Starboards;
+		this.transactions = connection.CometTransaction;
 	}
 };

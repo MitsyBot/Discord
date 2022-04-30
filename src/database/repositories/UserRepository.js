@@ -16,6 +16,18 @@ module.exports = class UserRepository {
 		return dados;
 	}
 
+	async getTodayBirthdays(date) {
+		const birthdays = await this.profiles.findMany({
+			where: {
+				birthday: date,
+			},
+		});
+		// Exclamação faz o if considerar se o valor for negativo
+		// No caso se não tiver nada no banco ele retorna um array vazio
+		return birthdays;
+	}
+
+
 	async ensureProfile(id) {
 
 		const previous = await this.general.findUnique({
@@ -98,7 +110,7 @@ module.exports = class UserRepository {
 			},
 		});
 		if (!previous.profile) {
-			return await this.user.profiles.create({
+			return await this.profiles.create({
 				data: {
 					id,
 					comets: amount,
@@ -115,7 +127,7 @@ module.exports = class UserRepository {
 			});
 		}
 
-		return await this.user.profiles.update({
+		return await this.profiles.update({
 			where: {
 				id,
 			},
@@ -128,7 +140,7 @@ module.exports = class UserRepository {
 	}
 
 	async removeComets(id, amount) {
-		return await this.user.profiles.update({
+		return await this.profiles.update({
 			where: {
 				id,
 			},

@@ -32,12 +32,75 @@ module.exports = class MiscUtils {
 			.catch(() => null);
 	}
 
+	static hasInappropriateWords(string) {
+		const BAD_NICKNAMES = [
+			'puta',
+			'vagabunda',
+			'lixo',
+			'desgraça',
+			'burra',
+			'piranha',
+			'protistuta',
+			'bicha',
+			'bixa',
+			'arromabada',
+			'cachorra',
+			'ruim',
+			'boquete',
+			'boqueteira',
+			'putona',
+			'viada',
+			'vadia',
+			'putiane',
+			'fdp',
+			'xereca',
+			'pepeca',
+			'pepeka',
+			'ppk',
+			'escrava sexual',
+			'xota',
+			'xoxota',
+			'xoxotinha',
+		];
+
+		const lowerCaseNickname = string.toLowerCase()
+			.replace('4', 'a')
+			.replace('@', 'a')
+			.replace('1', 'i')
+			.replace('0', 'o');
+
+		return BAD_NICKNAMES.includes(lowerCaseNickname);
+	}
 
 	static resolveCustomId(customId) {
 		return customId
 			.replace(/^[\s\d]+/, '')
 			.replace('|', '')
 			.trim();
+	}
+
+	static replacePlaceholders(template, values) {
+		if (!values.length) {return template;}
+
+		for (const [ index, value ] of values.entries()) {
+
+			switch (typeof value) {
+			case 'object':
+				for (const [ i, v ] of Object.entries(value)) {
+					const regex = new RegExp(`(?<!\\\\)\\{${i}\\}`, 'gi');
+					template = template.replace(regex, v);
+				}
+
+				break;
+			case 'string':
+				// eslint-disable-next-line no-case-declarations
+				const regex = new RegExp(`(?<!\\\\)\\{${index}\\}`, 'gi');
+				template = template.replace(regex, value);
+			}
+
+		}
+
+		return template;
 	}
 
 	static formatDuration(duration) {

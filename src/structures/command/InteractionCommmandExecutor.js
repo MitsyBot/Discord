@@ -20,14 +20,33 @@ module.exports = class InteractionCommandExecutor {
 		const userBlacklist = await client.controllers.developer.userBlacklisted(interaction.user.id);
 		const guildBlacklist = await client.controllers.developer.guildBlacklisted(interaction.guild.id);
 
-		const DevLevel = await client.controllers.developer.getDeveloper(interaction.user.id);
+		let DevLevel;
+
+		if (process.env.NODE_ENV === 'development') {
+			DevLevel = 4;
+		}
+		else {
+			DevLevel = await client.controllers.developer.getDeveloper(interaction.user.id);
+		}
 
 		data.author = authorData;
 		data.guild = guildData;
 
+		const guild_has_premium = !!(await client.database.keys.count({
+			where: {
+				active_in: interaction.guild.id,
+			},
+		}));
+
+		const user_has_premium = !!(await client.database.donations.count({
+			where: {
+				id: interaction.user.id,
+			},
+		}));
+
 		const command = client.slashCommands.find(c => c.config.name === interaction.commandName);
 
-		const t = client.i18next.getFixedT(data.guild.lang || 'pt-BR');
+		const t = client.i18next.getFixedT(data.guild.general.lang || 'pt-BR');
 
 		if (!command) {
 			interaction
@@ -45,7 +64,7 @@ module.exports = class InteractionCommandExecutor {
 				}).then(() => {
 					client.guilds.cache.get(data.guild.general.id)
 						.leave()
-						.then(g => client.logger.info({ tag: 'Discord' }, `Mitsy saiu de ${g} por ${data.guild.blacklistReason}`))
+						.then(g => client.logger.info({ tag: 'Discord' }, `Mitsy saiu de ${g} por ${data.guildBlacklist.reason}`))
 						.catch(console.error);
 				});
 			return;
@@ -59,10 +78,10 @@ module.exports = class InteractionCommandExecutor {
 			return;
 		}
 
-		if (data.guild.blacklisted_channels.includes(interaction.channelId) && DevLevel < 1) {
-			if (!data.guild.blacklistedChannels.warn) return;
+		if (data.guild.general.blacklisted_channels.includes(interaction.channelId) && DevLevel < 1) {
+			if (!data.guild.general.custom_warn_message) return await interaction.reply({ content: t('errors:CHANNEL_BLACKLISTED'), ephemeral: true });
 
-			await interaction.reply({ content: t('errors:CHANNEL_BLACKLISTED'), ephemeral: true });
+			await interaction.reply(data.guild.general.blacklisted_warning);
 			return;
 		}
 
@@ -122,7 +141,7 @@ module.exports = class InteractionCommandExecutor {
 		const now = Date.now();
 		const timestamps = client.cooldowns.get(command.config.name);
 		let cooldownAmount = (command.config.cooldown || 3) * 1000;
-		if (user_has_premium) cooldownAmount = cooldownAmount + (5000 * data.user.premium.tier);
+		if (user_has_premium) cooldownAmount = cooldownAmount + (5000 * data.author.premium.tier);
 		if (now - interaction.createdTimestamp >= 3000) return;
 
 		if (timestamps.has(interaction.user.id)) {
@@ -155,28 +174,30 @@ module.exports = class InteractionCommandExecutor {
 			data,
 		});
 
-
 		if (!command.run) return;
 
-		const guild_has_premium = !!(await client.database.keys.count({
-			where: {
-				active_in: interaction.guild.id,
-			},
-		}));
-
-		const user_has_premium = !!(await client.database.donations.count({
-			where: {
-				id: interaction.user.id,
-			},
-		}));
 		if (command.config.name === 'music') {
 
 			if (!(user_has_premium || guild_has_premium)) {
-				(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_NO_PREMIUM') });
+				if (interaction.deferred) {
+					interaction.webhook
+						.send({ content: t('errors:MUSIC_NO_PREMIUM') });
+				}
+				else {
+					interaction
+						.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
+				}
 			}
 
 			if (!(data.author.premium.tier === 3 || data.guild.key.tier === 4)) {
-				(interaction.deferred ? interaction.webhook.send : interaction.reply)({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+				if (interaction.deferred) {
+					interaction.webhook
+						.send({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+				}
+				else {
+					interaction
+						.reply({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
+				}
 			}
 		}
 

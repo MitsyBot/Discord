@@ -24,7 +24,7 @@ module.exports = class CommandLoader extends Loader {
 	}
 
 
-	initializeCommands(dirPath = 'src/commands') {
+	initializeCommands(dirPath = 'src/commands/public') {
 		let success = 0;
 		let failed = 0;
 		return FileUtils.requireDirectory(dirPath, (NewCommand, path) => {

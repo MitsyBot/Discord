@@ -14,6 +14,36 @@
         "api": "(Discord) Latência da API:",
         "mitsy_api": "(Mitsy) Latencia da API:"
       },
+      "youtube": {
+        "join": "<:Mitsy_omg:873019423886282812> **|** Uma party foi criada, entre [clicando aqui](<{{code}}>)."
+      },
+      "bicho": {
+        "sorted-title": "Números Sorteados",
+        "not-previous-title": "Nenhum sorteio anteriormente",
+        "not-previous-description": "**Nenhum sorteio aconteceu até agora**\n\nPróximo Sorteio Em `{{nextDate}}`\n**Valor Acumulado:** {{value}}",
+        "sorted-description": "**Último Sorteio:** `{{lastDate}}`\nNúmeros Sorteados:\n1º - `{{first}}`\n2º - `{{second}}`\n3º - `{{third}}`\n4º - `{{fourth}}`\n5º - `{{fifth}}`\nMaior Lucro: **{{biggestProfit}}**\n\nPróximo Sorteio Em `{{nextDate}}`\n**Valor Acumulado:** {{value}}",
+        "no-register": "Sem Registro",
+        "poor": "você não tem cometinhas suficientes para apostar no jogo do bicho!",
+        "bet-title": "Jogo do bicho",
+        "bet-description": "Como você quer apostar? Você pode apostar uma unidade, uma dezena, uma centena, um milhar, um animal, uma sequência ou quina de animais. Escolha como quer apostar, e apos isso selecione a aposta\n\n**MULTIPLICADOR:**\n**Unidade:** {{unity}}x\n**Dezena:** {{ten}}x\n**Centena:** {{hundred}}x\n**Milhar:** {{thousand}}x\n**Animal:** {{animal}}x\n**Sequência:** {{sequence}}x\n**Quina:** {{corner}}x",
+        "close": "Whoops, você chegou tarde, as apostas foram fechadas",
+        "unity": "Unidade",
+        "ten": "Dezena",
+        "hundred": "Centena",
+        "thousand": "Milhar",
+        "sequence": "Sequência",
+        "corner": "Quina",
+        "one-animal": "Animal",
+        "select": "Selecione a {{option}}",
+        "animal": "Selecione seu {{option}} Animal",
+        "first": "primeiro",
+        "second": "segundo",
+        "third": "terceiro",
+        "in": "Você já esta no jogo!",
+        "in-description": "Fontes indicam que você ja esta na aposta atual!",
+        "already": "Você já fez uma aposta no jogo atual! Espere o próximo começar",
+        "success": "Sua aposta foi feita com sucesso! Caso você ganhe os cometinhas serão debitados na sua conta!"
+      },
       "play": {
         "queueEnd": "A musica {{- songName}} acabou!",
         "queueEmpty": "A fila esta vazia, vou sair do canal de voz por que memoria ram não cresce em arvores!",
@@ -92,8 +122,15 @@
       },
       "level": {
         "embed_title": "{{mitsy_heart}} Nivel",
-        "embed_description": "{{mitsy_confetti}} Card de {{username}}\nNivel ``{{level}}``\nXp ``{{xp}}``",
+        "embed_description": "{{mitsy_confetti}} Card de {{username}}\nNivel ``{{level}}``\nXp ``{{xp}}``\nRanking ``#{{ranking}}``",
         "embed_footer": "Continue tentando subir de nivel."      
+      },
+      "transactions": {
+        "title": "Suas transações",
+        "received": "Recebeu {{quantity}} cometinhas de ``{{name}}``",
+        "sent": "Enviou {{quantity}} cometinhas para ``{{name}}``",
+        "genericSent": "Enviou {{quantity}} {{type}}",
+        "genericReceive": "Recebeu {{quantity}} {{type}}"
       },
       "checkpremium": {
         "ispremium": "{{mitsy_rica}} {{user}} é um usuario premium da mitsy tier {{tier}}",

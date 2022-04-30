@@ -29,7 +29,7 @@ module.exports = class LocaleLoader extends Loader {
 		return new Promise((resolve) => {
 			try {
 				i18next.use(translationBackend).init({
-					ns: ['commands', 'common', 'errors', 'events', 'permissions'],
+					ns: ['commands', 'common', 'errors', 'events', 'permissions', 'types'],
 					preload: dir,
 					fallbackLng: 'pt-BR',
 					backend: {

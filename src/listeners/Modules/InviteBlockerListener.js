@@ -1,0 +1,48 @@
+const { EventListener, MiscUtils } = require('../../');
+
+module.exports = class MessageListener extends EventListener {
+	constructor(client) {
+		super({
+			events: ['messageCreate'],
+		}, client);
+	}
+
+	async onMessageCreate(message) {
+		const isInvite = (/((?:discord\.gg|discordapp\.com\/invite|discord\.com\/invite))/g).test(message.content);
+		if (message.content.length === 0) return null;
+		if (!message.guild) return;
+		const guild = await this.database.guild.ensure(message.guild.id);
+		if (guild.invite_blocker.enabled && isInvite) {
+			const channels = guild.invite_blocker.whitelisted_channels;
+			const invite = await message.guild.invites.fetch(message.content).catch(() => {
+				return null;
+			});
+			if (invite && guild.invite_blocker.whitelist_server_invites) return;
+
+			if (!channels.includes(message.channel.id)) {
+				if (guild.invite_blocker.delete_message) {
+					message.delete();
+				}
+
+				if (guild.invite_blocker.tell_user) {
+					const replyMessage = guild.invite_blocker.warn_message;
+					const values = [
+						{
+							User: message.member.user.username,
+							'@User':  `<@${message.member.user.id}>`,
+							'user.name': message.member.displayName,
+							'user.discriminator': message.member.user.discriminator,
+							'user.tag': message.member.user.tag,
+							'user.id': message.member.user.id,
+							'user.avatar': message.member.user.avatarURL(),
+							'user.nickname': message.member.nickname,
+						},
+					];
+					const jsonmess = MiscUtils.replacePlaceholders(JSON.stringify(replyMessage), values);
+					message.channel.send(JSON.parse(jsonmess));
+				}
+
+			}
+		}
+	}
+};

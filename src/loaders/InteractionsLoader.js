@@ -1,6 +1,6 @@
 const { Loader, YoutubeTogether } = require('../');
 
-module.exports = class APILoader extends Loader {
+module.exports = class InteractionsLoader extends Loader {
 	constructor(client) {
 		super({
 			preLoad: true,
@@ -9,7 +9,7 @@ module.exports = class APILoader extends Loader {
 
 	async load() {
 		try {
-			this.client.media.interactions.youtube = new YoutubeTogether(this.client);
+			this.client.youtubetogether = new YoutubeTogether(this.client);
 			return true;
 		}
 		catch (e) {

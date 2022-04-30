@@ -18,9 +18,30 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		break;
 	}
 
+	case 'giveRep': {
+		// send an message to guild channel telling that a user has received a rep
+		const guild = mitsy.client.guilds.cache.get(data.guild);
+		if (!guild) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'Servidor não encontrado' } }));
+		const channel = guild.channels.cache.get(data.channel);
+		if (!channel) return mitsy.api.send(JSON.stringify({ id, res: { err: true, message: 'Canal não encontrado' } }));
+		channel.send(`<@${data.giver}> deu uma reputação para <@${data.user}>, <@${data.user}> Agora possui **${data.amount}** reptações\nQuer dar uma reputação para <@${data.giver}>? https://mitsy.xyz/rep/user/${data.giver}?guild=${guild.id}&channel=${channel.id}`);
+
+		mitsy.api.send(JSON.stringify({ id, res: 'Rep adicionada com sucesso' }));
+
+
+		break;
+	}
+
+	case 'getUser': {
+
+		const user = await mitsy.client.users.fetch(data.user);
+		mitsy.api.send(JSON.stringify({ id, res: user }));
+		break;
+	}
+
 	case 'message': {
 		const user = await mitsy.client.users.fetch(data.userid);
-		user.send(data.message);
+		user.send(data.message).catch(() => { mitsy.logger.error(`Could not send message to ${user.tag}`); });
 		mitsy.api.send(JSON.stringify({ id, res: { message: 'Enviado com sucesso' } }));
 		break;
 	}
@@ -39,14 +60,16 @@ const WebSocketController = async (mitsy, rawRequest) => {
 		break;
 	}
 
-	case 'removeconn': {
-		await mitsy.client.controllers.connection.disconnectUser(data.userID, data.connection);
-		mitsy.api.send(JSON.stringify({ id, res: { sucess: true } }));
+	case 'getresolvedguildname': {
+		const guild = mitsy.client.guilds.cache.get(data.guildId);
+		if (!guild) return mitsy.api.send(JSON.stringify({ id, res: 'Servidor não encontrado' }));
+		mitsy.api.send(JSON.stringify({ id, res: { name: guild.displayName } }));
 		break;
 	}
 
-	case 'common': {
-		mitsy.api.send(JSON.stringify({ id, res: { common: mitsy.client.guilds.cache.has(data.guild) } }));
+	case 'removeconn': {
+		await mitsy.client.controllers.connection.disconnectUser(data.userID, data.connection);
+		mitsy.api.send(JSON.stringify({ id, res: { sucess: true } }));
 		break;
 	}
 	}

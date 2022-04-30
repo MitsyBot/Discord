@@ -1,5 +1,4 @@
-const { Controller } = require('../');
-
+const { Controller, MitsyEmbed } = require('../');
 const moment = require('moment');
 
 // Daily
@@ -54,12 +53,37 @@ module.exports = class EconomyController extends Controller {
 	}
 
 	async transfer(_from, _to, amount) {
-		const { profile } = await this.client.database.user.ensureUserInfos(_from);
+		const { profile } = await this.client.database.user.ensureUserInfos(_from.id);
 		if (profile.comets < amount) return { sucess: false };
 		await Promise.all([
-			this.client.database.user.removeComets(_from, amount),
-			this.client.database.user.addComets(_to, amount),
+			this.client.database.user.removeComets(_from.id, amount),
+			this.client.database.user.addComets(_to.id, amount),
 		]);
+		const date = `${moment().format('DD/MM/YYYY HH:mm')}`;
+		const transaction = await this.client.database.transactions.create({
+			data: {
+				reason: 'PAYMENT',
+				given_by: _from.id,
+				received_by: _to.id,
+				quantity: amount,
+				given_at: date,
+			},
+		});
+
+		const starTrackerHook = await this.client.fetchWebhook(
+			process.env.STARTRACKER_ID,
+			process.env.STARTRACKER_TOKEN,
+		);
+		const embed = new MitsyEmbed()
+			.setTitle(`<:Mitsy_Rica:872870327049396274> **${amount} for PAYMENT**`)
+			.addFields(
+				{ name: '**💸 Quem pagou**', value: `<@${_from.id}>\n \`\`${_from.username}#${_from.discriminator}\`\``, inline: true },
+				{ name: '**💵 Quem recebeu**', value: `<@${_to.id}>\n \`\`${_to.username}#${_to.discriminator}\`\``, inline: true },
+			)
+			.setFooter({ text: `Transação ${transaction.id}`, iconURL: 'https://cdn.discordapp.com/emojis/873019423827587132.webp' });
+
+		starTrackerHook.send({ embeds: [embed] });
+
 		return { sucess: true };
 	}
 

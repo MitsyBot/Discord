@@ -8,14 +8,14 @@ module.exports = class GuildLogging extends EventListener {
 	}
 
 	onGuildCreate(guild) {
-		this.logger.info({ tag: 'Guilds' }, `Adicionado a "${guild.name}" (${guild.id})`);
+		this.logger.info({ tag: 'Guilds' }, `Adicionada a "${guild.name}" (${guild.id})`);
 		if (process.env.LOGGING_CHANNEL_ID) {
 			const channel = this.channels.cache.get(process.env.LOGGING_CHANNEL_ID);
 			const embed = new MitsyEmbed()
 				.setColor(Constants.GUILD_ADDED_COLOR)
 				.setTitle(`Fui adicionada a "${guild.name}"`)
 				.setDescription(`\`${guild.id}\``)
-				.setFooter({ text: `Ganhamos ${guild.members.cache.size} usuarios` });
+				.setFooter({ text: `Ganhamos ${guild.members.cache.size} usuários` });
 
 			channel.send({ embeds: [embed] });
 
@@ -23,7 +23,7 @@ module.exports = class GuildLogging extends EventListener {
 	}
 
 	onGuildDelete(guild) {
-		this.logger.info({ tag: 'Guilds' }, `Removido de "${guild.name}" (${guild.id})`);
+		this.logger.info({ tag: 'Guilds' }, `Removida de "${guild.name}" (${guild.id})`);
 		if (process.env.LOGGING_CHANNEL_ID) {
 			const channel = this.channels.cache.get(process.env.LOGGING_CHANNEL_ID);
 
@@ -32,7 +32,7 @@ module.exports = class GuildLogging extends EventListener {
 				.setColor(Constants.GUILD_LOST_COLOR)
 				.setTitle(`Fui removida de "${guild.name}"`)
 				.setDescription(`\`${guild.id}\``)
-				.setFooter({ text: `Perdemos ${guild.members.size} usuarios` });
+				.setFooter({ text: `Perdemos ${guild.members.size} usuários` });
 
 			channel.send({ embeds: [embed] });
 		}

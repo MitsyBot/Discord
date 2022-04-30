@@ -1,5 +1,5 @@
 const { Permissions } = require('discord.js');
-const { flattenChannel, flattenRole } = require('./FlattenChannels');
+const { flattenChannel, flattenRole, flattenEmoji } = require('./FlattenChannels');
 module.exports = class ApiUtils {
 	static async canManage(guild, member) {
 		if (guild.ownerId === member.id) return true;
@@ -15,6 +15,7 @@ module.exports = class ApiUtils {
 			approximatePresenceCount: guild.approximatePresenceCount,
 			available: guild.available,
 			banner: guild.banner,
+			emojis: guild.emojis.cache.map(flattenEmoji),
 			channels: guild.channels.cache.map(flattenChannel),
 			defaultMessageNotifications: guild.defaultMessageNotifications,
 			description: guild.description,
