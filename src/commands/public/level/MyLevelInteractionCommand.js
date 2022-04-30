@@ -21,8 +21,9 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 	async run(ctx) {
 
 		const user = ctx.data.user ?? ctx.data.author;
-		const member = ctx.interaction.guild.members.cache.get(user.id);
-
+		const member = ctx.interaction.guild.members.cache.get(user.global.id);
+		console.log(user);
+		console.log(member);
 		const embed = new MitsyEmbed()
 			.setTitle(ctx.locale('commands:level.embed_title', { mitsy_heart: Emotes.emotes.MITSY_HEART }))
 			.setDescription(ctx.locale('commands:level.embed_description', { mitsy_confetti:Emotes.emotes.MITSY_CONFETTI, username: member.user.username, level: user.profile.global_level, xp: user.profile.global_xp }))
