@@ -1,5 +1,7 @@
 // const { HTTPrequests } = require('../');
 const { BICHO_BET_MULTIPLIER, JOGO_DO_BICHO } = require('../utils/Constants');
+const { MitsyEmbed } = require('../');
+const moment = require('moment');
 
 const betType = (option) => {
 	if (/^(?=.*\d)[\d ]+$/.test(option)) {
@@ -112,9 +114,35 @@ module.exports = class JogoDoBichoManager {
 			const winners = JogoDoBichoManager.makeWinners(this.lastGame);
 			winners
 				.filter((a) => a.didWin)
-				.forEach((a) => {
-					this.clientInstance.repositories.starRepository.add(a.id, a.value);
-					// if (a.gameId) HTTPrequests.userWinBicho(a.gameId);
+				.forEach(async (a) => {
+					this.clientInstance.database.user.addComets(a.id, a.value);
+					if (a.gameId) {
+						const date = `${moment().format('DD/MM/YYYY HH:mm')}`;
+						const transaction = await this.client.database.transactions.create({
+							data: {
+								reason: 'BICHO',
+								given_by: this.clientInstance.user.id,
+								received_by: a.id,
+								quantity: a.value,
+								given_at: date,
+							},
+						});
+
+						const user = this.clientInstance.users.fetch(a.id);
+
+						const starTrackerHook = await this.client.fetchWebhook(
+							process.env.STARTRACKER_ID,
+							process.env.STARTRACKER_TOKEN,
+						);
+						const embed = new MitsyEmbed()
+							.setTitle(`<:Mitsy_Rica:872870327049396274> **${a.value} for BICHO**`)
+							.addFields(
+								{ name: '**💸 Quem recebeu**', value: `<@${a.id}>\n \`\`${user.tag}\`\``, inline: true },
+							)
+							.setFooter({ text: `Transação ${transaction.id}`, iconURL: 'https://cdn.discordapp.com/emojis/873019423827587132.webp' });
+
+						starTrackerHook.send({ embeds: [embed] });
+					}
 					if (this.lastGame && a.value > this.lastGame?.biggestProfit) {this.lastGame.biggestProfit = a.value;}
 				});
 		}
@@ -193,11 +221,37 @@ module.exports = class JogoDoBichoManager {
 
 			await new ((resolve) => {
 				if (totalBets <= 0) resolve();
-				this.ongoingGame.bets.forEach((a) => {
-					this.clientInstance.repositories.starRepository.add(a.id, a.bet).then(() => {
+				this.ongoingGame.bets.forEach(async (a) => {
+					await this.clientInstance.database.user.addComets(a.id, a.bet).then(() => {
 						totalBets -= 1;
 						if (totalBets <= 0) resolve();
 					});
+
+					const date = `${moment().format('DD/MM/YYYY HH:mm')}`;
+					const transaction = await this.client.database.transactions.create({
+						data: {
+							reason: 'REFOUND',
+							given_by: this.clientInstance.user.id,
+							received_by: a.id,
+							quantity: a.bet,
+							given_at: date,
+						},
+					});
+
+					const user = this.clientInstance.users.fetch(a.id);
+
+					const starTrackerHook = await this.client.fetchWebhook(
+						process.env.STARTRACKER_ID,
+						process.env.STARTRACKER_TOKEN,
+					);
+					const embed = new MitsyEmbed()
+						.setTitle(`<:Mitsy_Rica:872870327049396274> **${a.bet} for REFOUND**`)
+						.addFields(
+							{ name: '**💸 Quem recebeu**', value: `<@${a.id}>\n \`\`${user.tag}\`\``, inline: true },
+						)
+						.setFooter({ text: `Transação ${transaction.id}`, iconURL: 'https://cdn.discordapp.com/emojis/873019423827587132.webp' });
+
+					starTrackerHook.send({ embeds: [embed] });
 				});
 			});
 
