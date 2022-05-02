@@ -35,6 +35,27 @@
         "perfect": "PERFEITOS, LINDOS, MAGNIFICOS!!!!!!",
         "banned-user": "Este usuario está banido logo não pode ser incluido em meus comandos!"
       },
+      "casar": {
+        "bot": "Infelizmente bots ainda não podem se casar com humanos, talvez no futuro!",
+        "self-mention": "AAAH que legal, você se ama!!! mas infelizmente o cartorio não permite que você case com você mesmo",
+        "married": "Poxa, o cartorio ainda não permite casar a 3, talvez no futuro? nunca se sabe!",
+        "no-dbuser": "O usuario não foi encontrado na lista de cidadões!",
+        "mention-married": "Este usuario já é casado, O cartorio não permite casamento a 3!",
+        "accepted": "{{toMarry}} aceitou o pedido de casamento de {{author}}. Espero que aproveitem a vida, e principalmente o momento!",
+        "negated": "AAH, que pena, {{toMarry}} negou o pedido de casamento de {{author}}. Espero que ele encontre alguem que o ame!",
+        "first-text": "{{toMarry}}, você recebeu um pedido de casamento de {{author}}\n\n{{toMarry}}, você aceita {{author}} como sua legítima esposa (ou marido)?",
+        "accept": "Aceitar",
+        "deny": "Recusar",
+        "banned-user": "Este usuário não pode se casar pois está banido!"
+      },
+      "divorciar": {
+        "divorce": "Divorciar",
+        "cancel": "Cancelar",
+        "author-single": "Você não está casado com ninguém no momento!", 
+        "confirmation": "Você realmente quer se divorciar de",
+        "canceled": "Fico feliz em saber que vocês continuam junto, mas caso um dos 2 não esteja feliz, o melhor a se fazer é divorciar mesmo.",
+        "confirmed": "{{author}} acaba de se divorciar de {{mention}}.\nMas é aquilo, vida que segue e espero que os 2 encontrem alguem que os façam felizes, o que resta agora é refletir por que deu errado, que tal ouvir uma musica para melhorar o clima?"
+      },
       "bicho": {
         "sorted-title": "Números Sorteados",
         "not-previous-title": "Nenhum sorteio anteriormente",
