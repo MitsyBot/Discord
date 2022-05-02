@@ -50,6 +50,9 @@ jobs:
             docker run -it -d -p 50051:50051 --restart=always -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' \
             -e API_URL='${{ secrets.API_URL }}' \
             -e API_WEBSOCKET='${{ secrets.API_WS }}' \
+            -e REDIS_PORT='${{ secrets.REDIS_PORT }}' \
+            -e REDIS_HOST='${{ secrets.REDIS_HOST }}' \
+            -e REDIS_PASSWORD='${{ secrets.REDIS_PASSWORD }}' \
             -e GENERATOR_URL='${{ secrets.GENERATOR_URL }}' \
             -e API_TOKEN='${{ secrets.API_TOKEN }}' \
             -e OWNER='${{ secrets.OWNER_ID }}' \
