@@ -1,5 +1,6 @@
-const { InteractionCommand, Util } = require('../../../');
+const { InteractionCommand, Util, MitsyEmbed } = require('../../../');
 const { MessageButton } = require('discord.js');
+const moment = require('moment');
 
 module.exports = class CometsInteractionCommand extends InteractionCommand {
 	constructor() {
@@ -140,7 +141,34 @@ module.exports = class CometsInteractionCommand extends InteractionCommand {
 			}),
 			components: [],
 		});
+
 		await ctx.client.database.user.addComets(winner.id, input);
 		await ctx.client.database.user.removeComets(loser.id, input);
+
+		const date = `${moment().format('DD/MM/YYYY HH:mm')}`;
+		const transaction = await this.client.database.transactions.create({
+			data: {
+				reason: 'COINFLIP',
+				given_by: loser.id,
+				received_by: winner.id,
+				quantity: input,
+				given_at: date,
+			},
+		});
+
+		const starTrackerHook = await this.client.fetchWebhook(
+			process.env.STARTRACKER_ID,
+			process.env.STARTRACKER_TOKEN,
+		);
+
+		const embed = new MitsyEmbed()
+			.setTitle(`<:Mitsy_Rica:872870327049396274> **${input} for COINFLIP**`)
+			.addFields(
+				{ name: '**💵 Quem pagou**', value: `<@${loser.id}>\n \`\`${loser.username}#${loser.discriminator}\`\``, inline: true },
+				{ name: '**💸 Quem recebeu**', value: `<@${winner.id}>\n \`\`${winner.tag}\`\``, inline: true },
+			)
+			.setFooter({ text: `Transação ${transaction.id}`, iconURL: 'https://cdn.discordapp.com/emojis/873019423827587132.webp' });
+
+		starTrackerHook.send({ embeds: [embed] });
 	}
 };
