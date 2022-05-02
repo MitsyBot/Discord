@@ -111,6 +111,27 @@
         "canceled": "Fico feliz em saber que vocês continuam junto, mas caso um dos 2 não esteja feliz, o melhor a se fazer é divorciar mesmo.",
         "confirmed": "{{author}} acaba de se divorciar de {{mention}}.\nMas é aquilo, vida que segue e espero que os 2 encontrem alguem que os façam felizes, o que resta agora é refletir por que deu errado, que tal ouvir uma musica para melhorar o clima?"
       },
+      "status": {
+        "coinflip": {
+          "embed-title": "Status do coinflip de {{user}}",
+          "no-data": "Este usuário nunca jogou coinflip!",
+          "played": "Partidas Jogadas",
+          "wins": "Vitórias",
+          "loses": "Derrotas",
+          "earnMoney": "Cometinhas Ganhos",
+          "lostMoney": "Cometinhas Perdidos",
+          "profit": "Lucro",
+          "loss": "Prejuízo"
+        },
+        "bicho": {
+          "embed-title": "Status do Jogo do Bicho de {{user}}",
+          "no-data": "Este usuário nunca apostou no bicho!"
+        },
+        "roleta": {
+          "embed-title": "Status da roleta de {{user}}",
+          "no-data": "Este usuário nunca girou a roleta!"
+        }
+      },
       "bicho": {
         "sorted-title": "Números Sorteados",
         "not-previous-title": "Nenhum sorteio anteriormente",
