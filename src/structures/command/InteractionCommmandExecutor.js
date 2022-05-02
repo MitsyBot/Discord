@@ -201,7 +201,6 @@ module.exports = class InteractionCommandExecutor {
 			}
 		}
 
-
 		if (command.config.category === 'economy') {client.commandExecutions.add(ctx.author.id);}
 
 		await command.run(ctx).catch(async (error) => {

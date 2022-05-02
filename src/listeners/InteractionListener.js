@@ -1,4 +1,4 @@
-const { EventListener, InteractionCommandExecutor } = require('../');
+const { EventListener, InteractionCommandExecutor, MitsyEmbed } = require('../');
 module.exports = class InteractionListener extends EventListener {
 	constructor(client) {
 		super({
@@ -18,6 +18,17 @@ module.exports = class InteractionListener extends EventListener {
 			if (channel) {
 				(interaction.client.channels.cache).forceSet(interaction.channelId, channel);
 			}
+		}
+
+		if (process.env.LOGGING_CHANNEL_ID) {
+			this.logger.info({ tag: 'Commands' }, `${interaction.user.tag} executou o comando "${interaction.commandName}" no servidor "${interaction.guild.name}" (${interaction.guild.id}) no canal "${interaction.channel.name.toString()}" (${interaction.channel.id}) `);
+			const channel = this.channels.cache.get(process.env.LOGGING_CHANNEL_ID);
+			const embed = new MitsyEmbed()
+				.setTitle(`\`\`${interaction.user.tag}\`\` Executou um comando`)
+				.setDescription(`**Comando:** \`\`"${interaction.commandName.toUpperCase()}"\`\`\n**Servidor:** \`\`"${interaction.guild.name}"\`\` \`\`(${interaction.guild.id})\`\`\n**Canal:** \`\`"${interaction.channel.name.toString()}"\`\` \`\`(${interaction.channel.id})\`\``)
+				.setFooter({ text: 'Mitsy - Logger' });
+
+			channel.send({ embeds: [embed] });
 		}
 		const executor = new InteractionCommandExecutor(this, interaction);
 		executor.CommandExecuted(this, interaction);

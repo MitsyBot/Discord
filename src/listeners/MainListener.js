@@ -100,7 +100,7 @@ module.exports = class MainListener extends EventListener {
 					lastPingAt: Date.now(),
 				}));
 
-			await HTTPrequests.postShardStatus(toSendData);
+			await HTTPrequests.postShardStatus(toSendData, client);
 		}
 	}
 };

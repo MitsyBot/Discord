@@ -23,6 +23,18 @@
       "youtube": {
         "join": "<:Mitsy_omg:873019423886282812> **|** Uma party foi criada, entre [clicando aqui](<{{code}}>)."
       },
+      "ship": {
+        "value": "Se eu fosse colocar em porcentagem os dois combinam exatamente",
+        "unknow-user": "Usuário não encontrado",
+        "message-start": "970480996938031164 Hmmm, será que temos um novo casal aqui? 970480996938031164",
+        "default": "Talvez o cupido tenha calculado errado, ou Vocês que não combinam mesmo :(",
+        "low": "É, nada é impossivel. porem algumas coisas são bem improvaveis",
+        "ok": "Ó, fontes indicam que vocês são muito parecidos, mas não sei se é um casal ou não",
+        "medium": "Eu diria que tem tudo para dar certo",
+        "high": "Por que esses dois ainda não namoram? os dois são feitos um pro outro.",
+        "perfect": "PERFEITOS, LINDOS, MAGNIFICOS!!!!!!",
+        "banned-user": "Este usuario está banido logo não pode ser incluido em meus comandos!"
+      },
       "bicho": {
         "sorted-title": "Números Sorteados",
         "not-previous-title": "Nenhum sorteio anteriormente",

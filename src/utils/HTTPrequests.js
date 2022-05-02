@@ -22,8 +22,35 @@ module.exports = class HttpRequests {
 		}
 	}
 
-	static async postShardStatus(shards) {
-		await apiRequest.put('/shards', { data: { shards } });
+	static async postShardStatus(shards, client) {
+		try {
+			await apiRequest.put('/shards', { data: { shards } });
+		}
+		catch {
+			client.logger.error({ tag: 'Shards' }, 'Erro ao enviar status de shards para a api (Provavelmente a api esta desconectada)');
+			return true;
+		}
+	}
+
+	static async shipRequest(
+		linkOne,
+		linkTwo,
+		value,
+		percentage,
+	) {
+		try {
+			const data = await axios({
+				url: `${process.env.GENERATOR_URL}/render/ship`,
+				method: 'post',
+				data: { linkOne, linkTwo, value, percentage },
+				responseType: 'arraybuffer',
+			});
+
+			return { err: false, data: data.data };
+		}
+		catch {
+			return { err: true };
+		}
 	}
 
 	static async getMitsyApiPing() {
@@ -37,8 +64,14 @@ module.exports = class HttpRequests {
 	}
 
 
-	static async postCommandStatus(commands) {
-		await apiRequest.post('/commands', { data: { commands } });
+	static async postCommandStatus(commands, client) {
+		try {
+			await apiRequest.post('/commands', { data: { commands } }).catch();
+		}
+		catch {
+			client.logger.error({ tag: 'Comandos' }, 'Erro ao enviar comandos para a api (Provavelmente a api esta desconectada)');
+			return true;
+		}
 	}
 
 	static async profileRequest(_data) {

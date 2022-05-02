@@ -7,7 +7,13 @@ module.exports = class InteractionCommandExecutor {
 	}
 
 	async CommandExecuted(client, message) {
-		const DevLevel = await client.controllers.developer.getDeveloper(message.author.id);
+		let DevLevel;
+		if (process.env.NODE_ENV === 'development') {
+			DevLevel = 4;
+		}
+		else {
+			DevLevel = await client.controllers.developer.getDeveloper(message.author.id);
+		}
 		const prefix = 'm!';
 		const sw = (...s) => s.some(st => message.content.startsWith(st));
 		const usedPrefix = sw(prefix) ? prefix : null;

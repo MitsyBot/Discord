@@ -55,7 +55,7 @@ module.exports = class CommandLoader extends Loader {
 				});
 				return p;
 			}, []);
-			await HTTPrequests.postCommandStatus(Array.from(toAPIData.values()));
+			await HTTPrequests.postCommandStatus(Array.from(toAPIData.values()), this.client);
 			await this.client.application.commands.set(allCommands);
 			this.client.logger.info({ tag: 'Discord' }, 'Deploy global de slash commands realizado com sucesso');
 		}
