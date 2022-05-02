@@ -220,8 +220,7 @@ module.exports = class StatsInteractionCommand extends InteractionCommand {
 			});
 			return;
 		}
-		console.log(loseGames);
-		console.log(wonGames);
+
 		const lostMoney = loseGames.reduce((accum, game) => Number(accum) + Number(game.quantity), 0);
 		const winMoney = wonGames.reduce((accum, game) => Number(accum) + Number(game.quantity), 0);
 
