@@ -49,7 +49,6 @@ module.exports = class MarryInteractionCommand extends InteractionCommand {
 		}
 
 		const user2 = await ctx.client.database.user.ensureUserInfos(mencionado.id);
-		console.log(user2);
 		if (!user2) {
 			await ctx.makeMessage({
 				content: ctx.prettyResponse('MITSY_POINT', 'commands:casar.no-dbuser'),

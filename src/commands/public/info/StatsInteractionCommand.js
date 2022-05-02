@@ -86,12 +86,12 @@ module.exports = class StatsInteractionCommand extends InteractionCommand {
 				},
 				{
 					name: `📥 | ${translate('commands:status.coinflip.earnMoney')}`,
-					value: `**${data.winMoney}** :star:`,
+					value: `**${data.winMoney}**`,
 					inline: true,
 				},
 				{
 					name: `📤 | ${translate('commands:status.coinflip.lostMoney')}`,
-					value: `**${data.lostMoney}** :star:`,
+					value: `**${data.lostMoney}**`,
 					inline: true,
 				},
 			]);
@@ -99,12 +99,12 @@ module.exports = class StatsInteractionCommand extends InteractionCommand {
 		totalMoney > 0
 			? embed.addField(
 				`<:mitsy_yes:853638770107482163> | ${translate('commands:status.coinflip.profit')}`,
-				`**${totalMoney}** :star:`,
+				`**${totalMoney}**`,
 				true,
 			)
 			: embed.addField(
 				`<:mitsy_no:853638580139720714> | ${translate('commands:status.coinflip.loss')}`,
-				`**${totalMoney}** :star:`,
+				`**${totalMoney}**`,
 				true,
 			);
 
@@ -168,12 +168,12 @@ module.exports = class StatsInteractionCommand extends InteractionCommand {
 				},
 				{
 					name: `📥 | ${ctx.locale('commands:status.coinflip.earnMoney')}`,
-					value: `**${winMoney}** :star:`,
+					value: `**${winMoney}**`,
 					inline: true,
 				},
 				{
 					name: `📤 | ${ctx.locale('commands:status.coinflip.lostMoney')}`,
-					value: `**${lostMoney}** :star:`,
+					value: `**${lostMoney}**`,
 					inline: true,
 				},
 			]);
@@ -181,12 +181,12 @@ module.exports = class StatsInteractionCommand extends InteractionCommand {
 		totalMoney > 0
 			? embed.addField(
 				`<:mitsy_yes:853638770107482163> | ${ctx.locale('commands:status.coinflip.profit')}`,
-				`**${totalMoney}** :star:`,
+				`**${totalMoney}**`,
 				true,
 			)
 			: embed.addField(
 				`<:mitsy_no:853638580139720714> | ${ctx.locale('commands:status.coinflip.loss')}`,
-				`**${totalMoney}** :star:`,
+				`**${totalMoney}**`,
 				true,
 			);
 
@@ -220,8 +220,7 @@ module.exports = class StatsInteractionCommand extends InteractionCommand {
 			});
 			return;
 		}
-		console.log(loseGames);
-		console.log(wonGames);
+
 		const lostMoney = loseGames.reduce((accum, game) => Number(accum) + Number(game.quantity), 0);
 		const winMoney = wonGames.reduce((accum, game) => Number(accum) + Number(game.quantity), 0);
 
