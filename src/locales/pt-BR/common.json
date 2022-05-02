@@ -4,5 +4,6 @@
     "MAINTENANCE": "<:Mitsy_knife:914596410752647230> **|** Manutenção programada\nHoje as {{hour}} eu irei reiniciar para aplicar updates.",
     "negate": "Negar",
     "accept": "Aceitar",
-    "timeout": "<:mitsy_Sleeping:842775933508386816> **|** Que pena, O tempo maximo para concluir o pagamento acabou!"
+    "timeout": "<:mitsy_Sleeping:842775933508386816> **|** Que pena, O tempo maximo para concluir o pagamento acabou!",
+    "timesup": "<:mitsy_Sleeping:842775933508386816> **|** Que pena, O tempo maximo para confirmar a ação acabou!"
 }

@@ -108,4 +108,8 @@ const disableComponents = (
 		return c;
 	});
 
-module.exports = { actionRow, resolveCustomId, disableComponents, collectComponentInteractionWithCustomFilter, capitalize, collectComponentInteractionWithStartingId, collectComponentInteraction, collectComponentInteractionWithId };
+const RandomFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+const resolveSeparatedStrings = (string) => string.split(' | ');
+
+module.exports = { resolveSeparatedStrings, RandomFromArray, actionRow, resolveCustomId, disableComponents, collectComponentInteractionWithCustomFilter, capitalize, collectComponentInteractionWithStartingId, collectComponentInteraction, collectComponentInteractionWithId };

@@ -4,7 +4,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		super({
 			name: 'criarparty',
 			description: 'Crie uma party do youtube together',
-			category: 'level',
+			category: 'media',
 			cooldown: 5,
 		});
 	}

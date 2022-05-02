@@ -8,6 +8,7 @@ module.exports = {
 	InteractionsLoader: require('./InteractionsLoader'),
 	ControllerLoader: require('./ControllerLoader'),
 	gRPCLoader: require('./gRPCLoader'),
+	RedisLoader: require('./RedisLoader'),
 	ConnectionLoader: require('./ConnectionLoader'),
 	DeveloperCommandsLoader: require('./DeveloperCommandsLoader'),
 };
