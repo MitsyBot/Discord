@@ -107,5 +107,5 @@ const disableComponents = (
 		else c.setLabel(label);
 		return c;
 	});
-
-module.exports = { actionRow, resolveCustomId, disableComponents, collectComponentInteractionWithCustomFilter, capitalize, collectComponentInteractionWithStartingId, collectComponentInteraction, collectComponentInteractionWithId };
+const RandomFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
+module.exports = { RandomFromArray, actionRow, resolveCustomId, disableComponents, collectComponentInteractionWithCustomFilter, capitalize, collectComponentInteractionWithStartingId, collectComponentInteraction, collectComponentInteractionWithId };

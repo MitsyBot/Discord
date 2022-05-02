@@ -204,6 +204,7 @@ module.exports = class InteractionCommandExecutor {
 		if (command.config.category === 'economy') {client.commandExecutions.add(ctx.author.id);}
 
 		await command.run(ctx).catch(async (error) => {
+			console.log(error);
 			const errorWebHook = await client.fetchWebhook(
 				process.env.BUG_HOOK_ID,
 				process.env.BUG_HOOK_TOKEN,

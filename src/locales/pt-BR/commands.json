@@ -48,6 +48,18 @@
         "deny": "Recusar",
         "banned-user": "Este usuário não pode se casar pois está banido!"
       },
+      "coinflip": {
+        "bet": "Apostar",
+        "bot": "Infelizmente bots não podem apostar no coinflip",
+        "self-mention": "Você não pode apostar no coinflip com você mesmo",
+        "no-dbuser": "Este usuario não está no meu registro de cidadões!",
+        "poor": "{{user}} não possui cometinhas o suficiente para apostar!",
+        "confirm": "{{author}} te desafiou para uma aposta de Cara ou Coroa valendo **{{value}}** cometinhas. Caso o resultado seja Cara, {{author}} vence, caso o resultado seja coroa, {{mention}} vence.\nVocê aceita este desafio lendario??",
+        "cara": "CARA",
+        "coroa": "COROA",
+        "banned-user": "Este usuário não pode apostar pois está banido!",
+        "text": ":coin: | **{{choice}}**\n\n{{winner}} ganhou a aposta de **{{value}}** cometinhas contra {{loser}}"
+      },
       "divorciar": {
         "divorce": "Divorciar",
         "cancel": "Cancelar",
