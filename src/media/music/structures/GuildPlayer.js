@@ -14,13 +14,12 @@ module.exports = class GuildPlayer extends Player {
 		});
 
 		this.on('stop', () => {
-			this.playingSong = null;
 			this.manager.leave(this.id);
 		});
 
 		this.on('error', (e) => this.manager.client.logger.error(e));
 
-
+		this.playingSong = {};
 		this.queue = [];
 		this._volume = 100;
 		this._loop = false;

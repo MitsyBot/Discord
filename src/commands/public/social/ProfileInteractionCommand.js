@@ -29,7 +29,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		const previousLevel = Math.floor((user.profile.global_level - 1) * 1000);
 		const nextLevel = Math.floor((user.profile.global_level + 1) * 1000);
 		const progressBar = Math.max(Math.round(((user.profile.global_xp - previousLevel) / (nextLevel - previousLevel)) * 800), 6);
-		const ranking = await Ranking.fetchGlobalRank(user.id, ctx.client);
+		const ranking = await Ranking.fetchGlobalRank(member, ctx.client);
 
 		const data = {
 

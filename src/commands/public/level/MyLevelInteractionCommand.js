@@ -25,7 +25,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 
 		const embed = new MitsyEmbed()
 			.setTitle(ctx.locale('commands:level.embed_title', { mitsy_heart: Emotes.emotes.MITSY_HEART }))
-			.setDescription(ctx.locale('commands:level.embed_description', { mitsy_confetti:Emotes.emotes.MITSY_CONFETTI, username: member.user.username, level: user.profile.global_level, xp: user.profile.global_xp, ranking: await Ranking.fetchGlobalRank(user.id, ctx.client) }))
+			.setDescription(ctx.locale('commands:level.embed_description', { mitsy_confetti:Emotes.emotes.MITSY_CONFETTI, username: member.user.username, level: user.profile.global_level, xp: user.profile.global_xp, ranking: await Ranking.fetchGlobalRank(member, ctx.client) }))
 			.setFooter(ctx.locale('commands:level.embed_footer'));
 
 		await ctx.makeMessage({ embeds: [embed], ephemeral: false });

@@ -15,6 +15,11 @@
         "get": "<:Mitsy_Rica:872870327049396274> **|** <@{{user}}> Você pode conseguir seus cometinhas diarios [Clicando aqui](https://mitsy.xyz/dashboard/user/@me/daily)\nCaso você não fique satisfeito com a quantia de cometinhas que ganhar você pode comprar mais cometinhas [Clicando aqui](https://mitsy.xyz/dashboard/shop/comets)",
         "getted": "<:Mitsy_Rica:872870327049396274> Você ja pegou seu premio diario hoje, mas você ira poder pegar novamente em {{getagain}}"
       },
+      "remind": {
+        "created": "Eu irei te lembrar de ``{{reason}}`` em {{time}}",
+        "list": "**Pagina {{page}}**\nVocê tem {{length}} lembretes no total",
+        "deleted": "O lembrete ${id} ``[${content}]`` foi removido com sucesso"
+      },
       "ping": {
         "latency": "(Discord) Latência:",
         "api": "(Discord) Latência da API:",
