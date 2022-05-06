@@ -86,7 +86,7 @@ module.exports = class MarryInteractionCommand extends InteractionCommand {
 				},
 				data: {
 					married: false,
-					married_user: null,
+					married_user: undefined,
 					married_since: 0,
 				},
 			});
@@ -97,7 +97,7 @@ module.exports = class MarryInteractionCommand extends InteractionCommand {
 				},
 				data: {
 					married: false,
-					married_user: null,
+					married_user: undefined,
 					married_since: 0,
 				},
 			});
