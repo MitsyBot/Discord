@@ -141,7 +141,7 @@ module.exports = class InteractionCommandExecutor {
 		const now = Date.now();
 		const timestamps = client.cooldowns.get(command.config.name);
 		let cooldownAmount = (command.config.cooldown || 3) * 1000;
-		if (user_has_premium) cooldownAmount = cooldownAmount + (5000 * data.author.premium.tier);
+		if (user_has_premium) cooldownAmount = cooldownAmount - (5000 * data.author.premium.tier);
 		if (now - interaction.createdTimestamp >= 3000) return;
 
 		if (timestamps.has(interaction.user.id)) {
@@ -180,22 +180,23 @@ module.exports = class InteractionCommandExecutor {
 
 			if (!(user_has_premium || guild_has_premium)) {
 				if (interaction.deferred) {
-					interaction.webhook
-						.send({ content: t('errors:MUSIC_NO_PREMIUM') });
+					return interaction.webhook.send({ content: t('errors:MUSIC_NO_PREMIUM') });
 				}
 				else {
-					interaction
-						.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
+					return interaction.reply({ content: t('errors:MUSIC_NO_PREMIUM') });
 				}
 			}
 
-			if (!(data.author.premium.tier === 3 || data.guild.key.tier === 4)) {
+			const guildkeytier = (guild_has_premium ? data.guild.key.tier : 0);
+			const userkeytier = (user_has_premium ? data.author.premium.tier : 0);
+
+			if (!(guildkeytier === 4 || userkeytier > 3)) {
 				if (interaction.deferred) {
-					interaction.webhook
+					return interaction.webhook
 						.send({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 				}
 				else {
-					interaction
+					return interaction
 						.reply({ content: t('errors:MUSIC_PREMIUM_WITHOUT_TIER') });
 				}
 			}
