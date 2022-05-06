@@ -31,14 +31,14 @@ module.exports = class TransactionsInteractionCommand extends InteractionCommand
 
 		const page = ctx.options.getInteger('pagina', false);
 
-		let skipNumber = page - 1 * 10;
+		let skip = (1 * 10) * (page - 1);
 		let takeNumber = page * 10;
 		if (!page) {
-			skipNumber = 0;
+			skip = 0;
 			takeNumber = 10;
 		}
 		const userTransactions = await ctx.client.database.transactions.findMany({
-			skip: skipNumber,
+			skip,
 			take: takeNumber,
 			where: {
 				OR: [

@@ -4,6 +4,16 @@ module.exports = {
 	GUILD_ADDED_COLOR: '#41A57A',
 };
 
+const TIME = {
+	Millisecond: 1,
+	Second: 1000,
+	Minute: 1000 * 60,
+	Hour: 1000 * 60 * 60,
+	Day: 1000 * 60 * 60 * 24,
+	Month: 1000 * 60 * 60 * 24 * (365 / 12),
+	Year: 1000 * 60 * 60 * 24 * 365,
+};
+
 const JOGO_DO_BICHO = [
 	'avestruz',
 	'ágia',
@@ -85,4 +95,4 @@ const ROULETTE_NUMBERS = [
 ];
 
 
-module.exports = { BICHO_BET_MULTIPLIER, JOGO_DO_BICHO, HOURLY_ROULETTE_HIGH_VALUE_BET_LIMIT, ROULETTE_NUMBERS };
+module.exports = { BICHO_BET_MULTIPLIER, TIME, JOGO_DO_BICHO, HOURLY_ROULETTE_HIGH_VALUE_BET_LIMIT, ROULETTE_NUMBERS };
