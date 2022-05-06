@@ -72,12 +72,11 @@ module.exports = class Leaderboard {
 			take: 25000,
 		});
 
-
 		this.global.clear();
 
 		let i = 0;
 		for (const entry of data) {
-			this.global.set(entry.id, { points: entry.points, position: ++i });
+			this.global.set(entry.id, { points: entry.global_xp, position: ++i });
 		}
 
 		this.kTempPromises.users = null;
