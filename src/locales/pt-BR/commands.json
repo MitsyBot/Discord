@@ -20,6 +20,26 @@
         "list": "**Pagina {{page}}**\nVocê tem {{length}} lembretes no total",
         "deleted": "O lembrete ${id} ``[${content}]`` foi removido com sucesso"
       },
+      "user": {
+        "banner": {
+          "no-banner": "Este usuário não tem nenhum banner!",
+          "title": "Banner de {{user}}",
+          "footer": "Um banner magnifico eu diria"
+        },
+        "userinfo": {
+          "tag": "🔖 Tag do Discord",
+          "id": "💻 ID do Discord",
+          "status": "Status",
+          "createdAt": "📅 Conta criada em",
+          "joinedAt": "🌟 Entrou em",
+          "serversInCommon": ":ringed_planet: Servidores em comum ({{count}})",
+          "memberNumber": "Membro #{{count}}"
+        },
+        "title": "Avatar de {{user}}",
+        "footer": "Um avatar magnifico eu diria",
+        "client_title": "Meu avatar ({{user}})",
+        "client_footer": "Que arte incrível, espero que todos gostem muito!"
+      },
       "ping": {
         "latency": "(Discord) Latência:",
         "api": "(Discord) Latência da API:",
