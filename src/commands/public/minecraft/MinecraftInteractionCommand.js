@@ -1,6 +1,6 @@
 const { InteractionCommand, MitsyEmbed } = require('../../../');
 const axios = require('axios');
-module.exports = class ChannelInteractionCommand extends InteractionCommand {
+module.exports = class MinecraftInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'minecraft',

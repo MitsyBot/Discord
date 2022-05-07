@@ -2,7 +2,7 @@ const { InteractionCommand, Util, MitsyEmbed } = require('../../../');
 const { MessageButton } = require('discord.js');
 const moment = require('moment');
 
-module.exports = class CometsInteractionCommand extends InteractionCommand {
+module.exports = class CoinflipInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'coinflip',

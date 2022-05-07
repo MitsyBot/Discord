@@ -1,7 +1,7 @@
 const { InteractionCommand, Util } = require('../../../');
 const { MessageButton } = require('discord.js');
 
-module.exports = class MarryInteractionCommand extends InteractionCommand {
+module.exports = class DivorceInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'divorce',

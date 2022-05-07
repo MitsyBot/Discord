@@ -1,7 +1,7 @@
 const { InteractionCommand, MiscUtils } = require('../../../');
 const { MessageButton } = require('discord.js');
 
-module.exports = class CometsInteractionCommand extends InteractionCommand {
+module.exports = class PayInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'pay',

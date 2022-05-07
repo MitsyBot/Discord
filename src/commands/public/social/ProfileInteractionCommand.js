@@ -1,7 +1,7 @@
 const { InteractionCommand, HTTPrequests, Ranking } = require('../../../');
 const { MessageAttachment } = require('discord.js');
 
-module.exports = class LevelInteractionCommand extends InteractionCommand {
+module.exports = class ProfileInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'profile',

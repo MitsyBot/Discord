@@ -1,7 +1,7 @@
 const { InteractionCommand } = require('../../../');
 const moment = require('moment');
 
-module.exports = class LevelInteractionCommand extends InteractionCommand {
+module.exports = class RepInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'rep',

@@ -1,7 +1,7 @@
 const { InteractionCommand, MitsyEmbed } = require('../../../');
 const { Song, Playlist } = require('../../../media/music/structures');
 
-module.exports = class PlayInteractionCommand extends InteractionCommand {
+module.exports = class MusicInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'music',
