@@ -21,6 +21,62 @@ module.exports = class InteractionCommandContext {
 		return this.interaction.user;
 	}
 
+	async getEmoji(args) {
+		if (!args) return false;
+		if (args.includes('%')) args = decodeURIComponent(args);
+		if (!args.includes(':')) {
+			const emoji = this.interaction.guild.emojis.cache.find(emojij => emojij.name.toLowerCase().includes(args.toLowerCase())) || this.interaction.guild.emojis.cache.find(emojij => emojij.id === args);
+			if (emoji) {
+				return {
+					animated: emoji.animated,
+					name: emoji.name,
+					mention: `${emoji.animated ? '<a:' : '<:'}${emoji.name}:${emoji.id}>`,
+					id: emoji.id,
+					url: `https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? 'gif' : 'png'}?v=1`,
+				};
+			}
+
+			const axios = require('axios');
+			try {
+				if (await axios.get(`https://twemoji.maxcdn.com/2/72x72/${this.toUnicode(args).join('-')}.png`)) {
+					return {
+						animated: false,
+						name: args,
+						mention: args,
+						id: this.toUnicode(args).join('-').toString(0),
+						url: `https://twemoji.maxcdn.com/2/72x72/${this.toUnicode(args).join('-')}.png`,
+					};
+				}
+				else {
+					return false;
+				}
+			}
+			catch {
+				return false;
+			}
+		}
+
+		const m = args.match(/<?(?:(a):)?(\w{2,32}):(\d{17,19})?>?/);
+		if (!m) return false;
+		if (m[2] && !m[3]) return false;
+
+		return {
+			animated: Boolean(m[1]),
+			name: m[2],
+			mention: `${m[1] ? '<a:' : '<:'}${m[2]}:${m[3]}>`,
+			id: m[3],
+			url: `https://cdn.discordapp.com/emojis/${m[3]}.${m[1] ? 'gif' : 'png'}?v=1`,
+		};
+	}
+
+	toUnicode(text) {
+		const emojis = [];
+		for (const codePoint of text) {
+			emojis.push(codePoint.codePointAt(0).toString(16));
+		}
+		return emojis;
+	}
+
 	async defer(
 		options,
 		ephemeral = false,

@@ -7,5 +7,6 @@
     "timeout": "<:mitsy_Sleeping:842775933508386816> **|** Que pena, O tempo maximo para concluir o pagamento acabou!",
     "timesup": "<:mitsy_Sleeping:842775933508386816> **|** Que pena, O tempo maximo para confirmar a ação acabou!",
     "true": "Sim",
-    "false": "Não"
+    "false": "Não",
+    "emojiInvalid": "Este emoji não existe no servidor"
 }
