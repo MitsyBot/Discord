@@ -16,7 +16,7 @@
         "getted": "<:Mitsy_Rica:872870327049396274> Você ja pegou seu premio diario hoje, mas você ira poder pegar novamente em {{getagain}}"
       },
       "remind": {
-        "created": "Eu irei te lembrar de ``{{reason}}`` em {{time}}",
+        "created": "Eu irei te lembrar de ``{{reason}}`` em {{date}}",
         "list": "**Pagina {{page}}**\nVocê tem {{length}} lembretes no total",
         "deleted": "O lembrete ${id} ``[${content}]`` foi removido com sucesso"
       },
@@ -39,6 +39,15 @@
         "footer": "Um avatar magnifico eu diria",
         "client_title": "Meu avatar ({{user}})",
         "client_footer": "Que arte incrível, espero que todos gostem muito!"
+      },
+      "channelinfo": {
+        "title": "`Informações sobre #{{0}}`",
+        "noTopic": "Este canal não tem um tópico.",
+        "mention": "Menção do Canal",
+        "channelID": "ID do Canal",
+        "guild": "Servidor",
+        "category": "Categoria",
+        "createdAt": "Criado Em"
       },
       "ping": {
         "latency": "(Discord) Latência:",

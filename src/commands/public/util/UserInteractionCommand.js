@@ -69,15 +69,14 @@ module.exports = class UserInteractionCommand extends InteractionCommand {
 	async userInfo(ctx) {
 		moment.locale(ctx.data.author.general.locale);
 		const member = ctx.options.getMember('usuário') ?? ctx.interaction.member;
-		console.log(member.presence);
-		console.log(member.user.presence);
+
 		const embed = new MitsyEmbed()
 			.setTitle(member.displayName)
 			.setThumbnail(member.user.displayAvatarURL({ format: 'png' }))
 			.addField(ctx.locale('commands:user.userinfo.tag'), member.user.tag, true)
 			.addField(ctx.locale('commands:user.userinfo.id'), member.id, true)
-			.addField(ctx.locale('commands:user.userinfo.createdAt'), `${moment(member.user.createdTimestamp).format('LLL')}\n(${moment(member.user.createdTimestamp).fromNow()})`, true)
-			.addField(ctx.locale('commands:user.userinfo.joinedAt'), `${moment(member.joinedTimestamp).format('LLL')}\n(${moment(member.joinedTimestamp).fromNow()})`, true)
+			.addField(ctx.locale('commands:user.userinfo.createdAt'), `<t:${parseInt(member.user.createdTimestamp / 1000).toFixed(0)}:F>`, true)
+			.addField(ctx.locale('commands:user.userinfo.joinedAt'), `<t:${parseInt(member.joinedTimestamp / 1000).toFixed(0)}:F>`, true)
 			.setFooter(`${ctx.author.tag} - ${ctx.locale('commands:user.userinfo.memberNumber', { count: MiscUtils.formatNumber(Array.from(ctx.interaction.guild.members.cache.sort((a, b) => a.joinedTimestamp - b.joinedTimestamp)).indexOf(member) + 1, ctx.data.author.general.locale) })}`);
 
 		await ctx.makeMessage({ embeds: [embed] });
@@ -90,7 +89,7 @@ module.exports = class UserInteractionCommand extends InteractionCommand {
           (fromServer ? ctx.options.getMember('user', false) : ctx.options.getUser('user')) ??
           ctx.author;
 
-		const username = user ? user.user.username : user.username;
+		const username = user ? user.username : user.username;
 
 		const embed = new MitsyEmbed()
 			.setTitle(ctx.locale('commands:user.title', { user: username }))
@@ -108,15 +107,20 @@ module.exports = class UserInteractionCommand extends InteractionCommand {
 	}
 
 	async showBanner(ctx) {
-		const user = ctx.options.getUser('user') ?? ctx.author;
-
+		const user = await ctx.options.getUser('user') ?? ctx.author;
+		if (!user.banner) {
+			ctx.makeMessage({
+				content: ctx.prettyResponse('MITSY_COFFE', 'commands:user.banner.no-banner'),
+				ephemeral: true,
+			});
+			return;
+		}
 		const userBanner = await ctx.client.users.fetch(user.id).catch((e) => ctx.client.logger.error(e));
-
-		const bannerUrl = userBanner?.bannerURL({ dynamic: true, size: 1024 });
+		const bannerUrl = await userBanner.bannerURL({ dynamic: true, size: 1024 });
 
 		if (!userBanner || !bannerUrl) {
 			ctx.makeMessage({
-				content: ctx.prettyResponse('error', 'commands:user.banner.no-banner'),
+				content: ctx.prettyResponse('MITSY_COFFE', 'commands:user.banner.no-banner'),
 				ephemeral: true,
 			});
 			return;
