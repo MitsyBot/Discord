@@ -1,6 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 const { InteractionCommand, MitsyEmbed } = require('../../../');
-const moment = require('moment');
 module.exports = class LevelInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
@@ -123,7 +122,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		case 'minutes': duration = time * 1000 * 60; break;
 		}
 		duration = Date.now() + duration;
-		const date = `${moment(duration).format('**DD/MM/YYYY** à[s] **HH:mm**')}`;
+		const date = `<t:${parseInt(duration / 1000).toFixed(0)}:F>`;
 		await ctx.client.reminders.add(duration, author, ctx.interaction.channel, ctx.interaction.guild, reason);
 		ctx.makeMessage({ content: ctx.prettyResponse('MITSY_OK', 'commands:remind.created', { reason, date }) });
 	}
@@ -138,9 +137,6 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 				takeNumber = 10;
 			}
 
-			console.log(skip);
-			console.log(takeNumber);
-
 			const reminders = await ctx.client.database.reminders.findMany({
 				skip,
 				take: takeNumber,
@@ -152,7 +148,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 		 .setTitle('Lembretes');
 
 			for (const reminder of reminders) {
-				embed.addField(`**[${reminder.id}]** \`\`${reminder.content}\`\``, `${moment(reminder.duration).format('**DD/MM/YYYY** à[s] **HH:mm**')}`);
+				embed.addField(`**[${reminder.id}]** \`\`${reminder.content}\`\``, `<t:${parseInt(reminder.remind_at / 1000).toFixed(0)}:F>`);
 			}
 
 			ctx.makeMessage({ content: ctx.prettyResponse('MITSY_OK', 'commands:remind.list', { page, length: reminders.length }), embeds: [embed] });
@@ -172,7 +168,7 @@ module.exports = class LevelInteractionCommand extends InteractionCommand {
 				.addField('Motivo', reminder.content)
 				.addField('Servidor', guild.name)
 				.addField('Canal', `<#${guild.channels.cache.get(reminder.channel_id).id}>`)
-				.addField('Data', moment(reminder.duration).format('**DD/MM/YYYY** à[s] **HH:mm**'));
+				.addField('Data', `<t:${parseInt(reminder.remind_at / 1000).toFixed(0)}:F>`);
 			return ctx.makeMessage({ content: `**ID: ${reminder.id}**`, embeds: [embed] });
 		}
 	}

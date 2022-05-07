@@ -16,9 +16,132 @@
         "getted": "<:Mitsy_Rica:872870327049396274> Você ja pegou seu premio diario hoje, mas você ira poder pegar novamente em {{getagain}}"
       },
       "remind": {
-        "created": "Eu irei te lembrar de ``{{reason}}`` em {{time}}",
+        "created": "Eu irei te lembrar de ``{{reason}}`` em {{date}}",
         "list": "**Pagina {{page}}**\nVocê tem {{length}} lembretes no total",
         "deleted": "O lembrete ${id} ``[${content}]`` foi removido com sucesso"
+      },
+      "emojiinfo": {
+        "embed": {
+          "title": "Informações do emoji",
+          "name": "Nome do Emoji",
+          "id": "ID do Emoji",
+          "mention": "Menção do Emoji",
+          "url": "Baixar"
+        }
+      },
+      "mcquery": {
+        "version": "Versão",
+        "serverOffline": "O servidor `{{0}}` está offline nesse momento ou não existe."
+      },
+      "fakemsg": {
+        "argsNull": "Bom, parece que você não tem nada para dizer."
+      },
+      "roleinfo": {
+        "roleNotExist": "eu não consigo encontrar este cargo ou este cargo não existe...",
+        "roleName": "Informações do cargo: {{0}}",
+        "roleMention": "Menção do cargo",
+        "roleID": "ID do cargo",
+        "roleColor": "Cor do cargo",
+        "roleGuild": "Servidor",
+        "roleHoist": "Categoria Separada",
+        "roleMentionable": "Mencionável",
+        "roleManaged": "Integração",
+        "roleCreatedAt": "Cargo criado em",
+        "description": "Mostra algumas informações sobre o cargo."
+      },
+      "serverinfo": {
+        "description": "Mostra informações sobre este servidor.",
+        "general": "Geral",
+        "banner": "Banner do servidor",
+        "splash": "Fundo de convite do servidor",
+        "guildName": "Nome do servidor",
+        "guildOwner": "Dono do servidor",
+        "guildCreateAt": "Servidor criado",
+        "guildAFKChannel": {
+          "title": "Canal de ausência",
+          "noAfkChannel": "Não configurado"
+        },
+        "guildChannel": {
+          "title": "Canais ({{0}})",
+          "text": "Texto",
+          "voice": "Voz",
+          "voiceMembers": "Membros no canal de voz"
+        },
+        "guildMember": "Membros",
+        "features": {
+          "title": "Recursos",
+          "dontHave": "Este servidor não possui nenhum recurso.",
+          "INVITE_SPLASH": "Fundo de Convite",
+          "VIP_REGIONS": "Regiões VIP",
+          "VANITY_URL": "Convite personalizado",
+          "VERIFIED": "Verificado",
+          "PARTNERED": "Parceiro",
+          "COMMUNITY": "Comunidade",
+          "COMMERCE": "Comercial",
+          "NEWS": "Canal de Notícias",
+          "DISCOVERABLE": "Descobrível",
+          "FEATURABLE": "Recursos",
+          "ANIMATED_ICON": "Ícone Animado",
+          "BANNER": "Plano de fundo",
+          "WELCOME_SCREEN_ENABLED": "Tela de Boas-Vindas ativada",
+          "PREVIEW_ENABLED": "Pré-visualização",
+          "MEMBER_VERIFICATION_GATE_ENABLED": "Portão de Verificação",
+          "ENABLED_DISCOVERABLE_BEFORE": "Descobrimento Anteriormente Ativado",
+          "SEVEN_DAY_THREAD_ARCHIVE": "Sete Dias Para Arquivar Threads",
+          "PRIVATE_THREADS": "Tópicos Privados",
+          "THREE_DAY_THREAD_ARCHIVE": "Três Dias Para Arquivar Tópicos",
+          "THREADS_ENABLED": "Tópicos Ativos",
+          "ROLE_ICONS": "Ícones de Cargo",
+          "CHANNEL_BANNER": "Banner do Canal",
+          "ANIMATED_BANNER": "Banner Animado",
+          "NEW_THREAD_PERMISSIONS": "Novas Permissões de Tópicos",
+          "MEMBER_PROFILES": "Perfil de Membros",
+          "EXPOSED_TO_ACTIVITIES_WTP_EXPERIMENT": "Exposed to Activities WTP Experiment"
+        },
+        "booster": {
+          "levelCount": "Nível de Impulsionamento",
+          "boosterCount": "Total de Impulsos"
+        },
+        "joinedAt": "Eu entrei aqui"
+      },
+      "serverbanner": {
+        "missingFeature": "este servidor não possui o recurso de `plano de fundo`.",
+        "missingBanner": "este servidor não possui um banner.",
+        "download": "Abrir o banner do servidor no seu navegador"
+      },
+      "servericon": {
+        "missingIcon": "este servidor não possui um ícone",
+        "download": "Abrir o icone no seu navegador",
+        "description": "Mostra o ícone do servidor."
+      },
+      "user": {
+        "banner": {
+          "no-banner": "Este usuário não tem nenhum banner!",
+          "title": "Banner de {{user}}",
+          "footer": "Um banner magnifico eu diria"
+        },
+        "userinfo": {
+          "tag": "🔖 Tag do Discord",
+          "id": "💻 ID do Discord",
+          "status": "Status",
+          "createdAt": "📅 Conta criada em",
+          "joinedAt": "🌟 Entrou em",
+          "serversInCommon": ":ringed_planet: Servidores em comum ({{count}})",
+          "memberNumber": "Membro #{{count}}"
+        },
+        "title": "Avatar de {{user}}",
+        "footer": "Um avatar magnifico eu diria",
+        "client_title": "Meu avatar ({{user}})",
+        "client_footer": "Que arte incrível, espero que todos gostem muito!"
+      },
+      "channelinfo": {
+        "title": "`Informações sobre #{{0}}`",
+        "noTopic": "Este canal não tem um tópico.",
+        "mention": "Menção do Canal",
+        "channelID": "ID do Canal",
+        "guild": "Servidor",
+        "category": "Categoria",
+        "createdAt": "Criado Em"
       },
       "ping": {
         "latency": "(Discord) Latência:",
