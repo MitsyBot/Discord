@@ -29,6 +29,13 @@
           "url": "Baixar"
         }
       },
+      "mcquery": {
+        "version": "Versão",
+        "serverOffline": "O servidor `{{0}}` está offline nesse momento ou não existe."
+      },
+      "fakemsg": {
+        "argsNull": "Bom, parece que você não tem nada para dizer."
+      },
       "roleinfo": {
         "roleNotExist": "eu não consigo encontrar este cargo ou este cargo não existe...",
         "roleName": "Informações do cargo: {{0}}",
