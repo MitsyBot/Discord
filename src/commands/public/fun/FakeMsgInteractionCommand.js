@@ -1,6 +1,6 @@
 const { InteractionCommand } = require('../../../');
 
-module.exports = class ChannelInteractionCommand extends InteractionCommand {
+module.exports = class FakemsgInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'fakemsg',

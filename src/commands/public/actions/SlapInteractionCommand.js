@@ -1,5 +1,5 @@
 const { InteractionCommand, MitsyEmbed, HTTPrequests } = require('../../../');
-module.exports = class BiteInteractionCommand extends InteractionCommand {
+module.exports = class SlapInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'tapa',

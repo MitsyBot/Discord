@@ -1,5 +1,5 @@
 const { InteractionCommand } = require('../../../');
-module.exports = class LevelInteractionCommand extends InteractionCommand {
+module.exports = class YoutubeInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'criarparty',

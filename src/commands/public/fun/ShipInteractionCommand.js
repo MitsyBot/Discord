@@ -1,7 +1,7 @@
 const { InteractionCommand, HTTPrequests, MitsyEmbed } = require('../../../');
 const { MessageAttachment } = require('discord.js');
 
-module.exports = class BotInfoInteractionCommand extends InteractionCommand {
+module.exports = class ShipInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'ship',

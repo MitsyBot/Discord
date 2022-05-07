@@ -1,6 +1,6 @@
 const { InteractionCommand, MitsyEmbed } = require('../../../');
 
-module.exports = class LevelInteractionCommand extends InteractionCommand {
+module.exports = class GuildInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'servidor',

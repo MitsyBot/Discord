@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 const { InteractionCommand, MitsyEmbed } = require('../../../');
-module.exports = class LevelInteractionCommand extends InteractionCommand {
+module.exports = class ReminderInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'lembrete',

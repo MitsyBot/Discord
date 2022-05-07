@@ -1,6 +1,6 @@
 const { InteractionCommand, MitsyEmbed } = require('../../../');
 const { MessageAttachment } = require('discord.js');
-module.exports = class LevelInteractionCommand extends InteractionCommand {
+module.exports = class EmojiInteractionCommand extends InteractionCommand {
 	constructor() {
 		super({
 			name: 'emoji',
