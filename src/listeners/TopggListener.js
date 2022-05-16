@@ -10,22 +10,22 @@ module.exports = class TopGGListener extends EventListener {
 
 	onReady() {
 		if (process.env.DBL_TOKEN) {
-			fetch(`https://top.gg/api/bots/${this.client.user.id}/stats`, {
+			fetch(`https://top.gg/api/bots/${this.user.id}/stats`, {
 				method: 'POST',
 				headers: { Authorization: process.env.DBL_TOKEN },
-				body: { server_count: this.client.guilds.size },
+				body: { server_count: this.guilds.size },
 			})
-				.then(() => this.client.logger.info('Estatísticas enviadas ao TopGG', { tags: ['top.gg'] }))
-				.catch(() => this.client.logger.error('Falha ao enviar estatísticas para o TopGG', { tags: ['top.gg'] }));
+				.then(() => this.logger.info('Estatísticas enviadas ao TopGG', { tags: ['top.gg'] }))
+				.catch(() => this.logger.error('Falha ao enviar estatísticas para o TopGG', { tags: ['top.gg'] }));
 
 			setInterval(() => {
-				fetch(`https://top.gg/api/bots/${this.client.user.id}/stats`, {
+				fetch(`https://top.gg/api/bots/${this.user.id}/stats`, {
 					method: 'POST',
 					headers: { Authorization: process.env.DBL_TOKEN },
-					body: { server_count: this.client.guilds.size },
+					body: { server_count: this.guilds.size },
 				})
-					.then(() => this.client.logger.info('Estatísticas enviadas ao TopGG', { tags: ['top.gg'] }))
-					.catch(() => this.client.logger.error('Falha ao enviar estatísticas para o TopGG', { tags: ['top.gg'] }));
+					.then(() => this.logger.info('Estatísticas enviadas ao TopGG', { tags: ['top.gg'] }))
+					.catch(() => this.logger.error('Falha ao enviar estatísticas para o TopGG', { tags: ['top.gg'] }));
 
 			}, 1800000, this);
 
