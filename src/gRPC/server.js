@@ -1,6 +1,7 @@
 const { Server, ServerCredentials, loadPackageDefinition } = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 const GuildService = require('./services/Guild');
+const UserService = require('./services/User');
 const server = new Server({
 	'grpc.max_receive_message_length': -1,
 	'grpc.max_send_message_length': -1,
@@ -20,6 +21,8 @@ module.exports = class GrpcServer {
 		const discordProto = loadPackageDefinition(packageDefinition);
 
 		server.addService(discordProto.GuildService.service, new GuildService(client));
+		server.addService(discordProto.UserService.service, new UserService(client));
+
 		server.bindAsync('0.0.0.0:50051', ServerCredentials.createInsecure(), (err, bindPort) => {
 			if (err) {
 				throw err;

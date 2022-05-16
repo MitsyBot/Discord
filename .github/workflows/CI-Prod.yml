@@ -49,6 +49,8 @@ jobs:
             docker pull ghcr.io/mitsybot/discord-production:latest
             docker run -it -d -p 50051:50051 --restart=always -e BOT_TOKEN='${{ secrets.BOT_TOKEN }}' \
             -e API_URL='${{ secrets.API_URL }}' \
+            -e DBL_TOKEN='${{ secrets.DBL_TOKEN }}' \
+            -e DBL_WEBHOOK_SECRET='${{ secrets.DBL_WEBHOOK_SECRET }}' \
             -e API_WEBSOCKET='${{ secrets.API_WS }}' \
             -e REDIS_PORT='${{ secrets.REDIS_PORT }}' \
             -e REDIS_HOST='${{ secrets.REDIS_HOST }}' \
