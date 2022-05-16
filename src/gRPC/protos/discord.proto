@@ -18,10 +18,6 @@ message UserMessageResponse {
     required bool sucess = 1;
 }
 
-service UserService {
-    rpc getUser (User) returns (User) {}
-}
-
 message User {
     required string id = 1;
 }
