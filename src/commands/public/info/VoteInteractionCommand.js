@@ -11,7 +11,7 @@ module.exports = class VoteInteractionCommands extends InteractionCommand {
 
 	async run(ctx) {
 		const embed = new MitsyEmbed(ctx.author)
-			.setDescription(ctx.prettyResponse('MITSY_PLEAD', 'commands:vote.howToVote.dbl', { link: `https://top.gg/bot/${this.client.user.id}/vote` }));
+			.setDescription(ctx.prettyResponse('MITSY_PLEAD', 'commands:vote.howToVote.dbl', { link: `https://top.gg/bot/${ctx.client.user.id}/vote` }));
 		await ctx.makeMessage({ embeds: [embed] });
 	}
 };
