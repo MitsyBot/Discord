@@ -2,8 +2,8 @@ const { InteractionCommand, MitsyEmbed } = require('../../../');
 module.exports = class VoteInteractionCommands extends InteractionCommand {
 	constructor() {
 		super({
-			name: 'suporte',
-			description: 'Precisando de ajuda?',
+			name: 'vote',
+			description: 'Vote em mim no topgg!',
 			category: 'info',
 			cooldown: 5,
 		});
